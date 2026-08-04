@@ -388,7 +388,7 @@ function Shell() {
   const [favorites,toggleFavs] = useStored('ai-favorites'); 
   const [compare,setCompare] = useStored('ai-compare'); 
   const [showIntro, setShowIntro] = useState(true);
-  const [theme,setTheme] = useState<Theme>(() => { const saved = localStorage.getItem('ai-theme'); return saved === 'noir' || saved === 'violet' || saved === 'sunlight' || saved === 'maroon' ? saved : 'sunlight' }); 
+  const [theme,setTheme] = useState<Theme>(() => { const saved = localStorage.getItem('ai-theme'); return saved === 'noir' || saved === 'violet' || saved === 'sunlight' || saved === 'maroon' ? saved : 'maroon' }); 
 
   const [mobile,setMobile]=useState(false); 
   const [command,setCommand]=useState(false); 
