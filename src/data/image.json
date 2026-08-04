@@ -1,0 +1,146 @@
+[
+  {
+    "id": "midjourney",
+    "name": "Midjourney",
+    "category": "image",
+    "pricing": { "free": false, "paid": true },
+    "website": "https://midjourney.com",
+    "playstore": ""
+  },
+  {
+    "id": "ideogram",
+    "name": "Ideogram",
+    "category": "image",
+    "pricing": { "free": true, "paid": true },
+    "website": "https://ideogram.ai",
+    "playstore": ""
+  },
+  {
+    "id": "leonardo-ai",
+    "name": "Leonardo AI",
+    "category": "image",
+    "pricing": { "free": true, "paid": true },
+    "website": "https://leonardo.ai",
+    "playstore": "https://play.google.com/store/apps/details?id=ai.leonardo.android"
+  },
+  {
+    "id": "playground-ai",
+    "name": "Playground AI",
+    "category": "image",
+    "pricing": { "free": true, "paid": true },
+    "website": "https://playground.com",
+    "playstore": ""
+  },
+  {
+    "id": "adobe-firefly",
+    "name": "Adobe Firefly",
+    "category": "image",
+    "pricing": { "free": true, "paid": true },
+    "website": "https://firefly.adobe.com",
+    "playstore": "https://play.google.com/store/apps/details?id=com.adobe.firefly"
+  },
+  {
+    "id": "canva-ai",
+    "name": "Canva AI",
+    "category": "image",
+    "pricing": { "free": true, "paid": true },
+    "website": "https://www.canva.com",
+    "playstore": "https://play.google.com/store/apps/details?id=com.canva.editor"
+  },
+  {
+    "id": "microsoft-designer",
+    "name": "Microsoft Designer",
+    "category": "image",
+    "pricing": { "free": true, "paid": true },
+    "website": "https://designer.microsoft.com",
+    "playstore": "https://play.google.com/store/apps/details?id=com.microsoft.designer"
+  },
+  {
+    "id": "gpt-image",
+    "name": "GPT Image",
+    "category": "image",
+    "pricing": { "free": true, "paid": true },
+    "website": "https://chatgpt.com",
+    "playstore": "https://play.google.com/store/apps/details?id=com.openai.chatgpt"
+  },
+  {
+    "id": "flux",
+    "name": "Flux",
+    "category": "image",
+    "pricing": { "free": true, "paid": true },
+    "website": "https://flux1.ai",
+    "playstore": ""
+  },
+  {
+    "id": "stable-diffusion",
+    "name": "Stable Diffusion",
+    "category": "image",
+    "pricing": { "free": true, "paid": false },
+    "website": "https://stability.ai",
+    "playstore": ""
+  },
+  {
+    "id": "dreamstudio",
+    "name": "DreamStudio",
+    "category": "image",
+    "pricing": { "free": true, "paid": true },
+    "website": "https://dreamstudio.ai",
+    "playstore": ""
+  },
+  {
+    "id": "recraft",
+    "name": "Recraft",
+    "category": "image",
+    "pricing": { "free": true, "paid": true },
+    "website": "https://www.recraft.ai",
+    "playstore": ""
+  },
+  {
+    "id": "craiyon",
+    "name": "Craiyon",
+    "category": "image",
+    "pricing": { "free": true, "paid": true },
+    "website": "https://www.craiyon.com",
+    "playstore": ""
+  },
+  {
+    "id": "bing-image-creator",
+    "name": "Bing Image Creator",
+    "category": "image",
+    "pricing": { "free": true, "paid": false },
+    "website": "https://www.bing.com/images/create",
+    "playstore": "https://play.google.com/store/apps/details?id=com.microsoft.bing"
+  },
+  {
+    "id": "pixlr",
+    "name": "Pixlr",
+    "category": "image",
+    "pricing": { "free": true, "paid": true },
+    "website": "https://pixlr.com",
+    "playstore": "https://play.google.com/store/apps/details?id=com.pixlr.express"
+  },
+  {
+    "id": "nightcafe",
+    "name": "NightCafe",
+    "category": "image",
+    "pricing": { "free": true, "paid": true },
+    "website": "https://nightcafe.studio",
+    "playstore": ""
+  },
+  {
+    "id": "starryai",
+    "name": "StarryAI",
+    "category": "image",
+    "pricing": { "free": true, "paid": true },
+    "website": "https://starryai.com",
+    "playstore": "https://play.google.com/store/apps/details?id=com.starryai"
+  },
+  {
+    "id": "tensor-art",
+    "name": "Tensor Art",
+    "category": "image",
+    "pricing": { "free": true, "paid": true },
+    "website": "https://tensor.art",
+    "playstore": ""
+  }
+]

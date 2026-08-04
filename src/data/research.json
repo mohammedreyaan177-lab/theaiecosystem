@@ -1,0 +1,57 @@
+[
+  {
+    "id": "perplexity",
+    "name": "Perplexity",
+    "category": "research",
+    "pricing": {
+      "free": true,
+      "paid": true
+    },
+    "website": "https://perplexity.ai",
+    "playstore": "https://play.google.com/store/apps/details?id=ai.perplexity.app.android"
+  },
+  {
+    "id": "notebooklm",
+    "name": "NotebookLM",
+    "category": "research",
+    "pricing": {
+      "free": true,
+      "paid": true
+    },
+    "website": "",
+    "playstore": "https://play.google.com/store/apps/details?id=com.google.android.apps.notebooklm"
+  },
+  {
+    "id": "elicit",
+    "name": "Elicit",
+    "category": "research",
+    "pricing": {
+      "free": true,
+      "paid": true
+    },
+    "website": "",
+    "playstore": ""
+  },
+  {
+    "id": "consensus",
+    "name": "Consensus",
+    "category": "research",
+    "pricing": {
+      "free": true,
+      "paid": true
+    },
+    "website": "",
+    "playstore": ""
+  },
+  {
+    "id": "scispace",
+    "name": "SciSpace",
+    "category": "research",
+    "pricing": {
+      "free": true,
+      "paid": true
+    },
+    "website": "",
+    "playstore": ""
+  }
+]

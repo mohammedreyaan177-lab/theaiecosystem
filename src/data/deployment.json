@@ -1,0 +1,66 @@
+[
+  {
+    "id": "vercel-deploy",
+    "name": "Vercel",
+    "category": "deployment",
+    "pricing": { "free": true, "paid": true },
+    "website": "https://vercel.com",
+    "playstore": ""
+  },
+  {
+    "id": "render-deploy",
+    "name": "Render",
+    "category": "deployment",
+    "pricing": { "free": true, "paid": true },
+    "website": "https://render.com",
+    "playstore": ""
+  },
+  {
+    "id": "netlify-deploy",
+    "name": "Netlify",
+    "category": "deployment",
+    "pricing": { "free": true, "paid": true },
+    "website": "https://www.netlify.com",
+    "playstore": ""
+  },
+  {
+    "id": "railway-deploy",
+    "name": "Railway",
+    "category": "deployment",
+    "pricing": { "free": true, "paid": true },
+    "website": "https://railway.app",
+    "playstore": ""
+  },
+  {
+    "id": "fly-io",
+    "name": "Fly.io",
+    "category": "deployment",
+    "pricing": { "free": true, "paid": true },
+    "website": "https://fly.io",
+    "playstore": ""
+  },
+  {
+    "id": "cloudflare-pages",
+    "name": "Cloudflare Pages",
+    "category": "deployment",
+    "pricing": { "free": true, "paid": true },
+    "website": "https://pages.cloudflare.com",
+    "playstore": ""
+  },
+  {
+    "id": "aws-amplify",
+    "name": "AWS Amplify",
+    "category": "deployment",
+    "pricing": { "free": true, "paid": true },
+    "website": "https://aws.amazon.com/amplify",
+    "playstore": ""
+  },
+  {
+    "id": "koyeb",
+    "name": "Koyeb",
+    "category": "deployment",
+    "pricing": { "free": true, "paid": true },
+    "website": "https://www.koyeb.com",
+    "playstore": ""
+  }
+]

@@ -1,0 +1,12 @@
+[
+  { "id": "vscode", "name": "VS Code", "category": "devtools", "pricing": { "free": true, "paid": false }, "website": "https://code.visualstudio.com", "playstore": "" },
+  { "id": "github", "name": "GitHub", "category": "devtools", "pricing": { "free": true, "paid": true }, "website": "https://github.com", "playstore": "https://play.google.com/store/apps/details?id=com.github.android" },
+  { "id": "docker", "name": "Docker", "category": "devtools", "pricing": { "free": true, "paid": true }, "website": "https://www.docker.com", "playstore": "" },
+  { "id": "postman", "name": "Postman", "category": "devtools", "pricing": { "free": true, "paid": true }, "website": "https://www.postman.com", "playstore": "" },
+  { "id": "vercel", "name": "Vercel", "category": "devtools", "pricing": { "free": true, "paid": true }, "website": "https://vercel.com", "playstore": "" },
+  { "id": "netlify", "name": "Netlify", "category": "devtools", "pricing": { "free": true, "paid": true }, "website": "https://www.netlify.com", "playstore": "" },
+  { "id": "stackoverflow", "name": "Stack Overflow", "category": "devtools", "pricing": { "free": true, "paid": true }, "website": "https://stackoverflow.com", "playstore": "https://play.google.com/store/apps/details?id=com.stackexchange.marvin" },
+  { "id": "gitlab", "name": "GitLab", "category": "devtools", "pricing": { "free": true, "paid": true }, "website": "https://gitlab.com", "playstore": "" },
+  { "id": "insomnia", "name": "Insomnia", "category": "devtools", "pricing": { "free": true, "paid": true }, "website": "https://insomnia.rest", "playstore": "" },
+  { "id": "npm", "name": "npm", "category": "devtools", "pricing": { "free": true, "paid": true }, "website": "https://www.npmjs.com", "playstore": "" }
+]

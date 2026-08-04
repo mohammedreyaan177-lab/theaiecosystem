@@ -1,0 +1,79 @@
+[
+  {
+    "id": "jasper",
+    "name": "Jasper",
+    "category": "writing",
+    "pricing": {
+      "free": false,
+      "paid": true
+    },
+    "website": "",
+    "playstore": ""
+  },
+  {
+    "id": "copyai",
+    "name": "Copy.ai",
+    "category": "writing",
+    "pricing": {
+      "free": false,
+      "paid": true
+    },
+    "website": "",
+    "playstore": ""
+  },
+  {
+    "id": "writesonic",
+    "name": "Writesonic",
+    "category": "writing",
+    "pricing": {
+      "free": true,
+      "paid": true
+    },
+    "website": "",
+    "playstore": ""
+  },
+  {
+    "id": "rytr",
+    "name": "Rytr",
+    "category": "writing",
+    "pricing": {
+      "free": true,
+      "paid": true
+    },
+    "website": "",
+    "playstore": ""
+  },
+  {
+    "id": "grammarly",
+    "name": "Grammarly",
+    "category": "writing",
+    "pricing": {
+      "free": true,
+      "paid": true
+    },
+    "website": "",
+    "playstore": "https://play.google.com/store/apps/details?id=com.grammarly.android.keyboard"
+  },
+  {
+    "id": "quillbot",
+    "name": "QuillBot",
+    "category": "writing",
+    "pricing": {
+      "free": true,
+      "paid": true
+    },
+    "website": "",
+    "playstore": "https://play.google.com/store/apps/details?id=com.quillbot.paraphrasingtool"
+  },
+  {
+    "id": "deepl",
+    "name": "DeepL",
+    "category": "writing",
+    "pricing": {
+      "free": true,
+      "paid": true
+    },
+    "website": "",
+    "playstore": "https://play.google.com/store/apps/details?id=com.deepl.mobiletranslator"
+  }
+]

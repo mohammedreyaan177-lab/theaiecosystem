@@ -1,0 +1,58 @@
+[
+  {
+    "id": "suno",
+    "name": "Suno",
+    "category": "music",
+    "pricing": { "free": true, "paid": true },
+    "website": "https://suno.com",
+    "playstore": "https://play.google.com/store/apps/details?id=com.suno.android"
+  },
+  {
+    "id": "udio",
+    "name": "Udio",
+    "category": "music",
+    "pricing": { "free": true, "paid": true },
+    "website": "https://www.udio.com",
+    "playstore": ""
+  },
+  {
+    "id": "aiva",
+    "name": "AIVA",
+    "category": "music",
+    "pricing": { "free": true, "paid": true },
+    "website": "https://www.aiva.ai",
+    "playstore": ""
+  },
+  {
+    "id": "soundraw",
+    "name": "Soundraw",
+    "category": "music",
+    "pricing": { "free": true, "paid": true },
+    "website": "https://soundraw.io",
+    "playstore": ""
+  },
+  {
+    "id": "boomy",
+    "name": "Boomy",
+    "category": "music",
+    "pricing": { "free": true, "paid": true },
+    "website": "https://boomy.com",
+    "playstore": ""
+  },
+  {
+    "id": "loudly",
+    "name": "Loudly",
+    "category": "music",
+    "pricing": { "free": true, "paid": true },
+    "website": "https://www.loudly.com",
+    "playstore": ""
+  },
+  {
+    "id": "mubert",
+    "name": "Mubert",
+    "category": "music",
+    "pricing": { "free": true, "paid": true },
+    "website": "https://mubert.com",
+    "playstore": "https://play.google.com/store/apps/details?id=com.mubert"
+  }
+]

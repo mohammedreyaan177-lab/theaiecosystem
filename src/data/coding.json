@@ -1,0 +1,122 @@
+[
+  {
+    "id": "cursor",
+    "name": "Cursor",
+    "category": "coding",
+    "pricing": { "free": true, "paid": true },
+    "website": "https://cursor.com",
+    "playstore": ""
+  },
+  {
+    "id": "windsurf",
+    "name": "Windsurf",
+    "category": "coding",
+    "pricing": { "free": true, "paid": true },
+    "website": "https://codeium.com/windsurf",
+    "playstore": ""
+  },
+  {
+    "id": "github-copilot",
+    "name": "GitHub Copilot",
+    "category": "coding",
+    "pricing": { "free": true, "paid": true },
+    "website": "https://github.com/features/copilot",
+    "playstore": ""
+  },
+  {
+    "id": "codeium",
+    "name": "Codeium",
+    "category": "coding",
+    "pricing": { "free": true, "paid": true },
+    "website": "https://codeium.com",
+    "playstore": ""
+  },
+  {
+    "id": "continue",
+    "name": "Continue",
+    "category": "coding",
+    "pricing": { "free": true, "paid": false },
+    "website": "https://continue.dev",
+    "playstore": ""
+  },
+  {
+    "id": "replit-ai",
+    "name": "Replit AI",
+    "category": "coding",
+    "pricing": { "free": true, "paid": true },
+    "website": "https://replit.com",
+    "playstore": "https://play.google.com/store/apps/details?id=com.replit.app"
+  },
+  {
+    "id": "v0",
+    "name": "v0",
+    "category": "coding",
+    "pricing": { "free": true, "paid": true },
+    "website": "https://v0.dev",
+    "playstore": ""
+  },
+  {
+    "id": "bolt",
+    "name": "Bolt",
+    "category": "coding",
+    "pricing": { "free": true, "paid": true },
+    "website": "https://bolt.new",
+    "playstore": ""
+  },
+  {
+    "id": "lovable",
+    "name": "Lovable",
+    "category": "coding",
+    "pricing": { "free": true, "paid": true },
+    "website": "https://lovable.dev",
+    "playstore": ""
+  },
+  {
+    "id": "firebase-studio",
+    "name": "Firebase Studio",
+    "category": "coding",
+    "pricing": { "free": true, "paid": true },
+    "website": "https://firebase.google.com/studio",
+    "playstore": ""
+  },
+  {
+    "id": "tabnine",
+    "name": "Tabnine",
+    "category": "coding",
+    "pricing": { "free": true, "paid": true },
+    "website": "https://www.tabnine.com",
+    "playstore": ""
+  },
+  {
+    "id": "amazon-q",
+    "name": "Amazon Q Developer",
+    "category": "coding",
+    "pricing": { "free": true, "paid": true },
+    "website": "https://aws.amazon.com/q/developer",
+    "playstore": ""
+  },
+  {
+    "id": "cody",
+    "name": "Sourcegraph Cody",
+    "category": "coding",
+    "pricing": { "free": true, "paid": true },
+    "website": "https://sourcegraph.com/cody",
+    "playstore": ""
+  },
+  {
+    "id": "blackbox-ai",
+    "name": "Blackbox AI",
+    "category": "coding",
+    "pricing": { "free": true, "paid": true },
+    "website": "https://www.blackbox.ai",
+    "playstore": ""
+  },
+  {
+    "id": "supermaven",
+    "name": "Supermaven",
+    "category": "coding",
+    "pricing": { "free": true, "paid": true },
+    "website": "https://supermaven.com",
+    "playstore": ""
+  }
+]

@@ -1,0 +1,66 @@
+[
+  {
+    "id": "elevenlabs",
+    "name": "ElevenLabs",
+    "category": "voice",
+    "pricing": { "free": true, "paid": true },
+    "website": "https://elevenlabs.io",
+    "playstore": "https://play.google.com/store/apps/details?id=io.elevenlabs.android"
+  },
+  {
+    "id": "playht",
+    "name": "PlayHT",
+    "category": "voice",
+    "pricing": { "free": true, "paid": true },
+    "website": "https://play.ht",
+    "playstore": ""
+  },
+  {
+    "id": "cartesia",
+    "name": "Cartesia",
+    "category": "voice",
+    "pricing": { "free": true, "paid": true },
+    "website": "https://cartesia.ai",
+    "playstore": ""
+  },
+  {
+    "id": "murf-ai",
+    "name": "Murf AI",
+    "category": "voice",
+    "pricing": { "free": true, "paid": true },
+    "website": "https://murf.ai",
+    "playstore": ""
+  },
+  {
+    "id": "speechify",
+    "name": "Speechify",
+    "category": "voice",
+    "pricing": { "free": true, "paid": true },
+    "website": "https://speechify.com",
+    "playstore": "https://play.google.com/store/apps/details?id=com.cliffweitzman.speechify"
+  },
+  {
+    "id": "naturalreaders",
+    "name": "NaturalReaders",
+    "category": "voice",
+    "pricing": { "free": true, "paid": true },
+    "website": "https://www.naturalreaders.com",
+    "playstore": "https://play.google.com/store/apps/details?id=com.naturalreaders.naturalreader"
+  },
+  {
+    "id": "resemble-ai",
+    "name": "Resemble AI",
+    "category": "voice",
+    "pricing": { "free": true, "paid": true },
+    "website": "https://www.resemble.ai",
+    "playstore": ""
+  },
+  {
+    "id": "coqui-tts",
+    "name": "Coqui TTS",
+    "category": "voice",
+    "pricing": { "free": true, "paid": false },
+    "website": "https://github.com/coqui-ai/TTS",
+    "playstore": ""
+  }
+]

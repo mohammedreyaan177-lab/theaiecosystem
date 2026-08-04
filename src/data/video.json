@@ -1,0 +1,106 @@
+[
+  {
+    "id": "runway",
+    "name": "Runway",
+    "category": "video",
+    "pricing": { "free": true, "paid": true },
+    "website": "https://runwayml.com",
+    "playstore": ""
+  },
+  {
+    "id": "kling-ai",
+    "name": "Kling AI",
+    "category": "video",
+    "pricing": { "free": true, "paid": true },
+    "website": "https://klingai.com",
+    "playstore": "https://play.google.com/store/apps/details?id=com.kuaishou.klingai"
+  },
+  {
+    "id": "google-veo",
+    "name": "Google Veo",
+    "category": "video",
+    "pricing": { "free": true, "paid": true },
+    "website": "https://deepmind.google/technologies/veo",
+    "playstore": ""
+  },
+  {
+    "id": "pika",
+    "name": "Pika",
+    "category": "video",
+    "pricing": { "free": true, "paid": true },
+    "website": "https://pika.art",
+    "playstore": ""
+  },
+  {
+    "id": "luma-dream-machine",
+    "name": "Luma Dream Machine",
+    "category": "video",
+    "pricing": { "free": true, "paid": true },
+    "website": "https://lumalabs.ai/dream-machine",
+    "playstore": ""
+  },
+  {
+    "id": "hailuo-ai",
+    "name": "Hailuo AI",
+    "category": "video",
+    "pricing": { "free": true, "paid": true },
+    "website": "https://hailuoai.video",
+    "playstore": ""
+  },
+  {
+    "id": "synthesia",
+    "name": "Synthesia",
+    "category": "video",
+    "pricing": { "free": true, "paid": true },
+    "website": "https://www.synthesia.io",
+    "playstore": ""
+  },
+  {
+    "id": "heygen",
+    "name": "HeyGen",
+    "category": "video",
+    "pricing": { "free": true, "paid": true },
+    "website": "https://www.heygen.com",
+    "playstore": ""
+  },
+  {
+    "id": "d-id",
+    "name": "D-ID",
+    "category": "video",
+    "pricing": { "free": true, "paid": true },
+    "website": "https://www.d-id.com",
+    "playstore": ""
+  },
+  {
+    "id": "invideo-ai",
+    "name": "InVideo AI",
+    "category": "video",
+    "pricing": { "free": true, "paid": true },
+    "website": "https://invideo.io",
+    "playstore": "https://play.google.com/store/apps/details?id=io.invideo.android"
+  },
+  {
+    "id": "fliki",
+    "name": "Fliki",
+    "category": "video",
+    "pricing": { "free": true, "paid": true },
+    "website": "https://fliki.ai",
+    "playstore": ""
+  },
+  {
+    "id": "domo-ai",
+    "name": "Domo AI",
+    "category": "video",
+    "pricing": { "free": true, "paid": true },
+    "website": "https://domoai.app",
+    "playstore": ""
+  },
+  {
+    "id": "haiper",
+    "name": "Haiper",
+    "category": "video",
+    "pricing": { "free": true, "paid": true },
+    "website": "https://haiper.ai",
+    "playstore": ""
+  }
+]

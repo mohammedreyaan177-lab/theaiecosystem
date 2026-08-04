@@ -1,0 +1,134 @@
+[
+  {
+    "id": "notion-ai",
+    "name": "Notion AI",
+    "category": "productivity",
+    "pricing": {
+      "free": true,
+      "paid": true
+    },
+    "website": "",
+    "playstore": "https://play.google.com/store/apps/details?id=notion.id"
+  },
+  {
+    "id": "coda-ai",
+    "name": "Coda AI",
+    "category": "productivity",
+    "pricing": {
+      "free": true,
+      "paid": true
+    },
+    "website": "",
+    "playstore": ""
+  },
+  {
+    "id": "clickup-ai",
+    "name": "ClickUp AI",
+    "category": "productivity",
+    "pricing": {
+      "free": true,
+      "paid": true
+    },
+    "website": "",
+    "playstore": "https://play.google.com/store/apps/details?id=com.clickup.mobile"
+  },
+  {
+    "id": "gamma",
+    "name": "Gamma",
+    "category": "productivity",
+    "pricing": {
+      "free": true,
+      "paid": true
+    },
+    "website": "",
+    "playstore": ""
+  },
+  {
+    "id": "beautifulai",
+    "name": "Beautiful.ai",
+    "category": "productivity",
+    "pricing": {
+      "free": false,
+      "paid": true
+    },
+    "website": "",
+    "playstore": ""
+  },
+  {
+    "id": "tome",
+    "name": "Tome",
+    "category": "productivity",
+    "pricing": {
+      "free": false,
+      "paid": true
+    },
+    "website": "",
+    "playstore": ""
+  },
+  {
+    "id": "otterai",
+    "name": "Otter.ai",
+    "category": "productivity",
+    "pricing": {
+      "free": true,
+      "paid": true
+    },
+    "website": "",
+    "playstore": "https://play.google.com/store/apps/details?id=com.aisense.otter"
+  },
+  {
+    "id": "firefliesai",
+    "name": "Fireflies.ai",
+    "category": "productivity",
+    "pricing": {
+      "free": true,
+      "paid": true
+    },
+    "website": "",
+    "playstore": ""
+  },
+  {
+    "id": "descript",
+    "name": "Descript",
+    "category": "productivity",
+    "pricing": {
+      "free": true,
+      "paid": true
+    },
+    "website": "",
+    "playstore": ""
+  },
+  {
+    "id": "capcut-ai",
+    "name": "CapCut AI",
+    "category": "productivity",
+    "pricing": {
+      "free": true,
+      "paid": true
+    },
+    "website": "",
+    "playstore": "https://play.google.com/store/apps/details?id=com.lemon.lvoverseas"
+  },
+  {
+    "id": "opus-clip",
+    "name": "Opus Clip",
+    "category": "productivity",
+    "pricing": {
+      "free": true,
+      "paid": true
+    },
+    "website": "",
+    "playstore": ""
+  },
+  {
+    "id": "riverside",
+    "name": "Riverside",
+    "category": "productivity",
+    "pricing": {
+      "free": true,
+      "paid": true
+    },
+    "website": "",
+    "playstore": ""
+  }
+]

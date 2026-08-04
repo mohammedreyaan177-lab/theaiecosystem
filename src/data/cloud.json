@@ -1,0 +1,10 @@
+[
+  { "id": "supabase", "name": "Supabase", "category": "cloud", "pricing": { "free": true, "paid": true }, "website": "https://supabase.com", "playstore": "" },
+  { "id": "firebase", "name": "Firebase", "category": "cloud", "pricing": { "free": true, "paid": true }, "website": "https://firebase.google.com", "playstore": "" },
+  { "id": "cloudflare", "name": "Cloudflare", "category": "cloud", "pricing": { "free": true, "paid": true }, "website": "https://www.cloudflare.com", "playstore": "" },
+  { "id": "railway", "name": "Railway", "category": "cloud", "pricing": { "free": true, "paid": true }, "website": "https://railway.app", "playstore": "" },
+  { "id": "render", "name": "Render", "category": "cloud", "pricing": { "free": true, "paid": true }, "website": "https://render.com", "playstore": "" },
+  { "id": "planetscale", "name": "PlanetScale", "category": "cloud", "pricing": { "free": true, "paid": true }, "website": "https://planetscale.com", "playstore": "" },
+  { "id": "neon", "name": "Neon", "category": "cloud", "pricing": { "free": true, "paid": true }, "website": "https://neon.tech", "playstore": "" },
+  { "id": "upstash", "name": "Upstash", "category": "cloud", "pricing": { "free": true, "paid": true }, "website": "https://upstash.com", "playstore": "" }
+]

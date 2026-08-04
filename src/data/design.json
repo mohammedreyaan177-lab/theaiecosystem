@@ -1,0 +1,10 @@
+[
+  { "id": "figma", "name": "Figma", "category": "design", "pricing": { "free": true, "paid": true }, "website": "https://www.figma.com", "playstore": "https://play.google.com/store/apps/details?id=com.figma.mirror" },
+  { "id": "framer", "name": "Framer", "category": "design", "pricing": { "free": true, "paid": true }, "website": "https://www.framer.com", "playstore": "" },
+  { "id": "spline", "name": "Spline", "category": "design", "pricing": { "free": true, "paid": true }, "website": "https://spline.design", "playstore": "" },
+  { "id": "excalidraw", "name": "Excalidraw", "category": "design", "pricing": { "free": true, "paid": false }, "website": "https://excalidraw.com", "playstore": "" },
+  { "id": "penpot", "name": "Penpot", "category": "design", "pricing": { "free": true, "paid": false }, "website": "https://penpot.app", "playstore": "" },
+  { "id": "coolors", "name": "Coolors", "category": "design", "pricing": { "free": true, "paid": true }, "website": "https://coolors.co", "playstore": "https://play.google.com/store/apps/details?id=co.coolors.android" },
+  { "id": "dribbble", "name": "Dribbble", "category": "design", "pricing": { "free": true, "paid": true }, "website": "https://dribbble.com", "playstore": "" },
+  { "id": "behance", "name": "Behance", "category": "design", "pricing": { "free": true, "paid": false }, "website": "https://www.behance.net", "playstore": "https://play.google.com/store/apps/details?id=com.behance.behance" }
+]

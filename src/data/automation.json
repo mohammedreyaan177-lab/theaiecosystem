@@ -1,0 +1,18 @@
+[
+  { "id": "n8n", "name": "n8n", "category": "automation", "pricing": { "free": true, "paid": true }, "website": "https://n8n.io", "rating": 4.8, "openSource": true, "apiAvailable": true, "playstore": "" },
+  { "id": "zapier", "name": "Zapier", "category": "automation", "pricing": { "free": true, "paid": true }, "website": "https://zapier.com", "rating": 4.6, "openSource": false, "apiAvailable": true, "playstore": "" },
+  { "id": "make", "name": "Make", "category": "automation", "pricing": { "free": true, "paid": true }, "website": "https://www.make.com", "rating": 4.7, "openSource": false, "apiAvailable": true, "playstore": "" },
+  { "id": "crewai", "name": "CrewAI", "category": "automation", "pricing": { "free": true, "paid": true }, "website": "https://www.crewai.com", "rating": 4.5, "openSource": true, "apiAvailable": true, "playstore": "" },
+  { "id": "langchain", "name": "LangChain", "category": "automation", "pricing": { "free": true, "paid": true }, "website": "https://www.langchain.com", "rating": 4.6, "openSource": true, "apiAvailable": true, "playstore": "" },
+  { "id": "langgraph", "name": "LangGraph", "category": "automation", "pricing": { "free": true, "paid": true }, "website": "https://www.langchain.com/langgraph", "rating": 4.6, "openSource": true, "apiAvailable": true, "playstore": "" },
+  { "id": "flowise", "name": "Flowise", "category": "automation", "pricing": { "free": true, "paid": true }, "website": "https://flowiseai.com", "rating": 4.5, "openSource": true, "apiAvailable": true, "playstore": "" },
+  { "id": "open-webui", "name": "Open WebUI", "category": "automation", "pricing": { "free": true, "paid": true }, "website": "https://openwebui.com", "rating": 4.5, "openSource": true, "apiAvailable": true, "playstore": "" },
+  { "id": "ollama", "name": "Ollama", "category": "automation", "pricing": { "free": true, "paid": false }, "website": "https://ollama.com", "rating": 4.7, "openSource": true, "apiAvailable": true, "playstore": "" },
+  { "id": "lm-studio", "name": "LM Studio", "category": "automation", "pricing": { "free": true, "paid": false }, "website": "https://lmstudio.ai", "rating": 4.5, "openSource": false, "apiAvailable": true, "playstore": "" },
+  { "id": "anythingllm", "name": "AnythingLLM", "category": "automation", "pricing": { "free": true, "paid": true }, "website": "https://anythingllm.com", "rating": 4.4, "openSource": true, "apiAvailable": true, "playstore": "" },
+  { "id": "activepieces", "name": "Activepieces", "category": "automation", "pricing": { "free": true, "paid": true }, "website": "https://www.activepieces.com", "rating": 4.7, "openSource": true, "apiAvailable": true, "playstore": "" },
+  { "id": "automatisch", "name": "Automatisch", "category": "automation", "pricing": { "free": true, "paid": true }, "website": "https://automatisch.io", "rating": 4.3, "openSource": true, "apiAvailable": true, "playstore": "" },
+  { "id": "windmill", "name": "Windmill", "category": "automation", "pricing": { "free": true, "paid": true }, "website": "https://www.windmill.dev", "rating": 4.6, "openSource": true, "apiAvailable": true, "playstore": "" },
+  { "id": "pipedream", "name": "Pipedream", "category": "automation", "pricing": { "free": true, "paid": true }, "website": "https://pipedream.com", "rating": 4.5, "openSource": false, "apiAvailable": true, "playstore": "" },
+  { "id": "huginn", "name": "Huginn", "category": "automation", "pricing": { "free": true, "paid": false }, "website": "https://github.com/huginn/huginn", "rating": 4.2, "openSource": true, "apiAvailable": true, "playstore": "" }
+]

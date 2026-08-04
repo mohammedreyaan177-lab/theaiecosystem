@@ -1,0 +1,178 @@
+[
+  {
+    "id": "chatgpt",
+    "name": "ChatGPT",
+    "category": "chat",
+    "pricing": { "free": true, "paid": true },
+    "website": "https://chatgpt.com",
+    "playstore": "https://play.google.com/store/apps/details?id=com.openai.chatgpt"
+  },
+  {
+    "id": "claude",
+    "name": "Claude",
+    "category": "chat",
+    "pricing": { "free": true, "paid": true },
+    "website": "https://claude.ai",
+    "playstore": "https://play.google.com/store/apps/details?id=com.anthropic.claude"
+  },
+  {
+    "id": "gemini",
+    "name": "Gemini",
+    "category": "chat",
+    "pricing": { "free": true, "paid": true },
+    "website": "https://gemini.google.com",
+    "playstore": "https://play.google.com/store/apps/details?id=com.google.android.apps.bard"
+  },
+  {
+    "id": "grok",
+    "name": "Grok",
+    "category": "chat",
+    "pricing": { "free": true, "paid": true },
+    "website": "https://grok.com",
+    "playstore": "https://play.google.com/store/apps/details?id=com.twitter.android"
+  },
+  {
+    "id": "deepseek",
+    "name": "DeepSeek",
+    "category": "chat",
+    "pricing": { "free": true, "paid": true },
+    "website": "https://chat.deepseek.com",
+    "playstore": "https://play.google.com/store/apps/details?id=com.deepseek.chat"
+  },
+  {
+    "id": "meta-ai",
+    "name": "Meta AI",
+    "category": "chat",
+    "pricing": { "free": true, "paid": false },
+    "website": "https://www.meta.ai",
+    "playstore": "https://play.google.com/store/apps/details?id=com.facebook.orca"
+  },
+  {
+    "id": "le-chat",
+    "name": "Le Chat",
+    "category": "chat",
+    "pricing": { "free": true, "paid": true },
+    "website": "https://chat.mistral.ai",
+    "playstore": "https://play.google.com/store/apps/details?id=ai.mistral.chat"
+  },
+  {
+    "id": "copilot",
+    "name": "Copilot",
+    "category": "chat",
+    "pricing": { "free": true, "paid": true },
+    "website": "https://copilot.microsoft.com",
+    "playstore": "https://play.google.com/store/apps/details?id=com.microsoft.copilot"
+  },
+  {
+    "id": "perplexity",
+    "name": "Perplexity",
+    "category": "chat",
+    "pricing": { "free": true, "paid": true },
+    "website": "https://perplexity.ai",
+    "playstore": "https://play.google.com/store/apps/details?id=ai.perplexity.app.android"
+  },
+  {
+    "id": "character-ai",
+    "name": "Character.AI",
+    "category": "chat",
+    "pricing": { "free": true, "paid": true },
+    "website": "https://character.ai",
+    "playstore": "https://play.google.com/store/apps/details?id=ai.character.app"
+  },
+  {
+    "id": "huggingchat",
+    "name": "HuggingChat",
+    "category": "chat",
+    "pricing": { "free": true, "paid": false },
+    "website": "https://huggingface.co/chat",
+    "playstore": ""
+  },
+  {
+    "id": "pi",
+    "name": "Pi",
+    "category": "chat",
+    "pricing": { "free": true, "paid": false },
+    "website": "https://pi.ai",
+    "playstore": ""
+  },
+  {
+    "id": "poe",
+    "name": "Poe",
+    "category": "chat",
+    "pricing": { "free": true, "paid": true },
+    "website": "https://poe.com",
+    "playstore": "https://play.google.com/store/apps/details?id=com.poe.android"
+  },
+  {
+    "id": "coze",
+    "name": "Coze",
+    "category": "chat",
+    "pricing": { "free": true, "paid": true },
+    "website": "https://www.coze.com",
+    "playstore": ""
+  },
+  {
+    "id": "groq",
+    "name": "Groq",
+    "category": "chat",
+    "pricing": { "free": true, "paid": true },
+    "website": "https://groq.com",
+    "playstore": ""
+  },
+  {
+    "id": "qwen-chat",
+    "name": "Qwen Chat",
+    "category": "chat",
+    "pricing": { "free": true, "paid": false },
+    "website": "https://chat.qwen.ai",
+    "playstore": ""
+  },
+  {
+    "id": "kimi",
+    "name": "Kimi",
+    "category": "chat",
+    "pricing": { "free": true, "paid": true },
+    "website": "https://kimi.moonshot.cn",
+    "playstore": ""
+  },
+  {
+    "id": "youcom",
+    "name": "You.com",
+    "category": "chat",
+    "pricing": { "free": true, "paid": true },
+    "website": "https://you.com",
+    "playstore": ""
+  },
+  {
+    "id": "phind",
+    "name": "Phind",
+    "category": "chat",
+    "pricing": { "free": true, "paid": true },
+    "website": "https://phind.com",
+    "playstore": ""
+  },
+  {
+    "id": "notebooklm",
+    "name": "NotebookLM",
+    "category": "chat",
+    "pricing": { "free": true, "paid": true },
+    "website": "https://notebooklm.google.com",
+    "playstore": "https://play.google.com/store/apps/details?id=com.google.android.apps.notebooklm"
+  },
+  {
+    "id": "duckduckgo-ai",
+    "name": "DuckDuckGo AI Chat",
+    "category": "chat",
+    "pricing": { "free": true, "paid": false },
+    "website": "https://duckduckgo.com/aichat",
+    "playstore": "https://play.google.com/store/apps/details?id=com.duckduckgo.mobile.android"
+  },
+  {
+    "id": "venice-ai",
+    "name": "Venice AI",
+    "category": "chat",
+    "pricing": { "free": true, "paid": true },
+    "website": "https://venice.ai",
+    "playstore": ""
+  }
+]

@@ -1,0 +1,892 @@
+[
+  {
+    "id": "chatgpt",
+    "name": "ChatGPT",
+    "category": "chat",
+    "pricing": {
+      "free": true,
+      "paid": true
+    },
+    "website": "https://chatgpt.com"
+  },
+  {
+    "id": "claude",
+    "name": "Claude",
+    "category": "chat",
+    "pricing": {
+      "free": false,
+      "paid": true
+    },
+    "website": "https://claude.ai"
+  },
+  {
+    "id": "gemini",
+    "name": "Gemini",
+    "category": "chat",
+    "pricing": {
+      "free": true,
+      "paid": true
+    },
+    "website": "https://gemini.google.com"
+  },
+  {
+    "id": "grok",
+    "name": "Grok",
+    "category": "chat",
+    "pricing": {
+      "free": true,
+      "paid": true
+    },
+    "website": ""
+  },
+  {
+    "id": "deepseek",
+    "name": "DeepSeek",
+    "category": "chat",
+    "pricing": {
+      "free": true,
+      "paid": true
+    },
+    "website": ""
+  },
+  {
+    "id": "meta-ai",
+    "name": "Meta AI",
+    "category": "chat",
+    "pricing": {
+      "free": true,
+      "paid": true
+    },
+    "website": ""
+  },
+  {
+    "id": "le-chat",
+    "name": "Le Chat",
+    "category": "chat",
+    "pricing": {
+      "free": true,
+      "paid": true
+    },
+    "website": ""
+  },
+  {
+    "id": "qwen-chat",
+    "name": "Qwen Chat",
+    "category": "chat",
+    "pricing": {
+      "free": true,
+      "paid": true
+    },
+    "website": ""
+  },
+  {
+    "id": "kimi",
+    "name": "Kimi",
+    "category": "chat",
+    "pricing": {
+      "free": true,
+      "paid": true
+    },
+    "website": ""
+  },
+  {
+    "id": "poe",
+    "name": "Poe",
+    "category": "chat",
+    "pricing": {
+      "free": true,
+      "paid": true
+    },
+    "website": ""
+  },
+  {
+    "id": "youcom",
+    "name": "You.com",
+    "category": "chat",
+    "pricing": {
+      "free": true,
+      "paid": true
+    },
+    "website": ""
+  },
+  {
+    "id": "phind",
+    "name": "Phind",
+    "category": "chat",
+    "pricing": {
+      "free": true,
+      "paid": true
+    },
+    "website": ""
+  },
+  {
+    "id": "copilot",
+    "name": "Copilot",
+    "category": "chat",
+    "pricing": {
+      "free": true,
+      "paid": true
+    },
+    "website": ""
+  },
+  {
+    "id": "perplexity",
+    "name": "Perplexity",
+    "category": "chat",
+    "pricing": {
+      "free": true,
+      "paid": true
+    },
+    "website": "https://perplexity.ai"
+  },
+  {
+    "id": "notebooklm",
+    "name": "NotebookLM",
+    "category": "chat",
+    "pricing": {
+      "free": true,
+      "paid": true
+    },
+    "website": ""
+  },
+  {
+    "id": "cursor",
+    "name": "Cursor",
+    "category": "coding",
+    "pricing": {
+      "free": false,
+      "paid": true
+    },
+    "website": ""
+  },
+  {
+    "id": "windsurf",
+    "name": "Windsurf",
+    "category": "coding",
+    "pricing": {
+      "free": false,
+      "paid": true
+    },
+    "website": ""
+  },
+  {
+    "id": "github-copilot",
+    "name": "GitHub Copilot",
+    "category": "coding",
+    "pricing": {
+      "free": true,
+      "paid": true
+    },
+    "website": ""
+  },
+  {
+    "id": "codeium",
+    "name": "Codeium",
+    "category": "coding",
+    "pricing": {
+      "free": true,
+      "paid": true
+    },
+    "website": ""
+  },
+  {
+    "id": "continue",
+    "name": "Continue",
+    "category": "coding",
+    "pricing": {
+      "free": true,
+      "paid": true
+    },
+    "website": ""
+  },
+  {
+    "id": "replit-ai",
+    "name": "Replit AI",
+    "category": "coding",
+    "pricing": {
+      "free": true,
+      "paid": true
+    },
+    "website": ""
+  },
+  {
+    "id": "v0",
+    "name": "v0",
+    "category": "coding",
+    "pricing": {
+      "free": true,
+      "paid": true
+    },
+    "website": ""
+  },
+  {
+    "id": "bolt",
+    "name": "Bolt",
+    "category": "coding",
+    "pricing": {
+      "free": true,
+      "paid": true
+    },
+    "website": ""
+  },
+  {
+    "id": "lovable",
+    "name": "Lovable",
+    "category": "coding",
+    "pricing": {
+      "free": true,
+      "paid": true
+    },
+    "website": ""
+  },
+  {
+    "id": "firebase-studio",
+    "name": "Firebase Studio",
+    "category": "coding",
+    "pricing": {
+      "free": true,
+      "paid": true
+    },
+    "website": ""
+  },
+  {
+    "id": "midjourney",
+    "name": "Midjourney",
+    "category": "image",
+    "pricing": {
+      "free": false,
+      "paid": true
+    },
+    "website": ""
+  },
+  {
+    "id": "ideogram",
+    "name": "Ideogram",
+    "category": "image",
+    "pricing": {
+      "free": true,
+      "paid": true
+    },
+    "website": ""
+  },
+  {
+    "id": "leonardo-ai",
+    "name": "Leonardo AI",
+    "category": "image",
+    "pricing": {
+      "free": true,
+      "paid": true
+    },
+    "website": ""
+  },
+  {
+    "id": "playground-ai",
+    "name": "Playground AI",
+    "category": "image",
+    "pricing": {
+      "free": true,
+      "paid": true
+    },
+    "website": ""
+  },
+  {
+    "id": "adobe-firefly",
+    "name": "Adobe Firefly",
+    "category": "image",
+    "pricing": {
+      "free": true,
+      "paid": true
+    },
+    "website": ""
+  },
+  {
+    "id": "canva-ai",
+    "name": "Canva AI",
+    "category": "image",
+    "pricing": {
+      "free": true,
+      "paid": true
+    },
+    "website": ""
+  },
+  {
+    "id": "microsoft-designer",
+    "name": "Microsoft Designer",
+    "category": "image",
+    "pricing": {
+      "free": true,
+      "paid": true
+    },
+    "website": ""
+  },
+  {
+    "id": "gpt-image",
+    "name": "GPT Image",
+    "category": "image",
+    "pricing": {
+      "free": true,
+      "paid": true
+    },
+    "website": ""
+  },
+  {
+    "id": "flux",
+    "name": "Flux",
+    "category": "image",
+    "pricing": {
+      "free": true,
+      "paid": true
+    },
+    "website": ""
+  },
+  {
+    "id": "stable-diffusion",
+    "name": "Stable Diffusion",
+    "category": "image",
+    "pricing": {
+      "free": true,
+      "paid": true
+    },
+    "website": ""
+  },
+  {
+    "id": "dreamstudio",
+    "name": "DreamStudio",
+    "category": "image",
+    "pricing": {
+      "free": true,
+      "paid": true
+    },
+    "website": ""
+  },
+  {
+    "id": "recraft",
+    "name": "Recraft",
+    "category": "image",
+    "pricing": {
+      "free": true,
+      "paid": true
+    },
+    "website": ""
+  },
+  {
+    "id": "runway",
+    "name": "Runway",
+    "category": "video",
+    "pricing": {
+      "free": false,
+      "paid": true
+    },
+    "website": ""
+  },
+  {
+    "id": "kling-ai",
+    "name": "Kling AI",
+    "category": "video",
+    "pricing": {
+      "free": false,
+      "paid": true
+    },
+    "website": ""
+  },
+  {
+    "id": "google-veo",
+    "name": "Google Veo",
+    "category": "video",
+    "pricing": {
+      "free": true,
+      "paid": true
+    },
+    "website": ""
+  },
+  {
+    "id": "pika",
+    "name": "Pika",
+    "category": "video",
+    "pricing": {
+      "free": true,
+      "paid": true
+    },
+    "website": ""
+  },
+  {
+    "id": "luma-dream-machine",
+    "name": "Luma Dream Machine",
+    "category": "video",
+    "pricing": {
+      "free": true,
+      "paid": true
+    },
+    "website": ""
+  },
+  {
+    "id": "hailuo-ai",
+    "name": "Hailuo AI",
+    "category": "video",
+    "pricing": {
+      "free": true,
+      "paid": true
+    },
+    "website": ""
+  },
+  {
+    "id": "synthesia",
+    "name": "Synthesia",
+    "category": "video",
+    "pricing": {
+      "free": true,
+      "paid": true
+    },
+    "website": ""
+  },
+  {
+    "id": "heygen",
+    "name": "HeyGen",
+    "category": "video",
+    "pricing": {
+      "free": true,
+      "paid": true
+    },
+    "website": ""
+  },
+  {
+    "id": "d-id",
+    "name": "D-ID",
+    "category": "video",
+    "pricing": {
+      "free": true,
+      "paid": true
+    },
+    "website": ""
+  },
+  {
+    "id": "elevenlabs",
+    "name": "ElevenLabs",
+    "category": "voice",
+    "pricing": {
+      "free": false,
+      "paid": true
+    },
+    "website": ""
+  },
+  {
+    "id": "playht",
+    "name": "PlayHT",
+    "category": "voice",
+    "pricing": {
+      "free": false,
+      "paid": true
+    },
+    "website": ""
+  },
+  {
+    "id": "cartesia",
+    "name": "Cartesia",
+    "category": "voice",
+    "pricing": {
+      "free": false,
+      "paid": true
+    },
+    "website": ""
+  },
+  {
+    "id": "murf-ai",
+    "name": "Murf AI",
+    "category": "voice",
+    "pricing": {
+      "free": false,
+      "paid": true
+    },
+    "website": ""
+  },
+  {
+    "id": "suno",
+    "name": "Suno",
+    "category": "music",
+    "pricing": {
+      "free": true,
+      "paid": true
+    },
+    "website": ""
+  },
+  {
+    "id": "udio",
+    "name": "Udio",
+    "category": "music",
+    "pricing": {
+      "free": true,
+      "paid": true
+    },
+    "website": ""
+  },
+  {
+    "id": "aiva",
+    "name": "AIVA",
+    "category": "music",
+    "pricing": {
+      "free": true,
+      "paid": true
+    },
+    "website": ""
+  },
+  {
+    "id": "soundraw",
+    "name": "Soundraw",
+    "category": "music",
+    "pricing": {
+      "free": true,
+      "paid": true
+    },
+    "website": ""
+  },
+  {
+    "id": "perplexity",
+    "name": "Perplexity",
+    "category": "research",
+    "pricing": {
+      "free": true,
+      "paid": true
+    },
+    "website": "https://perplexity.ai"
+  },
+  {
+    "id": "notebooklm",
+    "name": "NotebookLM",
+    "category": "research",
+    "pricing": {
+      "free": true,
+      "paid": true
+    },
+    "website": ""
+  },
+  {
+    "id": "elicit",
+    "name": "Elicit",
+    "category": "research",
+    "pricing": {
+      "free": true,
+      "paid": true
+    },
+    "website": ""
+  },
+  {
+    "id": "consensus",
+    "name": "Consensus",
+    "category": "research",
+    "pricing": {
+      "free": true,
+      "paid": true
+    },
+    "website": ""
+  },
+  {
+    "id": "scispace",
+    "name": "SciSpace",
+    "category": "research",
+    "pricing": {
+      "free": true,
+      "paid": true
+    },
+    "website": ""
+  },
+  {
+    "id": "jasper",
+    "name": "Jasper",
+    "category": "writing",
+    "pricing": {
+      "free": false,
+      "paid": true
+    },
+    "website": ""
+  },
+  {
+    "id": "copyai",
+    "name": "Copy.ai",
+    "category": "writing",
+    "pricing": {
+      "free": false,
+      "paid": true
+    },
+    "website": ""
+  },
+  {
+    "id": "writesonic",
+    "name": "Writesonic",
+    "category": "writing",
+    "pricing": {
+      "free": true,
+      "paid": true
+    },
+    "website": ""
+  },
+  {
+    "id": "rytr",
+    "name": "Rytr",
+    "category": "writing",
+    "pricing": {
+      "free": true,
+      "paid": true
+    },
+    "website": ""
+  },
+  {
+    "id": "grammarly",
+    "name": "Grammarly",
+    "category": "writing",
+    "pricing": {
+      "free": true,
+      "paid": true
+    },
+    "website": ""
+  },
+  {
+    "id": "quillbot",
+    "name": "QuillBot",
+    "category": "writing",
+    "pricing": {
+      "free": true,
+      "paid": true
+    },
+    "website": ""
+  },
+  {
+    "id": "deepl",
+    "name": "DeepL",
+    "category": "writing",
+    "pricing": {
+      "free": true,
+      "paid": true
+    },
+    "website": ""
+  },
+  {
+    "id": "n8n",
+    "name": "n8n",
+    "category": "automation",
+    "pricing": {
+      "free": true,
+      "paid": true
+    },
+    "website": "https://n8n.io"
+  },
+  {
+    "id": "zapier",
+    "name": "Zapier",
+    "category": "automation",
+    "pricing": {
+      "free": true,
+      "paid": true
+    },
+    "website": "https://zapier.com"
+  },
+  {
+    "id": "make",
+    "name": "Make",
+    "category": "automation",
+    "pricing": {
+      "free": true,
+      "paid": true
+    },
+    "website": "https://make.com"
+  },
+  {
+    "id": "crewai",
+    "name": "CrewAI",
+    "category": "automation",
+    "pricing": {
+      "free": true,
+      "paid": true
+    },
+    "website": ""
+  },
+  {
+    "id": "langchain",
+    "name": "LangChain",
+    "category": "automation",
+    "pricing": {
+      "free": true,
+      "paid": true
+    },
+    "website": ""
+  },
+  {
+    "id": "langgraph",
+    "name": "LangGraph",
+    "category": "automation",
+    "pricing": {
+      "free": true,
+      "paid": true
+    },
+    "website": ""
+  },
+  {
+    "id": "flowise",
+    "name": "Flowise",
+    "category": "automation",
+    "pricing": {
+      "free": true,
+      "paid": true
+    },
+    "website": ""
+  },
+  {
+    "id": "open-webui",
+    "name": "Open WebUI",
+    "category": "automation",
+    "pricing": {
+      "free": true,
+      "paid": true
+    },
+    "website": ""
+  },
+  {
+    "id": "ollama",
+    "name": "Ollama",
+    "category": "automation",
+    "pricing": {
+      "free": true,
+      "paid": true
+    },
+    "website": ""
+  },
+  {
+    "id": "lm-studio",
+    "name": "LM Studio",
+    "category": "automation",
+    "pricing": {
+      "free": true,
+      "paid": true
+    },
+    "website": ""
+  },
+  {
+    "id": "anythingllm",
+    "name": "AnythingLLM",
+    "category": "automation",
+    "pricing": {
+      "free": true,
+      "paid": true
+    },
+    "website": ""
+  },
+  {
+    "id": "notion-ai",
+    "name": "Notion AI",
+    "category": "productivity",
+    "pricing": {
+      "free": true,
+      "paid": true
+    },
+    "website": ""
+  },
+  {
+    "id": "coda-ai",
+    "name": "Coda AI",
+    "category": "productivity",
+    "pricing": {
+      "free": true,
+      "paid": true
+    },
+    "website": ""
+  },
+  {
+    "id": "clickup-ai",
+    "name": "ClickUp AI",
+    "category": "productivity",
+    "pricing": {
+      "free": true,
+      "paid": true
+    },
+    "website": ""
+  },
+  {
+    "id": "gamma",
+    "name": "Gamma",
+    "category": "productivity",
+    "pricing": {
+      "free": true,
+      "paid": true
+    },
+    "website": ""
+  },
+  {
+    "id": "beautifulai",
+    "name": "Beautiful.ai",
+    "category": "productivity",
+    "pricing": {
+      "free": false,
+      "paid": true
+    },
+    "website": ""
+  },
+  {
+    "id": "tome",
+    "name": "Tome",
+    "category": "productivity",
+    "pricing": {
+      "free": false,
+      "paid": true
+    },
+    "website": ""
+  },
+  {
+    "id": "otterai",
+    "name": "Otter.ai",
+    "category": "productivity",
+    "pricing": {
+      "free": true,
+      "paid": true
+    },
+    "website": ""
+  },
+  {
+    "id": "firefliesai",
+    "name": "Fireflies.ai",
+    "category": "productivity",
+    "pricing": {
+      "free": true,
+      "paid": true
+    },
+    "website": ""
+  },
+  {
+    "id": "descript",
+    "name": "Descript",
+    "category": "productivity",
+    "pricing": {
+      "free": true,
+      "paid": true
+    },
+    "website": ""
+  },
+  {
+    "id": "capcut-ai",
+    "name": "CapCut AI",
+    "category": "productivity",
+    "pricing": {
+      "free": true,
+      "paid": true
+    },
+    "website": ""
+  },
+  {
+    "id": "opus-clip",
+    "name": "Opus Clip",
+    "category": "productivity",
+    "pricing": {
+      "free": true,
+      "paid": true
+    },
+    "website": ""
+  },
+  {
+    "id": "riverside",
+    "name": "Riverside",
+    "category": "productivity",
+    "pricing": {
+      "free": true,
+      "paid": true
+    },
+    "website": ""
+  }
+]
