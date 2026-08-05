@@ -335,7 +335,6 @@ function Intro({ onClose }: { onClose: () => void }) {
       animate={{ opacity: 1 }}
       exit={{ opacity: 0, scale: 1.08 }}
       transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
-      onClick={onClose}
     >
       <div className="cyber-grid-overlay" />
       <div className="glowing-orb-bg" />
@@ -394,14 +393,14 @@ function Intro({ onClose }: { onClose: () => void }) {
   );
 }
 
-type Theme = 'sunlight' | 'noir' | 'violet' | 'maroon'
-function ThemePicker({ theme, setTheme }: { theme: Theme; setTheme: (theme: Theme) => void }) { const [open, setOpen] = useState(false); const ref = React.useRef<HTMLDivElement>(null); useEffect(() => { const handleClick = (e: MouseEvent) => { if (ref.current && !ref.current.contains(e.target as Node)) setOpen(false) }; document.addEventListener('mousedown', handleClick); return () => document.removeEventListener('mousedown', handleClick) }, []); const themes: {id:Theme; name:string; note:string}[] = [{id:'sunlight',name:'Sunlight',note:'White + yellow'},{id:'noir',name:'Noir',note:'Black + yellow'},{id:'violet',name:'Midnight',note:'Ink + violet'},{id:'maroon',name:'Royal Maroon',note:'Maroon + white'}]; return <div className="theme-picker" ref={ref}><button className="theme-trigger icon" onClick={() => setOpen(!open)} aria-label="Change color theme"><Palette size={17}/></button>{open && <div className="theme-picker-menu">{themes.map(option => <button key={option.id} className={theme === option.id ? 'selected' : ''} onClick={() => { setTheme(option.id); setOpen(false) }}><span className={`theme-swatch ${option.id}`}/><div><b>{option.name}</b><small>{option.note}</small></div>{theme === option.id && <Check size={14}/>}</button>)}</div>}</div> }
+type Theme = 'sunlight' | 'noir' | 'violet'
+function ThemePicker({ theme, setTheme }: { theme: Theme; setTheme: (theme: Theme) => void }) { const [open, setOpen] = useState(false); const ref = React.useRef<HTMLDivElement>(null); useEffect(() => { const handleClick = (e: MouseEvent) => { if (ref.current && !ref.current.contains(e.target as Node)) setOpen(false) }; document.addEventListener('mousedown', handleClick); return () => document.removeEventListener('mousedown', handleClick) }, []); const themes: {id:Theme; name:string; note:string}[] = [{id:'sunlight',name:'Sunlight',note:'White + yellow'},{id:'noir',name:'Noir',note:'Black + yellow'},{id:'violet',name:'Midnight',note:'Ink + violet'}]; return <div className="theme-picker" ref={ref}><button className="theme-trigger icon" onClick={() => setOpen(!open)} aria-label="Change color theme"><Palette size={17}/></button>{open && <div className="theme-picker-menu">{themes.map(option => <button key={option.id} className={theme === option.id ? 'selected' : ''} onClick={() => { setTheme(option.id); setOpen(false) }}><span className={`theme-swatch ${option.id}`}/><div><b>{option.name}</b><small>{option.note}</small></div>{theme === option.id && <Check size={14}/>}</button>)}</div>}</div> }
 
 function Shell() { 
   const [favorites,toggleFavs] = useStored('ai-favorites'); 
   const [compare,setCompare] = useStored('ai-compare'); 
   const [showIntro, setShowIntro] = useState(() => !sessionStorage.getItem('ai-intro-played'));
-  const [theme,setTheme] = useState<Theme>(() => { const saved = localStorage.getItem('ai-theme'); return saved === 'noir' || saved === 'violet' || saved === 'sunlight' || saved === 'maroon' ? saved : 'maroon' }); 
+  const [theme,setTheme] = useState<Theme>(() => { const saved = localStorage.getItem('ai-theme'); return saved === 'noir' || saved === 'violet' || saved === 'sunlight' ? saved : 'sunlight' }); 
 
   const [mobile,setMobile]=useState(false); 
   const [command,setCommand]=useState(false); 

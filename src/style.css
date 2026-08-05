@@ -42,14 +42,14 @@ a {
 
 /* Theme Design Tokens */
 :root, :root[data-theme=light], :root[data-accent=sunlight] {
-  --ink: #1d281f;
-  --muted: #657067;
-  --green: #236a39;
-  --deep-green: #163e26;
-  --orange: #ed8613;
-  --paper: #f7f5ef;
-  --soft: #edf3eb;
-  --line: #dce3dc;
+  --ink: #16140d;
+  --muted: #716b55;
+  --green: #a87900;
+  --deep-green: #795700;
+  --orange: #f6c90e;
+  --paper: #fffdf5;
+  --soft: #fff7d6;
+  --line: #eadfba;
   color: var(--ink);
   background: #ffffff;
 }
@@ -1692,7 +1692,7 @@ a {
     margin-left: 0 !important;
     width: 100% !important;
     max-width: 100vw !important;
-    padding: 76px 14px 84px !important;
+    padding: 22px 14px 84px !important;
   }
 
   /* Page Headings Uniformity */
@@ -1891,6 +1891,9 @@ a {
   .topbar {
     padding: 0 10px !important;
   }
+  .brand > span:last-child, .avatar { display: none !important; }
+  .topbar { gap: 8px !important; }
+  .global-search { min-width: 0 !important; }
   .stats {
     grid-template-columns: 1fr !important;
   }
