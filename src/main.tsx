@@ -320,11 +320,12 @@ function Favorites(props: PageProps) {
 function Empty({ title, text }: { title:string; text:string }) { return <div className="empty"><CircleHelp size={25}/><h2>{title}</h2><p>{text}</p><Link className="primary" to="/browse">Browse tools</Link></div> }
 function Intro({ onClose }: { onClose: () => void }) {
   const [phase, setPhase] = useState<'boot' | 'reveal'>('boot');
+  const particles = Array.from({ length: 18 }, (_, index) => index);
 
   useEffect(() => {
     setPhase('boot');
     const timer1 = window.setTimeout(() => setPhase('reveal'), 900);
-    const timer2 = window.setTimeout(() => onClose(), 4400);
+    const timer2 = window.setTimeout(() => onClose(), 5600);
     return () => { window.clearTimeout(timer1); window.clearTimeout(timer2); };
   }, [onClose]);
 
@@ -338,10 +339,12 @@ function Intro({ onClose }: { onClose: () => void }) {
     >
       <div className="intro-noise" />
       <div className="intro-grid" />
+      <div className="intro-particle-field" aria-hidden="true">{particles.map(index => <span key={index} style={{'--i': index} as React.CSSProperties}/>)}</div>
       <div className="intro-sun intro-sun-one" /><div className="intro-sun intro-sun-two" />
       <div className="intro-orbit orbit-one" /><div className="intro-orbit orbit-two" /><div className="intro-orbit orbit-three" />
-      <div className="intro-corner intro-corner-tl">SYSTEM / AI-01</div><div className="intro-corner intro-corner-br">DISCOVERY ENGINE</div>
+      <div className="intro-corner intro-corner-tl"><i/> SYSTEM / AI-01</div><div className="intro-corner intro-corner-br">DISCOVERY ENGINE <b>LIVE</b></div>
       <div className="intro-metrics"><span><b>278</b> TOOLS INDEXED</span><span><b>16</b> CATEGORIES</span><span><b>∞</b> POSSIBILITIES</span></div>
+      <button className="intro-skip" type="button" onClick={onClose}>SKIP INTRO <X size={13}/></button>
       <motion.div className="intro-stage" initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
         <motion.div className="brand-reactor" initial={{scale:.3,opacity:0,rotate:-40}} animate={{scale:1,opacity:1,rotate:0}} transition={{duration:.85,ease:[.16,1,.3,1]}}>
           <span className="reactor-ring ring-a"/><span className="reactor-ring ring-b"/><span className="reactor-ring ring-c"/>
@@ -354,14 +357,14 @@ function Intro({ onClose }: { onClose: () => void }) {
   );
 }
 
-type Theme = 'sunlight' | 'noir' | 'violet'
-function ThemePicker({ theme, setTheme }: { theme: Theme; setTheme: (theme: Theme) => void }) { const [open, setOpen] = useState(false); const ref = React.useRef<HTMLDivElement>(null); useEffect(() => { const handleClick = (e: MouseEvent) => { if (ref.current && !ref.current.contains(e.target as Node)) setOpen(false) }; document.addEventListener('mousedown', handleClick); return () => document.removeEventListener('mousedown', handleClick) }, []); const themes: {id:Theme; name:string; note:string}[] = [{id:'sunlight',name:'Sunlight',note:'White + yellow'},{id:'noir',name:'Noir',note:'Black + yellow'},{id:'violet',name:'Midnight',note:'Ink + violet'}]; return <div className="theme-picker" ref={ref}><button className="theme-trigger icon" onClick={() => setOpen(!open)} aria-label="Change color theme"><Palette size={17}/></button>{open && <div className="theme-picker-menu">{themes.map(option => <button key={option.id} className={theme === option.id ? 'selected' : ''} onClick={() => { setTheme(option.id); setOpen(false) }}><span className={`theme-swatch ${option.id}`}/><div><b>{option.name}</b><small>{option.note}</small></div>{theme === option.id && <Check size={14}/>}</button>)}</div>}</div> }
+type Theme = 'maroon' | 'sunlight' | 'noir' | 'violet'
+function ThemePicker({ theme, setTheme }: { theme: Theme; setTheme: (theme: Theme) => void }) { const [open, setOpen] = useState(false); const ref = React.useRef<HTMLDivElement>(null); useEffect(() => { const handleClick = (e: MouseEvent) => { if (ref.current && !ref.current.contains(e.target as Node)) setOpen(false) }; document.addEventListener('mousedown', handleClick); return () => document.removeEventListener('mousedown', handleClick) }, []); const themes: {id:Theme; name:string; note:string}[] = [{id:'maroon',name:'Maroon',note:'Maroon + white'},{id:'sunlight',name:'Sunlight',note:'White + yellow'},{id:'noir',name:'Noir',note:'Black + yellow'},{id:'violet',name:'Midnight',note:'Ink + violet'}]; return <div className="theme-picker" ref={ref}><button className="theme-trigger icon" onClick={() => setOpen(!open)} aria-label="Change color theme"><Palette size={17}/></button>{open && <div className="theme-picker-menu">{themes.map(option => <button key={option.id} className={theme === option.id ? 'selected' : ''} onClick={() => { setTheme(option.id); setOpen(false) }}><span className={`theme-swatch ${option.id}`}/><div><b>{option.name}</b><small>{option.note}</small></div>{theme === option.id && <Check size={14}/>}</button>)}</div>}</div> }
 
 function Shell() { 
   const [favorites,toggleFavs] = useStored('ai-favorites'); 
   const [compare,setCompare] = useStored('ai-compare'); 
-  const [showIntro, setShowIntro] = useState(() => !sessionStorage.getItem('ai-intro-played'));
-  const [theme,setTheme] = useState<Theme>(() => { const saved = localStorage.getItem('ai-theme'); return saved === 'noir' || saved === 'violet' || saved === 'sunlight' ? saved : 'sunlight' }); 
+  const [showIntro, setShowIntro] = useState(() => !sessionStorage.getItem('ai-intro-v3-played'));
+  const [theme,setTheme] = useState<Theme>(() => { const saved = localStorage.getItem('ai-theme'); return saved === 'noir' || saved === 'violet' || saved === 'sunlight' || saved === 'maroon' ? saved : 'maroon' }); 
 
   const [command,setCommand]=useState(false); 
   const [cmdQuery,setCmdQuery]=useState('');
@@ -380,7 +383,7 @@ function Shell() {
   }, [cmdQuery]);
 
   const handleCloseIntro = () => {
-    sessionStorage.setItem('ai-intro-played', 'true');
+    sessionStorage.setItem('ai-intro-v3-played', 'true');
     setShowIntro(false);
   };
 
