@@ -571,25 +571,26 @@ a {
 
 /* Filterbar & Filter Chips */
 .filterbar {
-  display: grid;
-  grid-template-columns: 2fr 1fr 1fr 1fr;
+  display: flex;
+  flex-direction: column;
   gap: 10px;
   background: var(--paper);
   border: 1px solid var(--line);
   border-radius: 14px;
-  padding: 10px;
+  padding: 12px;
   margin-bottom: 16px;
 }
 
 .search-input {
+  width: 100%;
+  height: 44px;
   background: var(--soft);
   border: 1px solid var(--line);
   border-radius: 10px;
-  height: 42px;
   display: flex;
   align-items: center;
   gap: 9px;
-  padding: 0 12px;
+  padding: 0 14px;
   color: var(--muted);
 }
 
@@ -602,16 +603,43 @@ a {
   font-size: 14px;
 }
 
+.filterbar-selects {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr;
+  gap: 10px;
+  width: 100%;
+}
+
 .filterbar select {
-  height: 42px;
+  height: 44px;
+  width: 100%;
   background: var(--soft);
   border: 1px solid var(--line);
   border-radius: 10px;
   padding: 0 12px;
   color: var(--ink);
   font-size: 13px;
+  font-weight: 600;
   outline: none;
+  cursor: pointer;
+  -webkit-appearance: none;
+  appearance: none;
+  background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23657067' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+  background-size: 16px;
+  padding-right: 34px;
 }
+
+.filterbar select option {
+  background: var(--paper);
+  color: var(--ink);
+  padding: 10px;
+}
+
+:root[data-theme=dark] .filterbar select option { background: #1c1c1c; color: #f5f5f0; }
+:root[data-accent=violet] .filterbar select option { background: #18122c; color: #f5f3ff; }
+:root[data-accent=maroon] .filterbar select option { background: #4a0717; color: #ffffff; }
 
 .filter-chips {
   display: flex;
@@ -1108,19 +1136,28 @@ a {
 
   /* Filterbar & Filter Chips on Mobile */
   .filterbar {
-    grid-template-columns: 1fr 1fr !important;
-    gap: 8px !important;
-    padding: 10px !important;
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 10px !important;
+    padding: 12px !important;
   }
 
   .search-input {
-    grid-column: 1 / -1 !important;
+    width: 100% !important;
     height: 44px !important;
+  }
+
+  .filterbar-selects {
+    display: grid !important;
+    grid-template-columns: repeat(3, 1fr) !important;
+    gap: 8px !important;
+    width: 100% !important;
   }
 
   .filterbar select {
     height: 44px !important;
     font-size: 13px !important;
+    width: 100% !important;
   }
 
   .filter-chips {
@@ -1218,16 +1255,17 @@ a {
   }
 }
 
-/* Compact phones (<480px) */
-@media (max-width: 480px) {
+/* Compact phones (<600px) */
+@media (max-width: 600px) {
   .topbar {
     padding: 0 10px !important;
   }
   .stats {
     grid-template-columns: 1fr !important;
   }
-  .filterbar {
+  .filterbar-selects {
     grid-template-columns: 1fr !important;
+    gap: 8px !important;
   }
   .repo-actions {
     grid-template-columns: 1fr !important;
