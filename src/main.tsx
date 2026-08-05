@@ -318,103 +318,79 @@ function Favorites(props: PageProps) {
   );
 }
 function Empty({ title, text }: { title:string; text:string }) { return <div className="empty"><CircleHelp size={25}/><h2>{title}</h2><p>{text}</p><Link className="primary" to="/browse">Browse tools</Link></div> }
-function Intro({ visible, onClose }: { visible: boolean; onClose: () => void }) {
+function Intro({ onClose }: { onClose: () => void }) {
   const [phase, setPhase] = useState<'core' | 'hero'>('core');
 
   useEffect(() => {
-    if (!visible) return;
     setPhase('core');
     const timer1 = window.setTimeout(() => setPhase('hero'), 650);
     const timer2 = window.setTimeout(() => onClose(), 3400);
     return () => { window.clearTimeout(timer1); window.clearTimeout(timer2); };
-  }, [visible, onClose]);
-
-  if (!visible) return null;
+  }, [onClose]);
 
   return (
-    <AnimatePresence>
-      <motion.div 
-        className="intro-canvas"
-        initial={{ opacity: 1 }}
-        exit={{ opacity: 0, scale: 1.12, filter: 'blur(10px)' }}
-        transition={{ duration: 0.65, ease: [0.16, 1, 0.3, 1] }}
-      >
-        <div className="cyber-grid-overlay" />
-        <div className="glowing-orb-bg" />
-        
-        {phase === 'core' && (
+    <motion.div 
+      className="intro-canvas"
+      initial={{ opacity: 1 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0, scale: 1.08 }}
+      transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+      onClick={onClose}
+    >
+      <div className="cyber-grid-overlay" />
+      <div className="glowing-orb-bg" />
+      
+      {phase === 'core' && (
+        <motion.div 
+          className="singularity-core"
+          initial={{ scale: 0.05, rotate: -180, opacity: 0 }}
+          animate={{ scale: [0.05, 1.4, 1], rotate: 360, opacity: 1 }}
+          transition={{ duration: 0.65, ease: 'easeOut' }}
+        >
+          <div className="core-ring outer" />
+          <div className="core-ring inner" />
+          <img src={brandLogo} alt="Logo Core" className="core-logo" />
+        </motion.div>
+      )}
+
+      {phase === 'hero' && (
+        <motion.div 
+          className="intro-content-hero"
+          initial={{ opacity: 0, scale: 0.85, y: 15 }}
+          animate={{ opacity: 1, scale: 1, y: 0 }}
+          transition={{ duration: 0.55, ease: [0.16, 1, 0.3, 1] }}
+        >
           <motion.div 
-            className="singularity-core"
-            initial={{ scale: 0.05, rotate: -180, opacity: 0 }}
-            animate={{ scale: [0.05, 1.4, 1], rotate: 360, opacity: 1 }}
-            transition={{ duration: 0.65, ease: 'easeOut' }}
+            className="transformed-logo-wrap"
+            initial={{ scale: 0, rotate: -180 }}
+            animate={{ scale: 1, rotate: 0 }}
+            transition={{ type: 'spring', stiffness: 220, damping: 14 }}
           >
-            <div className="core-ring outer" />
-            <div className="core-ring inner" />
-            <img src={brandLogo} alt="Logo Core" className="core-logo" />
+            <div className="halo-glow" />
+            <img src={brandLogo} alt="AIEcosystem logo" className="hero-brandmark" />
           </motion.div>
-        )}
 
-        {phase === 'hero' && (
-          <motion.div 
-            className="intro-content-hero"
-            initial={{ opacity: 0, scale: 0.85, y: 15 }}
-            animate={{ opacity: 1, scale: 1, y: 0 }}
-            transition={{ duration: 0.55, ease: [0.16, 1, 0.3, 1] }}
+          <p className="intro-eyebrow">WELCOME TO</p>
+
+          <h1 className="intro-title">
+            AI<span className="shimmer-text">ECOSYSTEM</span>
+          </h1>
+
+          <p className="intro-tagline">
+            The intelligent directory for the tools shaping tomorrow.
+          </p>
+
+          <button 
+            type="button" 
+            className="intro-enter-btn" 
+            onClick={(e) => { e.stopPropagation(); onClose(); }}
           >
-            <motion.div 
-              className="transformed-logo-wrap"
-              initial={{ scale: 0, rotate: -180 }}
-              animate={{ scale: 1, rotate: 0 }}
-              transition={{ type: 'spring', stiffness: 220, damping: 14 }}
-            >
-              <div className="halo-glow" />
-              <img src={brandLogo} alt="AIEcosystem logo" className="hero-brandmark" />
-            </motion.div>
-
-            <motion.p 
-              className="intro-eyebrow"
-              initial={{ opacity: 0, letterSpacing: '0.6em' }}
-              animate={{ opacity: 1, letterSpacing: '0.25em' }}
-              transition={{ duration: 0.45, delay: 0.1 }}
-            >
-              WELCOME TO
-            </motion.p>
-
-            <motion.h1 
-              className="intro-title"
-              initial={{ opacity: 0, y: 15 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.45, delay: 0.2 }}
-            >
-              AI<span className="shimmer-text">ECOSYSTEM</span>
-            </motion.h1>
-
-            <motion.p 
-              className="intro-tagline"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 0.45, delay: 0.35 }}
-            >
-              The intelligent directory for the tools shaping tomorrow.
-            </motion.p>
-
-            <motion.button 
-              className="intro-enter-btn"
-              onClick={onClose}
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              transition={{ duration: 0.3, delay: 0.45 }}
-            >
-              <span>EXPLORE DIRECTORY</span>
-              <ChevronRight size={16} />
-            </motion.button>
-          </motion.div>
-        )}
-      </motion.div>
-    </AnimatePresence>
+            <span>EXPLORE DIRECTORY</span>
+            <ChevronRight size={16} />
+          </button>
+        </motion.div>
+      )}
+    </motion.div>
   );
 }
 
@@ -424,7 +400,7 @@ function ThemePicker({ theme, setTheme }: { theme: Theme; setTheme: (theme: Them
 function Shell() { 
   const [favorites,toggleFavs] = useStored('ai-favorites'); 
   const [compare,setCompare] = useStored('ai-compare'); 
-  const [showIntro, setShowIntro] = useState(true);
+  const [showIntro, setShowIntro] = useState(() => !sessionStorage.getItem('ai-intro-played'));
   const [theme,setTheme] = useState<Theme>(() => { const saved = localStorage.getItem('ai-theme'); return saved === 'noir' || saved === 'violet' || saved === 'sunlight' || saved === 'maroon' ? saved : 'maroon' }); 
 
   const [mobile,setMobile]=useState(false); 
@@ -444,9 +420,16 @@ function Shell() {
     return allTools.filter(t => `${t.name} ${t.category} ${t.company} ${t.description}`.toLowerCase().includes(q)).slice(0, 5);
   }, [cmdQuery]);
 
+  const handleCloseIntro = () => {
+    sessionStorage.setItem('ai-intro-played', 'true');
+    setShowIntro(false);
+  };
+
   return (
     <div className="app">
-      <Intro visible={showIntro} onClose={() => setShowIntro(false)} />
+      <AnimatePresence>
+        {showIntro && <Intro onClose={handleCloseIntro} />}
+      </AnimatePresence>
       {mobile && <div className="sidebar-backdrop" onClick={() => setMobile(false)} />}
       <header className="topbar">
         <button className="mobile-menu icon" onClick={()=>setMobile(!mobile)} aria-label="Toggle navigation menu"><Menu size={20}/></button>
