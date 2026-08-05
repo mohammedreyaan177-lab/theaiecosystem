@@ -317,10 +317,97 @@ type PageProps = { favorites:string[]; toggleFavorite:(id:string)=>void; compare
 function SectionHead({ title, action, to }: { title:string; action?:string; to?:string }) { return <div className="section-head"><h2>{title}</h2>{action && to && <Link to={to}>{action} <ChevronRight size={15}/></Link>}</div> }
 function Browse(props: PageProps) { const location = useLocation(); const params = new URLSearchParams(location.search); const [query, setQuery] = useState(params.get('q') || ''); const [category, setCategory] = useState(params.get('category') || ''); const [pricing, setPricing] = useState(params.get('pricing') || ''); const [freeOnly, setFreeOnly] = useState(params.get('free') === 'true'); const [openOnly, setOpenOnly] = useState(params.get('open') === 'true'); const [apiOnly, setApiOnly] = useState(false); const [sort, setSort] = useState('rating'); useEffect(() => { const next = new URLSearchParams(location.search); setQuery(next.get('q') || ''); setCategory(next.get('category') || ''); setPricing(next.get('pricing') || ''); setFreeOnly(next.get('free') === 'true') }, [location.search]); const list = useMemo(() => allTools.filter(t => (!category || t.category === category) && (!pricing || t.pricingLabel === pricing) && (!freeOnly || t.pricing.free) && (!openOnly || t.openSource) && (!apiOnly || t.apiAvailable) && (!query || `${t.name} ${t.company} ${t.category} ${t.description}`.toLowerCase().includes(query.toLowerCase()))).sort((a,b) => sort === 'name' ? a.name.localeCompare(b.name) : sort === 'new' ? b.id.localeCompare(a.id) : b.rating - a.rating), [query,category,pricing,freeOnly,openOnly,apiOnly,sort]); const reset = () => { setQuery(''); setCategory(''); setPricing(''); setFreeOnly(false); setOpenOnly(false); setApiOnly(false); setSort('rating') }; return <><div className="page-heading compact"><div><p className="eyebrow">DISCOVER</p><h1>Explore AI tools</h1><p>Find the right tool by capability, price, openness, API access, and community rating.</p></div></div><div className="filterbar"><div className="search-input"><Search size={17}/><input value={query} onChange={e=>setQuery(e.target.value)} placeholder="Search 100+ AI tools, models, dev tools, or capabilities…"/>{query && <button type="button" className="search-clear-btn" onClick={()=>setQuery('')} aria-label="Clear search"><X size={15}/></button>}</div><select value={category} onChange={e=>setCategory(e.target.value)}><option value="">All categories</option>{categories.map(c=><option key={c.id} value={c.id}>{c.name}</option>)}</select><select value={pricing} onChange={e=>setPricing(e.target.value)}><option value="">Any pricing</option><option>Free</option><option>Freemium</option><option>Paid</option></select><select value={sort} onChange={e=>setSort(e.target.value)}><option value="rating">Top rated</option><option value="name">Name A–Z</option><option value="new">Recently added</option></select></div><div className="filter-chips"><button className={freeOnly?'selected':''} onClick={()=>setFreeOnly(!freeOnly)}><Check size={14}/> Free access</button><button className={openOnly?'selected':''} onClick={()=>setOpenOnly(!openOnly)}><Check size={14}/> Open source</button><button className={apiOnly?'selected':''} onClick={()=>setApiOnly(!apiOnly)}><Check size={14}/> API available</button><button className="clear" onClick={reset}>Clear filters</button></div><p className="results">{list.length} matching tools · sorted by {sort === 'rating' ? 'rating' : sort === 'name' ? 'name' : 'newness'}</p><div className="tool-grid">{list.map(t => <ToolCard key={t.id} tool={t} {...props}/>)}</div>{!list.length && <Empty title="No tools found" text="Try removing a filter or searching for a broader term."/>}</> }
 function Categories() { return <><div className="page-heading compact"><div><p className="eyebrow">COLLECTIONS</p><h1>Browse topics</h1><p>Explore AI tools organized by their primary capability.</p></div></div><div className="topics">{categories.map(c=><Link to={`/browse?category=${c.id}`} className="topic" key={c.id}><FolderGit2 size={21}/><div><h2>{c.name}</h2><p>{c.description}</p><small>{c.count} AI tools</small></div><ChevronRight size={18}/></Link>)}</div></> }
+function getToolBestFor(tool: Tool) {
+  const cat = tool.category.toLowerCase();
+  if (cat === 'productivity') {
+    return {
+      targetAudience: ['Product Managers', 'Executive Assistants', 'Operations Teams', 'Knowledge Workers'],
+      useCases: [
+        'Organizing team notes, docs, and knowledge bases with instant AI synthesis.',
+        'Automating meeting summaries, action items, and task assignments across projects.',
+        'Generating slide decks, executive summaries, and smart documents in seconds.'
+      ],
+      strengths: ['Deep workspace integration', 'Contextual document search', 'Automated workflow triggers']
+    };
+  } else if (cat === 'coding' || cat === 'devtools') {
+    return {
+      targetAudience: ['Full-Stack Engineers', 'DevOps Specialists', 'Open Source Maintainers'],
+      useCases: [
+        'Context-aware code completion and multi-file code generation directly in the workspace.',
+        'Debugging complex stack traces and refactoring legacy codebases with agentic AI.',
+        'Automating pull request summaries, test generation, and documentation.'
+      ],
+      strengths: ['Background codebase indexing', 'Ultra-fast LPU/GPU inference', 'Multi-language grammar support']
+    };
+  } else if (cat === 'chat' || cat === 'research') {
+    return {
+      targetAudience: ['Researchers & Analysts', 'Students & Educators', 'Strategy Consultants'],
+      useCases: [
+        'Deep research and cited web intelligence gathering across real-time sources.',
+        'Interactive reasoning on complex mathematical, technical, and strategic queries.',
+        'Synthesizing massive PDF/document collections into concise audio/text insights.'
+      ],
+      strengths: ['Verified web citations', 'Long-context window capacity', 'Step-by-step chain of thought']
+    };
+  } else if (cat === 'writing') {
+    return {
+      targetAudience: ['Content Marketers', 'Copywriters', 'Technical Writers', 'Translators'],
+      useCases: [
+        'Drafting high-converting blog posts, marketing copy, and customer emails.',
+        'Grammar refinement, tone adjustments, and multilingual translation.',
+        'SEO keyword optimization and structured content expansion.'
+      ],
+      strengths: ['Tone & brand style matching', 'Plagiarism & grammar verification', 'Multi-channel export options']
+    };
+  } else if (cat === 'image' || cat === 'video' || cat === 'design') {
+    return {
+      targetAudience: ['UI/UX Designers', 'Social Media Creators', 'Video Editors', 'Brand Strategists'],
+      useCases: [
+        'Generating high-resolution visual assets and promotional artwork.',
+        'Automated video editing, short clips generation, and captioning.',
+        'Creating UI/UX mockups and interactive prototype designs from prompts.'
+      ],
+      strengths: ['4K resolution output', 'Prompt-to-video capabilities', 'Granular style and camera controls']
+    };
+  } else if (cat === 'voice' || cat === 'music') {
+    return {
+      targetAudience: ['Podcasters', 'Music Producers', 'Game Developers', 'Localization Teams'],
+      useCases: [
+        'Studio-quality voiceovers, text-to-speech synthesis, and voice cloning.',
+        'Full-length AI song composition with clear vocals and instrumentals.',
+        'Podcast editing, background noise removal, and automated audio mastering.'
+      ],
+      strengths: ['Hyper-realistic emotional inflection', 'Multi-stem audio separation', 'Commercial usage licensing']
+    };
+  } else {
+    return {
+      targetAudience: ['Domain Professionals', 'Startup Founders', 'AI Innovators'],
+      useCases: [
+        `Streamlining ${title(tool.category)} tasks with AI automation.`,
+        'Improving team execution speed and workflow efficiency.',
+        'Reducing repetitive manual effort with intelligent tools.'
+      ],
+      strengths: ['High reliability & uptime', 'Seamless tool integration', 'Scalable cloud performance']
+    };
+  }
+}
+
+function getToolFeatures(tool: Tool) {
+  return [
+    { title: 'AI Intelligence Core', description: `Next-generation neural architecture optimized specifically for ${title(tool.category)} workflows.`, included: true },
+    { title: 'Free Tier / Trial Access', description: tool.pricing.free ? 'Free plan or evaluation trial available without mandatory credit card.' : 'Paid subscription tiers optimized for professional and enterprise teams.', included: tool.pricing.free },
+    { title: 'Developer API & Integration', description: tool.apiAvailable ? 'RESTful API and developer SDKs available for building custom extensions.' : 'Accessible via intuitive web application and browser interface.', included: tool.apiAvailable },
+    { title: 'Open Source Transparency', description: tool.openSource ? 'Open-weights model or open-source codebase available on GitHub.' : 'Managed proprietary platform maintained by vendor.', included: tool.openSource },
+    { title: 'Mobile & Cloud Sync', description: tool.playstore ? 'Native Android mobile application available on Google Play.' : 'Cloud-synced web application accessible on all modern browsers.', included: Boolean(tool.playstore || tool.website) },
+    { title: 'Data Privacy & Security', description: 'Enterprise data protection with encrypted transport and strict privacy controls.', included: true }
+  ];
+}
+
 function Detail(props: PageProps) {
   const { id } = useParams();
   const nav = useNavigate();
   const tool = allTools.find(t => t.id === id);
+  const [activeTab, setActiveTab] = useState<'overview' | 'bestfor' | 'features' | 'alternatives'>('overview');
 
   useEffect(() => {
     if (tool) {
@@ -330,7 +417,11 @@ function Detail(props: PageProps) {
   }, [tool]);
 
   if (!tool) return <Empty title="Tool not found" text="This tool is no longer in the data index." />;
-  const alternatives = allTools.filter(t => t.category === tool.category && t.id !== tool.id).slice(0, 4);
+
+  const alternatives = allTools.filter(t => t.category === tool.category && t.id !== tool.id);
+  const sidebarAlternatives = alternatives.slice(0, 4);
+  const bestFor = getToolBestFor(tool);
+  const features = getToolFeatures(tool);
 
   return (
     <>
@@ -361,31 +452,123 @@ function Detail(props: PageProps) {
           )}
         </div>
       </header>
+
       <nav className="tabs">
-        <a className="selected">Overview</a>
-        <a>Best for</a>
-        <a>Features</a>
-        <a>Alternatives <span>{alternatives.length}</span></a>
+        <button type="button" className={activeTab === 'overview' ? 'tab-btn selected' : 'tab-btn'} onClick={() => setActiveTab('overview')}>
+          Overview
+        </button>
+        <button type="button" className={activeTab === 'bestfor' ? 'tab-btn selected' : 'tab-btn'} onClick={() => setActiveTab('bestfor')}>
+          Best for
+        </button>
+        <button type="button" className={activeTab === 'features' ? 'tab-btn selected' : 'tab-btn'} onClick={() => setActiveTab('features')}>
+          Features
+        </button>
+        <button type="button" className={activeTab === 'alternatives' ? 'tab-btn selected' : 'tab-btn'} onClick={() => setActiveTab('alternatives')}>
+          Alternatives <span>{alternatives.length}</span>
+        </button>
       </nav>
+
       <div className="detail-grid">
         <section className="readme">
-          <h2>About {tool.name}</h2>
-          <p>{tool.description} Browse the source directory for availability, pricing, and direct website access.</p>
-          <h3>Details</h3>
-          <dl>
-            <dt>Company</dt><dd>{tool.company}</dd>
-            <dt>Primary category</dt><dd><Link to={`/browse?category=${tool.category}`}>{title(tool.category)}</Link></dd>
-            <dt>Pricing model</dt><dd><Pricing tool={tool} /></dd>
-            <dt>Official website</dt><dd>{tool.website ? <a href={tool.website} target="_blank" rel="noreferrer">{tool.website.replace(/^https?:\/\//, '')} <ExternalLink size={13} /></a> : 'Not listed'}</dd>
-            <dt>Android app</dt><dd>{tool.playstore ? <a href={tool.playstore} target="_blank" rel="noreferrer">Get on Google Play <ExternalLink size={13} /></a> : 'Not available'}</dd>
-          </dl>
+          {activeTab === 'overview' && (
+            <div className="tab-panel">
+              <h2>About {tool.name}</h2>
+              <p>{tool.description} Explore availability, pricing models, official platform access, and community alternatives below.</p>
+              
+              <div className="quick-tags">
+                <span className="badge free"><Check size={12} /> {tool.pricingLabel}</span>
+                {tool.apiAvailable && <span className="badge freemium"><Zap size={12} /> API Available</span>}
+                {tool.openSource && <span className="badge paid"><FolderGit2 size={12} /> Open Source</span>}
+                <span className="rating-badge"><Star size={13} fill="currentColor" /> {tool.rating.toFixed(1)} Community Rating</span>
+              </div>
+
+              <h3>Specifications & Details</h3>
+              <dl>
+                <dt>Company</dt><dd>{tool.company}</dd>
+                <dt>Primary category</dt><dd><Link to={`/browse?category=${tool.category}`}>{title(tool.category)}</Link></dd>
+                <dt>Pricing model</dt><dd><Pricing tool={tool} /></dd>
+                <dt>Official website</dt><dd>{tool.website ? <a href={tool.website} target="_blank" rel="noreferrer">{tool.website.replace(/^https?:\/\//, '')} <ExternalLink size={13} /></a> : 'Not listed'}</dd>
+                <dt>Android app</dt><dd>{tool.playstore ? <a href={tool.playstore} target="_blank" rel="noreferrer">Get on Google Play <ExternalLink size={13} /></a> : 'Not available'}</dd>
+              </dl>
+            </div>
+          )}
+
+          {activeTab === 'bestfor' && (
+            <div className="tab-panel">
+              <h2>Who is {tool.name} Best For?</h2>
+              <p>Ideal workflows and target users optimized for {tool.name}.</p>
+              
+              <h3>Target Audience</h3>
+              <div className="audience-chips">
+                {bestFor.targetAudience.map(aud => (
+                  <span key={aud} className="audience-chip"><User size={13} /> {aud}</span>
+                ))}
+              </div>
+
+              <h3>Recommended Use Cases</h3>
+              <ul className="use-case-list">
+                {bestFor.useCases.map((uc, i) => (
+                  <li key={i}><Check size={16} className="check-icon" /> <span>{uc}</span></li>
+                ))}
+              </ul>
+
+              <h3>Core Strengths</h3>
+              <div className="strengths-grid">
+                {bestFor.strengths.map((str, i) => (
+                  <div key={i} className="strength-card">
+                    <Sparkles size={16} />
+                    <b>{str}</b>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+
+          {activeTab === 'features' && (
+            <div className="tab-panel">
+              <h2>Key Capabilities & Feature Grid</h2>
+              <p>Detailed feature breakdown for {tool.name}.</p>
+
+              <div className="features-grid">
+                {features.map((feat, i) => (
+                  <div key={i} className={`feature-card ${feat.included ? 'included' : 'excluded'}`}>
+                    <div className="feature-header">
+                      <span className={`feature-status ${feat.included ? 'yes' : 'no'}`}>
+                        {feat.included ? <Check size={14} /> : <X size={14} />}
+                      </span>
+                      <h4>{feat.title}</h4>
+                    </div>
+                    <p>{feat.description}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+
+          {activeTab === 'alternatives' && (
+            <div className="tab-panel">
+              <h2>All Alternatives to {tool.name}</h2>
+              <p>Discover top rated tools in the <b>{title(tool.category)}</b> category.</p>
+
+              {alternatives.length > 0 ? (
+                <div className="alternatives-tab-grid">
+                  {alternatives.map(alt => (
+                    <ToolCard key={alt.id} tool={alt} {...props} />
+                  ))}
+                </div>
+              ) : (
+                <p className="no-related">No alternative tools registered in this category yet.</p>
+              )}
+            </div>
+          )}
         </section>
+
         <aside className="detail-side">
           <div className="detail-side-header">
             <Sparkles size={16} />
             <h3>Related {title(tool.category)} Tools</h3>
           </div>
-          {alternatives.length > 0 ? alternatives.map(x => (
+          {sidebarAlternatives.length > 0 ? sidebarAlternatives.map(x => (
             <Link to={`/tools/${x.id}`} key={x.id} className="related-tool-item">
               <ToolLogo tool={x} />
               <div className="related-tool-info">
@@ -405,7 +588,119 @@ function Detail(props: PageProps) {
     </>
   );
 }
-function Compare(props: PageProps) { const selected = allTools.filter(t=>props.compare.includes(t.id)); return <><div className="page-heading compact"><div><p className="eyebrow">COMPARE</p><h1>Compare AI tools</h1><p>Select up to four tools to see their availability side by side.</p></div>{selected.length>0&&<button className="button" onClick={()=>selected.forEach(t=>props.toggleCompare(t.id))}>Clear comparison</button>}</div>{selected.length ? <div className="comparison"><div className="compare-head"><b>Attribute</b>{selected.map(t=><div key={t.id}><b>{t.name}</b><button onClick={()=>props.toggleCompare(t.id)}><X size={14}/></button></div>)}</div>{[['Company',(t:Tool)=>t.company],['Pricing',(t:Tool)=>t.pricingLabel],['Category',(t:Tool)=>title(t.category)],['Free plan',(t:Tool)=>t.pricing.free?'Available':'—'],['Paid plan',(t:Tool)=>t.pricing.paid?'Available':'—'],['Website',(t:Tool)=>t.website?'Official site':'Not listed']].map(([label,fn])=><div className="compare-row" key={label as string}><b>{label as string}</b>{selected.map(t=><span key={t.id}>{(fn as (t:Tool)=>string)(t)}</span>)}</div>)}</div> : <Empty title="Your comparison is empty" text="Add tools from any card using the compare button."/>}</> }
+
+function AddToolDropdown({ compare, toggleCompare }: { compare: string[]; toggleCompare: (id: string) => void }) {
+  const available = allTools.filter(t => !compare.includes(t.id));
+  return (
+    <div className="add-compare-slot">
+      <select
+        defaultValue=""
+        onChange={e => {
+          if (e.target.value) {
+            toggleCompare(e.target.value);
+            e.target.value = '';
+          }
+        }}
+      >
+        <option value="" disabled>+ Add tool to compare...</option>
+        {available.map(t => (
+          <option key={t.id} value={t.id}>
+            {t.name} ({title(t.category)})
+          </option>
+        ))}
+      </select>
+    </div>
+  );
+}
+
+function Compare(props: PageProps) {
+  const selected = allTools.filter(t => props.compare.includes(t.id));
+
+  return (
+    <>
+      <div className="page-heading compact">
+        <div>
+          <p className="eyebrow">COMPARE</p>
+          <h1>Compare AI tools side-by-side</h1>
+          <p>Evaluate features, pricing models, ratings, API availability, and platform support.</p>
+        </div>
+        <div className="heading-actions">
+          {selected.length > 0 && (
+            <button className="button" onClick={() => selected.forEach(t => props.toggleCompare(t.id))}>
+              Clear comparison
+            </button>
+          )}
+        </div>
+      </div>
+
+      {selected.length > 0 ? (
+        <div className="comparison-container">
+          <div className="compare-head-grid">
+            <div className="compare-head-col attribute-title">
+              <span>Comparing ({selected.length}/4)</span>
+            </div>
+            {selected.map(t => (
+              <div key={t.id} className="compare-head-col compare-tool-card">
+                <div className="compare-tool-top">
+                  <ToolLogo tool={t} />
+                  <button
+                    className="compare-remove-btn"
+                    onClick={() => props.toggleCompare(t.id)}
+                    title="Remove from compare"
+                  >
+                    <X size={16} />
+                  </button>
+                </div>
+                <Link to={`/tools/${t.id}`} className="compare-tool-name">{t.name}</Link>
+                <span className="company">{t.company} · <span>{title(t.category)}</span></span>
+                <div className="quick-tags">
+                  <Pricing tool={t} />
+                  <span className="rating"><Star size={13} fill="currentColor" /> {t.rating.toFixed(1)}</span>
+                </div>
+              </div>
+            ))}
+            {selected.length < 4 && (
+              <div className="compare-head-col">
+                <AddToolDropdown compare={props.compare} toggleCompare={props.toggleCompare} />
+              </div>
+            )}
+          </div>
+
+          {[
+            ['Rating & Score', (t: Tool) => <span className="rating"><Star size={14} fill="currentColor" /> {t.rating.toFixed(1)} / 5.0</span>],
+            ['Pricing Model', (t: Tool) => <Pricing tool={t} />],
+            ['Company / Host', (t: Tool) => <b>{t.company}</b>],
+            ['Primary Category', (t: Tool) => <span className="category-pill">{title(t.category)}</span>],
+            ['Free Plan', (t: Tool) => t.pricing.free ? <span className="cell-check"><Check size={15} /> Free tier available</span> : <span className="cell-cross"><X size={15} /> Paid only</span>],
+            ['API & SDK Access', (t: Tool) => t.apiAvailable ? <span className="cell-check"><Zap size={15} /> API Available</span> : <span className="cell-cross"><X size={15} /> UI only</span>],
+            ['Open Source', (t: Tool) => t.openSource ? <span className="cell-check"><FolderGit2 size={15} /> Open Source</span> : <span className="cell-cross"><X size={15} /> Proprietary</span>],
+            ['Android App', (t: Tool) => t.playstore ? <span className="cell-check"><Smartphone size={15} /> Google Play</span> : <span className="cell-cross"><X size={15} /> Not listed</span>],
+            ['Website Access', (t: Tool) => t.website ? <a href={t.website} target="_blank" rel="noreferrer" className="visit">Visit site <ExternalLink size={13} /></a> : <span className="cell-cross">Not listed</span>]
+          ].map(([label, fn]) => (
+            <div className="compare-row-grid" key={label as string}>
+              <div className="compare-row-label">{label as string}</div>
+              {selected.map(t => (
+                <div key={t.id} className="compare-row-cell">
+                  {(fn as (t: Tool) => React.ReactNode)(t)}
+                </div>
+              ))}
+              {selected.length < 4 && <div className="compare-row-cell empty-cell">—</div>}
+            </div>
+          ))}
+        </div>
+      ) : (
+        <div className="empty-compare-wrapper">
+          <Empty title="Your comparison list is empty" text="Add up to four tools from any card across the directory or select a tool below." />
+          <div className="quick-add-section">
+            <h3>Quickly add a tool to compare:</h3>
+            <AddToolDropdown compare={props.compare} toggleCompare={props.toggleCompare} />
+          </div>
+        </div>
+      )}
+    </>
+  );
+}
+
 function Favorites(props: PageProps) {
   const list = allTools.filter(t => props.favorites.includes(t.id));
   return (
@@ -485,7 +780,14 @@ function Shell() {
   const toggleFavorite=(id:string)=>toggleFavs(x=>x.includes(id)?x.filter(i=>i!==id):[id,...x]); 
   const toggleCompare=(id:string)=>setCompare(x=>x.includes(id)?x.filter(i=>i!==id):x.length<4?[...x,id]:x); 
   const props={favorites,toggleFavorite,compare,toggleCompare}; 
-  const nav = [{to:'/',icon:Home,label:'Home'},{to:'/browse',icon:Search,label:'Directory'},{to:'/categories',icon:FolderGit2,label:'Categories'},{to:'/maker',icon:User,label:'Maker'},{to:'/compare',icon:Boxes,label:'Compare'},{to:'/favorites',icon:Heart,label:'Saved'}]; 
+  const nav = [
+    { to: '/', icon: Home, label: 'Home' },
+    { to: '/browse', icon: Search, label: 'Directory' },
+    { to: '/categories', icon: FolderGit2, label: 'Categories' },
+    { to: '/maker', icon: User, label: 'Maker' },
+    { to: '/compare', icon: Boxes, label: 'Compare', count: compare.length },
+    { to: '/favorites', icon: Heart, label: 'Saved', count: favorites.length }
+  ]; 
   
   const cmdMatches = useMemo(() => {
     if (!cmdQuery.trim()) return [];
@@ -505,7 +807,14 @@ function Shell() {
       </AnimatePresence>
       <header className="topbar">
         <Logo/>
-        <nav className="header-nav">{nav.map(({to,label})=><NavLink key={to} to={to} end={to==='/'}>{label}{label==='Compare'&&compare.length>0&&<span className="count">{compare.length}</span>}{label==='Saved'&&favorites.length>0&&<span className="count">{favorites.length}</span>}</NavLink>)}</nav>
+        <nav className="header-nav">
+          {nav.map(({ to, label, count }) => (
+            <NavLink key={to} to={to} end={to === '/'}>
+              {label}
+              {count !== undefined && count > 0 && <span className="nav-badge">{count}</span>}
+            </NavLink>
+          ))}
+        </nav>
         <button className="global-search" onClick={()=>setCommand(true)} aria-label="Search directory"><Search size={16}/><span>Search 100+ AI tools...</span><kbd><Command size={11}/>K</kbd></button>
         <div className="top-actions">
           <ThemePicker theme={theme} setTheme={setTheme}/>
@@ -546,7 +855,10 @@ function Shell() {
           <span>Saved</span>
         </NavLink>
         <NavLink to="/compare" className={({ isActive }) => (isActive ? 'mobile-nav-item active' : 'mobile-nav-item')}>
-          <Boxes size={20} />
+          <div className="nav-icon-wrap">
+            <Boxes size={20} />
+            {compare.length > 0 && <span className="mobile-nav-badge">{compare.length}</span>}
+          </div>
           <span>Compare</span>
         </NavLink>
       </nav>
