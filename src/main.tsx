@@ -228,7 +228,31 @@ function Maker() {
 }
 
 function useStored(key: string, fallback: string[] = []) { const [value, setValue] = useState<string[]>(() => { try { return JSON.parse(localStorage.getItem(key) || 'null') || fallback } catch { return fallback } }); useEffect(() => localStorage.setItem(key, JSON.stringify(value)), [key]); return [value, setValue] as const }
-function ToolLogo({ tool, large = false }: { tool: Tool; large?: boolean }) { const [failed, setFailed] = useState(!tool.website); const hostname = tool.website ? new URL(tool.website).hostname : ''; return <div className={`tool-logo ${large ? 'large' : ''}`}>{!failed && <img src={`https://www.google.com/s2/favicons?domain=${hostname}&sz=128`} alt={`${tool.name} logo`} onError={() => setFailed(true)}/>}<span className={failed ? '' : 'fallback'}>{tool.name.slice(0,2).toUpperCase()}</span></div> }
+function ToolLogo({ tool, large = false }: { tool: Tool; large?: boolean }) {
+  const [failed, setFailed] = useState(!tool.website);
+
+  useEffect(() => {
+    setFailed(!tool.website);
+  }, [tool.website]);
+
+  const hostname = tool.website ? new URL(tool.website).hostname : '';
+
+  return (
+    <div className={`tool-logo ${large ? 'large' : ''}`}>
+      {!failed && hostname ? (
+        <img
+          src={`https://www.google.com/s2/favicons?domain=${hostname}&sz=128`}
+          alt={`${tool.name} logo`}
+          onError={() => setFailed(true)}
+          loading="lazy"
+        />
+      ) : null}
+      <span className={failed || !hostname ? 'fallback-show' : 'fallback'}>
+        {tool.name.slice(0, 2).toUpperCase()}
+      </span>
+    </div>
+  );
+}
 function Logo({ small = false }: { small?: boolean }) { return <Link to="/" className="brand"><img className="brandmark" src={brandLogo} alt="AIEcosystem logo"/>{!small && <span>AIEcosystem</span>}</Link> }
 function Pricing({ tool }: { tool: Tool }) { return <span className={`badge ${tool.pricingLabel.toLowerCase()}`}>{tool.pricingLabel}</span> }
 function ToolCard({ tool, favorites, toggleFavorite, compare, toggleCompare }: { tool: Tool; favorites: string[]; toggleFavorite: (id:string)=>void; compare: string[]; toggleCompare: (id:string)=>void }) { 
@@ -293,7 +317,94 @@ type PageProps = { favorites:string[]; toggleFavorite:(id:string)=>void; compare
 function SectionHead({ title, action, to }: { title:string; action?:string; to?:string }) { return <div className="section-head"><h2>{title}</h2>{action && to && <Link to={to}>{action} <ChevronRight size={15}/></Link>}</div> }
 function Browse(props: PageProps) { const location = useLocation(); const params = new URLSearchParams(location.search); const [query, setQuery] = useState(params.get('q') || ''); const [category, setCategory] = useState(params.get('category') || ''); const [pricing, setPricing] = useState(params.get('pricing') || ''); const [freeOnly, setFreeOnly] = useState(params.get('free') === 'true'); const [openOnly, setOpenOnly] = useState(params.get('open') === 'true'); const [apiOnly, setApiOnly] = useState(false); const [sort, setSort] = useState('rating'); useEffect(() => { const next = new URLSearchParams(location.search); setQuery(next.get('q') || ''); setCategory(next.get('category') || ''); setPricing(next.get('pricing') || ''); setFreeOnly(next.get('free') === 'true') }, [location.search]); const list = useMemo(() => allTools.filter(t => (!category || t.category === category) && (!pricing || t.pricingLabel === pricing) && (!freeOnly || t.pricing.free) && (!openOnly || t.openSource) && (!apiOnly || t.apiAvailable) && (!query || `${t.name} ${t.company} ${t.category} ${t.description}`.toLowerCase().includes(query.toLowerCase()))).sort((a,b) => sort === 'name' ? a.name.localeCompare(b.name) : sort === 'new' ? b.id.localeCompare(a.id) : b.rating - a.rating), [query,category,pricing,freeOnly,openOnly,apiOnly,sort]); const reset = () => { setQuery(''); setCategory(''); setPricing(''); setFreeOnly(false); setOpenOnly(false); setApiOnly(false); setSort('rating') }; return <><div className="page-heading compact"><div><p className="eyebrow">DISCOVER</p><h1>Explore AI tools</h1><p>Find the right tool by capability, price, openness, API access, and community rating.</p></div></div><div className="filterbar"><div className="search-input"><Search size={17}/><input value={query} onChange={e=>setQuery(e.target.value)} placeholder="Search 100+ AI tools, models, dev tools, or capabilities…"/>{query && <button type="button" className="search-clear-btn" onClick={()=>setQuery('')} aria-label="Clear search"><X size={15}/></button>}</div><select value={category} onChange={e=>setCategory(e.target.value)}><option value="">All categories</option>{categories.map(c=><option key={c.id} value={c.id}>{c.name}</option>)}</select><select value={pricing} onChange={e=>setPricing(e.target.value)}><option value="">Any pricing</option><option>Free</option><option>Freemium</option><option>Paid</option></select><select value={sort} onChange={e=>setSort(e.target.value)}><option value="rating">Top rated</option><option value="name">Name A–Z</option><option value="new">Recently added</option></select></div><div className="filter-chips"><button className={freeOnly?'selected':''} onClick={()=>setFreeOnly(!freeOnly)}><Check size={14}/> Free access</button><button className={openOnly?'selected':''} onClick={()=>setOpenOnly(!openOnly)}><Check size={14}/> Open source</button><button className={apiOnly?'selected':''} onClick={()=>setApiOnly(!apiOnly)}><Check size={14}/> API available</button><button className="clear" onClick={reset}>Clear filters</button></div><p className="results">{list.length} matching tools · sorted by {sort === 'rating' ? 'rating' : sort === 'name' ? 'name' : 'newness'}</p><div className="tool-grid">{list.map(t => <ToolCard key={t.id} tool={t} {...props}/>)}</div>{!list.length && <Empty title="No tools found" text="Try removing a filter or searching for a broader term."/>}</> }
 function Categories() { return <><div className="page-heading compact"><div><p className="eyebrow">COLLECTIONS</p><h1>Browse topics</h1><p>Explore AI tools organized by their primary capability.</p></div></div><div className="topics">{categories.map(c=><Link to={`/browse?category=${c.id}`} className="topic" key={c.id}><FolderGit2 size={21}/><div><h2>{c.name}</h2><p>{c.description}</p><small>{c.count} AI tools</small></div><ChevronRight size={18}/></Link>)}</div></> }
-function Detail(props: PageProps) { const { id } = useParams(); const nav = useNavigate(); const tool = allTools.find(t=>t.id===id); useEffect(()=>{ if (tool) { const viewed = JSON.parse(localStorage.getItem('recent-ai') || '[]').filter((x:string)=>x !== tool.id); localStorage.setItem('recent-ai', JSON.stringify([tool.id,...viewed].slice(0,8))) } },[tool]); if (!tool) return <Empty title="Tool not found" text="This tool is no longer in the data index."/>; const alternatives = allTools.filter(t=>t.category===tool.category && t.id!==tool.id).slice(0,3); return <><button className="back" onClick={()=>nav(-1)}>← Back</button><header className="repo-header"><ToolLogo tool={tool} large/><div><p className="eyebrow">{title(tool.category)} / TOOL</p><h1>{tool.name}</h1><p>{tool.company} · {tool.description}</p></div><div className="repo-actions"><button onClick={()=>props.toggleFavorite(tool.id)} className={props.favorites.includes(tool.id) ? 'button active' : 'button'}><Heart size={16}/> {props.favorites.includes(tool.id) ? 'Saved' : 'Favorite'}</button><button onClick={()=>props.toggleCompare(tool.id)} className={props.compare.includes(tool.id) ? 'button active' : 'button'}><Boxes size={16}/> Compare</button>{tool.website && <a className="primary" href={tool.website} target="_blank" rel="noreferrer">Visit website <ExternalLink size={15}/></a>}{tool.playstore && <a className="button playstore-btn" href={tool.playstore} target="_blank" rel="noreferrer"><Smartphone size={15}/> Play Store</a>}</div></header><nav className="tabs"><a className="selected">Overview</a><a>Best for</a><a>Features</a><a>Alternatives <span>{alternatives.length}</span></a></nav><div className="detail-grid"><section className="readme"><h2>About {tool.name}</h2><p>{tool.description} Browse the source directory for availability, pricing, and direct website access.</p><h3>Details</h3><dl><dt>Company</dt><dd>{tool.company}</dd><dt>Primary category</dt><dd><Link to={`/browse?category=${tool.category}`}>{title(tool.category)}</Link></dd><dt>Pricing model</dt><dd><Pricing tool={tool}/></dd><dt>Official website</dt><dd>{tool.website ? <a href={tool.website} target="_blank" rel="noreferrer">{tool.website.replace(/^https?:\/\//,'')} <ExternalLink size={13}/></a> : 'Not listed'}</dd><dt>Android app</dt><dd>{tool.playstore ? <a href={tool.playstore} target="_blank" rel="noreferrer">Get on Google Play <ExternalLink size={13}/></a> : 'Not available'}</dd></dl></section><aside className="detail-side"><h3>Related tools</h3>{alternatives.map(x=><Link to={`/tools/${x.id}`} key={x.id}><ToolLogo tool={x}/><div><b>{x.name}</b><small>{x.pricingLabel} · {x.company}</small></div></Link>)}</aside></div></> }
+function Detail(props: PageProps) {
+  const { id } = useParams();
+  const nav = useNavigate();
+  const tool = allTools.find(t => t.id === id);
+
+  useEffect(() => {
+    if (tool) {
+      const viewed = JSON.parse(localStorage.getItem('recent-ai') || '[]').filter((x: string) => x !== tool.id);
+      localStorage.setItem('recent-ai', JSON.stringify([tool.id, ...viewed].slice(0, 8)));
+    }
+  }, [tool]);
+
+  if (!tool) return <Empty title="Tool not found" text="This tool is no longer in the data index." />;
+  const alternatives = allTools.filter(t => t.category === tool.category && t.id !== tool.id).slice(0, 4);
+
+  return (
+    <>
+      <button className="back" onClick={() => nav(-1)}>← Back</button>
+      <header className="repo-header">
+        <ToolLogo tool={tool} large />
+        <div>
+          <p className="eyebrow">{title(tool.category)} / TOOL</p>
+          <h1>{tool.name}</h1>
+          <p>{tool.company} · {tool.description}</p>
+        </div>
+        <div className="repo-actions">
+          <button onClick={() => props.toggleFavorite(tool.id)} className={props.favorites.includes(tool.id) ? 'button active' : 'button'}>
+            <Heart size={16} /> {props.favorites.includes(tool.id) ? 'Saved' : 'Favorite'}
+          </button>
+          <button onClick={() => props.toggleCompare(tool.id)} className={props.compare.includes(tool.id) ? 'button active' : 'button'}>
+            <Boxes size={16} /> Compare
+          </button>
+          {tool.website && (
+            <a className="primary" href={tool.website} target="_blank" rel="noreferrer">
+              Visit website <ExternalLink size={15} />
+            </a>
+          )}
+          {tool.playstore && (
+            <a className="button playstore-btn" href={tool.playstore} target="_blank" rel="noreferrer">
+              <Smartphone size={15} /> Play Store
+            </a>
+          )}
+        </div>
+      </header>
+      <nav className="tabs">
+        <a className="selected">Overview</a>
+        <a>Best for</a>
+        <a>Features</a>
+        <a>Alternatives <span>{alternatives.length}</span></a>
+      </nav>
+      <div className="detail-grid">
+        <section className="readme">
+          <h2>About {tool.name}</h2>
+          <p>{tool.description} Browse the source directory for availability, pricing, and direct website access.</p>
+          <h3>Details</h3>
+          <dl>
+            <dt>Company</dt><dd>{tool.company}</dd>
+            <dt>Primary category</dt><dd><Link to={`/browse?category=${tool.category}`}>{title(tool.category)}</Link></dd>
+            <dt>Pricing model</dt><dd><Pricing tool={tool} /></dd>
+            <dt>Official website</dt><dd>{tool.website ? <a href={tool.website} target="_blank" rel="noreferrer">{tool.website.replace(/^https?:\/\//, '')} <ExternalLink size={13} /></a> : 'Not listed'}</dd>
+            <dt>Android app</dt><dd>{tool.playstore ? <a href={tool.playstore} target="_blank" rel="noreferrer">Get on Google Play <ExternalLink size={13} /></a> : 'Not available'}</dd>
+          </dl>
+        </section>
+        <aside className="detail-side">
+          <div className="detail-side-header">
+            <Sparkles size={16} />
+            <h3>Related {title(tool.category)} Tools</h3>
+          </div>
+          {alternatives.length > 0 ? alternatives.map(x => (
+            <Link to={`/tools/${x.id}`} key={x.id} className="related-tool-item">
+              <ToolLogo tool={x} />
+              <div className="related-tool-info">
+                <span className="related-tool-name">{x.name}</span>
+                <div className="related-tool-meta">
+                  <Pricing tool={x} />
+                  <span>{x.company}</span>
+                </div>
+              </div>
+              <ChevronRight size={16} className="related-tool-chevron" />
+            </Link>
+          )) : (
+            <p className="no-related">No other tools found in this category.</p>
+          )}
+        </aside>
+      </div>
+    </>
+  );
+}
 function Compare(props: PageProps) { const selected = allTools.filter(t=>props.compare.includes(t.id)); return <><div className="page-heading compact"><div><p className="eyebrow">COMPARE</p><h1>Compare AI tools</h1><p>Select up to four tools to see their availability side by side.</p></div>{selected.length>0&&<button className="button" onClick={()=>selected.forEach(t=>props.toggleCompare(t.id))}>Clear comparison</button>}</div>{selected.length ? <div className="comparison"><div className="compare-head"><b>Attribute</b>{selected.map(t=><div key={t.id}><b>{t.name}</b><button onClick={()=>props.toggleCompare(t.id)}><X size={14}/></button></div>)}</div>{[['Company',(t:Tool)=>t.company],['Pricing',(t:Tool)=>t.pricingLabel],['Category',(t:Tool)=>title(t.category)],['Free plan',(t:Tool)=>t.pricing.free?'Available':'—'],['Paid plan',(t:Tool)=>t.pricing.paid?'Available':'—'],['Website',(t:Tool)=>t.website?'Official site':'Not listed']].map(([label,fn])=><div className="compare-row" key={label as string}><b>{label as string}</b>{selected.map(t=><span key={t.id}>{(fn as (t:Tool)=>string)(t)}</span>)}</div>)}</div> : <Empty title="Your comparison is empty" text="Add tools from any card using the compare button."/>}</> }
 function Favorites(props: PageProps) {
   const list = allTools.filter(t => props.favorites.includes(t.id));

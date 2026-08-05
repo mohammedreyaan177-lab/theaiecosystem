@@ -18,7 +18,7 @@
       "free": true,
       "paid": true
     },
-    "website": "",
+    "website": "https://notebooklm.google.com",
     "playstore": "https://play.google.com/store/apps/details?id=com.google.android.apps.notebooklm"
   },
   {
@@ -29,7 +29,7 @@
       "free": true,
       "paid": true
     },
-    "website": "",
+    "website": "https://elicit.com",
     "playstore": ""
   },
   {
@@ -40,7 +40,7 @@
       "free": true,
       "paid": true
     },
-    "website": "",
+    "website": "https://consensus.app",
     "playstore": ""
   },
   {
@@ -51,7 +51,7 @@
       "free": true,
       "paid": true
     },
-    "website": "",
+    "website": "https://typeset.io",
     "playstore": ""
   }
 ]

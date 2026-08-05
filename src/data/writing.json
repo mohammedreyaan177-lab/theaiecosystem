@@ -7,7 +7,7 @@
       "free": false,
       "paid": true
     },
-    "website": "",
+    "website": "https://www.jasper.ai",
     "playstore": ""
   },
   {
@@ -18,7 +18,7 @@
       "free": false,
       "paid": true
     },
-    "website": "",
+    "website": "https://www.copy.ai",
     "playstore": ""
   },
   {
@@ -29,7 +29,7 @@
       "free": true,
       "paid": true
     },
-    "website": "",
+    "website": "https://writesonic.com",
     "playstore": ""
   },
   {
@@ -40,7 +40,7 @@
       "free": true,
       "paid": true
     },
-    "website": "",
+    "website": "https://rytr.me",
     "playstore": ""
   },
   {
@@ -51,7 +51,7 @@
       "free": true,
       "paid": true
     },
-    "website": "",
+    "website": "https://www.grammarly.com",
     "playstore": "https://play.google.com/store/apps/details?id=com.grammarly.android.keyboard"
   },
   {
@@ -62,7 +62,7 @@
       "free": true,
       "paid": true
     },
-    "website": "",
+    "website": "https://quillbot.com",
     "playstore": "https://play.google.com/store/apps/details?id=com.quillbot.paraphrasingtool"
   },
   {
@@ -73,7 +73,7 @@
       "free": true,
       "paid": true
     },
-    "website": "",
+    "website": "https://www.deepl.com",
     "playstore": "https://play.google.com/store/apps/details?id=com.deepl.mobiletranslator"
   }
 ]

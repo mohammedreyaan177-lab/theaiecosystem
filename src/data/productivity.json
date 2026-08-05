@@ -7,7 +7,7 @@
       "free": true,
       "paid": true
     },
-    "website": "",
+    "website": "https://www.notion.so",
     "playstore": "https://play.google.com/store/apps/details?id=notion.id"
   },
   {
@@ -18,7 +18,7 @@
       "free": true,
       "paid": true
     },
-    "website": "",
+    "website": "https://coda.io",
     "playstore": ""
   },
   {
@@ -29,7 +29,7 @@
       "free": true,
       "paid": true
     },
-    "website": "",
+    "website": "https://clickup.com",
     "playstore": "https://play.google.com/store/apps/details?id=com.clickup.mobile"
   },
   {
@@ -40,7 +40,7 @@
       "free": true,
       "paid": true
     },
-    "website": "",
+    "website": "https://gamma.app",
     "playstore": ""
   },
   {
@@ -51,7 +51,7 @@
       "free": false,
       "paid": true
     },
-    "website": "",
+    "website": "https://www.beautiful.ai",
     "playstore": ""
   },
   {
@@ -62,7 +62,7 @@
       "free": false,
       "paid": true
     },
-    "website": "",
+    "website": "https://tome.app",
     "playstore": ""
   },
   {
@@ -73,7 +73,7 @@
       "free": true,
       "paid": true
     },
-    "website": "",
+    "website": "https://otter.ai",
     "playstore": "https://play.google.com/store/apps/details?id=com.aisense.otter"
   },
   {
@@ -84,7 +84,7 @@
       "free": true,
       "paid": true
     },
-    "website": "",
+    "website": "https://fireflies.ai",
     "playstore": ""
   },
   {
@@ -95,7 +95,7 @@
       "free": true,
       "paid": true
     },
-    "website": "",
+    "website": "https://www.descript.com",
     "playstore": ""
   },
   {
@@ -106,7 +106,7 @@
       "free": true,
       "paid": true
     },
-    "website": "",
+    "website": "https://www.capcut.com",
     "playstore": "https://play.google.com/store/apps/details?id=com.lemon.lvoverseas"
   },
   {
@@ -117,7 +117,7 @@
       "free": true,
       "paid": true
     },
-    "website": "",
+    "website": "https://www.opus.pro",
     "playstore": ""
   },
   {
@@ -128,7 +128,7 @@
       "free": true,
       "paid": true
     },
-    "website": "",
+    "website": "https://riverside.fm",
     "playstore": ""
   }
 ]
