@@ -402,18 +402,31 @@ function Shell() {
   return (
     <div className="app">
       <Intro visible={showIntro} onClose={() => setShowIntro(false)} />
+      {mobile && <div className="sidebar-backdrop" onClick={() => setMobile(false)} />}
       <header className="topbar">
-        <button className="mobile-menu" onClick={()=>setMobile(!mobile)}><Menu size={20}/></button>
+        <button className="mobile-menu icon" onClick={()=>setMobile(!mobile)} aria-label="Toggle navigation menu"><Menu size={20}/></button>
         <Logo/>
         <nav className="header-nav">{nav.map(({to,label})=><NavLink key={to} to={to} end={to==='/'}>{label}{label==='Compare'&&compare.length>0&&<span className="count">{compare.length}</span>}{label==='Saved'&&favorites.length>0&&<span className="count">{favorites.length}</span>}</NavLink>)}</nav>
-        <button className="global-search" onClick={()=>setCommand(true)}><Search size={16}/><span>Search the directory</span><kbd><Command size={11}/>K</kbd></button>
+        <button className="global-search" onClick={()=>setCommand(true)} aria-label="Search directory"><Search size={16}/><span>Search the directory</span><kbd><Command size={11}/>K</kbd></button>
         <div className="top-actions">
           <ThemePicker theme={theme} setTheme={setTheme}/>
           <button className="avatar" title="Meet Mohammed Reyaan (Maker)" onClick={()=>navigate('/maker')}>MR</button>
         </div>
       </header>
       <aside className={mobile?'sidebar open':'sidebar'}>
-        <div className="sidebar-scroll">{nav.map(({to,icon:Icon,label})=><NavLink to={to} key={to} onClick={()=>setMobile(false)}><Icon size={17}/>{label}{label==='Compare'&&compare.length>0&&<span className="count">{compare.length}</span>}{label==='Saved'&&favorites.length>0&&<span className="count">{favorites.length}</span>}</NavLink>)}</div>
+        <div className="sidebar-header">
+          <Logo small />
+          <button className="icon mobile-close-btn" onClick={() => setMobile(false)} aria-label="Close menu">
+            <X size={18} />
+          </button>
+        </div>
+        <div className="sidebar-scroll">{nav.map(({to,icon:Icon,label})=><NavLink to={to} key={to} onClick={()=>setMobile(false)} end={to==='/'}><Icon size={17}/><span>{label}</span>{label==='Compare'&&compare.length>0&&<span className="count">{compare.length}</span>}{label==='Saved'&&favorites.length>0&&<span className="count">{favorites.length}</span>}</NavLink>)}</div>
+        <div className="sidebar-footer">
+          <div className="sidebar-footer-content">
+            <span className="status-dot" />
+            <span>AI Ecosystem · v0.1.0</span>
+          </div>
+        </div>
       </aside>
       <main className="main">
         <Routes>
@@ -427,6 +440,31 @@ function Shell() {
           <Route path="*" element={<Empty title="Page not found" text="The page you requested does not exist."/>}/>
         </Routes>
       </main>
+      <nav className="mobile-bottom-nav" aria-label="Mobile bottom navigation">
+        <NavLink to="/" end className={({ isActive }) => (isActive ? 'mobile-nav-item active' : 'mobile-nav-item')}>
+          <Home size={20} />
+          <span>Home</span>
+        </NavLink>
+        <NavLink to="/browse" className={({ isActive }) => (isActive ? 'mobile-nav-item active' : 'mobile-nav-item')}>
+          <Search size={20} />
+          <span>Explore</span>
+        </NavLink>
+        <NavLink to="/categories" className={({ isActive }) => (isActive ? 'mobile-nav-item active' : 'mobile-nav-item')}>
+          <FolderGit2 size={20} />
+          <span>Topics</span>
+        </NavLink>
+        <NavLink to="/favorites" className={({ isActive }) => (isActive ? 'mobile-nav-item active' : 'mobile-nav-item')}>
+          <div className="nav-icon-wrap">
+            <Heart size={20} />
+            {favorites.length > 0 && <span className="mobile-nav-badge">{favorites.length}</span>}
+          </div>
+          <span>Saved</span>
+        </NavLink>
+        <NavLink to="/maker" className={({ isActive }) => (isActive ? 'mobile-nav-item active' : 'mobile-nav-item')}>
+          <User size={20} />
+          <span>Maker</span>
+        </NavLink>
+      </nav>
       <AnimatePresence>
         {command&&<motion.div className="command-overlay" initial={{opacity:0}} animate={{opacity:1}} exit={{opacity:0}} onClick={()=>setCommand(false)}>
           <motion.div className="command-box" initial={{scale:.98,y:-8}} animate={{scale:1,y:0}} onClick={e=>e.stopPropagation()}>
