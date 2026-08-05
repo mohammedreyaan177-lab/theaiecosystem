@@ -319,12 +319,12 @@ function Favorites(props: PageProps) {
 }
 function Empty({ title, text }: { title:string; text:string }) { return <div className="empty"><CircleHelp size={25}/><h2>{title}</h2><p>{text}</p><Link className="primary" to="/browse">Browse tools</Link></div> }
 function Intro({ onClose }: { onClose: () => void }) {
-  const [phase, setPhase] = useState<'core' | 'hero'>('core');
+  const [phase, setPhase] = useState<'boot' | 'reveal'>('boot');
 
   useEffect(() => {
-    setPhase('core');
-    const timer1 = window.setTimeout(() => setPhase('hero'), 650);
-    const timer2 = window.setTimeout(() => onClose(), 3400);
+    setPhase('boot');
+    const timer1 = window.setTimeout(() => setPhase('reveal'), 900);
+    const timer2 = window.setTimeout(() => onClose(), 4400);
     return () => { window.clearTimeout(timer1); window.clearTimeout(timer2); };
   }, [onClose]);
 
@@ -336,59 +336,20 @@ function Intro({ onClose }: { onClose: () => void }) {
       exit={{ opacity: 0, scale: 1.08 }}
       transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
     >
-      <div className="cyber-grid-overlay" />
-      <div className="glowing-orb-bg" />
-      
-      {phase === 'core' && (
-        <motion.div 
-          className="singularity-core"
-          initial={{ scale: 0.05, rotate: -180, opacity: 0 }}
-          animate={{ scale: [0.05, 1.4, 1], rotate: 360, opacity: 1 }}
-          transition={{ duration: 0.65, ease: 'easeOut' }}
-        >
-          <div className="core-ring outer" />
-          <div className="core-ring inner" />
-          <img src={brandLogo} alt="Logo Core" className="core-logo" />
+      <div className="intro-noise" />
+      <div className="intro-grid" />
+      <div className="intro-sun intro-sun-one" /><div className="intro-sun intro-sun-two" />
+      <div className="intro-orbit orbit-one" /><div className="intro-orbit orbit-two" /><div className="intro-orbit orbit-three" />
+      <div className="intro-corner intro-corner-tl">SYSTEM / AI-01</div><div className="intro-corner intro-corner-br">DISCOVERY ENGINE</div>
+      <div className="intro-metrics"><span><b>278</b> TOOLS INDEXED</span><span><b>16</b> CATEGORIES</span><span><b>∞</b> POSSIBILITIES</span></div>
+      <motion.div className="intro-stage" initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
+        <motion.div className="brand-reactor" initial={{scale:.3,opacity:0,rotate:-40}} animate={{scale:1,opacity:1,rotate:0}} transition={{duration:.85,ease:[.16,1,.3,1]}}>
+          <span className="reactor-ring ring-a"/><span className="reactor-ring ring-b"/><span className="reactor-ring ring-c"/>
+          <span className="reactor-dot dot-a"/><span className="reactor-dot dot-b"/><span className="reactor-dot dot-c"/>
+          <div className="reactor-core"><img src={brandLogo} alt="AIEcosystem logo"/></div>
         </motion.div>
-      )}
-
-      {phase === 'hero' && (
-        <motion.div 
-          className="intro-content-hero"
-          initial={{ opacity: 0, scale: 0.85, y: 15 }}
-          animate={{ opacity: 1, scale: 1, y: 0 }}
-          transition={{ duration: 0.55, ease: [0.16, 1, 0.3, 1] }}
-        >
-          <motion.div 
-            className="transformed-logo-wrap"
-            initial={{ scale: 0, rotate: -180 }}
-            animate={{ scale: 1, rotate: 0 }}
-            transition={{ type: 'spring', stiffness: 220, damping: 14 }}
-          >
-            <div className="halo-glow" />
-            <img src={brandLogo} alt="AIEcosystem logo" className="hero-brandmark" />
-          </motion.div>
-
-          <p className="intro-eyebrow">WELCOME TO</p>
-
-          <h1 className="intro-title">
-            AI<span className="shimmer-text">ECOSYSTEM</span>
-          </h1>
-
-          <p className="intro-tagline">
-            The intelligent directory for the tools shaping tomorrow.
-          </p>
-
-          <button 
-            type="button" 
-            className="intro-enter-btn" 
-            onClick={(e) => { e.stopPropagation(); onClose(); }}
-          >
-            <span>EXPLORE DIRECTORY</span>
-            <ChevronRight size={16} />
-          </button>
-        </motion.div>
-      )}
+        {phase === 'boot' ? <motion.div className="intro-boot" initial={{opacity:0}} animate={{opacity:1}}><span>INITIALIZING ECOSYSTEM</span><i><em/></i><small>Loading intelligent discovery layer</small></motion.div> : <motion.div className="intro-reveal" initial={{opacity:0,y:22}} animate={{opacity:1,y:0}} transition={{duration:.55}}><p>THE DIRECTORY FOR WHAT'S NEXT</p><h1>AI<span>ECOSYSTEM</span></h1><div className="intro-tagline">Find the tools. Build what matters.</div><button type="button" className="intro-enter-btn" onClick={onClose}><span>ENTER THE ECOSYSTEM</span><ChevronRight size={17}/></button><small>or wait to continue</small></motion.div>}
+      </motion.div>
     </motion.div>
   );
 }
@@ -402,7 +363,6 @@ function Shell() {
   const [showIntro, setShowIntro] = useState(() => !sessionStorage.getItem('ai-intro-played'));
   const [theme,setTheme] = useState<Theme>(() => { const saved = localStorage.getItem('ai-theme'); return saved === 'noir' || saved === 'violet' || saved === 'sunlight' ? saved : 'sunlight' }); 
 
-  const [mobile,setMobile]=useState(false); 
   const [command,setCommand]=useState(false); 
   const [cmdQuery,setCmdQuery]=useState('');
   const navigate=useNavigate(); 
@@ -429,9 +389,7 @@ function Shell() {
       <AnimatePresence>
         {showIntro && <Intro onClose={handleCloseIntro} />}
       </AnimatePresence>
-      {mobile && <div className="sidebar-backdrop" onClick={() => setMobile(false)} />}
       <header className="topbar">
-        <button className="mobile-menu icon" onClick={()=>setMobile(!mobile)} aria-label="Toggle navigation menu"><Menu size={20}/></button>
         <Logo/>
         <nav className="header-nav">{nav.map(({to,label})=><NavLink key={to} to={to} end={to==='/'}>{label}{label==='Compare'&&compare.length>0&&<span className="count">{compare.length}</span>}{label==='Saved'&&favorites.length>0&&<span className="count">{favorites.length}</span>}</NavLink>)}</nav>
         <button className="global-search" onClick={()=>setCommand(true)} aria-label="Search directory"><Search size={16}/><span>Search 100+ AI tools...</span><kbd><Command size={11}/>K</kbd></button>
@@ -440,21 +398,7 @@ function Shell() {
           <button className="avatar" title="Meet Mohammed Reyaan (Maker)" onClick={()=>navigate('/maker')}>MR</button>
         </div>
       </header>
-      <aside className={mobile?'sidebar open':'sidebar'}>
-        <div className="sidebar-header">
-          <Logo small />
-          <button className="icon mobile-close-btn" onClick={() => setMobile(false)} aria-label="Close menu">
-            <X size={18} />
-          </button>
-        </div>
-        <div className="sidebar-scroll">{nav.map(({to,icon:Icon,label})=><NavLink to={to} key={to} onClick={()=>setMobile(false)} end={to==='/'}><Icon size={17}/><span>{label}</span>{label==='Compare'&&compare.length>0&&<span className="count">{compare.length}</span>}{label==='Saved'&&favorites.length>0&&<span className="count">{favorites.length}</span>}</NavLink>)}</div>
-        <div className="sidebar-footer">
-          <div className="sidebar-footer-content">
-            <span className="status-dot" />
             <span>AI Ecosystem · v0.1.0</span>
-          </div>
-        </div>
-      </aside>
       <main className="main">
         <Routes>
           <Route path="/" element={<Dashboard {...props}/>}/>
@@ -487,9 +431,9 @@ function Shell() {
           </div>
           <span>Saved</span>
         </NavLink>
-        <NavLink to="/maker" className={({ isActive }) => (isActive ? 'mobile-nav-item active' : 'mobile-nav-item')}>
-          <User size={20} />
-          <span>Maker</span>
+        <NavLink to="/compare" className={({ isActive }) => (isActive ? 'mobile-nav-item active' : 'mobile-nav-item')}>
+          <Boxes size={20} />
+          <span>Compare</span>
         </NavLink>
       </nav>
       <AnimatePresence>
