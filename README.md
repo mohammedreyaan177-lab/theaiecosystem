@@ -1,89 +1,144 @@
 # AIEcosystem
 
-> A fast, polished directory for discovering, comparing, and saving the AI tools that matter.
+> A fast, polished, and comprehensive directory for discovering, comparing, and saving the world's best AI models, developer tools, and productivity applications.
 
-AIEcosystem turns a simple collection of JSON files into a complete AI discovery experience. Browse hundreds of tools, sort by rating, focus on free or open-source options, compare candidates side by side, and jump directly to official websites or Android apps where available.
+AIEcosystem turns a modular JSON data system into a complete AI discovery platform. Browse 100+ curated tools across 17 categories, search by intent or capability tags, filter by pricing or open-source status, compare candidates side-by-side in an interactive comparison matrix, and jump directly to official websites or Android apps.
 
-## What’s inside
+---
 
-- Data-driven directory — every tool is loaded from `src/data/*.json`.
-- Smart discovery — instant search plus category, pricing, free-access, open-source, API, and rating filters.
-- Tool profiles — official site, Android Play Store redirect (when available), pricing, related tools, and quick actions.
-- Compare workspace — save up to four tools and review the important differences.
-- Local collections — favorites, comparisons, recently viewed tools, and theme preference persist in the browser.
-- Responsive navigation — desktop sidebar, compact mobile drawer, and mobile bottom navigation.
-- Command palette — press <kbd>Ctrl</kbd>/<kbd>⌘</kbd> + <kbd>K</kbd> to search from anywhere.
-- Three themes — Sunlight (white + yellow), Noir (black + yellow), and Midnight (ink + violet).
-- Vercel-ready SPA routing — deep links such as `/tools/chatgpt` work after deployment and refresh.
+## Key Features
 
-## Tech stack
+- **17 Curated Categories**: Covers Conversational AI, Open-Source Models & Frontier Weights, AI Coding, Development Tools, Workflow Automation, Image & Video Generation, Voice & Music, Research, Cloud Databases, VPS Servers, and Productivity.
+- **Developer Certified Badge**: Top-tier, community-verified tools (e.g. ChatGPT, Claude, Gemini, DeepSeek, Cursor, v0, Supabase, Neon, LangChain, LangGraph, NVIDIA Nemotron, Nous Hermes, OpenCode, Vercel, Docker) feature a verified `Dev Certified` badge and are prioritized at the top of all listings.
+- **Intent Tag Search**: Every tool is indexed with 5–10 capability tags (e.g., `image generation`, `educate`, `reasoning`, `vector db`, `open weights`, `rag`, `agents`, `tts`, `vps`, `code generation`), enabling instant search matches.
+- **Multi-Tier Logo Resolution Engine**: Automated 5-stage logo loader (SimpleIcons Vector SVG → Clearbit Logo API → Google Favicon 128px → IconHorse → Monogram Avatar) ensures 100% logo coverage.
+- **Interactive Side-by-Side Comparison**: Compare up to four tools side-by-side across 10 detailed attributes, with an in-place `+ Add tool to compare...` slot dropdown selector.
+- **Live Saved & Compare Count Badges**: Real-time counter badges on topbar navigation and mobile bottom nav.
+- **Sunlight Theme System**: Clean, high-contrast Sunlight light theme with warm gold/yellow accent tokens.
+- **Command Palette Search**: Press <kbd>Ctrl</kbd>/<kbd>⌘</kbd> + <kbd>K</kbd> to launch global search from anywhere in the application.
+- **Maker Spotlight**: Dedicated creator page highlighting Mohammed Reyaan (GitHub & LinkedIn profiles).
+
+---
+
+## Tech Stack
 
 | Layer | Technology |
 | --- | --- |
-| UI | React 19 + TypeScript |
-| Build | Vite |
-| Routing | React Router |
-| Motion | Framer Motion |
-| Icons | Lucide React |
-| Data | Local JSON files |
-| Hosting | Vercel |
+| **Framework** | React 19 + TypeScript |
+| **Build Tool** | Vite |
+| **Routing** | React Router DOM (v7) |
+| **Animations** | Framer Motion |
+| **Icons** | Lucide React + SimpleIcons SVG CDN |
+| **Styling** | Vanilla CSS Design System with CSS Tokens |
+| **Data Engine** | Modular Eager JSON Modules (`src/data/*.json`) |
+| **Deployment** | Vercel SPA Rewrite (`vercel.json`) |
 
-## Run locally
+---
 
-```bash
-npm install
-npm run dev
-```
+## Getting Started
 
-Create an optimized production build:
+### Local Development
+
+1. Clone the repository and install dependencies:
+   ```bash
+   npm install
+   ```
+
+2. Launch the dev server:
+   ```bash
+   npm run dev
+   ```
+
+3. Open `http://localhost:5173` in your browser.
+
+### Building for Production
 
 ```bash
 npm run build
 npm run preview
 ```
 
-## Add a tool
+---
 
-Add one JSON object to the appropriate file in `src/data/`. No component edits are required.
+## Data Schema & Adding New Tools
+
+Every tool record is defined in its respective category file inside `src/data/*.json`. Adding a new tool requires no component edits:
 
 ```json
 {
-  "id": "example-ai",
-  "name": "Example AI",
-  "category": "automation",
-  "pricing": { "free": true, "paid": true },
-  "website": "https://example.com",
-  "playstore": "https://play.google.com/store/apps/details?id=com.example.app",
-  "rating": 4.6,
-  "openSource": false,
-  "apiAvailable": true
+  "id": "opencode",
+  "name": "OpenCode",
+  "category": "models",
+  "pricing": { "free": true, "paid": false },
+  "website": "https://opencode.ai",
+  "playstore": "",
+  "rating": 4.8,
+  "openSource": true,
+  "apiAvailable": true,
+  "tags": ["models", "opencode", "coding model", "open source", "code generation", "developer tool", "llm"],
+  "developerCertified": true
 }
 ```
 
-`playstore` is optional. When omitted, the interface correctly labels the Android app as unavailable instead of showing an unreliable redirect.
+### Schema Properties
 
-## Deploy to Vercel
+| Property | Type | Description |
+| --- | --- | --- |
+| `id` | `string` | Unique identifier (kebab-case). |
+| `name` | `string` | Display name. |
+| `category` | `string` | Primary category ID (e.g. `chat`, `models`, `coding`, `automation`, `cloud`). |
+| `pricing` | `object` | `{ "free": boolean, "paid": boolean }` |
+| `website` | `string` | Official website URL. |
+| `playstore` | `string` | Optional Google Play Store link. |
+| `rating` | `number` | Community score (e.g. `4.8`). |
+| `openSource` | `boolean` | Whether the tool/model is open-source or open-weights. |
+| `apiAvailable` | `boolean` | Whether API/SDK access is provided. |
+| `tags` | `string[]` | 5–10 descriptive search tags. |
+| `developerCertified` | `boolean` | `true` if widely verified and trusted by the developer community. |
 
-1. Push the project to GitHub.
+---
+
+## Deployment on Vercel
+
+1. Push your repository to GitHub.
 2. Import the repository at [vercel.com/new](https://vercel.com/new).
-3. Keep the detected Vite settings and deploy.
+3. The included `vercel.json` provides SPA rewrites so direct links (e.g., `/tools/cursor` or `/compare`) reload seamlessly.
 
-The included `vercel.json` defines the build command, `dist` output folder, and an SPA rewrite, so direct URLs and browser refreshes resolve correctly.
+---
 
-## Environment variables
-
-Copy `.env.example` to `.env.local` for local overrides. Only public build-time values belong in `VITE_*` variables—never place secrets there.
-
-## Project structure
+## Project Structure
 
 ```text
-src/
-├── assets/       # Brand assets
-├── data/         # Source-of-truth tool records
-├── main.tsx      # App routes, pages, interactions
-└── style.css     # Responsive visual system and themes
+THEAIECOSYSTEM/
+├── src/
+│   ├── assets/       # Brand assets & logos
+│   ├── data/         # Source-of-truth JSON files by category
+│   │   ├── automation.json
+│   │   ├── chat.json
+│   │   ├── cloud.json
+│   │   ├── coding.json
+│   │   ├── collaboration.json
+│   │   ├── deployment.json
+│   │   ├── design.json
+│   │   ├── devtools.json
+│   │   ├── image.json
+│   │   ├── learning.json
+│   │   ├── management.json
+│   │   ├── models.json
+│   │   ├── music.json
+│   │   ├── productivity.json
+│   │   ├── research.json
+│   │   ├── video.json
+│   │   ├── voice.json
+│   │   ├── vps.json
+│   │   └── writing.json
+│   ├── main.tsx      # Routing, state, search, and page views
+│   └── style.css     # Sunlight design system & responsive layout
+├── index.html        # Entry HTML
+├── vercel.json       # SPA routing rewrites
+└── README.md
 ```
 
 ---
 
-Built for curious people who want to find the right AI tool before the next workflow begins.
+Crafted by **Mohammed Reyaan** for developers, researchers, and creators finding the right AI tools for what's next.
