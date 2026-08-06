@@ -3,55 +3,50 @@
     "id": "perplexity",
     "name": "Perplexity",
     "category": "research",
-    "pricing": {
-      "free": true,
-      "paid": true
-    },
+    "pricing": { "free": true, "paid": true },
     "website": "https://perplexity.ai",
-    "playstore": "https://play.google.com/store/apps/details?id=ai.perplexity.app.android"
+    "playstore": "https://play.google.com/store/apps/details?id=ai.perplexity.app.android",
+    "tags": ["research", "ai search engine", "real-time citations", "pro search", "academic research", "educate"],
+    "developerCertified": true
   },
   {
     "id": "notebooklm",
     "name": "NotebookLM",
     "category": "research",
-    "pricing": {
-      "free": true,
-      "paid": true
-    },
+    "pricing": { "free": true, "paid": true },
     "website": "https://notebooklm.google.com",
-    "playstore": "https://play.google.com/store/apps/details?id=com.google.android.apps.notebooklm"
+    "playstore": "https://play.google.com/store/apps/details?id=com.google.android.apps.notebooklm",
+    "tags": ["research", "google", "audio overview", "pdf synthesis", "notebook", "sources", "educate"],
+    "developerCertified": true
   },
   {
     "id": "elicit",
     "name": "Elicit",
     "category": "research",
-    "pricing": {
-      "free": true,
-      "paid": true
-    },
+    "pricing": { "free": true, "paid": true },
     "website": "https://elicit.com",
-    "playstore": ""
+    "playstore": "",
+    "tags": ["research", "academic papers", "literature review", "pubmed", "scientific research", "educate"],
+    "developerCertified": true
   },
   {
     "id": "consensus",
     "name": "Consensus",
     "category": "research",
-    "pricing": {
-      "free": true,
-      "paid": true
-    },
+    "pricing": { "free": true, "paid": true },
     "website": "https://consensus.app",
-    "playstore": ""
+    "playstore": "",
+    "tags": ["research", "science search", "evidence based", "paper summaries", "claims verification", "educate"],
+    "developerCertified": true
   },
   {
     "id": "scispace",
     "name": "SciSpace",
     "category": "research",
-    "pricing": {
-      "free": true,
-      "paid": true
-    },
+    "pricing": { "free": true, "paid": true },
     "website": "https://typeset.io",
-    "playstore": ""
+    "playstore": "",
+    "tags": ["research", "typeset", "read papers", "copilot for papers", "pdf explanation", "educate"],
+    "developerCertified": true
   }
 ]

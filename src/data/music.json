@@ -5,7 +5,9 @@
     "category": "music",
     "pricing": { "free": true, "paid": true },
     "website": "https://suno.com",
-    "playstore": "https://play.google.com/store/apps/details?id=com.suno.android"
+    "playstore": "",
+    "tags": ["music", "song generation", "full tracks", "vocals", "lyrics to music", "audio ai"],
+    "developerCertified": true
   },
   {
     "id": "udio",
@@ -13,15 +15,9 @@
     "category": "music",
     "pricing": { "free": true, "paid": true },
     "website": "https://www.udio.com",
-    "playstore": ""
-  },
-  {
-    "id": "aiva",
-    "name": "AIVA",
-    "category": "music",
-    "pricing": { "free": true, "paid": true },
-    "website": "https://www.aiva.ai",
-    "playstore": ""
+    "playstore": "",
+    "tags": ["music", "high fidelity music", "stem control", "genre customization", "song builder"],
+    "developerCertified": true
   },
   {
     "id": "soundraw",
@@ -29,30 +25,18 @@
     "category": "music",
     "pricing": { "free": true, "paid": true },
     "website": "https://soundraw.io",
-    "playstore": ""
+    "playstore": "",
+    "tags": ["music", "royalty free music", "background music", "custom beats", "video background"],
+    "developerCertified": false
   },
   {
-    "id": "boomy",
-    "name": "Boomy",
+    "id": "splash-pro",
+    "name": "Splash Pro",
     "category": "music",
     "pricing": { "free": true, "paid": true },
-    "website": "https://boomy.com",
-    "playstore": ""
-  },
-  {
-    "id": "loudly",
-    "name": "Loudly",
-    "category": "music",
-    "pricing": { "free": true, "paid": true },
-    "website": "https://www.loudly.com",
-    "playstore": ""
-  },
-  {
-    "id": "mubert",
-    "name": "Mubert",
-    "category": "music",
-    "pricing": { "free": true, "paid": true },
-    "website": "https://mubert.com",
-    "playstore": "https://play.google.com/store/apps/details?id=com.mubert"
+    "website": "https://pro.splashmusic.com",
+    "playstore": "",
+    "tags": ["music", "beat maker", "text to music", "vocal synth", "ai producer"],
+    "developerCertified": false
   }
 ]

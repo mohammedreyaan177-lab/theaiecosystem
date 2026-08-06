@@ -4,8 +4,40 @@
     "name": "Midjourney",
     "category": "image",
     "pricing": { "free": false, "paid": true },
-    "website": "https://midjourney.com",
-    "playstore": ""
+    "website": "https://www.midjourney.com",
+    "playstore": "",
+    "tags": ["image", "image generation", "text to image", "discord", "photorealistic", "art", "creative"],
+    "developerCertified": true
+  },
+  {
+    "id": "dall-e-3",
+    "name": "DALL-E 3",
+    "category": "image",
+    "pricing": { "free": true, "paid": true },
+    "website": "https://openai.com/dall-e-3",
+    "playstore": "",
+    "tags": ["image", "openai", "chatgpt image", "text to image", "prompt expansion", "art"],
+    "developerCertified": true
+  },
+  {
+    "id": "flux",
+    "name": "Flux",
+    "category": "image",
+    "pricing": { "free": true, "paid": true },
+    "website": "https://blackforestlabs.ai",
+    "playstore": "",
+    "tags": ["image", "black forest labs", "open weights", "text to image", "high quality", "sd3 killer"],
+    "developerCertified": true
+  },
+  {
+    "id": "stable-diffusion",
+    "name": "Stable Diffusion",
+    "category": "image",
+    "pricing": { "free": true, "paid": true },
+    "website": "https://stability.ai",
+    "playstore": "",
+    "tags": ["image", "stability ai", "open source", "sdxl", "controlnet", "lora", "local generation"],
+    "developerCertified": true
   },
   {
     "id": "ideogram",
@@ -13,79 +45,9 @@
     "category": "image",
     "pricing": { "free": true, "paid": true },
     "website": "https://ideogram.ai",
-    "playstore": ""
-  },
-  {
-    "id": "leonardo-ai",
-    "name": "Leonardo AI",
-    "category": "image",
-    "pricing": { "free": true, "paid": true },
-    "website": "https://leonardo.ai",
-    "playstore": "https://play.google.com/store/apps/details?id=ai.leonardo.android"
-  },
-  {
-    "id": "playground-ai",
-    "name": "Playground AI",
-    "category": "image",
-    "pricing": { "free": true, "paid": true },
-    "website": "https://playground.com",
-    "playstore": ""
-  },
-  {
-    "id": "adobe-firefly",
-    "name": "Adobe Firefly",
-    "category": "image",
-    "pricing": { "free": true, "paid": true },
-    "website": "https://firefly.adobe.com",
-    "playstore": "https://play.google.com/store/apps/details?id=com.adobe.firefly"
-  },
-  {
-    "id": "canva-ai",
-    "name": "Canva AI",
-    "category": "image",
-    "pricing": { "free": true, "paid": true },
-    "website": "https://www.canva.com",
-    "playstore": "https://play.google.com/store/apps/details?id=com.canva.editor"
-  },
-  {
-    "id": "microsoft-designer",
-    "name": "Microsoft Designer",
-    "category": "image",
-    "pricing": { "free": true, "paid": true },
-    "website": "https://designer.microsoft.com",
-    "playstore": "https://play.google.com/store/apps/details?id=com.microsoft.designer"
-  },
-  {
-    "id": "gpt-image",
-    "name": "GPT Image",
-    "category": "image",
-    "pricing": { "free": true, "paid": true },
-    "website": "https://chatgpt.com",
-    "playstore": "https://play.google.com/store/apps/details?id=com.openai.chatgpt"
-  },
-  {
-    "id": "flux",
-    "name": "Flux",
-    "category": "image",
-    "pricing": { "free": true, "paid": true },
-    "website": "https://flux1.ai",
-    "playstore": ""
-  },
-  {
-    "id": "stable-diffusion",
-    "name": "Stable Diffusion",
-    "category": "image",
-    "pricing": { "free": true, "paid": false },
-    "website": "https://stability.ai",
-    "playstore": ""
-  },
-  {
-    "id": "dreamstudio",
-    "name": "DreamStudio",
-    "category": "image",
-    "pricing": { "free": true, "paid": true },
-    "website": "https://dreamstudio.ai",
-    "playstore": ""
+    "playstore": "",
+    "tags": ["image", "text rendering", "typography", "logo design", "graphic art", "image generation"],
+    "developerCertified": true
   },
   {
     "id": "recraft",
@@ -93,54 +55,28 @@
     "category": "image",
     "pricing": { "free": true, "paid": true },
     "website": "https://www.recraft.ai",
-    "playstore": ""
+    "playstore": "",
+    "tags": ["image", "vector art", "svg generation", "brand design", "consistent style", "illustrator"],
+    "developerCertified": true
   },
   {
-    "id": "craiyon",
-    "name": "Craiyon",
+    "id": "magnific",
+    "name": "Magnific",
+    "category": "image",
+    "pricing": { "free": false, "paid": true },
+    "website": "https://magnific.ai",
+    "playstore": "",
+    "tags": ["image", "upscaler", "enhancer", "detail generation", "4k resolution", "photo editor"],
+    "developerCertified": true
+  },
+  {
+    "id": "leonardo-ai",
+    "name": "Leonardo.Ai",
     "category": "image",
     "pricing": { "free": true, "paid": true },
-    "website": "https://www.craiyon.com",
-    "playstore": ""
-  },
-  {
-    "id": "bing-image-creator",
-    "name": "Bing Image Creator",
-    "category": "image",
-    "pricing": { "free": true, "paid": false },
-    "website": "https://www.bing.com/images/create",
-    "playstore": "https://play.google.com/store/apps/details?id=com.microsoft.bing"
-  },
-  {
-    "id": "pixlr",
-    "name": "Pixlr",
-    "category": "image",
-    "pricing": { "free": true, "paid": true },
-    "website": "https://pixlr.com",
-    "playstore": "https://play.google.com/store/apps/details?id=com.pixlr.express"
-  },
-  {
-    "id": "nightcafe",
-    "name": "NightCafe",
-    "category": "image",
-    "pricing": { "free": true, "paid": true },
-    "website": "https://nightcafe.studio",
-    "playstore": ""
-  },
-  {
-    "id": "starryai",
-    "name": "StarryAI",
-    "category": "image",
-    "pricing": { "free": true, "paid": true },
-    "website": "https://starryai.com",
-    "playstore": "https://play.google.com/store/apps/details?id=com.starryai"
-  },
-  {
-    "id": "tensor-art",
-    "name": "Tensor Art",
-    "category": "image",
-    "pricing": { "free": true, "paid": true },
-    "website": "https://tensor.art",
-    "playstore": ""
+    "website": "https://leonardo.ai",
+    "playstore": "https://play.google.com/store/apps/details?id=ai.leonardo.app",
+    "tags": ["image", "game assets", "canvas", "character design", "texture generation"],
+    "developerCertified": false
   }
 ]

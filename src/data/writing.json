@@ -3,77 +3,70 @@
     "id": "jasper",
     "name": "Jasper",
     "category": "writing",
-    "pricing": {
-      "free": false,
-      "paid": true
-    },
+    "pricing": { "free": false, "paid": true },
     "website": "https://www.jasper.ai",
-    "playstore": ""
+    "playstore": "",
+    "tags": ["writing", "copywriting", "marketing content", "blog posts", "brand voice", "seo"],
+    "developerCertified": true
   },
   {
     "id": "copyai",
     "name": "Copy.ai",
     "category": "writing",
-    "pricing": {
-      "free": false,
-      "paid": true
-    },
+    "pricing": { "free": false, "paid": true },
     "website": "https://www.copy.ai",
-    "playstore": ""
+    "playstore": "",
+    "tags": ["writing", "sales copy", "social media posts", "email generator", "marketing automation"],
+    "developerCertified": true
   },
   {
     "id": "writesonic",
     "name": "Writesonic",
     "category": "writing",
-    "pricing": {
-      "free": true,
-      "paid": true
-    },
+    "pricing": { "free": true, "paid": true },
     "website": "https://writesonic.com",
-    "playstore": ""
+    "playstore": "",
+    "tags": ["writing", "article writer", "seo optimizer", "audiosonic", "chatsonic"],
+    "developerCertified": false
   },
   {
     "id": "rytr",
     "name": "Rytr",
     "category": "writing",
-    "pricing": {
-      "free": true,
-      "paid": true
-    },
+    "pricing": { "free": true, "paid": true },
     "website": "https://rytr.me",
-    "playstore": ""
+    "playstore": "",
+    "tags": ["writing", "content generator", "short form copy", "tone selector", "free writer"],
+    "developerCertified": false
   },
   {
     "id": "grammarly",
     "name": "Grammarly",
     "category": "writing",
-    "pricing": {
-      "free": true,
-      "paid": true
-    },
+    "pricing": { "free": true, "paid": true },
     "website": "https://www.grammarly.com",
-    "playstore": "https://play.google.com/store/apps/details?id=com.grammarly.android.keyboard"
+    "playstore": "https://play.google.com/store/apps/details?id=com.grammarly.android.keyboard",
+    "tags": ["writing", "grammar checker", "spell check", "tone detector", "plagiarism", "keyboard"],
+    "developerCertified": true
   },
   {
     "id": "quillbot",
     "name": "QuillBot",
     "category": "writing",
-    "pricing": {
-      "free": true,
-      "paid": true
-    },
+    "pricing": { "free": true, "paid": true },
     "website": "https://quillbot.com",
-    "playstore": "https://play.google.com/store/apps/details?id=com.quillbot.paraphrasingtool"
+    "playstore": "https://play.google.com/store/apps/details?id=com.quillbot.paraphrasingtool",
+    "tags": ["writing", "paraphraser", "grammar check", "summarizer", "citation generator", "educate"],
+    "developerCertified": true
   },
   {
     "id": "deepl",
     "name": "DeepL",
     "category": "writing",
-    "pricing": {
-      "free": true,
-      "paid": true
-    },
+    "pricing": { "free": true, "paid": true },
     "website": "https://www.deepl.com",
-    "playstore": "https://play.google.com/store/apps/details?id=com.deepl.mobiletranslator"
+    "playstore": "https://play.google.com/store/apps/details?id=com.deepl.mobiletranslator",
+    "tags": ["writing", "translation", "translator", "multilingual", "precise translation", "dictionary"],
+    "developerCertified": true
   }
 ]

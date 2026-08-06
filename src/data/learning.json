@@ -1,10 +1,42 @@
 [
-  { "id": "freecodecamp", "name": "freeCodeCamp", "category": "learning", "pricing": { "free": true, "paid": false }, "website": "https://www.freecodecamp.org", "playstore": "" },
-  { "id": "khan-academy", "name": "Khan Academy", "category": "learning", "pricing": { "free": true, "paid": false }, "website": "https://www.khanacademy.org", "playstore": "https://play.google.com/store/apps/details?id=org.khanacademy.android" },
-  { "id": "coursera", "name": "Coursera", "category": "learning", "pricing": { "free": true, "paid": true }, "website": "https://www.coursera.org", "playstore": "https://play.google.com/store/apps/details?id=org.coursera.android" },
-  { "id": "odin-project", "name": "The Odin Project", "category": "learning", "pricing": { "free": true, "paid": false }, "website": "https://www.theodinproject.com", "playstore": "" },
-  { "id": "codecademy", "name": "Codecademy", "category": "learning", "pricing": { "free": true, "paid": true }, "website": "https://www.codecademy.com", "playstore": "https://play.google.com/store/apps/details?id=com.ryzac.codecademygo" },
-  { "id": "w3schools", "name": "W3Schools", "category": "learning", "pricing": { "free": true, "paid": true }, "website": "https://www.w3schools.com", "playstore": "" },
-  { "id": "mdn", "name": "MDN Web Docs", "category": "learning", "pricing": { "free": true, "paid": false }, "website": "https://developer.mozilla.org", "playstore": "" },
-  { "id": "mit-ocw", "name": "MIT OpenCourseWare", "category": "learning", "pricing": { "free": true, "paid": false }, "website": "https://ocw.mit.edu", "playstore": "" }
+  {
+    "id": "coursera",
+    "name": "Coursera",
+    "category": "learning",
+    "pricing": { "free": true, "paid": true },
+    "website": "https://www.coursera.org",
+    "playstore": "https://play.google.com/store/apps/details?id=org.coursera.android",
+    "tags": ["learning", "online courses", "certificates", "ai specialization", "university", "education", "educate"],
+    "developerCertified": true
+  },
+  {
+    "id": "deeplearning-ai",
+    "name": "DeepLearning.AI",
+    "category": "learning",
+    "pricing": { "free": true, "paid": true },
+    "website": "https://www.deeplearning.ai",
+    "playstore": "",
+    "tags": ["learning", "andrew ng", "deep learning", "machine learning", "python", "ai certification", "educate"],
+    "developerCertified": true
+  },
+  {
+    "id": "kaggle",
+    "name": "Kaggle",
+    "category": "learning",
+    "pricing": { "free": true, "paid": false },
+    "website": "https://www.kaggle.com",
+    "playstore": "",
+    "tags": ["learning", "data science", "competitions", "datasets", "python notebooks", "machine learning", "educate"],
+    "developerCertified": true
+  },
+  {
+    "id": "udemy",
+    "name": "Udemy",
+    "category": "learning",
+    "pricing": { "free": true, "paid": true },
+    "website": "https://www.udemy.com",
+    "playstore": "https://play.google.com/store/apps/details?id=com.udemy.android",
+    "tags": ["learning", "video courses", "programming", "web dev", "skills", "tutorials", "educate"],
+    "developerCertified": false
+  }
 ]

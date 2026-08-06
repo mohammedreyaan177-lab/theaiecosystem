@@ -1,10 +1,82 @@
 [
-  { "id": "supabase", "name": "Supabase", "category": "cloud", "pricing": { "free": true, "paid": true }, "website": "https://supabase.com", "playstore": "" },
-  { "id": "firebase", "name": "Firebase", "category": "cloud", "pricing": { "free": true, "paid": true }, "website": "https://firebase.google.com", "playstore": "" },
-  { "id": "cloudflare", "name": "Cloudflare", "category": "cloud", "pricing": { "free": true, "paid": true }, "website": "https://www.cloudflare.com", "playstore": "" },
-  { "id": "railway", "name": "Railway", "category": "cloud", "pricing": { "free": true, "paid": true }, "website": "https://railway.app", "playstore": "" },
-  { "id": "render", "name": "Render", "category": "cloud", "pricing": { "free": true, "paid": true }, "website": "https://render.com", "playstore": "" },
-  { "id": "planetscale", "name": "PlanetScale", "category": "cloud", "pricing": { "free": true, "paid": true }, "website": "https://planetscale.com", "playstore": "" },
-  { "id": "neon", "name": "Neon", "category": "cloud", "pricing": { "free": true, "paid": true }, "website": "https://neon.tech", "playstore": "" },
-  { "id": "upstash", "name": "Upstash", "category": "cloud", "pricing": { "free": true, "paid": true }, "website": "https://upstash.com", "playstore": "" }
+  {
+    "id": "supabase",
+    "name": "Supabase",
+    "category": "cloud",
+    "pricing": { "free": true, "paid": true },
+    "website": "https://supabase.com",
+    "playstore": "",
+    "tags": ["cloud", "database", "postgres", "vector embeddings", "firebase alternative", "open source", "developer tool"],
+    "developerCertified": true
+  },
+  {
+    "id": "neon",
+    "name": "Neon",
+    "category": "cloud",
+    "pricing": { "free": true, "paid": true },
+    "website": "https://neon.tech",
+    "playstore": "",
+    "tags": ["cloud", "postgres", "serverless db", "database branching", "sql", "vector search", "developer tool"],
+    "developerCertified": true
+  },
+  {
+    "id": "aws",
+    "name": "AWS",
+    "category": "cloud",
+    "pricing": { "free": true, "paid": true },
+    "website": "https://aws.amazon.com",
+    "playstore": "",
+    "tags": ["cloud", "amazon web services", "hosting", "s3", "ec2", "lambda", "infrastructure", "developer tool"],
+    "developerCertified": true
+  },
+  {
+    "id": "google-cloud",
+    "name": "Google Cloud",
+    "category": "cloud",
+    "pricing": { "free": true, "paid": true },
+    "website": "https://cloud.google.com",
+    "playstore": "",
+    "tags": ["cloud", "gcp", "vertex ai", "bigquery", "google infrastructure", "developer tool"],
+    "developerCertified": true
+  },
+  {
+    "id": "cloudflare",
+    "name": "Cloudflare",
+    "category": "cloud",
+    "pricing": { "free": true, "paid": true },
+    "website": "https://www.cloudflare.com",
+    "playstore": "",
+    "tags": ["cloud", "cdn", "dns", "workers", "r2", "vectorize", "security", "developer tool"],
+    "developerCertified": true
+  },
+  {
+    "id": "pinecone",
+    "name": "Pinecone",
+    "category": "cloud",
+    "pricing": { "free": true, "paid": true },
+    "website": "https://www.pinecone.io",
+    "playstore": "",
+    "tags": ["cloud", "vector database", "rag", "similarity search", "embeddings", "ai database", "developer tool"],
+    "developerCertified": true
+  },
+  {
+    "id": "qdrant",
+    "name": "Qdrant",
+    "category": "cloud",
+    "pricing": { "free": true, "paid": true },
+    "website": "https://qdrant.tech",
+    "playstore": "",
+    "tags": ["cloud", "vector engine", "rust", "open source RAG", "similarity search", "developer tool"],
+    "developerCertified": true
+  },
+  {
+    "id": "chromadb",
+    "name": "ChromaDB",
+    "category": "cloud",
+    "pricing": { "free": true, "paid": false },
+    "website": "https://www.trychroma.com",
+    "playstore": "",
+    "tags": ["cloud", "vector storage", "python", "open source RAG", "embeddings", "developer tool"],
+    "developerCertified": true
+  }
 ]

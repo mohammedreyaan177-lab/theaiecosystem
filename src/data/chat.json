@@ -5,7 +5,9 @@
     "category": "chat",
     "pricing": { "free": true, "paid": true },
     "website": "https://chatgpt.com",
-    "playstore": "https://play.google.com/store/apps/details?id=com.openai.chatgpt"
+    "playstore": "https://play.google.com/store/apps/details?id=com.openai.chatgpt",
+    "tags": ["chat", "conversational ai", "gpt-4o", "o3-mini", "openai", "writing", "coding", "educate", "reasoning", "general assistant"],
+    "developerCertified": true
   },
   {
     "id": "claude",
@@ -13,7 +15,9 @@
     "category": "chat",
     "pricing": { "free": true, "paid": true },
     "website": "https://claude.ai",
-    "playstore": "https://play.google.com/store/apps/details?id=com.anthropic.claude"
+    "playstore": "https://play.google.com/store/apps/details?id=com.anthropic.claude",
+    "tags": ["chat", "anthropic", "claude 3.7", "thinking model", "coding", "long context", "reasoning", "writing", "analysis"],
+    "developerCertified": true
   },
   {
     "id": "gemini",
@@ -21,7 +25,9 @@
     "category": "chat",
     "pricing": { "free": true, "paid": true },
     "website": "https://gemini.google.com",
-    "playstore": "https://play.google.com/store/apps/details?id=com.google.android.apps.bard"
+    "playstore": "https://play.google.com/store/apps/details?id=com.google.android.apps.bard",
+    "tags": ["chat", "google deepmind", "gemini 2.0", "multimodal", "vision", "voice", "search", "coding", "educate"],
+    "developerCertified": true
   },
   {
     "id": "grok",
@@ -29,7 +35,9 @@
     "category": "chat",
     "pricing": { "free": true, "paid": true },
     "website": "https://grok.com",
-    "playstore": "https://play.google.com/store/apps/details?id=com.twitter.android"
+    "playstore": "https://play.google.com/store/apps/details?id=com.twitter.android",
+    "tags": ["chat", "xai", "elon musk", "real-time X search", "fun mode", "reasoning", "grok 3"],
+    "developerCertified": true
   },
   {
     "id": "deepseek",
@@ -37,7 +45,9 @@
     "category": "chat",
     "pricing": { "free": true, "paid": true },
     "website": "https://chat.deepseek.com",
-    "playstore": "https://play.google.com/store/apps/details?id=com.deepseek.chat"
+    "playstore": "https://play.google.com/store/apps/details?id=com.deepseek.chat",
+    "tags": ["chat", "open weights", "r1 model", "deep reasoning", "chain of thought", "coding", "math", "educate"],
+    "developerCertified": true
   },
   {
     "id": "meta-ai",
@@ -45,7 +55,9 @@
     "category": "chat",
     "pricing": { "free": true, "paid": false },
     "website": "https://www.meta.ai",
-    "playstore": "https://play.google.com/store/apps/details?id=com.facebook.orca"
+    "playstore": "https://play.google.com/store/apps/details?id=com.facebook.orca",
+    "tags": ["chat", "llama 3.3", "facebook", "instagram", "whatsapp", "free ai", "open source"],
+    "developerCertified": false
   },
   {
     "id": "le-chat",
@@ -53,7 +65,9 @@
     "category": "chat",
     "pricing": { "free": true, "paid": true },
     "website": "https://chat.mistral.ai",
-    "playstore": "https://play.google.com/store/apps/details?id=ai.mistral.chat"
+    "playstore": "https://play.google.com/store/apps/details?id=ai.mistral.chat",
+    "tags": ["chat", "mistral ai", "french ai", "code sandbox", "document analysis", "open weights"],
+    "developerCertified": true
   },
   {
     "id": "copilot",
@@ -61,7 +75,9 @@
     "category": "chat",
     "pricing": { "free": true, "paid": true },
     "website": "https://copilot.microsoft.com",
-    "playstore": "https://play.google.com/store/apps/details?id=com.microsoft.copilot"
+    "playstore": "https://play.google.com/store/apps/details?id=com.microsoft.copilot",
+    "tags": ["chat", "microsoft", "bing", "dall-e", "gpt-4o", "office 365", "web search"],
+    "developerCertified": true
   },
   {
     "id": "perplexity",
@@ -69,7 +85,9 @@
     "category": "chat",
     "pricing": { "free": true, "paid": true },
     "website": "https://perplexity.ai",
-    "playstore": "https://play.google.com/store/apps/details?id=ai.perplexity.app.android"
+    "playstore": "https://play.google.com/store/apps/details?id=ai.perplexity.app.android",
+    "tags": ["chat", "search engine", "web research", "citations", "academic", "pro search", "real time"],
+    "developerCertified": true
   },
   {
     "id": "character-ai",
@@ -77,7 +95,9 @@
     "category": "chat",
     "pricing": { "free": true, "paid": true },
     "website": "https://character.ai",
-    "playstore": "https://play.google.com/store/apps/details?id=ai.character.app"
+    "playstore": "https://play.google.com/store/apps/details?id=ai.character.app",
+    "tags": ["chat", "personas", "roleplay", "anime", "creative chat", "fun", "companions"],
+    "developerCertified": false
   },
   {
     "id": "huggingchat",
@@ -85,7 +105,9 @@
     "category": "chat",
     "pricing": { "free": true, "paid": false },
     "website": "https://huggingface.co/chat",
-    "playstore": ""
+    "playstore": "",
+    "tags": ["chat", "hugging face", "open source models", "llama", "mistral", "qwen", "free chat"],
+    "developerCertified": true
   },
   {
     "id": "pi",
@@ -93,7 +115,9 @@
     "category": "chat",
     "pricing": { "free": true, "paid": false },
     "website": "https://pi.ai",
-    "playstore": ""
+    "playstore": "",
+    "tags": ["chat", "inflection ai", "personal assistant", "coaching", "friendly chat", "support"],
+    "developerCertified": false
   },
   {
     "id": "poe",
@@ -101,7 +125,9 @@
     "category": "chat",
     "pricing": { "free": true, "paid": true },
     "website": "https://poe.com",
-    "playstore": "https://play.google.com/store/apps/details?id=com.poe.android"
+    "playstore": "https://play.google.com/store/apps/details?id=com.poe.android",
+    "tags": ["chat", "quora", "bot marketplace", "multi-llm", "custom bots", "prompt bots"],
+    "developerCertified": true
   },
   {
     "id": "coze",
@@ -109,7 +135,9 @@
     "category": "chat",
     "pricing": { "free": true, "paid": true },
     "website": "https://www.coze.com",
-    "playstore": ""
+    "playstore": "",
+    "tags": ["chat", "bytedance", "bot builder", "plugins", "workflows", "no-code ai"],
+    "developerCertified": false
   },
   {
     "id": "groq",
@@ -117,7 +145,9 @@
     "category": "chat",
     "pricing": { "free": true, "paid": true },
     "website": "https://groq.com",
-    "playstore": ""
+    "playstore": "",
+    "tags": ["chat", "lpu", "ultra fast inference", "llama 3.3", "instant speed", "developer api"],
+    "developerCertified": true
   },
   {
     "id": "qwen-chat",
@@ -125,7 +155,9 @@
     "category": "chat",
     "pricing": { "free": true, "paid": false },
     "website": "https://chat.qwen.ai",
-    "playstore": ""
+    "playstore": "",
+    "tags": ["chat", "alibaba", "qwen 2.5", "multilingual", "coding", "chinese llm"],
+    "developerCertified": true
   },
   {
     "id": "kimi",
@@ -133,7 +165,9 @@
     "category": "chat",
     "pricing": { "free": true, "paid": true },
     "website": "https://kimi.moonshot.cn",
-    "playstore": ""
+    "playstore": "",
+    "tags": ["chat", "moonshot ai", "long context", "2m tokens", "document reader", "pdf summary"],
+    "developerCertified": false
   },
   {
     "id": "youcom",
@@ -141,7 +175,9 @@
     "category": "chat",
     "pricing": { "free": true, "paid": true },
     "website": "https://you.com",
-    "playstore": ""
+    "playstore": "",
+    "tags": ["chat", "ai search", "citations", "mode search", "writing assistant"],
+    "developerCertified": false
   },
   {
     "id": "phind",
@@ -149,7 +185,9 @@
     "category": "chat",
     "pricing": { "free": true, "paid": true },
     "website": "https://phind.com",
-    "playstore": ""
+    "playstore": "",
+    "tags": ["chat", "developer search", "coding help", "documentation", "debug code", "tech search"],
+    "developerCertified": true
   },
   {
     "id": "notebooklm",
@@ -157,7 +195,9 @@
     "category": "chat",
     "pricing": { "free": true, "paid": true },
     "website": "https://notebooklm.google.com",
-    "playstore": "https://play.google.com/store/apps/details?id=com.google.android.apps.notebooklm"
+    "playstore": "https://play.google.com/store/apps/details?id=com.google.android.apps.notebooklm",
+    "tags": ["chat", "google", "podcast generation", "audio overview", "note taking", "pdf synthesis", "educate"],
+    "developerCertified": true
   },
   {
     "id": "duckduckgo-ai",
@@ -165,7 +205,9 @@
     "category": "chat",
     "pricing": { "free": true, "paid": false },
     "website": "https://duckduckgo.com/aichat",
-    "playstore": "https://play.google.com/store/apps/details?id=com.duckduckgo.mobile.android"
+    "playstore": "https://play.google.com/store/apps/details?id=com.duckduckgo.mobile.android",
+    "tags": ["chat", "privacy chat", "anonymous", "free llms", "no tracking"],
+    "developerCertified": false
   },
   {
     "id": "venice-ai",
@@ -173,6 +215,8 @@
     "category": "chat",
     "pricing": { "free": true, "paid": true },
     "website": "https://venice.ai",
-    "playstore": ""
+    "playstore": "",
+    "tags": ["chat", "private ai", "uncensored", "crypto", "no logs"],
+    "developerCertified": false
   }
 ]

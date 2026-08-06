@@ -879,7 +879,54 @@ a {
 }
 
 .badge.free { color: #3fb950; border-color: #238636; }
-.badge.paid { color: #d29922; border-color: #9e6a03; }
+.badge.certified {
+  color: #107c41;
+  background: rgba(16, 124, 65, 0.12);
+  border: 1px solid rgba(16, 124, 65, 0.3);
+  font: 700 11px Manrope, sans-serif;
+  padding: 3px 8px;
+  border-radius: 999px;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.badge.certified.large-badge {
+  font-size: 12px;
+  padding: 4px 10px;
+}
+
+.name-certified-wrap {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.card-tags {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+  margin: 4px 0 6px;
+}
+
+.tag-chip {
+  font-size: 11px;
+  color: var(--muted);
+  background: var(--soft);
+  border: 1px solid var(--line);
+  padding: 2px 8px;
+  border-radius: 6px;
+  text-decoration: none;
+  font-family: 'JetBrains Mono', monospace;
+  transition: all 0.2s ease;
+}
+
+.tag-chip:hover {
+  color: var(--ink);
+  border-color: var(--green);
+  background: var(--paper);
+}.badge.paid { color: #d29922; border-color: #9e6a03; }
 .badge.freemium { color: var(--green); border-color: var(--green); }
 
 .rating {

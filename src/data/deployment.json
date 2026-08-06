@@ -1,35 +1,23 @@
 [
   {
-    "id": "vercel-deploy",
-    "name": "Vercel",
-    "category": "deployment",
-    "pricing": { "free": true, "paid": true },
-    "website": "https://vercel.com",
-    "playstore": ""
-  },
-  {
-    "id": "render-deploy",
+    "id": "render",
     "name": "Render",
     "category": "deployment",
     "pricing": { "free": true, "paid": true },
     "website": "https://render.com",
-    "playstore": ""
+    "playstore": "",
+    "tags": ["deployment", "cloud hosting", "web service", "postgres", "docker", "heroku alternative", "developer tool"],
+    "developerCertified": true
   },
   {
-    "id": "netlify-deploy",
-    "name": "Netlify",
-    "category": "deployment",
-    "pricing": { "free": true, "paid": true },
-    "website": "https://www.netlify.com",
-    "playstore": ""
-  },
-  {
-    "id": "railway-deploy",
+    "id": "railway",
     "name": "Railway",
     "category": "deployment",
     "pricing": { "free": true, "paid": true },
     "website": "https://railway.app",
-    "playstore": ""
+    "playstore": "",
+    "tags": ["deployment", "cloud platform", "infrastructure", "monorepo", "fast deploy", "developer tool"],
+    "developerCertified": true
   },
   {
     "id": "fly-io",
@@ -37,30 +25,28 @@
     "category": "deployment",
     "pricing": { "free": true, "paid": true },
     "website": "https://fly.io",
-    "playstore": ""
+    "playstore": "",
+    "tags": ["deployment", "edge compute", "docker containers", "global microservices", "developer tool"],
+    "developerCertified": true
   },
   {
-    "id": "cloudflare-pages",
-    "name": "Cloudflare Pages",
+    "id": "digitalocean",
+    "name": "DigitalOcean",
     "category": "deployment",
     "pricing": { "free": true, "paid": true },
-    "website": "https://pages.cloudflare.com",
-    "playstore": ""
+    "website": "https://www.digitalocean.com",
+    "playstore": "",
+    "tags": ["deployment", "droplets", "app platform", "vps", "cloud compute", "developer tool"],
+    "developerCertified": true
   },
   {
-    "id": "aws-amplify",
-    "name": "AWS Amplify",
+    "id": "herokuboy",
+    "name": "Heroku",
     "category": "deployment",
-    "pricing": { "free": true, "paid": true },
-    "website": "https://aws.amazon.com/amplify",
-    "playstore": ""
-  },
-  {
-    "id": "koyeb",
-    "name": "Koyeb",
-    "category": "deployment",
-    "pricing": { "free": true, "paid": true },
-    "website": "https://www.koyeb.com",
-    "playstore": ""
+    "pricing": { "free": false, "paid": true },
+    "website": "https://www.heroku.com",
+    "playstore": "",
+    "tags": ["deployment", "paas", "git push deploy", "web apps", "dynos", "developer tool"],
+    "developerCertified": false
   }
 ]

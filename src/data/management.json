@@ -1,10 +1,42 @@
 [
-  { "id": "trello", "name": "Trello", "category": "management", "pricing": { "free": true, "paid": true }, "website": "https://trello.com", "playstore": "https://play.google.com/store/apps/details?id=com.trello" },
-  { "id": "asana", "name": "Asana", "category": "management", "pricing": { "free": true, "paid": true }, "website": "https://asana.com", "playstore": "https://play.google.com/store/apps/details?id=com.asana.app" },
-  { "id": "linear", "name": "Linear", "category": "management", "pricing": { "free": true, "paid": true }, "website": "https://linear.app", "playstore": "" },
-  { "id": "jira", "name": "Jira", "category": "management", "pricing": { "free": true, "paid": true }, "website": "https://www.atlassian.com/software/jira", "playstore": "https://play.google.com/store/apps/details?id=com.atlassian.android.jira.core" },
-  { "id": "todoist", "name": "Todoist", "category": "management", "pricing": { "free": true, "paid": true }, "website": "https://todoist.com", "playstore": "https://play.google.com/store/apps/details?id=com.todoist" },
-  { "id": "monday", "name": "Monday.com", "category": "management", "pricing": { "free": true, "paid": true }, "website": "https://monday.com", "playstore": "https://play.google.com/store/apps/details?id=com.monday.monday" },
-  { "id": "height", "name": "Height", "category": "management", "pricing": { "free": true, "paid": true }, "website": "https://height.app", "playstore": "" },
-  { "id": "basecamp", "name": "Basecamp", "category": "management", "pricing": { "free": true, "paid": true }, "website": "https://basecamp.com", "playstore": "https://play.google.com/store/apps/details?id=com.basecamp.bc3" }
+  {
+    "id": "jira",
+    "name": "Jira",
+    "category": "management",
+    "pricing": { "free": true, "paid": true },
+    "website": "https://www.atlassian.com/software/jira",
+    "playstore": "https://play.google.com/store/apps/details?id=com.atlassian.android.jira.core",
+    "tags": ["management", "agile", "scrum", "kanban", "issue tracker", "atlassian", "developer tool"],
+    "developerCertified": true
+  },
+  {
+    "id": "linear",
+    "name": "Linear",
+    "category": "management",
+    "pricing": { "free": true, "paid": true },
+    "website": "https://linear.app",
+    "playstore": "",
+    "tags": ["management", "issue tracking", "keyboard first", "high speed", "software teams", "developer tool"],
+    "developerCertified": true
+  },
+  {
+    "id": "trello",
+    "name": "Trello",
+    "category": "management",
+    "pricing": { "free": true, "paid": true },
+    "website": "https://trello.com",
+    "playstore": "https://play.google.com/store/apps/details?id=com.trello",
+    "tags": ["management", "kanban board", "task management", "atlassian", "simple workflow"],
+    "developerCertified": false
+  },
+  {
+    "id": "asana",
+    "name": "Asana",
+    "category": "management",
+    "pricing": { "free": true, "paid": true },
+    "website": "https://asana.com",
+    "playstore": "https://play.google.com/store/apps/details?id=com.asana.app",
+    "tags": ["management", "project management", "gantt chart", "task tracking", "team execution"],
+    "developerCertified": false
+  }
 ]

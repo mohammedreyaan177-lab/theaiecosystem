@@ -22,12 +22,22 @@ function LinkedinIcon({ size = 18 }: { size?: number }) {
   );
 }
 
-type RawTool = { id: string; name: string; category: string; pricing: { free: boolean; paid: boolean }; website: string; playstore?: string; rating?: number; openSource?: boolean; apiAvailable?: boolean }
-type Tool = RawTool & { company: string; pricingLabel: 'Free' | 'Paid' | 'Freemium'; description: string; rating: number; openSource: boolean; apiAvailable: boolean; playstore: string }
-const modules = import.meta.glob('./data/*.json', { eager: true }) as Record<string, { default: RawTool[] }>
-const categoryCopy: Record<string, string> = { chat: 'Conversational AI and assistants', image: 'Image generation and creative tools', coding: 'Developer tools and code assistants', video: 'Video generation and editing', writing: 'Writing and content tools', automation: 'Workflow automation and agents', productivity: 'Work, notes, and organization', research: 'Research and information tools', voice: 'Voice generation and audio tools', music: 'Music generation and composition', devtools: 'Essential developer tools and platforms', design: 'Design and creative platforms', collaboration: 'Team communication and collaboration', management: 'Project and task management', cloud: 'Cloud infrastructure and hosting', learning: 'Learning and education platforms' }
+type RawTool = { id: string; name: string; category: string; pricing: { free: boolean; paid: boolean }; website: string; playstore?: string; rating?: number; openSource?: boolean; apiAvailable?: boolean; tags?: string[]; developerCertified?: boolean }
+type Tool = RawTool & { company: string; pricingLabel: 'Free' | 'Paid' | 'Freemium'; description: string; rating: number; openSource: boolean; apiAvailable: boolean; playstore: string; tags: string[]; developerCertified: boolean }
+const modules = import.meta.glob(['./data/*.json', '!./data/all_models.json'], { eager: true }) as Record<string, { default: RawTool[] }>
+const categoryCopy: Record<string, string> = { chat: 'Conversational AI and assistants', models: 'Open-source LLMs, code models, and frontier weights', image: 'Image generation and creative tools', coding: 'Developer tools and code assistants', video: 'Video generation and editing', writing: 'Writing and content tools', automation: 'Workflow automation and agents', productivity: 'Work, notes, and organization', research: 'Research and information tools', voice: 'Voice generation and audio tools', music: 'Music generation and composition', devtools: 'Essential developer tools and platforms', design: 'Design and creative platforms', collaboration: 'Team communication and collaboration', management: 'Project and task management', cloud: 'Cloud infrastructure and hosting', learning: 'Learning and education platforms' }
 const title = (value: string) => value.replace(/[-_]/g, ' ').replace(/\b\w/g, c => c.toUpperCase())
 const toolDescriptions: Record<string, string> = {
+  'opencode': 'Open-source AI coding model designed for autonomous code execution and generation.',
+  'nous-hermes': 'State-of-the-art open-weights reasoning model suite developed by Nous Research.',
+  'nvidia-nemotron': 'NVIDIA enterprise open-weights LLM family optimized for GPU-accelerated inference.',
+  'nvidia-cosmos': 'NVIDIA world foundation AI models for physical AI, robotics, and synthetic simulation.',
+  'qwen-coder': 'Alibaba Cloud open-source coding model series surpassing proprietary benchmarks in code tasks.',
+  'deepseek-r1-model': 'Open-weights deep reasoning AI model with verified chain-of-thought architecture.',
+  'llama-3-3': 'Meta AI 70B open-weights model delivering GPT-4 level intelligence with open access.',
+  'codestral': 'Mistral AI open code model built specifically for fill-in-the-middle code completion.',
+  'phi-4': 'Microsoft 14B open small language model trained on high-quality synthetic reasoning data.',
+  'yi-lightning': 'High-speed open multimodal model series developed by 01.AI.',
   'chatgpt': 'Frontier AI conversational assistant powered by OpenAI GPT-4o & o3 reasoning models.',
   'claude': 'Advanced reasoning AI assistant by Anthropic with 200k context & hybrid thinking architecture.',
   'gemini': 'Multimodal AI model suite by Google DeepMind for text, vision, audio & code intelligence.',
@@ -62,13 +72,38 @@ const toolDescriptions: Record<string, string> = {
   'vercel': 'Frontend cloud platform for seamless deployment of Next.js and web applications.'
 };
 
-const allTools: Tool[] = Object.values(modules).flatMap(m => m.default || []).reduce<RawTool[]>((acc, tool) => { const index = acc.findIndex(x => x.id === tool.id); if (index < 0) return [...acc, tool]; const current = acc[index]; const merged = { ...current } as Record<string, unknown>; Object.entries(tool).forEach(([k, v]) => { if (v !== '' && v !== undefined && v !== null) merged[k] = v }); return acc.map((x,i) => i === index ? merged as RawTool : x) }, []).map(tool => {
+const allTools: Tool[] = Object.values(modules).flatMap(m => m.default || []).reduce<RawTool[]>((acc, tool) => { 
+  const index = acc.findIndex(x => x.id === tool.id); 
+  if (index < 0) return [...acc, tool]; 
+  const current = acc[index]; 
+  const merged = { ...current } as Record<string, unknown>; 
+  Object.entries(tool).forEach(([k, v]) => { 
+    if (v !== '' && v !== undefined && v !== null) merged[k] = v 
+  }); 
+  return acc.map((x,i) => i === index ? merged as RawTool : x) 
+}, []).map(tool => {
   const host = tool.website ? new URL(tool.website).hostname.replace(/^www\./, '').split('.')[0] : ''
   const pricingLabel: Tool['pricingLabel'] = tool.pricing.free && tool.pricing.paid ? 'Freemium' : tool.pricing.free ? 'Free' : 'Paid'
   const customDesc = toolDescriptions[tool.id] || ((tool as any).description && (tool as any).description !== '' ? (tool as any).description : null);
   const description = customDesc || `Next-generation ${title(tool.category)} platform built for intelligent workflows, developer speed, and creative automation.`;
-  return { ...tool, company: host ? title(host) : 'Independent', pricingLabel, rating: tool.rating ?? 4.2, openSource: tool.openSource ?? false, apiAvailable: tool.apiAvailable ?? Boolean(tool.website), playstore: tool.playstore || '', description }
-}).sort((a,b) => a.name.localeCompare(b.name))
+  return { 
+    ...tool, 
+    company: host ? title(host) : 'Independent', 
+    pricingLabel, 
+    rating: tool.rating ?? 4.2, 
+    openSource: tool.openSource ?? false, 
+    apiAvailable: tool.apiAvailable ?? Boolean(tool.website), 
+    playstore: tool.playstore || '', 
+    tags: tool.tags || [tool.category, tool.name.toLowerCase()],
+    developerCertified: tool.developerCertified ?? false,
+    description 
+  }
+}).sort((a,b) => {
+  if (a.developerCertified !== b.developerCertified) {
+    return a.developerCertified ? -1 : 1;
+  }
+  return b.rating - a.rating || a.name.localeCompare(b.name);
+})
 const categories = [...new Set(allTools.map(t => t.category))].map(id => ({ id, name: title(id), count: allTools.filter(t => t.category === id).length, description: categoryCopy[id] || `Explore ${title(id)} AI tools` })).sort((a,b) => b.count-a.count)
 
 function getDynamicTime(hoursOffset: number): string {
@@ -228,28 +263,181 @@ function Maker() {
 }
 
 function useStored(key: string, fallback: string[] = []) { const [value, setValue] = useState<string[]>(() => { try { return JSON.parse(localStorage.getItem(key) || 'null') || fallback } catch { return fallback } }); useEffect(() => localStorage.setItem(key, JSON.stringify(value)), [key]); return [value, setValue] as const }
-function ToolLogo({ tool, large = false }: { tool: Tool; large?: boolean }) {
-  const [failed, setFailed] = useState(!tool.website);
+const brandIconMap: Record<string, string> = {
+  'opencode': 'https://cdn.simpleicons.org/huggingface',
+  'nous-hermes': 'https://cdn.simpleicons.org/python',
+  'nvidia-nemotron': 'https://cdn.simpleicons.org/nvidia',
+  'nvidia-cosmos': 'https://cdn.simpleicons.org/nvidia',
+  'qwen-coder': 'https://cdn.simpleicons.org/alibabacloud',
+  'deepseek-r1-model': 'https://cdn.simpleicons.org/deepseek',
+  'llama-3-3': 'https://cdn.simpleicons.org/meta',
+  'codestral': 'https://cdn.simpleicons.org/mistral',
+  'phi-4': 'https://cdn.simpleicons.org/microsoft',
+  'yi-lightning': 'https://cdn.simpleicons.org/huggingface',
+  'chatgpt': 'https://cdn.simpleicons.org/openai',
+  'claude': 'https://cdn.simpleicons.org/anthropic',
+  'gemini': 'https://cdn.simpleicons.org/googlegemini',
+  'grok': 'https://cdn.simpleicons.org/x',
+  'deepseek': 'https://cdn.simpleicons.org/deepseek',
+  'meta-ai': 'https://cdn.simpleicons.org/meta',
+  'le-chat': 'https://cdn.simpleicons.org/mistral',
+  'copilot': 'https://cdn.simpleicons.org/microsoft',
+  'perplexity': 'https://cdn.simpleicons.org/perplexity',
+  'character-ai': 'https://cdn.simpleicons.org/characterdotai',
+  'huggingchat': 'https://cdn.simpleicons.org/huggingface',
+  'poe': 'https://cdn.simpleicons.org/quora',
+  'groq': 'https://cdn.simpleicons.org/groq',
+  'notebooklm': 'https://cdn.simpleicons.org/google',
+  'phind': 'https://cdn.simpleicons.org/phind',
+  'cursor': 'https://cdn.simpleicons.org/cursor',
+  'windsurf': 'https://cdn.simpleicons.org/codeium',
+  'github-copilot': 'https://cdn.simpleicons.org/githubcopilot',
+  'codeium': 'https://cdn.simpleicons.org/codeium',
+  'continue': 'https://cdn.simpleicons.org/continue',
+  'replit-ai': 'https://cdn.simpleicons.org/replit',
+  'v0': 'https://cdn.simpleicons.org/vercel',
+  'bolt': 'https://cdn.simpleicons.org/stackblitz',
+  'lovable': 'https://cdn.simpleicons.org/lovable',
+  'tabnine': 'https://cdn.simpleicons.org/tabnine',
+  'amazon-q': 'https://cdn.simpleicons.org/amazonaws',
+  'supermaven': 'https://cdn.simpleicons.org/supermaven',
+  'vscode': 'https://cdn.simpleicons.org/visualstudiocode',
+  'github': 'https://cdn.simpleicons.org/github',
+  'docker': 'https://cdn.simpleicons.org/docker',
+  'postman': 'https://cdn.simpleicons.org/postman',
+  'vercel': 'https://cdn.simpleicons.org/vercel',
+  'netlify': 'https://cdn.simpleicons.org/netlify',
+  'gitlab': 'https://cdn.simpleicons.org/gitlab',
+  'insomnia': 'https://cdn.simpleicons.org/insomnia',
+  'npm': 'https://cdn.simpleicons.org/npm',
+  'stackoverflow': 'https://cdn.simpleicons.org/stackoverflow',
+  'n8n': 'https://cdn.simpleicons.org/n8n',
+  'zapier': 'https://cdn.simpleicons.org/zapier',
+  'make': 'https://cdn.simpleicons.org/make',
+  'crewai': 'https://cdn.simpleicons.org/python',
+  'langchain': 'https://cdn.simpleicons.org/langchain',
+  'langgraph': 'https://cdn.simpleicons.org/langchain',
+  'flowise': 'https://cdn.simpleicons.org/flowise',
+  'open-webui': 'https://cdn.simpleicons.org/openwebui',
+  'ollama': 'https://cdn.simpleicons.org/ollama',
+  'lm-studio': 'https://cdn.simpleicons.org/lmstudio',
+  'anythingllm': 'https://cdn.simpleicons.org/anythingllm',
+  'pipedream': 'https://cdn.simpleicons.org/pipedream',
+  'windmill': 'https://cdn.simpleicons.org/windmill',
+  'supabase': 'https://cdn.simpleicons.org/supabase',
+  'neon': 'https://cdn.simpleicons.org/neon',
+  'aws': 'https://cdn.simpleicons.org/amazonaws',
+  'google-cloud': 'https://cdn.simpleicons.org/googlecloud',
+  'cloudflare': 'https://cdn.simpleicons.org/cloudflare',
+  'pinecone': 'https://cdn.simpleicons.org/pinecone',
+  'qdrant': 'https://cdn.simpleicons.org/qdrant',
+  'chromadb': 'https://cdn.simpleicons.org/chroma',
+  'render': 'https://cdn.simpleicons.org/render',
+  'railway': 'https://cdn.simpleicons.org/railway',
+  'fly-io': 'https://cdn.simpleicons.org/flydotio',
+  'digitalocean': 'https://cdn.simpleicons.org/digitalocean',
+  'herokuboy': 'https://cdn.simpleicons.org/heroku',
+  'figma': 'https://cdn.simpleicons.org/figma',
+  'canva': 'https://cdn.simpleicons.org/canva',
+  'framer': 'https://cdn.simpleicons.org/framer',
+  'webflow': 'https://cdn.simpleicons.org/webflow',
+  'rive': 'https://cdn.simpleicons.org/rive',
+  'midjourney': 'https://cdn.simpleicons.org/midjourney',
+  'dall-e-3': 'https://cdn.simpleicons.org/openai',
+  'flux': 'https://cdn.simpleicons.org/blackforestlabs',
+  'stable-diffusion': 'https://cdn.simpleicons.org/stabilityai',
+  'ideogram': 'https://cdn.simpleicons.org/ideogram',
+  'recraft': 'https://cdn.simpleicons.org/recraft',
+  'leonardo-ai': 'https://cdn.simpleicons.org/leonardoai',
+  'coursera': 'https://cdn.simpleicons.org/coursera',
+  'deeplearning-ai': 'https://cdn.simpleicons.org/deeplearningai',
+  'kaggle': 'https://cdn.simpleicons.org/kaggle',
+  'udemy': 'https://cdn.simpleicons.org/udemy',
+  'jira': 'https://cdn.simpleicons.org/jira',
+  'linear': 'https://cdn.simpleicons.org/linear',
+  'trello': 'https://cdn.simpleicons.org/trello',
+  'asana': 'https://cdn.simpleicons.org/asana',
+  'suno': 'https://cdn.simpleicons.org/suno',
+  'udio': 'https://cdn.simpleicons.org/udio',
+  'notion-ai': 'https://cdn.simpleicons.org/notion',
+  'notion': 'https://cdn.simpleicons.org/notion',
+  'coda-ai': 'https://cdn.simpleicons.org/coda',
+  'clickup-ai': 'https://cdn.simpleicons.org/clickup',
+  'gamma': 'https://cdn.simpleicons.org/gamma',
+  'otterai': 'https://cdn.simpleicons.org/otterai',
+  'firefliesai': 'https://cdn.simpleicons.org/firefliesai',
+  'descript': 'https://cdn.simpleicons.org/descript',
+  'capcut-ai': 'https://cdn.simpleicons.org/capcut',
+  'riverside': 'https://cdn.simpleicons.org/riversidefm',
+  'elicit': 'https://cdn.simpleicons.org/elicit',
+  'consensus': 'https://cdn.simpleicons.org/consensus',
+  'runway': 'https://cdn.simpleicons.org/runway',
+  'pika': 'https://cdn.simpleicons.org/pika',
+  'heygen': 'https://cdn.simpleicons.org/heygen',
+  'synthesia': 'https://cdn.simpleicons.org/synthesia',
+  'kling-ai': 'https://cdn.simpleicons.org/klingai',
+  'elevenlabs': 'https://cdn.simpleicons.org/elevenlabs',
+  'playht': 'https://cdn.simpleicons.org/playht',
+  'speechify': 'https://cdn.simpleicons.org/speechify',
+  'jasper': 'https://cdn.simpleicons.org/jasper',
+  'copyai': 'https://cdn.simpleicons.org/copyai',
+  'writesonic': 'https://cdn.simpleicons.org/writesonic',
+  'grammarly': 'https://cdn.simpleicons.org/grammarly',
+  'quillbot': 'https://cdn.simpleicons.org/quillbot',
+  'deepl': 'https://cdn.simpleicons.org/deepl',
+  'slack': 'https://cdn.simpleicons.org/slack',
+  'discord': 'https://cdn.simpleicons.org/discord',
+  'miro': 'https://cdn.simpleicons.org/miro',
+  'vps-hetzner': 'https://cdn.simpleicons.org/hetzner',
+  'vps-linode': 'https://cdn.simpleicons.org/linode',
+  'vps-vultr': 'https://cdn.simpleicons.org/vultr'
+};
 
-  useEffect(() => {
-    setFailed(!tool.website);
+function ToolLogo({ tool, large = false }: { tool: Tool; large?: boolean }) {
+  const [srcIndex, setSrcIndex] = useState(0);
+
+  const domain = useMemo(() => {
+    if (!tool.website) return '';
+    try {
+      return new URL(tool.website).hostname.replace(/^www\./, '');
+    } catch {
+      return '';
+    }
   }, [tool.website]);
 
-  const hostname = tool.website ? new URL(tool.website).hostname : '';
+  const sources = useMemo(() => {
+    const list: string[] = [];
+    if (brandIconMap[tool.id]) {
+      list.push(brandIconMap[tool.id]);
+    }
+    if (domain) {
+      list.push(`https://logo.clearbit.com/${domain}`);
+      list.push(`https://www.google.com/s2/favicons?domain=${domain}&sz=128`);
+      list.push(`https://icon.horse/icon/${domain}`);
+    }
+    return list;
+  }, [tool.id, domain]);
+
+  useEffect(() => {
+    setSrcIndex(0);
+  }, [tool.id, tool.website]);
+
+  const currentSrc = sources[srcIndex];
 
   return (
     <div className={`tool-logo ${large ? 'large' : ''}`}>
-      {!failed && hostname ? (
+      {currentSrc && srcIndex < sources.length ? (
         <img
-          src={`https://www.google.com/s2/favicons?domain=${hostname}&sz=128`}
+          src={currentSrc}
           alt={`${tool.name} logo`}
-          onError={() => setFailed(true)}
+          onError={() => setSrcIndex(prev => prev + 1)}
           loading="lazy"
         />
-      ) : null}
-      <span className={failed || !hostname ? 'fallback-show' : 'fallback'}>
-        {tool.name.slice(0, 2).toUpperCase()}
-      </span>
+      ) : (
+        <span className="fallback-show">
+          {tool.name.slice(0, 2).toUpperCase()}
+        </span>
+      )}
     </div>
   );
 }
@@ -271,9 +459,23 @@ function ToolCard({ tool, favorites, toggleFavorite, compare, toggleCompare }: {
           </button>
         </div>
       </div>
-      <Link to={`/tools/${tool.id}`} className="tool-name">{tool.name}</Link>
+      <div className="name-certified-wrap">
+        <Link to={`/tools/${tool.id}`} className="tool-name">{tool.name}</Link>
+        {tool.developerCertified && (
+          <span className="badge certified" title="Verified Tech Community Pick">
+            <Check size={11} /> Dev Certified
+          </span>
+        )}
+      </div>
       <p className="company">{tool.company} · <span>{title(tool.category)}</span></p>
       <p className="description">{tool.description}</p>
+      {tool.tags && tool.tags.length > 0 && (
+        <div className="card-tags">
+          {tool.tags.slice(0, 4).map(tag => (
+            <span key={tag} className="tag-chip">{tag}</span>
+          ))}
+        </div>
+      )}
       <div className="card-footer">
         <Pricing tool={tool}/>
         <span className="rating"><Star size={14} fill="currentColor"/> {tool.rating.toFixed(1)}</span>
@@ -285,11 +487,11 @@ function ToolCard({ tool, favorites, toggleFavorite, compare, toggleCompare }: {
 }
 
 const trendingTech = [
-  { name: 'DeepSeek R1', tag: 'Reasoning', query: 'deepseek' },
-  { name: 'Next.js 15', tag: 'Framework', query: 'vercel' },
+  { name: 'NVIDIA Nemotron', tag: 'Open Model', query: 'nvidia' },
+  { name: 'Nous Hermes 3', tag: 'Reasoning', query: 'hermes' },
+  { name: 'OpenCode', tag: 'AI Coding', query: 'opencode' },
+  { name: 'DeepSeek R1', tag: 'Chain-of-Thought', query: 'deepseek' },
   { name: 'Supabase & Neon', tag: 'Serverless DB', query: 'cloud' },
-  { name: 'Vercel & Render', tag: 'Deployment', query: 'deployment' },
-  { name: 'Hetzner VPS', tag: 'Cloud Servers', query: 'vps' },
   { name: 'Claude 3.7', tag: 'AI Coding', query: 'claude' }
 ];
 
@@ -315,7 +517,7 @@ function Dashboard(props: PageProps) { const trend = [...allTools].sort((a,b) =>
 type PageProps = { favorites:string[]; toggleFavorite:(id:string)=>void; compare:string[]; toggleCompare:(id:string)=>void }
 
 function SectionHead({ title, action, to }: { title:string; action?:string; to?:string }) { return <div className="section-head"><h2>{title}</h2>{action && to && <Link to={to}>{action} <ChevronRight size={15}/></Link>}</div> }
-function Browse(props: PageProps) { const location = useLocation(); const params = new URLSearchParams(location.search); const [query, setQuery] = useState(params.get('q') || ''); const [category, setCategory] = useState(params.get('category') || ''); const [pricing, setPricing] = useState(params.get('pricing') || ''); const [freeOnly, setFreeOnly] = useState(params.get('free') === 'true'); const [openOnly, setOpenOnly] = useState(params.get('open') === 'true'); const [apiOnly, setApiOnly] = useState(false); const [sort, setSort] = useState('rating'); useEffect(() => { const next = new URLSearchParams(location.search); setQuery(next.get('q') || ''); setCategory(next.get('category') || ''); setPricing(next.get('pricing') || ''); setFreeOnly(next.get('free') === 'true') }, [location.search]); const list = useMemo(() => allTools.filter(t => (!category || t.category === category) && (!pricing || t.pricingLabel === pricing) && (!freeOnly || t.pricing.free) && (!openOnly || t.openSource) && (!apiOnly || t.apiAvailable) && (!query || `${t.name} ${t.company} ${t.category} ${t.description}`.toLowerCase().includes(query.toLowerCase()))).sort((a,b) => sort === 'name' ? a.name.localeCompare(b.name) : sort === 'new' ? b.id.localeCompare(a.id) : b.rating - a.rating), [query,category,pricing,freeOnly,openOnly,apiOnly,sort]); const reset = () => { setQuery(''); setCategory(''); setPricing(''); setFreeOnly(false); setOpenOnly(false); setApiOnly(false); setSort('rating') }; return <><div className="page-heading compact"><div><p className="eyebrow">DISCOVER</p><h1>Explore AI tools</h1><p>Find the right tool by capability, price, openness, API access, and community rating.</p></div></div><div className="filterbar"><div className="search-input"><Search size={17}/><input value={query} onChange={e=>setQuery(e.target.value)} placeholder="Search 100+ AI tools, models, dev tools, or capabilities…"/>{query && <button type="button" className="search-clear-btn" onClick={()=>setQuery('')} aria-label="Clear search"><X size={15}/></button>}</div><select value={category} onChange={e=>setCategory(e.target.value)}><option value="">All categories</option>{categories.map(c=><option key={c.id} value={c.id}>{c.name}</option>)}</select><select value={pricing} onChange={e=>setPricing(e.target.value)}><option value="">Any pricing</option><option>Free</option><option>Freemium</option><option>Paid</option></select><select value={sort} onChange={e=>setSort(e.target.value)}><option value="rating">Top rated</option><option value="name">Name A–Z</option><option value="new">Recently added</option></select></div><div className="filter-chips"><button className={freeOnly?'selected':''} onClick={()=>setFreeOnly(!freeOnly)}><Check size={14}/> Free access</button><button className={openOnly?'selected':''} onClick={()=>setOpenOnly(!openOnly)}><Check size={14}/> Open source</button><button className={apiOnly?'selected':''} onClick={()=>setApiOnly(!apiOnly)}><Check size={14}/> API available</button><button className="clear" onClick={reset}>Clear filters</button></div><p className="results">{list.length} matching tools · sorted by {sort === 'rating' ? 'rating' : sort === 'name' ? 'name' : 'newness'}</p><div className="tool-grid">{list.map(t => <ToolCard key={t.id} tool={t} {...props}/>)}</div>{!list.length && <Empty title="No tools found" text="Try removing a filter or searching for a broader term."/>}</> }
+function Browse(props: PageProps) { const location = useLocation(); const params = new URLSearchParams(location.search); const [query, setQuery] = useState(params.get('q') || ''); const [category, setCategory] = useState(params.get('category') || ''); const [pricing, setPricing] = useState(params.get('pricing') || ''); const [freeOnly, setFreeOnly] = useState(params.get('free') === 'true'); const [openOnly, setOpenOnly] = useState(params.get('open') === 'true'); const [apiOnly, setApiOnly] = useState(false); const [sort, setSort] = useState('rating'); useEffect(() => { const next = new URLSearchParams(location.search); setQuery(next.get('q') || ''); setCategory(next.get('category') || ''); setPricing(next.get('pricing') || ''); setFreeOnly(next.get('free') === 'true') }, [location.search]); const list = useMemo(() => allTools.filter(t => (!category || t.category === category) && (!pricing || t.pricingLabel === pricing) && (!freeOnly || t.pricing.free) && (!openOnly || t.openSource) && (!apiOnly || t.apiAvailable) && (!query || `${t.name} ${t.company} ${t.category} ${t.description} ${t.tags ? t.tags.join(' ') : ''}`.toLowerCase().includes(query.toLowerCase()))).sort((a,b) => sort === 'name' ? a.name.localeCompare(b.name) : sort === 'new' ? b.id.localeCompare(a.id) : b.rating - a.rating), [query,category,pricing,freeOnly,openOnly,apiOnly,sort]); const reset = () => { setQuery(''); setCategory(''); setPricing(''); setFreeOnly(false); setOpenOnly(false); setApiOnly(false); setSort('rating') }; return <><div className="page-heading compact"><div><p className="eyebrow">DISCOVER</p><h1>Explore AI tools</h1><p>Find the right tool by capability, price, openness, API access, and community rating.</p></div></div><div className="filterbar"><div className="search-input"><Search size={17}/><input value={query} onChange={e=>setQuery(e.target.value)} placeholder="Search 100+ AI tools, models, dev tools, or capabilities…"/>{query && <button type="button" className="search-clear-btn" onClick={()=>setQuery('')} aria-label="Clear search"><X size={15}/></button>}</div><select value={category} onChange={e=>setCategory(e.target.value)}><option value="">All categories</option>{categories.map(c=><option key={c.id} value={c.id}>{c.name}</option>)}</select><select value={pricing} onChange={e=>setPricing(e.target.value)}><option value="">Any pricing</option><option>Free</option><option>Freemium</option><option>Paid</option></select><select value={sort} onChange={e=>setSort(e.target.value)}><option value="rating">Top rated</option><option value="name">Name A–Z</option><option value="new">Recently added</option></select></div><div className="filter-chips"><button className={freeOnly?'selected':''} onClick={()=>setFreeOnly(!freeOnly)}><Check size={14}/> Free access</button><button className={openOnly?'selected':''} onClick={()=>setOpenOnly(!openOnly)}><Check size={14}/> Open source</button><button className={apiOnly?'selected':''} onClick={()=>setApiOnly(!apiOnly)}><Check size={14}/> API available</button><button className="clear" onClick={reset}>Clear filters</button></div><p className="results">{list.length} matching tools · sorted by {sort === 'rating' ? 'rating' : sort === 'name' ? 'name' : 'newness'}</p><div className="tool-grid">{list.map(t => <ToolCard key={t.id} tool={t} {...props}/>)}</div>{!list.length && <Empty title="No tools found" text="Try removing a filter or searching for a broader term."/>}</> }
 function Categories() { return <><div className="page-heading compact"><div><p className="eyebrow">COLLECTIONS</p><h1>Browse topics</h1><p>Explore AI tools organized by their primary capability.</p></div></div><div className="topics">{categories.map(c=><Link to={`/browse?category=${c.id}`} className="topic" key={c.id}><FolderGit2 size={21}/><div><h2>{c.name}</h2><p>{c.description}</p><small>{c.count} AI tools</small></div><ChevronRight size={18}/></Link>)}</div></> }
 function getToolBestFor(tool: Tool) {
   const cat = tool.category.toLowerCase();
@@ -430,7 +632,14 @@ function Detail(props: PageProps) {
         <ToolLogo tool={tool} large />
         <div>
           <p className="eyebrow">{title(tool.category)} / TOOL</p>
-          <h1>{tool.name}</h1>
+          <div className="name-certified-wrap">
+            <h1>{tool.name}</h1>
+            {tool.developerCertified && (
+              <span className="badge certified large-badge" title="Verified Tech Community Pick">
+                <Check size={13} /> Dev Certified
+              </span>
+            )}
+          </div>
           <p>{tool.company} · {tool.description}</p>
         </div>
         <div className="repo-actions">
@@ -476,11 +685,25 @@ function Detail(props: PageProps) {
               <p>{tool.description} Explore availability, pricing models, official platform access, and community alternatives below.</p>
               
               <div className="quick-tags">
+                {tool.developerCertified && <span className="badge certified"><Check size={12} /> Dev Certified</span>}
                 <span className="badge free"><Check size={12} /> {tool.pricingLabel}</span>
                 {tool.apiAvailable && <span className="badge freemium"><Zap size={12} /> API Available</span>}
                 {tool.openSource && <span className="badge paid"><FolderGit2 size={12} /> Open Source</span>}
                 <span className="rating-badge"><Star size={13} fill="currentColor" /> {tool.rating.toFixed(1)} Community Rating</span>
               </div>
+
+              {tool.tags && tool.tags.length > 0 && (
+                <div className="detail-tags-section">
+                  <h3>Tags & Keywords</h3>
+                  <div className="card-tags">
+                    {tool.tags.map(tag => (
+                      <Link key={tag} to={`/browse?q=${encodeURIComponent(tag)}`} className="tag-chip">
+                        #{tag}
+                      </Link>
+                    ))}
+                  </div>
+                </div>
+              )}
 
               <h3>Specifications & Details</h3>
               <dl>
@@ -667,6 +890,7 @@ function Compare(props: PageProps) {
           </div>
 
           {[
+            ['Developer Certified', (t: Tool) => t.developerCertified ? <span className="cell-check"><Check size={15} /> Dev Certified</span> : <span className="cell-cross">— Standard</span>],
             ['Rating & Score', (t: Tool) => <span className="rating"><Star size={14} fill="currentColor" /> {t.rating.toFixed(1)} / 5.0</span>],
             ['Pricing Model', (t: Tool) => <Pricing tool={t} />],
             ['Company / Host', (t: Tool) => <b>{t.company}</b>],
@@ -763,19 +987,15 @@ function Intro({ onClose }: { onClose: () => void }) {
   );
 }
 
-type Theme = 'maroon' | 'sunlight' | 'noir' | 'violet'
-function ThemePicker({ theme, setTheme }: { theme: Theme; setTheme: (theme: Theme) => void }) { const [open, setOpen] = useState(false); const ref = React.useRef<HTMLDivElement>(null); useEffect(() => { const handleClick = (e: MouseEvent) => { if (ref.current && !ref.current.contains(e.target as Node)) setOpen(false) }; document.addEventListener('mousedown', handleClick); return () => document.removeEventListener('mousedown', handleClick) }, []); const themes: {id:Theme; name:string; note:string}[] = [{id:'maroon',name:'Maroon',note:'Maroon + white'},{id:'sunlight',name:'Sunlight',note:'White + yellow'},{id:'noir',name:'Noir',note:'Black + yellow'},{id:'violet',name:'Midnight',note:'Ink + violet'}]; return <div className="theme-picker" ref={ref}><button className="theme-trigger icon" onClick={() => setOpen(!open)} aria-label="Change color theme"><Palette size={17}/></button>{open && <div className="theme-picker-menu">{themes.map(option => <button key={option.id} className={theme === option.id ? 'selected' : ''} onClick={() => { setTheme(option.id); setOpen(false) }}><span className={`theme-swatch ${option.id}`}/><div><b>{option.name}</b><small>{option.note}</small></div>{theme === option.id && <Check size={14}/>}</button>)}</div>}</div> }
-
 function Shell() { 
   const [favorites,toggleFavs] = useStored('ai-favorites'); 
   const [compare,setCompare] = useStored('ai-compare'); 
   const [showIntro, setShowIntro] = useState(() => !sessionStorage.getItem('ai-intro-v3-played'));
-  const [theme,setTheme] = useState<Theme>(() => { const saved = localStorage.getItem('ai-theme'); return saved === 'noir' || saved === 'violet' || saved === 'sunlight' || saved === 'maroon' ? saved : 'maroon' }); 
 
   const [command,setCommand]=useState(false); 
   const [cmdQuery,setCmdQuery]=useState('');
   const navigate=useNavigate(); 
-  useEffect(()=>{ document.documentElement.dataset.theme= theme === 'sunlight' ? 'light' : 'dark'; document.documentElement.dataset.accent=theme; localStorage.setItem('ai-theme',theme) },[theme]); 
+  useEffect(()=>{ document.documentElement.dataset.theme='light'; document.documentElement.dataset.accent='sunlight'; localStorage.setItem('ai-theme','sunlight') },[]); 
   useEffect(()=>{ const fn=(e:KeyboardEvent)=>{if((e.ctrlKey||e.metaKey)&&e.key.toLowerCase()==='k'){e.preventDefault();setCommand(true)}}; addEventListener('keydown',fn);return()=>removeEventListener('keydown',fn)},[]); 
   const toggleFavorite=(id:string)=>toggleFavs(x=>x.includes(id)?x.filter(i=>i!==id):[id,...x]); 
   const toggleCompare=(id:string)=>setCompare(x=>x.includes(id)?x.filter(i=>i!==id):x.length<4?[...x,id]:x); 
@@ -792,7 +1012,7 @@ function Shell() {
   const cmdMatches = useMemo(() => {
     if (!cmdQuery.trim()) return [];
     const q = cmdQuery.toLowerCase().trim();
-    return allTools.filter(t => `${t.name} ${t.category} ${t.company} ${t.description}`.toLowerCase().includes(q)).slice(0, 5);
+    return allTools.filter(t => `${t.name} ${t.category} ${t.company} ${t.description} ${t.tags ? t.tags.join(' ') : ''}`.toLowerCase().includes(q)).slice(0, 5);
   }, [cmdQuery]);
 
   const handleCloseIntro = () => {
@@ -817,7 +1037,6 @@ function Shell() {
         </nav>
         <button className="global-search" onClick={()=>setCommand(true)} aria-label="Search directory"><Search size={16}/><span>Search 100+ AI tools...</span><kbd><Command size={11}/>K</kbd></button>
         <div className="top-actions">
-          <ThemePicker theme={theme} setTheme={setTheme}/>
           <button className="avatar" title="Meet Mohammed Reyaan (Maker)" onClick={()=>navigate('/maker')}>MR</button>
         </div>
       </header>

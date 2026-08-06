@@ -1,12 +1,102 @@
 [
-  { "id": "vscode", "name": "VS Code", "category": "devtools", "pricing": { "free": true, "paid": false }, "website": "https://code.visualstudio.com", "playstore": "" },
-  { "id": "github", "name": "GitHub", "category": "devtools", "pricing": { "free": true, "paid": true }, "website": "https://github.com", "playstore": "https://play.google.com/store/apps/details?id=com.github.android" },
-  { "id": "docker", "name": "Docker", "category": "devtools", "pricing": { "free": true, "paid": true }, "website": "https://www.docker.com", "playstore": "" },
-  { "id": "postman", "name": "Postman", "category": "devtools", "pricing": { "free": true, "paid": true }, "website": "https://www.postman.com", "playstore": "" },
-  { "id": "vercel", "name": "Vercel", "category": "devtools", "pricing": { "free": true, "paid": true }, "website": "https://vercel.com", "playstore": "" },
-  { "id": "netlify", "name": "Netlify", "category": "devtools", "pricing": { "free": true, "paid": true }, "website": "https://www.netlify.com", "playstore": "" },
-  { "id": "stackoverflow", "name": "Stack Overflow", "category": "devtools", "pricing": { "free": true, "paid": true }, "website": "https://stackoverflow.com", "playstore": "https://play.google.com/store/apps/details?id=com.stackexchange.marvin" },
-  { "id": "gitlab", "name": "GitLab", "category": "devtools", "pricing": { "free": true, "paid": true }, "website": "https://gitlab.com", "playstore": "" },
-  { "id": "insomnia", "name": "Insomnia", "category": "devtools", "pricing": { "free": true, "paid": true }, "website": "https://insomnia.rest", "playstore": "" },
-  { "id": "npm", "name": "npm", "category": "devtools", "pricing": { "free": true, "paid": true }, "website": "https://www.npmjs.com", "playstore": "" }
+  {
+    "id": "vscode",
+    "name": "VS Code",
+    "category": "devtools",
+    "pricing": { "free": true, "paid": false },
+    "website": "https://code.visualstudio.com",
+    "playstore": "",
+    "tags": ["devtools", "editor", "ide", "microsoft", "coding", "extensions", "developer tool"],
+    "developerCertified": true
+  },
+  {
+    "id": "github",
+    "name": "GitHub",
+    "category": "devtools",
+    "pricing": { "free": true, "paid": true },
+    "website": "https://github.com",
+    "playstore": "https://play.google.com/store/apps/details?id=com.github.android",
+    "tags": ["devtools", "git", "repository", "open source", "version control", "ci/cd", "developer tool"],
+    "developerCertified": true
+  },
+  {
+    "id": "docker",
+    "name": "Docker",
+    "category": "devtools",
+    "pricing": { "free": true, "paid": true },
+    "website": "https://www.docker.com",
+    "playstore": "",
+    "tags": ["devtools", "containers", "devops", "virtualization", "dockerfile", "deployment", "developer tool"],
+    "developerCertified": true
+  },
+  {
+    "id": "postman",
+    "name": "Postman",
+    "category": "devtools",
+    "pricing": { "free": true, "paid": true },
+    "website": "https://www.postman.com",
+    "playstore": "",
+    "tags": ["devtools", "api", "rest api", "testing", "http client", "api docs", "developer tool"],
+    "developerCertified": true
+  },
+  {
+    "id": "vercel",
+    "name": "Vercel",
+    "category": "devtools",
+    "pricing": { "free": true, "paid": true },
+    "website": "https://vercel.com",
+    "playstore": "",
+    "tags": ["devtools", "deployment", "next.js", "frontend", "serverless", "cloud", "hosting", "developer tool"],
+    "developerCertified": true
+  },
+  {
+    "id": "netlify",
+    "name": "Netlify",
+    "category": "devtools",
+    "pricing": { "free": true, "paid": true },
+    "website": "https://www.netlify.com",
+    "playstore": "",
+    "tags": ["devtools", "deployment", "static hosting", "serverless", "jamstack", "cloud", "developer tool"],
+    "developerCertified": true
+  },
+  {
+    "id": "stackoverflow",
+    "name": "Stack Overflow",
+    "category": "devtools",
+    "pricing": { "free": true, "paid": true },
+    "website": "https://stackoverflow.com",
+    "playstore": "https://play.google.com/store/apps/details?id=com.stackexchange.marvin",
+    "tags": ["devtools", "q&a", "community", "programming help", "debugging", "developer tool"],
+    "developerCertified": true
+  },
+  {
+    "id": "gitlab",
+    "name": "GitLab",
+    "category": "devtools",
+    "pricing": { "free": true, "paid": true },
+    "website": "https://gitlab.com",
+    "playstore": "",
+    "tags": ["devtools", "git", "ci/cd", "devops", "repository", "open source", "developer tool"],
+    "developerCertified": true
+  },
+  {
+    "id": "insomnia",
+    "name": "Insomnia",
+    "category": "devtools",
+    "pricing": { "free": true, "paid": true },
+    "website": "https://insomnia.rest",
+    "playstore": "",
+    "tags": ["devtools", "api client", "rest", "graphql", "postman alternative", "open source", "developer tool"],
+    "developerCertified": true
+  },
+  {
+    "id": "npm",
+    "name": "npm",
+    "category": "devtools",
+    "pricing": { "free": true, "paid": true },
+    "website": "https://www.npmjs.com",
+    "playstore": "",
+    "tags": ["devtools", "package manager", "javascript", "node.js", "registry", "modules", "developer tool"],
+    "developerCertified": true
+  }
 ]

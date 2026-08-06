@@ -1,66 +1,42 @@
 [
   {
-    "id": "hetzner-vps",
+    "id": "vps-hetzner",
     "name": "Hetzner Cloud",
     "category": "vps",
     "pricing": { "free": false, "paid": true },
     "website": "https://www.hetzner.com/cloud",
-    "playstore": "https://play.google.com/store/apps/details?id=de.hetzner.app"
+    "playstore": "",
+    "tags": ["vps", "hetzner", "cloud server", "cheap vps", "bare metal", "linux", "gpu server", "developer tool"],
+    "developerCertified": true
   },
   {
-    "id": "digitalocean-vps",
-    "name": "DigitalOcean Droplets",
+    "id": "vps-linode",
+    "name": "Akamai Linode",
     "category": "vps",
-    "pricing": { "free": true, "paid": true },
-    "website": "https://www.digitalocean.com",
-    "playstore": ""
-  },
-  {
-    "id": "linode-vps",
-    "name": "Linode (Akamai)",
-    "category": "vps",
-    "pricing": { "free": true, "paid": true },
+    "pricing": { "free": false, "paid": true },
     "website": "https://www.linode.com",
-    "playstore": ""
+    "playstore": "",
+    "tags": ["vps", "akamai linode", "linux vps", "cloud computing", "developer infrastructure"],
+    "developerCertified": true
   },
   {
-    "id": "vultr-vps",
-    "name": "Vultr VPS",
+    "id": "vps-vultr",
+    "name": "Vultr",
     "category": "vps",
-    "pricing": { "free": true, "paid": true },
+    "pricing": { "free": false, "paid": true },
     "website": "https://www.vultr.com",
-    "playstore": ""
+    "playstore": "",
+    "tags": ["vps", "vultr", "cloud compute", "gpu instances", "one-click apps", "developer tool"],
+    "developerCertified": true
   },
   {
-    "id": "aws-ec2",
-    "name": "AWS EC2",
+    "id": "vps-contabo",
+    "name": "Contabo",
     "category": "vps",
-    "pricing": { "free": true, "paid": true },
-    "website": "https://aws.amazon.com/ec2",
-    "playstore": "https://play.google.com/store/apps/details?id=com.amazon.aws.console"
-  },
-  {
-    "id": "gcp-compute",
-    "name": "Google Compute Engine",
-    "category": "vps",
-    "pricing": { "free": true, "paid": true },
-    "website": "https://cloud.google.com/compute",
-    "playstore": "https://play.google.com/store/apps/details?id=com.google.android.apps.cloudconsole"
-  },
-  {
-    "id": "oracle-cloud-vps",
-    "name": "Oracle Always Free VPS",
-    "category": "vps",
-    "pricing": { "free": true, "paid": true },
-    "website": "https://www.oracle.com/cloud/free",
-    "playstore": ""
-  },
-  {
-    "id": "scaleway-vps",
-    "name": "Scaleway VPS",
-    "category": "vps",
-    "pricing": { "free": true, "paid": true },
-    "website": "https://www.scaleway.com",
-    "playstore": ""
+    "pricing": { "free": false, "paid": true },
+    "website": "https://contabo.com",
+    "playstore": "",
+    "tags": ["vps", "contabo", "high storage", "cheap vps", "german servers", "developer tool"],
+    "developerCertified": false
   }
 ]

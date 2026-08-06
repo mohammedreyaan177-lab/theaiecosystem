@@ -5,23 +5,19 @@
     "category": "voice",
     "pricing": { "free": true, "paid": true },
     "website": "https://elevenlabs.io",
-    "playstore": "https://play.google.com/store/apps/details?id=io.elevenlabs.android"
+    "playstore": "",
+    "tags": ["voice", "text to speech", "voice cloning", "dubbing", "audiobook", "sound effects", "developer api"],
+    "developerCertified": true
   },
   {
     "id": "playht",
-    "name": "PlayHT",
+    "name": "Play.ht",
     "category": "voice",
     "pricing": { "free": true, "paid": true },
     "website": "https://play.ht",
-    "playstore": ""
-  },
-  {
-    "id": "cartesia",
-    "name": "Cartesia",
-    "category": "voice",
-    "pricing": { "free": true, "paid": true },
-    "website": "https://cartesia.ai",
-    "playstore": ""
+    "playstore": "",
+    "tags": ["voice", "conversational voice", "realtime tts", "voice cloning", "podcast generator"],
+    "developerCertified": true
   },
   {
     "id": "murf-ai",
@@ -29,7 +25,9 @@
     "category": "voice",
     "pricing": { "free": true, "paid": true },
     "website": "https://murf.ai",
-    "playstore": ""
+    "playstore": "",
+    "tags": ["voice", "voiceover", "studio voice", "presentations", "elearning", "narration"],
+    "developerCertified": false
   },
   {
     "id": "speechify",
@@ -37,30 +35,8 @@
     "category": "voice",
     "pricing": { "free": true, "paid": true },
     "website": "https://speechify.com",
-    "playstore": "https://play.google.com/store/apps/details?id=com.cliffweitzman.speechify"
-  },
-  {
-    "id": "naturalreaders",
-    "name": "NaturalReaders",
-    "category": "voice",
-    "pricing": { "free": true, "paid": true },
-    "website": "https://www.naturalreaders.com",
-    "playstore": "https://play.google.com/store/apps/details?id=com.naturalreaders.naturalreader"
-  },
-  {
-    "id": "resemble-ai",
-    "name": "Resemble AI",
-    "category": "voice",
-    "pricing": { "free": true, "paid": true },
-    "website": "https://www.resemble.ai",
-    "playstore": ""
-  },
-  {
-    "id": "coqui-tts",
-    "name": "Coqui TTS",
-    "category": "voice",
-    "pricing": { "free": true, "paid": false },
-    "website": "https://github.com/coqui-ai/TTS",
-    "playstore": ""
+    "playstore": "https://play.google.com/store/apps/details?id=com.speechify",
+    "tags": ["voice", "read text aloud", "pdf reader", "speed reading", "chrome extension"],
+    "developerCertified": true
   }
 ]

@@ -3,132 +3,120 @@
     "id": "notion-ai",
     "name": "Notion AI",
     "category": "productivity",
-    "pricing": {
-      "free": true,
-      "paid": true
-    },
+    "pricing": { "free": true, "paid": true },
     "website": "https://www.notion.so",
-    "playstore": "https://play.google.com/store/apps/details?id=notion.id"
+    "playstore": "https://play.google.com/store/apps/details?id=notion.id",
+    "tags": ["productivity", "notes", "documents", "knowledge base", "notion", "workspace", "synthesis", "educate"],
+    "developerCertified": true
   },
   {
     "id": "coda-ai",
     "name": "Coda AI",
     "category": "productivity",
-    "pricing": {
-      "free": true,
-      "paid": true
-    },
+    "pricing": { "free": true, "paid": true },
     "website": "https://coda.io",
-    "playstore": ""
+    "playstore": "",
+    "tags": ["productivity", "docs", "tables", "automation", "building blocks", "team wiki"],
+    "developerCertified": true
   },
   {
     "id": "clickup-ai",
     "name": "ClickUp AI",
     "category": "productivity",
-    "pricing": {
-      "free": true,
-      "paid": true
-    },
+    "pricing": { "free": true, "paid": true },
     "website": "https://clickup.com",
-    "playstore": "https://play.google.com/store/apps/details?id=com.clickup.mobile"
+    "playstore": "https://play.google.com/store/apps/details?id=com.clickup.mobile",
+    "tags": ["productivity", "tasks", "docs", "project management", "all in one", "workflow"],
+    "developerCertified": true
   },
   {
     "id": "gamma",
     "name": "Gamma",
     "category": "productivity",
-    "pricing": {
-      "free": true,
-      "paid": true
-    },
+    "pricing": { "free": true, "paid": true },
     "website": "https://gamma.app",
-    "playstore": ""
+    "playstore": "",
+    "tags": ["productivity", "presentation", "slide deck", "webpage generation", "visual document"],
+    "developerCertified": true
   },
   {
     "id": "beautifulai",
     "name": "Beautiful.ai",
     "category": "productivity",
-    "pricing": {
-      "free": false,
-      "paid": true
-    },
+    "pricing": { "free": false, "paid": true },
     "website": "https://www.beautiful.ai",
-    "playstore": ""
+    "playstore": "",
+    "tags": ["productivity", "slides", "smart templates", "pitch deck", "presentations"],
+    "developerCertified": false
   },
   {
     "id": "tome",
     "name": "Tome",
     "category": "productivity",
-    "pricing": {
-      "free": false,
-      "paid": true
-    },
+    "pricing": { "free": false, "paid": true },
     "website": "https://tome.app",
-    "playstore": ""
+    "playstore": "",
+    "tags": ["productivity", "storytelling", "slide generator", "presentations", "multimodal deck"],
+    "developerCertified": false
   },
   {
     "id": "otterai",
     "name": "Otter.ai",
     "category": "productivity",
-    "pricing": {
-      "free": true,
-      "paid": true
-    },
+    "pricing": { "free": true, "paid": true },
     "website": "https://otter.ai",
-    "playstore": "https://play.google.com/store/apps/details?id=com.aisense.otter"
+    "playstore": "https://play.google.com/store/apps/details?id=com.aisense.otter",
+    "tags": ["productivity", "transcription", "meeting notes", "zoom recorder", "action items", "speech to text"],
+    "developerCertified": true
   },
   {
     "id": "firefliesai",
     "name": "Fireflies.ai",
     "category": "productivity",
-    "pricing": {
-      "free": true,
-      "paid": true
-    },
+    "pricing": { "free": true, "paid": true },
     "website": "https://fireflies.ai",
-    "playstore": ""
+    "playstore": "",
+    "tags": ["productivity", "meeting assistant", "transcript", "crm sync", "action item extraction"],
+    "developerCertified": true
   },
   {
     "id": "descript",
     "name": "Descript",
     "category": "productivity",
-    "pricing": {
-      "free": true,
-      "paid": true
-    },
+    "pricing": { "free": true, "paid": true },
     "website": "https://www.descript.com",
-    "playstore": ""
+    "playstore": "",
+    "tags": ["productivity", "video editing", "transcript editor", "screen recorder", "overdub", "podcast"],
+    "developerCertified": true
   },
   {
     "id": "capcut-ai",
     "name": "CapCut AI",
     "category": "productivity",
-    "pricing": {
-      "free": true,
-      "paid": true
-    },
+    "pricing": { "free": true, "paid": true },
     "website": "https://www.capcut.com",
-    "playstore": "https://play.google.com/store/apps/details?id=com.lemon.lvoverseas"
+    "playstore": "https://play.google.com/store/apps/details?id=com.lemon.lvoverseas",
+    "tags": ["productivity", "video editor", "short clips", "captions", "tiktok", "reels"],
+    "developerCertified": true
   },
   {
     "id": "opus-clip",
     "name": "Opus Clip",
     "category": "productivity",
-    "pricing": {
-      "free": true,
-      "paid": true
-    },
+    "pricing": { "free": true, "paid": true },
     "website": "https://www.opus.pro",
-    "playstore": ""
+    "playstore": "",
+    "tags": ["productivity", "short video generator", "repurpose podcast", "auto subtitle", "virality score"],
+    "developerCertified": true
   },
   {
     "id": "riverside",
     "name": "Riverside",
     "category": "productivity",
-    "pricing": {
-      "free": true,
-      "paid": true
-    },
+    "pricing": { "free": true, "paid": true },
     "website": "https://riverside.fm",
-    "playstore": ""
+    "playstore": "",
+    "tags": ["productivity", "podcast recording", "4k video", "remote studio", "transcript"],
+    "developerCertified": true
   }
 ]

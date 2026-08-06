@@ -5,7 +5,9 @@
     "category": "coding",
     "pricing": { "free": true, "paid": true },
     "website": "https://cursor.com",
-    "playstore": ""
+    "playstore": "",
+    "tags": ["coding", "ide", "editor", "ai assistant", "vibe coding", "autocompletion", "ai agent", "developer tool"],
+    "developerCertified": true
   },
   {
     "id": "windsurf",
@@ -13,7 +15,9 @@
     "category": "coding",
     "pricing": { "free": true, "paid": true },
     "website": "https://codeium.com/windsurf",
-    "playstore": ""
+    "playstore": "",
+    "tags": ["coding", "ide", "editor", "codeium", "ai agent", "flow", "developer tool"],
+    "developerCertified": true
   },
   {
     "id": "github-copilot",
@@ -21,7 +25,9 @@
     "category": "coding",
     "pricing": { "free": true, "paid": true },
     "website": "https://github.com/features/copilot",
-    "playstore": ""
+    "playstore": "",
+    "tags": ["coding", "copilot", "github", "autocompletion", "ai pair programmer", "vscode", "developer tool"],
+    "developerCertified": true
   },
   {
     "id": "codeium",
@@ -29,7 +35,9 @@
     "category": "coding",
     "pricing": { "free": true, "paid": true },
     "website": "https://codeium.com",
-    "playstore": ""
+    "playstore": "",
+    "tags": ["coding", "autocompletion", "free copilot", "code completion", "developer tool"],
+    "developerCertified": true
   },
   {
     "id": "continue",
@@ -37,7 +45,9 @@
     "category": "coding",
     "pricing": { "free": true, "paid": false },
     "website": "https://continue.dev",
-    "playstore": ""
+    "playstore": "",
+    "tags": ["coding", "open source", "vscode", "jetbrains", "llm extension", "developer tool"],
+    "developerCertified": true
   },
   {
     "id": "replit-ai",
@@ -45,7 +55,9 @@
     "category": "coding",
     "pricing": { "free": true, "paid": true },
     "website": "https://replit.com",
-    "playstore": "https://play.google.com/store/apps/details?id=com.replit.app"
+    "playstore": "https://play.google.com/store/apps/details?id=com.replit.app",
+    "tags": ["coding", "cloud ide", "replit", "in-browser editor", "hosting", "developer tool"],
+    "developerCertified": true
   },
   {
     "id": "v0",
@@ -53,7 +65,9 @@
     "category": "coding",
     "pricing": { "free": true, "paid": true },
     "website": "https://v0.dev",
-    "playstore": ""
+    "playstore": "",
+    "tags": ["coding", "ui generation", "react", "shadcn", "tailwind", "vercel", "frontend", "developer tool"],
+    "developerCertified": true
   },
   {
     "id": "bolt",
@@ -61,7 +75,9 @@
     "category": "coding",
     "pricing": { "free": true, "paid": true },
     "website": "https://bolt.new",
-    "playstore": ""
+    "playstore": "",
+    "tags": ["coding", "fullstack", "web app builder", "react", "node", "in-browser app", "developer tool"],
+    "developerCertified": true
   },
   {
     "id": "lovable",
@@ -69,7 +85,9 @@
     "category": "coding",
     "pricing": { "free": true, "paid": true },
     "website": "https://lovable.dev",
-    "playstore": ""
+    "playstore": "",
+    "tags": ["coding", "fullstack", "web app builder", "gpt-4o", "react", "no-code", "developer tool"],
+    "developerCertified": true
   },
   {
     "id": "firebase-studio",
@@ -77,7 +95,9 @@
     "category": "coding",
     "pricing": { "free": true, "paid": true },
     "website": "https://firebase.google.com/studio",
-    "playstore": ""
+    "playstore": "",
+    "tags": ["coding", "google", "firebase", "backend", "cloud", "developer tool"],
+    "developerCertified": false
   },
   {
     "id": "tabnine",
@@ -85,7 +105,9 @@
     "category": "coding",
     "pricing": { "free": true, "paid": true },
     "website": "https://www.tabnine.com",
-    "playstore": ""
+    "playstore": "",
+    "tags": ["coding", "code completion", "privacy", "on-premise", "ai assistant", "developer tool"],
+    "developerCertified": false
   },
   {
     "id": "amazon-q",
@@ -93,7 +115,9 @@
     "category": "coding",
     "pricing": { "free": true, "paid": true },
     "website": "https://aws.amazon.com/q/developer",
-    "playstore": ""
+    "playstore": "",
+    "tags": ["coding", "aws", "amazon", "cloud developer", "security", "developer tool"],
+    "developerCertified": false
   },
   {
     "id": "cody",
@@ -101,7 +125,9 @@
     "category": "coding",
     "pricing": { "free": true, "paid": true },
     "website": "https://sourcegraph.com/cody",
-    "playstore": ""
+    "playstore": "",
+    "tags": ["coding", "sourcegraph", "codebase search", "context aware", "developer tool"],
+    "developerCertified": false
   },
   {
     "id": "blackbox-ai",
@@ -109,7 +135,9 @@
     "category": "coding",
     "pricing": { "free": true, "paid": true },
     "website": "https://www.blackbox.ai",
-    "playstore": ""
+    "playstore": "",
+    "tags": ["coding", "code search", "autocomplete", "copy code", "developer tool"],
+    "developerCertified": false
   },
   {
     "id": "supermaven",
@@ -117,6 +145,8 @@
     "category": "coding",
     "pricing": { "free": true, "paid": true },
     "website": "https://supermaven.com",
-    "playstore": ""
+    "playstore": "",
+    "tags": ["coding", "fast autocomplete", "1m context", "speed", "copilot alternative", "developer tool"],
+    "developerCertified": true
   }
 ]

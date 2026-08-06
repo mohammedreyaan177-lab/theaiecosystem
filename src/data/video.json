@@ -5,23 +5,9 @@
     "category": "video",
     "pricing": { "free": true, "paid": true },
     "website": "https://runwayml.com",
-    "playstore": ""
-  },
-  {
-    "id": "kling-ai",
-    "name": "Kling AI",
-    "category": "video",
-    "pricing": { "free": true, "paid": true },
-    "website": "https://klingai.com",
-    "playstore": "https://play.google.com/store/apps/details?id=com.kuaishou.klingai"
-  },
-  {
-    "id": "google-veo",
-    "name": "Google Veo",
-    "category": "video",
-    "pricing": { "free": true, "paid": true },
-    "website": "https://deepmind.google/technologies/veo",
-    "playstore": ""
+    "playstore": "",
+    "tags": ["video", "gen-3 alpha", "video generation", "text to video", "motion brush", "vfx", "cinematic"],
+    "developerCertified": true
   },
   {
     "id": "pika",
@@ -29,7 +15,9 @@
     "category": "video",
     "pricing": { "free": true, "paid": true },
     "website": "https://pika.art",
-    "playstore": ""
+    "playstore": "",
+    "tags": ["video", "pika labs", "3d animation", "lip sync", "video generation", "effects"],
+    "developerCertified": true
   },
   {
     "id": "luma-dream-machine",
@@ -37,23 +25,9 @@
     "category": "video",
     "pricing": { "free": true, "paid": true },
     "website": "https://lumalabs.ai/dream-machine",
-    "playstore": ""
-  },
-  {
-    "id": "hailuo-ai",
-    "name": "Hailuo AI",
-    "category": "video",
-    "pricing": { "free": true, "paid": true },
-    "website": "https://hailuoai.video",
-    "playstore": ""
-  },
-  {
-    "id": "synthesia",
-    "name": "Synthesia",
-    "category": "video",
-    "pricing": { "free": true, "paid": true },
-    "website": "https://www.synthesia.io",
-    "playstore": ""
+    "playstore": "",
+    "tags": ["video", "luma ai", "photorealistic video", "camera motion", "3d video"],
+    "developerCertified": true
   },
   {
     "id": "heygen",
@@ -61,46 +35,28 @@
     "category": "video",
     "pricing": { "free": true, "paid": true },
     "website": "https://www.heygen.com",
-    "playstore": ""
+    "playstore": "",
+    "tags": ["video", "ai avatar", "video localization", "translation", "spokesperson", "marketing video"],
+    "developerCertified": true
   },
   {
-    "id": "d-id",
-    "name": "D-ID",
+    "id": "synthesia",
+    "name": "Synthesia",
     "category": "video",
-    "pricing": { "free": true, "paid": true },
-    "website": "https://www.d-id.com",
-    "playstore": ""
+    "pricing": { "free": false, "paid": true },
+    "website": "https://www.synthesia.io",
+    "playstore": "",
+    "tags": ["video", "avatar video", "corporate training", "text to video", "multilingual avatars"],
+    "developerCertified": false
   },
   {
-    "id": "invideo-ai",
-    "name": "InVideo AI",
+    "id": "kling-ai",
+    "name": "Kling AI",
     "category": "video",
     "pricing": { "free": true, "paid": true },
-    "website": "https://invideo.io",
-    "playstore": "https://play.google.com/store/apps/details?id=io.invideo.android"
-  },
-  {
-    "id": "fliki",
-    "name": "Fliki",
-    "category": "video",
-    "pricing": { "free": true, "paid": true },
-    "website": "https://fliki.ai",
-    "playstore": ""
-  },
-  {
-    "id": "domo-ai",
-    "name": "Domo AI",
-    "category": "video",
-    "pricing": { "free": true, "paid": true },
-    "website": "https://domoai.app",
-    "playstore": ""
-  },
-  {
-    "id": "haiper",
-    "name": "Haiper",
-    "category": "video",
-    "pricing": { "free": true, "paid": true },
-    "website": "https://haiper.ai",
-    "playstore": ""
+    "website": "https://klingai.com",
+    "playstore": "",
+    "tags": ["video", "kuaishou", "1080p video generation", "realistic physics", "text to video"],
+    "developerCertified": true
   }
 ]

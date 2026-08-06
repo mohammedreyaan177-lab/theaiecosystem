@@ -1,10 +1,42 @@
 [
-  { "id": "slack", "name": "Slack", "category": "collaboration", "pricing": { "free": true, "paid": true }, "website": "https://slack.com", "playstore": "https://play.google.com/store/apps/details?id=com.Slack" },
-  { "id": "discord", "name": "Discord", "category": "collaboration", "pricing": { "free": true, "paid": true }, "website": "https://discord.com", "playstore": "https://play.google.com/store/apps/details?id=com.discord" },
-  { "id": "zoom", "name": "Zoom", "category": "collaboration", "pricing": { "free": true, "paid": true }, "website": "https://zoom.us", "playstore": "https://play.google.com/store/apps/details?id=us.zoom.videomeetings" },
-  { "id": "ms-teams", "name": "Microsoft Teams", "category": "collaboration", "pricing": { "free": true, "paid": true }, "website": "https://www.microsoft.com/microsoft-teams", "playstore": "https://play.google.com/store/apps/details?id=com.microsoft.teams" },
-  { "id": "telegram", "name": "Telegram", "category": "collaboration", "pricing": { "free": true, "paid": true }, "website": "https://telegram.org", "playstore": "https://play.google.com/store/apps/details?id=org.telegram.messenger" },
-  { "id": "loom", "name": "Loom", "category": "collaboration", "pricing": { "free": true, "paid": true }, "website": "https://www.loom.com", "playstore": "https://play.google.com/store/apps/details?id=com.loom.android" },
-  { "id": "miro", "name": "Miro", "category": "collaboration", "pricing": { "free": true, "paid": true }, "website": "https://miro.com", "playstore": "https://play.google.com/store/apps/details?id=com.realtimeboard" },
-  { "id": "google-meet", "name": "Google Meet", "category": "collaboration", "pricing": { "free": true, "paid": true }, "website": "https://meet.google.com", "playstore": "https://play.google.com/store/apps/details?id=com.google.android.apps.meetings" }
+  {
+    "id": "slack",
+    "name": "Slack",
+    "category": "collaboration",
+    "pricing": { "free": true, "paid": true },
+    "website": "https://slack.com",
+    "playstore": "https://play.google.com/store/apps/details?id=com.Slack",
+    "tags": ["collaboration", "team chat", "slack ai", "channels", "huddles", "integrations", "developer tool"],
+    "developerCertified": true
+  },
+  {
+    "id": "discord",
+    "name": "Discord",
+    "category": "collaboration",
+    "pricing": { "free": true, "paid": true },
+    "website": "https://discord.com",
+    "playstore": "https://play.google.com/store/apps/details?id=com.discord",
+    "tags": ["collaboration", "voice chat", "community", "bots", "gaming", "midjourney host", "developer tool"],
+    "developerCertified": true
+  },
+  {
+    "id": "notion",
+    "name": "Notion",
+    "category": "collaboration",
+    "pricing": { "free": true, "paid": true },
+    "website": "https://www.notion.so",
+    "playstore": "https://play.google.com/store/apps/details?id=notion.id",
+    "tags": ["collaboration", "wiki", "docs", "database", "team workspace", "kanban"],
+    "developerCertified": true
+  },
+  {
+    "id": "miro",
+    "name": "Miro",
+    "category": "collaboration",
+    "pricing": { "free": true, "paid": true },
+    "website": "https://miro.com",
+    "playstore": "https://play.google.com/store/apps/details?id=com.realtimeboard",
+    "tags": ["collaboration", "whiteboard", "mind mapping", "diagramming", "brainstorming", "agile"],
+    "developerCertified": true
+  }
 ]
