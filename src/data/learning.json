@@ -1,5 +1,15 @@
 [
   {
+    "id": "khanmigo",
+    "name": "Khanmigo",
+    "category": "learning",
+    "pricing": { "free": true, "paid": true },
+    "website": "https://www.khanacademy.org/khanmigo",
+    "playstore": "",
+    "tags": ["learning", "khan academy", "socratic tutor", "ai coach", "math", "coding", "educate"],
+    "developerCertified": true
+  },
+  {
     "id": "coursera",
     "name": "Coursera",
     "category": "learning",
@@ -28,15 +38,5 @@
     "playstore": "",
     "tags": ["learning", "data science", "competitions", "datasets", "python notebooks", "machine learning", "educate"],
     "developerCertified": true
-  },
-  {
-    "id": "udemy",
-    "name": "Udemy",
-    "category": "learning",
-    "pricing": { "free": true, "paid": true },
-    "website": "https://www.udemy.com",
-    "playstore": "https://play.google.com/store/apps/details?id=com.udemy.android",
-    "tags": ["learning", "video courses", "programming", "web dev", "skills", "tutorials", "educate"],
-    "developerCertified": false
   }
 ]

@@ -1,5 +1,35 @@
 [
   {
+    "id": "wordtune",
+    "name": "Wordtune",
+    "category": "writing",
+    "pricing": { "free": true, "paid": true },
+    "website": "https://www.wordtune.com",
+    "playstore": "",
+    "tags": ["writing", "rewriter", "paraphrase", "tone enhancer", "summary"],
+    "developerCertified": true
+  },
+  {
+    "id": "languagetool",
+    "name": "LanguageTool AI",
+    "category": "writing",
+    "pricing": { "free": true, "paid": true },
+    "website": "https://languagetool.org",
+    "playstore": "https://play.google.com/store/apps/details?id=org.languagetool",
+    "tags": ["writing", "open source grammar", "multilingual", "proofreader"],
+    "developerCertified": true
+  },
+  {
+    "id": "deepl-write",
+    "name": "DeepL Write",
+    "category": "writing",
+    "pricing": { "free": true, "paid": true },
+    "website": "https://www.deepl.com/write",
+    "playstore": "",
+    "tags": ["writing", "grammar assistant", "tone editing", "paraphrase", "deepl", "precision"],
+    "developerCertified": true
+  },
+  {
     "id": "jasper",
     "name": "Jasper",
     "category": "writing",
@@ -18,26 +48,6 @@
     "playstore": "",
     "tags": ["writing", "sales copy", "social media posts", "email generator", "marketing automation"],
     "developerCertified": true
-  },
-  {
-    "id": "writesonic",
-    "name": "Writesonic",
-    "category": "writing",
-    "pricing": { "free": true, "paid": true },
-    "website": "https://writesonic.com",
-    "playstore": "",
-    "tags": ["writing", "article writer", "seo optimizer", "audiosonic", "chatsonic"],
-    "developerCertified": false
-  },
-  {
-    "id": "rytr",
-    "name": "Rytr",
-    "category": "writing",
-    "pricing": { "free": true, "paid": true },
-    "website": "https://rytr.me",
-    "playstore": "",
-    "tags": ["writing", "content generator", "short form copy", "tone selector", "free writer"],
-    "developerCertified": false
   },
   {
     "id": "grammarly",

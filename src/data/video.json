@@ -1,5 +1,45 @@
 [
   {
+    "id": "sora",
+    "name": "Sora by OpenAI",
+    "category": "video",
+    "pricing": { "free": false, "paid": true },
+    "website": "https://openai.com/sora",
+    "playstore": "",
+    "tags": ["video", "openai", "sora", "hyper realistic", "1080p video", "text to video", "cinematic"],
+    "developerCertified": true
+  },
+  {
+    "id": "pixverse",
+    "name": "PixVerse AI",
+    "category": "video",
+    "pricing": { "free": true, "paid": true },
+    "website": "https://pixverse.ai",
+    "playstore": "",
+    "tags": ["video", "4k video", "motion video", "text to video", "anime video", "effects"],
+    "developerCertified": true
+  },
+  {
+    "id": "viggle",
+    "name": "Viggle AI",
+    "category": "video",
+    "pricing": { "free": true, "paid": true },
+    "website": "https://viggle.ai",
+    "playstore": "",
+    "tags": ["video", "character animation", "dance motion", "controllable video", "discord"],
+    "developerCertified": true
+  },
+  {
+    "id": "invideo",
+    "name": "InVideo AI",
+    "category": "video",
+    "pricing": { "free": true, "paid": true },
+    "website": "https://invideo.io",
+    "playstore": "https://play.google.com/store/apps/details?id=io.invideo.app",
+    "tags": ["video", "youtube shorts", "tiktok video", "script to video", "narrated video"],
+    "developerCertified": true
+  },
+  {
     "id": "runway",
     "name": "Runway",
     "category": "video",
@@ -7,16 +47,6 @@
     "website": "https://runwayml.com",
     "playstore": "",
     "tags": ["video", "gen-3 alpha", "video generation", "text to video", "motion brush", "vfx", "cinematic"],
-    "developerCertified": true
-  },
-  {
-    "id": "pika",
-    "name": "Pika",
-    "category": "video",
-    "pricing": { "free": true, "paid": true },
-    "website": "https://pika.art",
-    "playstore": "",
-    "tags": ["video", "pika labs", "3d animation", "lip sync", "video generation", "effects"],
     "developerCertified": true
   },
   {
@@ -30,24 +60,14 @@
     "developerCertified": true
   },
   {
-    "id": "heygen",
-    "name": "HeyGen",
+    "id": "hailuo-ai",
+    "name": "Hailuo AI (Minimax)",
     "category": "video",
     "pricing": { "free": true, "paid": true },
-    "website": "https://www.heygen.com",
+    "website": "https://hailuoai.video",
     "playstore": "",
-    "tags": ["video", "ai avatar", "video localization", "translation", "spokesperson", "marketing video"],
+    "tags": ["video", "minimax", "character motion", "cinematic video", "text to video"],
     "developerCertified": true
-  },
-  {
-    "id": "synthesia",
-    "name": "Synthesia",
-    "category": "video",
-    "pricing": { "free": false, "paid": true },
-    "website": "https://www.synthesia.io",
-    "playstore": "",
-    "tags": ["video", "avatar video", "corporate training", "text to video", "multilingual avatars"],
-    "developerCertified": false
   },
   {
     "id": "kling-ai",
@@ -57,6 +77,26 @@
     "website": "https://klingai.com",
     "playstore": "",
     "tags": ["video", "kuaishou", "1080p video generation", "realistic physics", "text to video"],
+    "developerCertified": true
+  },
+  {
+    "id": "pika",
+    "name": "Pika",
+    "category": "video",
+    "pricing": { "free": true, "paid": true },
+    "website": "https://pika.art",
+    "playstore": "",
+    "tags": ["video", "pika labs", "3d animation", "lip sync", "video generation", "effects"],
+    "developerCertified": true
+  },
+  {
+    "id": "kling-1-5",
+    "name": "Kling 1.5 AI",
+    "category": "video",
+    "pricing": { "free": true, "paid": true },
+    "website": "https://klingai.com",
+    "playstore": "",
+    "tags": ["video", "kling 1.5", "1080p hd", "motion control", "camera movement"],
     "developerCertified": true
   }
 ]

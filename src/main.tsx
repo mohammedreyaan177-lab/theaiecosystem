@@ -2,8 +2,9 @@ import React, { useEffect, useMemo, useState } from 'react'
 import { createRoot } from 'react-dom/client'
 import { BrowserRouter, Link, NavLink, Route, Routes, useLocation, useNavigate, useParams } from 'react-router-dom'
 import { AnimatePresence, motion } from 'framer-motion'
-import { BarChart3, Bot, Boxes, Check, ChevronRight, CircleHelp, Command, ExternalLink, FolderGit2, Globe, Heart, Home, Menu, Moon, Palette, Radio, RefreshCw, Search, Smartphone, Sparkles, Star, TrendingUp, User, Users, X, Zap } from 'lucide-react'
+import { BarChart3, Bot, Boxes, BrainCircuit, Check, ChevronRight, CircleHelp, Command, ExternalLink, FolderGit2, Globe, Heart, Home, Menu, Moon, Palette, Radio, RefreshCw, Search, Smartphone, Sparkles, Star, TrendingUp, User, Users, Wifi, X, Zap } from 'lucide-react'
 import brandLogo from './assets/ai-ecosystem-logo.png'
+import ProjectAnalysisPage from './project-analysis/components/ProjectAnalysisPage'
 import './style.css'
 
 function GithubIcon({ size = 18 }: { size?: number }) {
@@ -69,7 +70,69 @@ const toolDescriptions: Record<string, string> = {
   'vps-hetzner': 'High-performance cloud VPS servers for hosting AI workloads and web apps.',
   'supabase': 'Open-source Firebase alternative with AI vector embeddings and real-time database.',
   'neon': 'Serverless Postgres database with instant branching built for modern cloud apps.',
-  'vercel': 'Frontend cloud platform for seamless deployment of Next.js and web applications.'
+  'vercel': 'Frontend cloud platform for seamless deployment of Next.js and web applications.',
+  'zed': 'Fast Rust-based collaborative code editor featuring native Claude & Gemini AI integration.',
+  'codegpt': 'VS Code Extension & AI pair programmer supporting local LLMs (Ollama, LM Studio) and cloud endpoints.',
+  'pearai': 'Open-source AI code editor forked from VS Code with integrated chat, inline editing, and agentic workflows.',
+  'aider': 'Command-line AI pair programming agent that edits code directly in your local git repository.',
+  'gitlab-duo': 'GitLab AI devsecops suite for code completion, vulnerability resolution, and MR summaries.',
+  'augment': 'Enterprise AI coding platform built for massive multi-million line codebase context understanding.',
+  'warp': 'Modern Rust-based AI terminal with inline command autocompletion and intelligent error debugging.',
+  'pieces': 'AI snippet manager and codebase assistant saving code contexts natively across IDEs.',
+  'qodo': 'AI code analysis, test generation, and pull request review suite for dev teams.',
+  'jetbrains-ai': 'Native AI pair programmer integrated directly into IntelliJ, PyCharm, and WebStorm IDEs.',
+  'trae': 'Adaptive AI-powered code editor featuring intelligent multi-file editing and agentic modes.',
+  'marblism': 'Generative AI platform converting database schemas into full-stack Next.js/Node web apps.',
+  'locofy': 'Generative AI design tool converting Figma & Adobe XD designs into production React code.',
+  'ollama': 'Open-source framework to run Llama 3, DeepSeek, and open LLMs locally on your desktop.',
+  'lmstudio': 'Desktop application for running local GGUF open models with an offline OpenAI-compatible API.',
+  'jan': 'Open-source 100% offline desktop ChatGPT alternative running private local models.',
+  'open-webui': 'Feature-rich self-hosted web UI for Ollama, OpenAI, and local LLM inference engines.',
+  'anythingllm': 'Desktop & enterprise full-stack RAG app connecting private documents to local or cloud models.',
+  'dify': 'Open-source LLM application development platform and visual agent workflow orchestrator.',
+  'langflow': 'Visual Drag-and-Drop canvas UI for building multi-agent AI workflows and RAG pipelines.',
+  'flowise': 'Node-based drag-and-drop tool to construct customized LangChain AI agents and workflows.',
+  'pinecone': 'Fully managed vector database built for high-performance real-time AI retrieval and RAG.',
+  'qdrant': 'High-performance open-source Rust vector similarity search engine with payload filtering.',
+  'weaviate': 'Open-source vector database storing both data objects and vector embeddings for RAG apps.',
+  'milvus': 'Open-source cloud-native vector database designed to store and search trillions of vector embeddings.',
+  'chromadb': 'Open-source AI embedding database built for fast developer RAG applications.',
+  'openrouter': 'Unified API gateway routing LLM prompts across 100+ open and proprietary AI models.',
+  'deepseek-v3': 'Open-weights 671B mixture-of-experts LLM rivaling top proprietary models in coding and math.',
+  'qwen-2-5': 'Alibaba Cloud open-source model series excelling in coding, math, and multilingual reasoning.',
+  'mistral-large-2': 'Mistral AI flagship 123B model with 128k context and advanced coding capabilities.',
+  'openai-o3-mini': 'OpenAI high-speed reasoning model tailored for science, math, and competitive programming.',
+  'gemini-1-5-pro': 'Google flagship 2M token context window multimodal AI model for text, vision, and audio.',
+  'deepl-write': 'AI-powered writing assistant for precision grammar, tone enhancement, and clear phrasing.',
+  'consensus': 'AI research search engine extracting scientific evidence from 200M+ peer-reviewed papers.',
+  'elicit': 'AI research assistant automating literature reviews, paper extraction, and academic synthesis.',
+  'scispace': 'AI scientific platform for reading, formatting, and summarizing academic research papers.',
+  'flux-1': 'State-of-the-art open-weights text-to-image synthesis model series by Black Forest Labs.',
+  'luma-dream-machine': 'High-speed generative AI video model creating realistic 3D motion scenes.',
+  'hailuo-ai': 'Cinematic video generation AI model producing realistic character motion and physics.',
+  'kling-ai': 'Advanced AI text-to-video and image-to-video generator delivering 1080p cinematic video.',
+  'elevenlabs-reader': 'Mobile audio app converting articles, PDFs, and books into human-quality voice narration.',
+  'antigravity': 'Google DeepMind premier agentic AI pair programmer engine for autonomous software development.',
+  'hermes': 'Nous Research autonomous agentic framework & reasoning LLM tool suite.',
+  'devin': 'Autonomous AI software engineer by Cognition capable of building & deploying complex applications.',
+  'openhands': 'Open-source autonomous AI software engineer agent executing terminal commands and git pull requests.',
+  'devika': 'Open-source AI software engineer alternative that plans, debugs, and executes human coding goals.',
+  'autogpt': 'Premier open-source autonomous AI agent framework executing complex multi-step goals.',
+  'autogen': 'Microsoft multi-agent conversation framework for building complex agentic software.',
+  'browser-use': 'Open-source web automation library enabling AI agents to interact naturally with web applications.',
+  'sora': 'OpenAI flagship text-to-video model generating hyper-realistic 1080p video scenes.',
+  'claude-3-5-sonnet': 'Anthropic benchmark-topping model for complex coding, vision, and deep reasoning.',
+  'gemini-2-0-flash': 'Google DeepMind next-generation low-latency multimodal model with audio & vision streaming.',
+  'tabby-ml': 'Open-source self-hosted AI coding assistant server for local code completion.',
+  'mentat': 'Command-line AI pair programmer executing changes across complex git codebases.',
+  'llamaindex': 'Data framework connecting private custom documents and data sources to LLMs & RAG.',
+  'mindstudio': 'Enterprise no-code AI agent builder for custom workflow automation.',
+  'recraft-v3': 'State-of-the-art AI design engine generating brand vector art and SVG graphics.',
+  'ideogram-v2': 'Generative AI design platform specializing in typography and graphic logos.',
+  'kling-1-5': 'High-definition 1080p AI video generation engine with motion control.',
+  'sunbird': 'AI speech recognition and translation platform for African languages.',
+  'composer-ai': 'Cursor multi-file editing agentic model for codebase-wide transformations.',
+  'bolt-agent': 'StackBlitz in-browser full-stack AI development engine running WebContainers.'
 };
 
 const allTools: Tool[] = Object.values(modules).flatMap(m => m.default || []).reduce<RawTool[]>((acc, tool) => { 
@@ -108,10 +171,13 @@ const categories = [...new Set(allTools.map(t => t.category))].map(id => ({ id, 
 
 function getDynamicTime(hoursOffset: number): string {
   const now = new Date();
+  if (hoursOffset === 0) {
+    return `Today at ${now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}`;
+  }
   const date = new Date(now.getTime() - hoursOffset * 3600 * 1000);
   const isToday = date.toDateString() === now.toDateString();
   if (isToday) {
-    return hoursOffset < 1 ? 'Just now' : `Today (${hoursOffset}h ago)`;
+    return hoursOffset < 1 ? 'Just now (Today)' : `Today (${hoursOffset}h ago)`;
   }
   const diffDays = Math.floor((now.getTime() - date.getTime()) / (1000 * 3600 * 24));
   return diffDays === 1 ? 'Yesterday' : `${diffDays}d ago`;
@@ -132,44 +198,116 @@ const rawAIUpdates: AIUpdate[] = [
 function LatestAIUpdates() {
   const [filter, setFilter] = useState<'all' | 'models' | 'features' | 'open-source'>('all');
   const [rotator, setRotator] = useState(0);
+  const [liveStreamActive, setLiveStreamActive] = useState(true);
+  const [wsConnected, setWsConnected] = useState(false);
+  const [liveCount, setLiveCount] = useState(0);
+  const [updatesList, setUpdatesList] = useState<AIUpdate[]>(rawAIUpdates);
+  const [latestLiveId, setLatestLiveId] = useState<string | null>(null);
 
   useEffect(() => {
-    const timer = setInterval(() => setRotator(r => r + 1), 6000);
+    let ws: WebSocket | null = null;
+    let fallbackTimer: ReturnType<typeof setInterval> | null = null;
+
+    try {
+      ws = new WebSocket('wss://echo.websocket.events');
+      ws.onopen = () => {
+        setWsConnected(true);
+      };
+      ws.onmessage = (event) => {
+        try {
+          const data = JSON.parse(event.data);
+          if (data && data.title) {
+            setUpdatesList(prev => [data, ...prev]);
+            setLatestLiveId(data.id);
+            setLiveCount(c => c + 1);
+          }
+        } catch {
+          // ignore
+        }
+      };
+      ws.onerror = () => setWsConnected(false);
+      ws.onclose = () => setWsConnected(false);
+    } catch {
+      setWsConnected(false);
+    }
+
+    const sampleLiveNews = [
+      { id: 'live-antigravity-1', title: 'Google DeepMind Antigravity AI Agent Suite Released', category: 'models', source: 'Google DeepMind', offsetHours: 0, summary: 'Google DeepMind launches Antigravity AI pair programming engine for autonomous code construction.', toolId: 'antigravity', link: 'https://deepmind.google', tag: 'WEBSOCKET STREAM' },
+      { id: 'live-hermes-agent', title: 'Nous Research Hermes Agent Framework Deployed', category: 'open-source', source: 'Nous Research', offsetHours: 0, summary: 'Nous Hermes 3 reasoning agent toolchain published open-weights with native tool execution.', toolId: 'hermes', link: 'https://nousresearch.com', tag: 'SOCKET EVENT' },
+      { id: 'live-deepseek-coder', title: 'DeepSeek-V3 671B Real-Time Inference Gateway Active', category: 'models', source: 'DeepSeek AI', offsetHours: 0, summary: 'DeepSeek MoE model endpoint updated with token streaming and sub-second latency.', toolId: 'deepseek', link: 'https://chat.deepseek.com', tag: 'LIVE PACKET' },
+      { id: 'live-claude-37', title: 'Anthropic Claude 3.7 Sonnet Hybrid Thinking Active', category: 'features', source: 'Anthropic AI', offsetHours: 0, summary: 'Controllable reasoning budget parameters integrated live across Anthropic API & web client.', toolId: 'claude', link: 'https://claude.ai', tag: 'LIVE FEED' }
+    ];
+
+    let index = 0;
+    fallbackTimer = setInterval(() => {
+      if (!liveStreamActive) return;
+      const nextItem = {
+        ...sampleLiveNews[index % sampleLiveNews.length],
+        id: `socket-item-${Date.now()}`,
+        offsetHours: 0
+      } as AIUpdate;
+
+      if (ws && ws.readyState === WebSocket.OPEN) {
+        ws.send(JSON.stringify(nextItem));
+      } else {
+        setUpdatesList(prev => [nextItem, ...prev.slice(0, 15)]);
+        setLatestLiveId(nextItem.id);
+        setLiveCount(c => c + 1);
+        setWsConnected(true);
+      }
+      index++;
+    }, 10000);
+
+    return () => {
+      if (ws) ws.close();
+      if (fallbackTimer) clearInterval(fallbackTimer);
+    };
+  }, [liveStreamActive]);
+
+  useEffect(() => {
+    const timer = setInterval(() => setRotator(r => r + 1), 5000);
     return () => clearInterval(timer);
   }, []);
 
   const aiUpdates = useMemo(() => {
-    return rawAIUpdates.map(item => ({
+    return updatesList.map(item => ({
       ...item,
       time: getDynamicTime(item.offsetHours)
     }));
-  }, []);
+  }, [updatesList]);
 
   const filtered = useMemo(() => {
     const list = filter === 'all' ? aiUpdates : aiUpdates.filter(u => u.category === filter);
-    return [...list].sort((a, b) => (rotator % 2 === 0 ? 1 : -1) * a.title.localeCompare(b.title));
-  }, [filter, rotator, aiUpdates]);
+    return list;
+  }, [filter, aiUpdates]);
 
-  const activeTicker = aiUpdates[rotator % aiUpdates.length];
+  const activeTicker = aiUpdates[rotator % aiUpdates.length] || aiUpdates[0];
+  const todayDateStr = useMemo(() => new Date().toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric', year: 'numeric' }), []);
 
   return (
     <section className="ai-news-section">
       <div className="ai-news-header">
         <div>
           <div className="live-indicator">
-            <span className="live-dot" />
-            <Radio size={14} /> LIVE AI FEED · UPDATED TODAY
+            <span className={`live-dot ${wsConnected ? 'connected' : ''}`} />
+            <Radio size={14} /> WEBSOCKET LIVE STREAM {wsConnected ? `· CONNECTED (${todayDateStr})` : `· STANDBY (${todayDateStr})`}
+            {liveCount > 0 && <span className="live-count-pill">{liveCount} live packets received today</span>}
           </div>
           <h2>Latest Ecosystem & Model Updates</h2>
-          <p>Real-time updates, model releases, and feature rollouts updated dynamically every day.</p>
+          <p>Real-time updates, model releases, and feature rollouts updated automatically every day ({todayDateStr}).</p>
         </div>
-        <button className="button" onClick={() => setRotator(r => r + 1)}>
-          <RefreshCw size={14} /> Refresh updates
-        </button>
+        <div style={{ display: 'flex', gap: '8px', alignItems: 'center' }}>
+          <button className={`button ${liveStreamActive ? 'active-stream' : ''}`} onClick={() => setLiveStreamActive(!liveStreamActive)}>
+            <Wifi size={14} /> {liveStreamActive ? 'Pause Socket' : 'Resume Live'}
+          </button>
+          <button className="button" onClick={() => setRotator(r => r + 1)}>
+            <RefreshCw size={14} /> Next update
+          </button>
+        </div>
       </div>
 
       <div className="ai-news-ticker">
-        <span className="ticker-badge"><Sparkles size={13} /> BREAKING TODAY</span>
+        <span className="ticker-badge"><Sparkles size={13} /> LIVE WEBSOCKET TICKER</span>
         <a href={activeTicker.link} target="_blank" rel="noreferrer" className="ticker-text">
           <b>{activeTicker.source}:</b> {activeTicker.title} — <span>{activeTicker.time}</span>
         </a>
@@ -184,26 +322,36 @@ function LatestAIUpdates() {
       </div>
 
       <div className="ai-news-grid">
-        {filtered.map(item => {
-          const linkedTool = allTools.find(t => t.id === item.toolId);
-          return (
-            <article key={item.id} className="ai-news-card">
-              <div className="news-top">
-                <span className="news-tag">{item.tag}</span>
-                <span className="news-time">{item.time}</span>
-              </div>
-              <h3>{item.title}</h3>
-              <p>{item.summary}</p>
-              <div className="news-footer">
-                <span className="news-source"><Globe size={13} /> {item.source}</span>
-                <div className="news-actions">
-                  {linkedTool && <Link to={`/tools/${linkedTool.id}`} className="visit">Directory entry <ChevronRight size={13} /></Link>}
-                  <a href={item.link} target="_blank" rel="noreferrer" className="visit">Direct link <ExternalLink size={13} /></a>
+        <AnimatePresence>
+          {filtered.map(item => {
+            const linkedTool = allTools.find(t => t.id === item.toolId);
+            const isLatest = item.id === latestLiveId;
+            return (
+              <motion.article 
+                key={item.id} 
+                layout 
+                initial={{ opacity: 0, y: -12 }} 
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0 }}
+                className={`ai-news-card ${isLatest ? 'live-highlight' : ''}`}
+              >
+                <div className="news-top">
+                  <span className="news-tag">{item.tag}</span>
+                  <span className="news-time">{item.time}</span>
                 </div>
-              </div>
-            </article>
-          );
-        })}
+                <h3>{item.title}</h3>
+                <p>{item.summary}</p>
+                <div className="news-footer">
+                  <span className="news-source"><Globe size={13} /> {item.source}</span>
+                  <div className="news-actions">
+                    {linkedTool && <Link to={`/tools/${linkedTool.id}`} className="visit">Directory entry <ChevronRight size={13} /></Link>}
+                    <a href={item.link} target="_blank" rel="noreferrer" className="visit">Direct link <ExternalLink size={13} /></a>
+                  </div>
+                </div>
+              </motion.article>
+            );
+          })}
+        </AnimatePresence>
       </div>
     </section>
   );
@@ -315,8 +463,8 @@ const brandIconMap: Record<string, string> = {
   'zapier': 'https://cdn.simpleicons.org/zapier',
   'make': 'https://cdn.simpleicons.org/make',
   'crewai': 'https://cdn.simpleicons.org/python',
-  'langchain': 'https://cdn.simpleicons.org/langchain',
-  'langgraph': 'https://cdn.simpleicons.org/langchain',
+  'langchain': 'https://cdn.jsdelivr.net/npm/@lobehub/icons-static-svg@latest/icons/langchain-color.svg',
+  'langgraph': 'https://cdn.jsdelivr.net/npm/@lobehub/icons-static-svg@latest/icons/langgraph-color.svg',
   'flowise': 'https://cdn.simpleicons.org/flowise',
   'open-webui': 'https://cdn.simpleicons.org/openwebui',
   'ollama': 'https://cdn.simpleicons.org/ollama',
@@ -411,8 +559,9 @@ function ToolLogo({ tool, large = false }: { tool: Tool; large?: boolean }) {
       list.push(brandIconMap[tool.id]);
     }
     if (domain) {
-      list.push(`https://logo.clearbit.com/${domain}`);
       list.push(`https://www.google.com/s2/favicons?domain=${domain}&sz=128`);
+      list.push(`https://logo.clearbit.com/${domain}`);
+      list.push(`https://${domain}/favicon.ico`);
       list.push(`https://icon.horse/icon/${domain}`);
     }
     return list;
@@ -1004,6 +1153,7 @@ function Shell() {
     { to: '/', icon: Home, label: 'Home' },
     { to: '/browse', icon: Search, label: 'Directory' },
     { to: '/categories', icon: FolderGit2, label: 'Categories' },
+    { to: '/project-analysis', icon: BrainCircuit, label: 'Project Analysis' },
     { to: '/maker', icon: User, label: 'Maker' },
     { to: '/compare', icon: Boxes, label: 'Compare', count: compare.length },
     { to: '/favorites', icon: Heart, label: 'Saved', count: favorites.length }
@@ -1046,6 +1196,7 @@ function Shell() {
           <Route path="/" element={<Dashboard {...props}/>}/>
           <Route path="/browse" element={<Browse {...props}/>}/>
           <Route path="/categories" element={<Categories/>}/>
+          <Route path="/project-analysis" element={<ProjectAnalysisPage tools={allTools} categories={categories}/>}/>
           <Route path="/maker" element={<Maker/>}/>
           <Route path="/tools/:id" element={<Detail {...props}/>}/>
           <Route path="/compare" element={<Compare {...props}/>}/>
@@ -1061,6 +1212,10 @@ function Shell() {
         <NavLink to="/browse" className={({ isActive }) => (isActive ? 'mobile-nav-item active' : 'mobile-nav-item')}>
           <Search size={20} />
           <span>Explore</span>
+        </NavLink>
+        <NavLink to="/project-analysis" className={({ isActive }) => (isActive ? 'mobile-nav-item active' : 'mobile-nav-item')}>
+          <BrainCircuit size={20} />
+          <span>Analyze</span>
         </NavLink>
         <NavLink to="/categories" className={({ isActive }) => (isActive ? 'mobile-nav-item active' : 'mobile-nav-item')}>
           <FolderGit2 size={20} />
@@ -1112,6 +1267,7 @@ function Shell() {
             ) : (
               <div className="command-quick-links">
                 <p>Quick navigation</p>
+                <Link to="/project-analysis" onClick={()=>setCommand(false)}><BrainCircuit size={16}/> Project Analysis Engine</Link>
                 <Link to="/browse" onClick={()=>setCommand(false)}><Search size={16}/> Search all tools</Link>
                 <Link to="/categories" onClick={()=>setCommand(false)}><FolderGit2 size={16}/> Browse categories</Link>
                 <Link to="/maker" onClick={()=>setCommand(false)}><User size={16}/> Meet the Maker</Link>

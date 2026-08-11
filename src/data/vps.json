@@ -1,5 +1,25 @@
 [
   {
+    "id": "runpod",
+    "name": "RunPod Cloud GPU",
+    "category": "vps",
+    "pricing": { "free": false, "paid": true },
+    "website": "https://www.runpod.io",
+    "playstore": "",
+    "tags": ["vps", "gpu cloud", "serverless gpu", "fine-tuning", "h100", "a100", "developer tool"],
+    "developerCertified": true
+  },
+  {
+    "id": "vast-ai",
+    "name": "Vast.ai",
+    "category": "vps",
+    "pricing": { "free": false, "paid": true },
+    "website": "https://vast.ai",
+    "playstore": "",
+    "tags": ["vps", "gpu rental", "p2p gpu", "cheap training", "docker", "developer tool"],
+    "developerCertified": true
+  },
+  {
     "id": "vps-hetzner",
     "name": "Hetzner Cloud",
     "category": "vps",

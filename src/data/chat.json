@@ -218,5 +218,25 @@
     "playstore": "",
     "tags": ["chat", "private ai", "uncensored", "crypto", "no logs"],
     "developerCertified": false
+  },
+  {
+    "id": "deepseek-chat-official",
+    "name": "DeepSeek Chat",
+    "category": "chat",
+    "pricing": { "free": true, "paid": false },
+    "website": "https://chat.deepseek.com",
+    "playstore": "",
+    "tags": ["chat", "deepseek", "v3", "r1", "free reasoning", "coding"],
+    "developerCertified": true
+  },
+  {
+    "id": "kimi-k2",
+    "name": "Kimi AI Chat",
+    "category": "chat",
+    "pricing": { "free": true, "paid": true },
+    "website": "https://kimi.moonshot.cn",
+    "playstore": "",
+    "tags": ["chat", "moonshot", "2m context", "document reading", "long text"],
+    "developerCertified": true
   }
 ]

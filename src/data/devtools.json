@@ -1,5 +1,105 @@
 [
   {
+    "id": "ollama",
+    "name": "Ollama",
+    "category": "devtools",
+    "pricing": { "free": true, "paid": false },
+    "website": "https://ollama.com",
+    "playstore": "",
+    "tags": ["devtools", "local ai", "open source", "llama", "deepseek", "cli", "macos", "windows", "developer tool"],
+    "developerCertified": true
+  },
+  {
+    "id": "lmstudio",
+    "name": "LM Studio",
+    "category": "devtools",
+    "pricing": { "free": true, "paid": false },
+    "website": "https://lmstudio.ai",
+    "playstore": "",
+    "tags": ["devtools", "local ai", "desktop app", "gguf", "offline models", "openai api", "developer tool"],
+    "developerCertified": true
+  },
+  {
+    "id": "jan",
+    "name": "Jan AI",
+    "category": "devtools",
+    "pricing": { "free": true, "paid": false },
+    "website": "https://jan.ai",
+    "playstore": "",
+    "tags": ["devtools", "local ai", "open source", "chatgpt alternative", "privacy", "developer tool"],
+    "developerCertified": true
+  },
+  {
+    "id": "open-webui",
+    "name": "Open WebUI",
+    "category": "devtools",
+    "pricing": { "free": true, "paid": false },
+    "website": "https://openwebui.com",
+    "playstore": "",
+    "tags": ["devtools", "web UI", "ollama webui", "self-hosted", "chatgpt UI", "developer tool"],
+    "developerCertified": true
+  },
+  {
+    "id": "anythingllm",
+    "name": "AnythingLLM",
+    "category": "devtools",
+    "pricing": { "free": true, "paid": true },
+    "website": "https://anythingllm.com",
+    "playstore": "",
+    "tags": ["devtools", "rag", "documents", "vector database", "local llm", "enterprise", "developer tool"],
+    "developerCertified": true
+  },
+  {
+    "id": "dify",
+    "name": "Dify AI",
+    "category": "devtools",
+    "pricing": { "free": true, "paid": true },
+    "website": "https://dify.ai",
+    "playstore": "",
+    "tags": ["devtools", "llm ops", "agent builder", "workflow", "open source", "rag", "developer tool"],
+    "developerCertified": true
+  },
+  {
+    "id": "langflow",
+    "name": "Langflow",
+    "category": "devtools",
+    "pricing": { "free": true, "paid": false },
+    "website": "https://www.langflow.org",
+    "playstore": "",
+    "tags": ["devtools", "visual canvas", "multi-agent", "python", "datastax", "langchain", "developer tool"],
+    "developerCertified": true
+  },
+  {
+    "id": "flowise",
+    "name": "Flowise AI",
+    "category": "devtools",
+    "pricing": { "free": true, "paid": false },
+    "website": "https://flowiseai.com",
+    "playstore": "",
+    "tags": ["devtools", "no-code ai", "drag and drop", "langchain", "node.js", "open source", "developer tool"],
+    "developerCertified": true
+  },
+  {
+    "id": "localai",
+    "name": "LocalAI",
+    "category": "devtools",
+    "pricing": { "free": true, "paid": false },
+    "website": "https://localai.io",
+    "playstore": "",
+    "tags": ["devtools", "openai REST drop-in", "local model", "docker", "c++", "developer tool"],
+    "developerCertified": true
+  },
+  {
+    "id": "vllm",
+    "name": "vLLM",
+    "category": "devtools",
+    "pricing": { "free": true, "paid": false },
+    "website": "https://vllm.ai",
+    "playstore": "",
+    "tags": ["devtools", "high throughput", "paged attention", "gpu inference", "python", "developer tool"],
+    "developerCertified": true
+  },
+  {
     "id": "vscode",
     "name": "VS Code",
     "category": "devtools",
@@ -60,16 +160,6 @@
     "developerCertified": true
   },
   {
-    "id": "stackoverflow",
-    "name": "Stack Overflow",
-    "category": "devtools",
-    "pricing": { "free": true, "paid": true },
-    "website": "https://stackoverflow.com",
-    "playstore": "https://play.google.com/store/apps/details?id=com.stackexchange.marvin",
-    "tags": ["devtools", "q&a", "community", "programming help", "debugging", "developer tool"],
-    "developerCertified": true
-  },
-  {
     "id": "gitlab",
     "name": "GitLab",
     "category": "devtools",
@@ -80,23 +170,23 @@
     "developerCertified": true
   },
   {
-    "id": "insomnia",
-    "name": "Insomnia",
+    "id": "gitkraken-ai",
+    "name": "GitKraken AI",
     "category": "devtools",
     "pricing": { "free": true, "paid": true },
-    "website": "https://insomnia.rest",
+    "website": "https://www.gitkraken.com",
     "playstore": "",
-    "tags": ["devtools", "api client", "rest", "graphql", "postman alternative", "open source", "developer tool"],
+    "tags": ["devtools", "git client", "commit summaries", "merge conflict", "developer tool"],
     "developerCertified": true
   },
   {
-    "id": "npm",
-    "name": "npm",
+    "id": "bruno",
+    "name": "Bruno API Client",
     "category": "devtools",
-    "pricing": { "free": true, "paid": true },
-    "website": "https://www.npmjs.com",
+    "pricing": { "free": true, "paid": false },
+    "website": "https://usebruno.com",
     "playstore": "",
-    "tags": ["devtools", "package manager", "javascript", "node.js", "registry", "modules", "developer tool"],
+    "tags": ["devtools", "api client", "open source", "postman alternative", "git friendly", "developer tool"],
     "developerCertified": true
   }
 ]

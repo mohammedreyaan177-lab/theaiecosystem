@@ -1,5 +1,45 @@
 [
   {
+    "id": "recraft-v3",
+    "name": "Recraft V3",
+    "category": "design",
+    "pricing": { "free": true, "paid": true },
+    "website": "https://www.recraft.ai",
+    "playstore": "",
+    "tags": ["design", "vector svg", "graphic design", "red dot award", "style consistency"],
+    "developerCertified": true
+  },
+  {
+    "id": "ideogram-v2",
+    "name": "Ideogram 2.0",
+    "category": "design",
+    "pricing": { "free": true, "paid": true },
+    "website": "https://ideogram.ai",
+    "playstore": "",
+    "tags": ["design", "typography", "logo design", "graphic art", "text rendering"],
+    "developerCertified": true
+  },
+  {
+    "id": "adobe-firefly",
+    "name": "Adobe Firefly",
+    "category": "design",
+    "pricing": { "free": true, "paid": true },
+    "website": "https://firefly.adobe.com",
+    "playstore": "",
+    "tags": ["design", "adobe", "generative fill", "photoshop", "vector generation", "font text effects"],
+    "developerCertified": true
+  },
+  {
+    "id": "uizard",
+    "name": "Uizard",
+    "category": "design",
+    "pricing": { "free": true, "paid": true },
+    "website": "https://uizard.io",
+    "playstore": "",
+    "tags": ["design", "ui mockups", "wireframe to code", "prototyping", "ai designer"],
+    "developerCertified": true
+  },
+  {
     "id": "figma",
     "name": "Figma",
     "category": "design",

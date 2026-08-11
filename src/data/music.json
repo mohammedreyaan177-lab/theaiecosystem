@@ -1,5 +1,15 @@
 [
   {
+    "id": "riffusion",
+    "name": "Riffusion",
+    "category": "music",
+    "pricing": { "free": true, "paid": false },
+    "website": "https://www.riffusion.com",
+    "playstore": "",
+    "tags": ["music", "spectrogram diffusion", "realtime music", "open source", "audio generation"],
+    "developerCertified": true
+  },
+  {
     "id": "suno",
     "name": "Suno",
     "category": "music",
@@ -27,16 +37,6 @@
     "website": "https://soundraw.io",
     "playstore": "",
     "tags": ["music", "royalty free music", "background music", "custom beats", "video background"],
-    "developerCertified": false
-  },
-  {
-    "id": "splash-pro",
-    "name": "Splash Pro",
-    "category": "music",
-    "pricing": { "free": true, "paid": true },
-    "website": "https://pro.splashmusic.com",
-    "playstore": "",
-    "tags": ["music", "beat maker", "text to music", "vocal synth", "ai producer"],
     "developerCertified": false
   }
 ]
