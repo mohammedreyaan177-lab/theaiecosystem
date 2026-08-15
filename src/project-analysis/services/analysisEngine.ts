@@ -60,6 +60,13 @@ export async function runProjectAnalysis(
   return {
     timestamp: new Date().toISOString(),
     rawInput: prompt,
+    classification: {
+      requestType: lowerPrompt.includes('like') || lowerPrompt.includes('clone') ? 'PROJECT_SPECIFIC' : 'GENERIC',
+      confidence: 0.90,
+      targetEntity: null,
+      projectType: understanding.category,
+      reason: existsSummary
+    },
     understanding,
     architectureSummary,
     techStack,

@@ -6,6 +6,9 @@ import { ToolMatchingSection } from './ToolMatchingSection';
 import { ExistingProductsSection } from './ExistingProductsSection';
 import { ArchitectureSection } from './ArchitectureSection';
 import { SecuritySection } from './SecuritySection';
+import { BuildBlueprintSection } from './BuildBlueprintSection';
+import { DifferentiationSection } from './DifferentiationSection';
+import { TestingDeploymentSection } from './TestingDeploymentSection';
 import { 
   RotateCcw, 
   Printer, 
@@ -14,9 +17,11 @@ import {
   Boxes, 
   Globe, 
   Network, 
-  ShieldAlert, 
+  Download,
+  Target,
   Layers,
-  Download
+  Rocket,
+  Sparkles
 } from 'lucide-react';
 
 interface AnalysisResultsViewProps {
@@ -26,10 +31,12 @@ interface AnalysisResultsViewProps {
 
 type TabKey = 
   | 'all' 
+  | 'blueprint'
+  | 'differentiation'
   | 'products'
   | 'tech' 
-  | 'ai' 
   | 'tools' 
+  | 'testing'
   | 'architecture';
 
 export const AnalysisResultsView: React.FC<AnalysisResultsViewProps> = ({ report, onReset }) => {
@@ -43,27 +50,36 @@ export const AnalysisResultsView: React.FC<AnalysisResultsViewProps> = ({ report
     const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(report, null, 2));
     const downloadAnchor = document.createElement('a');
     downloadAnchor.setAttribute("href", dataStr);
-    downloadAnchor.setAttribute("download", `technical_analysis.json`);
+    downloadAnchor.setAttribute("download", `project_analysis.json`);
     document.body.appendChild(downloadAnchor);
     downloadAnchor.click();
     downloadAnchor.remove();
   };
 
   const tabs: { key: TabKey; label: string; icon: React.FC<{ size?: number }> }[] = [
-    { key: 'all', label: 'Full Technical Report', icon: Layers },
-    { key: 'products', label: 'Internet Search (Does it exist?)', icon: Globe },
+    { key: 'all', label: 'Full Technical Report', icon: Sparkles },
+    { key: 'blueprint', label: 'Build Blueprint & Guides', icon: Layers },
+    { key: 'differentiation', label: 'Product Differentiation', icon: Sparkles },
+    { key: 'products', label: 'Web Discovery & Existing Projects', icon: Globe },
+    { key: 'tools', label: 'AI Tool Recommendations', icon: Boxes },
     { key: 'tech', label: 'Recommended Tech Stack', icon: Server },
-    { key: 'ai', label: 'AI Capabilities', icon: BrainCircuit },
-    { key: 'tools', label: 'AIEcosystem Tools', icon: Boxes },
+    { key: 'testing', label: 'Testing & Deployment', icon: Rocket },
     { key: 'architecture', label: 'Architecture & Security', icon: Network }
   ];
+
+  const classification = report.classification || {
+    requestType: 'GENERIC',
+    confidence: 0.95,
+    targetEntity: null,
+    reason: 'Generic application concept analysis.'
+  };
 
   return (
     <div className="analysis-results-container">
       <div className="results-toolbar">
         <div className="results-title-summary">
           <span className="eyebrow">TECHNICAL EVALUATION COMPLETE</span>
-          <h2>Project Technical Analysis</h2>
+          <h2>Project Technical Analysis Report</h2>
           <p className="timestamp">Generated on {new Date(report.timestamp).toLocaleString()}</p>
         </div>
 
@@ -78,6 +94,29 @@ export const AnalysisResultsView: React.FC<AnalysisResultsViewProps> = ({ report
             <Printer size={15} /> Print / Export PDF
           </button>
         </div>
+      </div>
+
+      {/* Classification Intent Banner */}
+      <div className="intent-classification-banner" style={{ background: 'var(--paper)', border: '1px solid var(--line)', borderRadius: '14px', padding: '20px', marginBottom: '24px' }}>
+        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '12px', marginBottom: '12px' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+            <span className={`badge ${classification.requestType === 'PROJECT_SPECIFIC' ? 'certified' : 'freemium'}`} style={{ fontSize: '13px', padding: '4px 12px' }}>
+              <Target size={14} style={{ display: 'inline', marginRight: '6px' }} />
+              {classification.requestType === 'PROJECT_SPECIFIC' ? 'PROJECT-SPECIFIC REQUEST' : 'GENERIC CATEGORY REQUEST'}
+            </span>
+            <span style={{ fontSize: '13px', color: 'var(--muted)', fontWeight: 600 }}>
+              Confidence: {Math.round((classification.confidence || 0.95) * 100)}%
+            </span>
+          </div>
+          {classification.targetEntity && (
+            <span style={{ background: 'var(--soft)', padding: '4px 12px', borderRadius: '8px', fontSize: '13px', fontWeight: 700, color: 'var(--green)' }}>
+              Target Reference: {classification.targetEntity}
+            </span>
+          )}
+        </div>
+        <p style={{ margin: 0, fontSize: '14px', color: 'var(--ink)', lineHeight: '1.5' }}>
+          <b>Intent Classification Reasoning:</b> {classification.reason}
+        </p>
       </div>
 
       {/* Tabs bar */}
@@ -96,8 +135,16 @@ export const AnalysisResultsView: React.FC<AnalysisResultsViewProps> = ({ report
         ))}
       </div>
 
-      {/* Render Streamlined Tab Contents */}
+      {/* Render Tab Contents */}
       <div className="report-content-body">
+        {(activeTab === 'all' || activeTab === 'blueprint') && (
+          <BuildBlueprintSection phases={report.buildBlueprint} />
+        )}
+
+        {(activeTab === 'all' || activeTab === 'differentiation') && (
+          <DifferentiationSection data={report.differentiationEngine} />
+        )}
+
         {(activeTab === 'all' || activeTab === 'products') && (
           <ExistingProductsSection
             products={report.existingProducts}
@@ -106,16 +153,19 @@ export const AnalysisResultsView: React.FC<AnalysisResultsViewProps> = ({ report
           />
         )}
 
+        {(activeTab === 'all' || activeTab === 'tools') && (
+          <ToolMatchingSection items={report.ecosystemTools} />
+        )}
+
         {(activeTab === 'all' || activeTab === 'tech') && (
           <TechStackSection items={report.techStack} archSummary={report.architectureSummary} />
         )}
 
-        {(activeTab === 'all' || activeTab === 'ai') && (
-          <AIStackSection items={report.aiStack} />
-        )}
-
-        {(activeTab === 'all' || activeTab === 'tools') && (
-          <ToolMatchingSection items={report.ecosystemTools} />
+        {(activeTab === 'all' || activeTab === 'testing') && (
+          <TestingDeploymentSection
+            testingPlan={report.testingPlan}
+            deploymentPlan={report.deploymentPlan}
+          />
         )}
 
         {(activeTab === 'all' || activeTab === 'architecture') && (

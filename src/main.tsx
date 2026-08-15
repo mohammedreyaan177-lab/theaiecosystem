@@ -2,9 +2,11 @@ import React, { useEffect, useMemo, useState } from 'react'
 import { createRoot } from 'react-dom/client'
 import { BrowserRouter, Link, NavLink, Route, Routes, useLocation, useNavigate, useParams } from 'react-router-dom'
 import { AnimatePresence, motion } from 'framer-motion'
-import { BarChart3, Bot, Boxes, BrainCircuit, Check, ChevronRight, CircleHelp, Command, ExternalLink, FolderGit2, Globe, Heart, Home, Menu, Moon, Palette, Radio, RefreshCw, Search, Smartphone, Sparkles, Star, TrendingUp, User, Users, Wifi, X, Zap } from 'lucide-react'
+import { BarChart3, Bot, Boxes, BrainCircuit, Check, ChevronRight, CircleHelp, Command, ExternalLink, FolderGit2, Globe, Heart, Home, Layers, Menu, Moon, Palette, Radio, RefreshCw, Search, Smartphone, Sparkles, Star, TrendingUp, User, Users, Wifi, X, Zap } from 'lucide-react'
 import brandLogo from './assets/ai-ecosystem-logo.png'
 import ProjectAnalysisPage from './project-analysis/components/ProjectAnalysisPage'
+import { useISTGreeting } from './utils/greeting'
+import { fetchNewsArticles, triggerNewsIngestion, NewsArticle } from './services/newsApi'
 import './style.css'
 
 function GithubIcon({ size = 18 }: { size?: number }) {
@@ -169,119 +171,126 @@ const allTools: Tool[] = Object.values(modules).flatMap(m => m.default || []).re
 })
 const categories = [...new Set(allTools.map(t => t.category))].map(id => ({ id, name: title(id), count: allTools.filter(t => t.category === id).length, description: categoryCopy[id] || `Explore ${title(id)} AI tools` })).sort((a,b) => b.count-a.count)
 
-function getDynamicTime(hoursOffset: number): string {
-  const now = new Date();
-  if (hoursOffset === 0) {
-    return `Today at ${now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}`;
+function formatPublishedTime(publishedAt: string): string {
+  try {
+    const pubDate = new Date(publishedAt);
+    const now = new Date();
+    const diffMs = now.getTime() - pubDate.getTime();
+    const diffMins = Math.floor(diffMs / 60000);
+    const diffHours = Math.floor(diffMins / 60);
+    const diffDays = Math.floor(diffHours / 24);
+
+    if (diffMins < 5) return 'Just now';
+    if (diffMins < 60) return `${diffMins}m ago`;
+    if (diffHours < 24) return `${diffHours}h ago`;
+    if (diffDays === 1) return 'Yesterday';
+    return pubDate.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+  } catch {
+    return 'Recent';
   }
-  const date = new Date(now.getTime() - hoursOffset * 3600 * 1000);
-  const isToday = date.toDateString() === now.toDateString();
-  if (isToday) {
-    return hoursOffset < 1 ? 'Just now (Today)' : `Today (${hoursOffset}h ago)`;
-  }
-  const diffDays = Math.floor((now.getTime() - date.getTime()) / (1000 * 3600 * 24));
-  return diffDays === 1 ? 'Yesterday' : `${diffDays}d ago`;
 }
 
-type AIUpdate = { id: string; title: string; category: 'all' | 'models' | 'features' | 'open-source'; source: string; offsetHours: number; summary: string; toolId?: string; link: string; tag: string }
-const rawAIUpdates: AIUpdate[] = [
-  { id: 'deepseek-r1', title: 'DeepSeek Releases R1 Open Reasoning Model', category: 'models', source: 'DeepSeek AI', offsetHours: 2, summary: 'DeepSeek-R1 introduces open-weights reasoning capability matching frontier proprietary models with full chain-of-thought outputs.', toolId: 'deepseek', link: 'https://chat.deepseek.com', tag: 'MODEL RELEASE' },
-  { id: 'claude-37', title: 'Anthropic Unveils Hybrid Thinking Architecture', category: 'models', source: 'Anthropic', offsetHours: 4, summary: 'Claude 3.7 Sonnet introduces controllable reasoning budget for complex math, coding, and strategic decision making.', toolId: 'claude', link: 'https://claude.ai', tag: 'MAJOR UPDATE' },
-  { id: 'gemini-2-flash', title: 'Google Expands Gemini 2.0 Flash Multimodal Capabilities', category: 'models', source: 'Google DeepMind', offsetHours: 6, summary: 'Real-time audio, vision streaming, and enhanced speed available natively in Google AI Studio and Gemini web interface.', toolId: 'gemini', link: 'https://gemini.google.com', tag: 'API & SPEEDS' },
-  { id: 'openai-o3-mini', title: 'OpenAI Launches o3-mini Reasoning Model', category: 'features', source: 'OpenAI', offsetHours: 18, summary: 'STEM-optimized reasoning model brought to ChatGPT Free and Plus users with high, medium, and low thinking parameters.', toolId: 'chatgpt', link: 'https://chatgpt.com', tag: 'FEATURE ROLLOUT' },
-  { id: 'cursor-045', title: 'Cursor Releases Agentic Multi-File Background Code Generator', category: 'features', source: 'Cursor Team', offsetHours: 26, summary: 'Automated background codebase indexing and intelligent prompt chaining now available in Cursor 0.45.', toolId: 'cursor', link: 'https://cursor.com', tag: 'TOOL UPDATE' },
-  { id: 'llama-33-70b', title: 'Meta Releases Llama 3.3 70B Open Source Weights', category: 'open-source', source: 'Meta AI', offsetHours: 42, summary: 'State-of-the-art open source LLM matching previous 405B performance at a fraction of inference compute requirements.', toolId: 'meta-ai', link: 'https://www.meta.ai', tag: 'OPEN SOURCE' },
-  { id: 'mistral-le-chat', title: 'Mistral AI Enhances Le Chat with Live Code Sandbox', category: 'features', source: 'Mistral AI', offsetHours: 54, summary: 'Le Chat now features live Python code sandbox, document analysis, and web search integrations.', toolId: 'le-chat', link: 'https://chat.mistral.ai', tag: 'NEW FEATURE' },
-  { id: 'suno-v4', title: 'Suno Audio Model v4 Reaches Studio Quality', category: 'models', source: 'Suno Music', offsetHours: 68, summary: 'Improved vocal clarity, multi-instrument separation, and customizable song structure controls.', toolId: 'suno', link: 'https://suno.com', tag: 'AUDIO & MUSIC' }
-]
-
 function LatestAIUpdates() {
-  const [filter, setFilter] = useState<'all' | 'models' | 'features' | 'open-source'>('all');
+  const [filter, setFilter] = useState<string>('all');
   const [rotator, setRotator] = useState(0);
-  const [liveStreamActive, setLiveStreamActive] = useState(true);
-  const [wsConnected, setWsConnected] = useState(false);
-  const [liveCount, setLiveCount] = useState(0);
-  const [updatesList, setUpdatesList] = useState<AIUpdate[]>(rawAIUpdates);
-  const [latestLiveId, setLatestLiveId] = useState<string | null>(null);
+  const [articles, setArticles] = useState<NewsArticle[]>([]);
+  const [pendingArticles, setPendingArticles] = useState<NewsArticle[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [refreshing, setRefreshing] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+  const [latestPublishedAt, setLatestPublishedAt] = useState<string | null>(null);
 
-  useEffect(() => {
-    let ws: WebSocket | null = null;
-    let fallbackTimer: ReturnType<typeof setInterval> | null = null;
+  // Initial Fetch & Category Change
+  const loadArticles = async (category: string, isInitial = false) => {
+    if (isInitial) setLoading(true);
+    setError(null);
 
     try {
-      ws = new WebSocket('wss://echo.websocket.events');
-      ws.onopen = () => {
-        setWsConnected(true);
-      };
-      ws.onmessage = (event) => {
-        try {
-          const data = JSON.parse(event.data);
-          if (data && data.title) {
-            setUpdatesList(prev => [data, ...prev]);
-            setLatestLiveId(data.id);
-            setLiveCount(c => c + 1);
-          }
-        } catch {
-          // ignore
-        }
-      };
-      ws.onerror = () => setWsConnected(false);
-      ws.onclose = () => setWsConnected(false);
-    } catch {
-      setWsConnected(false);
-    }
-
-    const sampleLiveNews = [
-      { id: 'live-antigravity-1', title: 'Google DeepMind Antigravity AI Agent Suite Released', category: 'models', source: 'Google DeepMind', offsetHours: 0, summary: 'Google DeepMind launches Antigravity AI pair programming engine for autonomous code construction.', toolId: 'antigravity', link: 'https://deepmind.google', tag: 'WEBSOCKET STREAM' },
-      { id: 'live-hermes-agent', title: 'Nous Research Hermes Agent Framework Deployed', category: 'open-source', source: 'Nous Research', offsetHours: 0, summary: 'Nous Hermes 3 reasoning agent toolchain published open-weights with native tool execution.', toolId: 'hermes', link: 'https://nousresearch.com', tag: 'SOCKET EVENT' },
-      { id: 'live-deepseek-coder', title: 'DeepSeek-V3 671B Real-Time Inference Gateway Active', category: 'models', source: 'DeepSeek AI', offsetHours: 0, summary: 'DeepSeek MoE model endpoint updated with token streaming and sub-second latency.', toolId: 'deepseek', link: 'https://chat.deepseek.com', tag: 'LIVE PACKET' },
-      { id: 'live-claude-37', title: 'Anthropic Claude 3.7 Sonnet Hybrid Thinking Active', category: 'features', source: 'Anthropic AI', offsetHours: 0, summary: 'Controllable reasoning budget parameters integrated live across Anthropic API & web client.', toolId: 'claude', link: 'https://claude.ai', tag: 'LIVE FEED' }
-    ];
-
-    let index = 0;
-    fallbackTimer = setInterval(() => {
-      if (!liveStreamActive) return;
-      const nextItem = {
-        ...sampleLiveNews[index % sampleLiveNews.length],
-        id: `socket-item-${Date.now()}`,
-        offsetHours: 0
-      } as AIUpdate;
-
-      if (ws && ws.readyState === WebSocket.OPEN) {
-        ws.send(JSON.stringify(nextItem));
-      } else {
-        setUpdatesList(prev => [nextItem, ...prev.slice(0, 15)]);
-        setLatestLiveId(nextItem.id);
-        setLiveCount(c => c + 1);
-        setWsConnected(true);
+      const data = await fetchNewsArticles({ page: 1, limit: 20, category });
+      setArticles(data.articles || []);
+      setPendingArticles([]);
+      if (data.latestPublishedAt) {
+        setLatestPublishedAt(data.latestPublishedAt);
+      } else if (data.articles && data.articles.length > 0) {
+        setLatestPublishedAt(data.articles[0].publishedAt);
       }
-      index++;
-    }, 10000);
+    } catch (err: any) {
+      console.error('[Frontend News] Error fetching articles:', err);
+      setError(err.message || 'Failed to load live news');
+    } finally {
+      setLoading(false);
+      setRefreshing(false);
+    }
+  };
 
-    return () => {
-      if (ws) ws.close();
-      if (fallbackTimer) clearInterval(fallbackTimer);
-    };
-  }, [liveStreamActive]);
-
+  // Initial Load
   useEffect(() => {
-    const timer = setInterval(() => setRotator(r => r + 1), 5000);
+    loadArticles(filter, true);
+  }, [filter]);
+
+  // Controlled Incremental Polling (Every 5 minutes = 300,000ms)
+  useEffect(() => {
+    const pollInterval = setInterval(async () => {
+      if (!latestPublishedAt) return;
+      try {
+        const data = await fetchNewsArticles({ category: filter, after: latestPublishedAt });
+        if (data.articles && data.articles.length > 0) {
+          // Deduplicate incoming articles against existing IDs
+          const existingIds = new Set(articles.map(a => a.id));
+          const existingUrls = new Set(articles.map(a => a.canonicalUrl || a.url));
+
+          const newUnique = data.articles.filter(a => !existingIds.has(a.id) && !existingUrls.has(a.canonicalUrl || a.url));
+          if (newUnique.length > 0) {
+            setPendingArticles(prev => {
+              const combined = [...newUnique, ...prev];
+              const set = new Set();
+              return combined.filter(item => {
+                if (set.has(item.id)) return false;
+                set.add(item.id);
+                return true;
+              });
+            });
+            if (data.latestPublishedAt) {
+              setLatestPublishedAt(data.latestPublishedAt);
+            }
+          }
+        }
+      } catch {
+        // Silent polling failure handling
+      }
+    }, 5 * 60 * 1000);
+
+    return () => clearInterval(pollInterval);
+  }, [filter, latestPublishedAt, articles]);
+
+  // Ticker Auto Rotator
+  useEffect(() => {
+    const timer = setInterval(() => setRotator(r => r + 1), 6000);
     return () => clearInterval(timer);
   }, []);
 
-  const aiUpdates = useMemo(() => {
-    return updatesList.map(item => ({
-      ...item,
-      time: getDynamicTime(item.offsetHours)
-    }));
-  }, [updatesList]);
+  const handleApplyPending = () => {
+    if (pendingArticles.length === 0) return;
+    setArticles(prev => {
+      const merged = [...pendingArticles, ...prev];
+      const seen = new Set();
+      return merged.filter(item => {
+        const key = item.canonicalUrl || item.url || item.id;
+        if (seen.has(key)) return false;
+        seen.add(key);
+        return true;
+      });
+    });
+    setPendingArticles([]);
+  };
 
-  const filtered = useMemo(() => {
-    const list = filter === 'all' ? aiUpdates : aiUpdates.filter(u => u.category === filter);
-    return list;
-  }, [filter, aiUpdates]);
+  const handleManualRefresh = async () => {
+    setRefreshing(true);
+    await triggerNewsIngestion();
+    await loadArticles(filter, false);
+  };
 
-  const activeTicker = aiUpdates[rotator % aiUpdates.length] || aiUpdates[0];
+  const activeTicker = articles[rotator % articles.length] || articles[0];
   const todayDateStr = useMemo(() => new Date().toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric', year: 'numeric' }), []);
 
   return (
@@ -289,70 +298,98 @@ function LatestAIUpdates() {
       <div className="ai-news-header">
         <div>
           <div className="live-indicator">
-            <span className={`live-dot ${wsConnected ? 'connected' : ''}`} />
-            <Radio size={14} /> WEBSOCKET LIVE STREAM {wsConnected ? `· CONNECTED (${todayDateStr})` : `· STANDBY (${todayDateStr})`}
-            {liveCount > 0 && <span className="live-count-pill">{liveCount} live packets received today</span>}
+            <span className="live-dot connected" />
+            <Radio size={14} /> REST API PIPELINE · LIVE INGESTION ({todayDateStr})
+            {pendingArticles.length > 0 && (
+              <button className="live-count-pill clickable" onClick={handleApplyPending} style={{ cursor: 'pointer', border: 'none' }}>
+                {pendingArticles.length} new stories ready — click to merge
+              </button>
+            )}
           </div>
           <h2>Latest Ecosystem & Model Updates</h2>
-          <p>Real-time updates, model releases, and feature rollouts updated automatically every day ({todayDateStr}).</p>
+          <p>Real-time AI news ingested, normalized, and deduplicated from external sources ({todayDateStr}).</p>
         </div>
         <div style={{ display: 'flex', gap: '8px', alignItems: 'center' }}>
-          <button className={`button ${liveStreamActive ? 'active-stream' : ''}`} onClick={() => setLiveStreamActive(!liveStreamActive)}>
-            <Wifi size={14} /> {liveStreamActive ? 'Pause Socket' : 'Resume Live'}
-          </button>
-          <button className="button" onClick={() => setRotator(r => r + 1)}>
-            <RefreshCw size={14} /> Next update
+          <button className={`button ${refreshing ? 'loading' : ''}`} onClick={handleManualRefresh} disabled={refreshing}>
+            <RefreshCw size={14} className={refreshing ? 'spin' : ''} /> {refreshing ? 'Fetching...' : 'Check for updates'}
           </button>
         </div>
       </div>
 
-      <div className="ai-news-ticker">
-        <span className="ticker-badge"><Sparkles size={13} /> LIVE WEBSOCKET TICKER</span>
-        <a href={activeTicker.link} target="_blank" rel="noreferrer" className="ticker-text">
-          <b>{activeTicker.source}:</b> {activeTicker.title} — <span>{activeTicker.time}</span>
-        </a>
-      </div>
+      {activeTicker && (
+        <div className="ai-news-ticker">
+          <span className="ticker-badge"><Sparkles size={13} /> LATEST STORY</span>
+          <a href={activeTicker.canonicalUrl || activeTicker.url} target="_blank" rel="noreferrer" className="ticker-text">
+            <b>{activeTicker.source}:</b> {activeTicker.title} — <span>{formatPublishedTime(activeTicker.publishedAt)}</span>
+          </a>
+        </div>
+      )}
 
       <div className="ai-news-filters">
-        {(['all', 'models', 'features', 'open-source'] as const).map(cat => (
-          <button key={cat} className={filter === cat ? 'active' : ''} onClick={() => setFilter(cat)}>
-            {cat === 'all' ? 'All Updates' : cat === 'models' ? 'Model Releases' : cat === 'features' ? 'Tool Features' : 'Open Source'}
+        {[
+          { id: 'all', label: 'All Updates' },
+          { id: 'Models', label: 'Model Releases' },
+          { id: 'Open Source', label: 'Open Source' },
+          { id: 'Research', label: 'Research' },
+          { id: 'Developer Tools', label: 'Dev Tools' },
+          { id: 'AI Agents', label: 'AI Agents' },
+          { id: 'Funding', label: 'Funding' }
+        ].map(cat => (
+          <button key={cat.id} className={filter === cat.id ? 'active' : ''} onClick={() => setFilter(cat.id)}>
+            {cat.label}
           </button>
         ))}
       </div>
 
-      <div className="ai-news-grid">
-        <AnimatePresence>
-          {filtered.map(item => {
-            const linkedTool = allTools.find(t => t.id === item.toolId);
-            const isLatest = item.id === latestLiveId;
-            return (
-              <motion.article 
-                key={item.id} 
-                layout 
-                initial={{ opacity: 0, y: -12 }} 
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0 }}
-                className={`ai-news-card ${isLatest ? 'live-highlight' : ''}`}
-              >
-                <div className="news-top">
-                  <span className="news-tag">{item.tag}</span>
-                  <span className="news-time">{item.time}</span>
-                </div>
-                <h3>{item.title}</h3>
-                <p>{item.summary}</p>
-                <div className="news-footer">
-                  <span className="news-source"><Globe size={13} /> {item.source}</span>
-                  <div className="news-actions">
-                    {linkedTool && <Link to={`/tools/${linkedTool.id}`} className="visit">Directory entry <ChevronRight size={13} /></Link>}
-                    <a href={item.link} target="_blank" rel="noreferrer" className="visit">Direct link <ExternalLink size={13} /></a>
+      {error && (
+        <div className="news-error-banner" style={{ padding: '12px 16px', background: '#ffeef0', color: '#b31d28', borderRadius: '10px', fontSize: '13px', marginBottom: '16px' }}>
+          ⚠️ {error}. Displaying stored cached news feed.
+        </div>
+      )}
+
+      {loading ? (
+        <div style={{ padding: '40px', textAlign: 'center', color: 'var(--muted)' }}>
+          <RefreshCw size={24} className="spin" style={{ margin: '0 auto 12px' }} />
+          <p>Fetching fresh deduplicated news feed...</p>
+        </div>
+      ) : articles.length === 0 ? (
+        <div style={{ padding: '40px', textAlign: 'center', background: 'var(--paper)', borderRadius: '14px', border: '1px dashed var(--line)' }}>
+          <h3>No recent AI news available.</h3>
+          <p style={{ color: 'var(--muted)', fontSize: '14px' }}>Check back soon as backend periodically ingests fresh stories from external sources.</p>
+        </div>
+      ) : (
+        <div className="ai-news-grid">
+          <AnimatePresence>
+            {articles.map(item => {
+              const linkedTool = allTools.find(t => t.name.toLowerCase().includes(item.source.toLowerCase()) || t.id === item.source.toLowerCase());
+              return (
+                <motion.article 
+                  key={item.id} 
+                  layout 
+                  initial={{ opacity: 0, y: -10 }} 
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0 }}
+                  className="ai-news-card"
+                >
+                  <div className="news-top">
+                    <span className="news-tag">{item.category.toUpperCase()}</span>
+                    <span className="news-time">{formatPublishedTime(item.publishedAt)}</span>
                   </div>
-                </div>
-              </motion.article>
-            );
-          })}
-        </AnimatePresence>
-      </div>
+                  <h3>{item.title}</h3>
+                  <p>{item.description}</p>
+                  <div className="news-footer">
+                    <span className="news-source"><Globe size={13} /> {item.source}</span>
+                    <div className="news-actions">
+                      {linkedTool && <Link to={`/tools/${linkedTool.id}`} className="visit">Directory entry <ChevronRight size={13} /></Link>}
+                      <a href={item.canonicalUrl || item.url} target="_blank" rel="noreferrer" className="visit">Direct link <ExternalLink size={13} /></a>
+                    </div>
+                  </div>
+                </motion.article>
+              );
+            })}
+          </AnimatePresence>
+        </div>
+      )}
     </section>
   );
 }
@@ -662,7 +699,34 @@ function TrendingTechBar() {
 }
 
 function Stat({ icon: Icon, label, value, tone = '' }: { icon: any; label: string; value: number; tone?: string }) { return <div className="stat"><span className={`stat-icon ${tone}`}><Icon size={18}/></span><div><b>{value.toLocaleString()}</b><span>{label}</span></div></div> }
-function Dashboard(props: PageProps) { const trend = [...allTools].sort((a,b) => b.rating - a.rating).slice(0,6); return <><div className="page-heading"><div><p className="eyebrow">OVERVIEW</p><h1>Good evening, explorer.</h1><p>Discover the best tools for your next AI workflow.</p></div><Link className="primary" to="/browse"><Search size={16}/> Explore tools</Link></div><TrendingTechBar/><section className="stats"><Stat icon={Bot} label="AI tools" value={allTools.length} tone="blue"/><Stat icon={Zap} label="Free to try" value={allTools.filter(t=>t.pricing.free).length} tone="green"/><Stat icon={BarChart3} label="Categories" value={categories.length} tone="purple"/><Stat icon={Users} label="Companies" value={new Set(allTools.map(t=>t.company)).size} tone="orange"/></section><SectionHead title="Top rated AI" action="View all" to="/browse"/><div className="tool-grid">{trend.map(t => <ToolCard key={t.id} tool={t} {...props}/>)}</div><LatestAIUpdates/></> }
+function Dashboard(props: PageProps) { 
+  const trend = [...allTools].sort((a,b) => b.rating - a.rating).slice(0,6); 
+  const greeting = useISTGreeting();
+  return (
+    <>
+      <div className="page-heading">
+        <div>
+          <p className="eyebrow">OVERVIEW</p>
+          <h1>{greeting}, explorer.</h1>
+          <p>Discover the best tools for your next AI workflow.</p>
+        </div>
+        <Link className="primary" to="/browse"><Search size={16}/> Explore tools</Link>
+      </div>
+      <TrendingTechBar/>
+      <section className="stats">
+        <Stat icon={Bot} label="AI tools" value={allTools.length} tone="blue"/>
+        <Stat icon={Zap} label="Free to try" value={allTools.filter(t=>t.pricing.free).length} tone="green"/>
+        <Stat icon={BarChart3} label="Categories" value={categories.length} tone="purple"/>
+        <Stat icon={Users} label="Companies" value={new Set(allTools.map(t=>t.company)).size} tone="orange"/>
+      </section>
+      <SectionHead title="Top rated AI" action="View all" to="/browse"/>
+      <div className="tool-grid">
+        {trend.map(t => <ToolCard key={t.id} tool={t} {...props}/>)}
+      </div>
+      <LatestAIUpdates/>
+    </>
+  ); 
+}
 type PageProps = { favorites:string[]; toggleFavorite:(id:string)=>void; compare:string[]; toggleCompare:(id:string)=>void }
 
 function SectionHead({ title, action, to }: { title:string; action?:string; to?:string }) { return <div className="section-head"><h2>{title}</h2>{action && to && <Link to={to}>{action} <ChevronRight size={15}/></Link>}</div> }
@@ -1158,7 +1222,7 @@ function Shell() {
     { to: '/compare', icon: Boxes, label: 'Compare', count: compare.length },
     { to: '/favorites', icon: Heart, label: 'Saved', count: favorites.length }
   ]; 
-  
+
   const cmdMatches = useMemo(() => {
     if (!cmdQuery.trim()) return [];
     const q = cmdQuery.toLowerCase().trim();
