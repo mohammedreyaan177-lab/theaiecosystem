@@ -1787,3 +1787,106 @@
   line-height: 1.4;
 }
 
+/* Mobile & Tablet Responsiveness for Project Analysis */
+@media (max-width: 768px) {
+  .project-analysis-page {
+    padding: 0 4px 40px;
+  }
+  .analysis-form-card {
+    padding: 16px;
+  }
+  .form-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+  .clear-text-btn {
+    align-self: flex-start;
+  }
+  .sample-chips-grid {
+    grid-template-columns: 1fr;
+  }
+  .form-actions {
+    width: 100%;
+  }
+  .analyze-submit-btn {
+    width: 100%;
+    justify-content: center;
+    min-height: 48px;
+  }
+  .results-toolbar {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 16px;
+    gap: 12px;
+  }
+  .results-actions {
+    width: 100%;
+    flex-direction: column;
+  }
+  .results-actions button {
+    width: 100%;
+    justify-content: center;
+    min-height: 44px;
+  }
+  .analysis-tabs-bar {
+    margin-inline: -14px;
+    padding-inline: 14px;
+    -webkit-overflow-scrolling: touch;
+  }
+  .analysis-tab-btn {
+    min-height: 42px;
+    padding: 8px 14px;
+    font-size: 12px;
+  }
+  .analysis-section-block {
+    padding: 16px;
+    border-radius: 14px;
+  }
+  .compliance-grid,
+  .apis-grid,
+  .step-details-grid {
+    grid-template-columns: 1fr;
+  }
+  .journey-step-card {
+    flex-direction: column;
+    gap: 12px;
+    padding: 14px;
+  }
+  .step-number-badge {
+    width: 36px;
+    height: 36px;
+    font-size: 14px;
+  }
+  .code-template-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+  .copy-code-btn {
+    width: 100%;
+    justify-content: center;
+    min-height: 36px;
+  }
+  .prompt-code-content {
+    font-size: 12px;
+    padding: 12px;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+}
+
+@media (max-width: 480px) {
+  .analysis-form-card {
+    padding: 14px;
+  }
+  .icon-badge {
+    width: 36px;
+    height: 36px;
+  }
+  .form-title-group h3 {
+    font-size: 16px;
+  }
+}
+
+
