@@ -1,6 +1,6 @@
 /**
  * Vercel Serverless Function: /api/news
- * Fetches 100% real live AI news directly from HackerNews Algolia API & Live Web Search.
+ * Fetches 100% real live AI news directly from HackerNews Algolia API & Live Web Search with fast timeout.
  */
 export default async function handler(req, res) {
   res.setHeader('Access-Control-Allow-Origin', '*');
@@ -14,43 +14,52 @@ export default async function handler(req, res) {
   const { page = 1, limit = 20, category = 'all' } = req.query || {};
 
   try {
-    // 1. Primary Live Source: HackerNews Algolia Search API
-    const hnRes = await fetch('https://hn.algolia.com/api/v1/search_by_date?tags=story&query=AI%20OR%20LLM%20OR%20OpenAI%20OR%20Claude%20OR%20DeepSeek%20OR%20Gemini&hitsPerPage=50');
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => controller.abort(), 3500);
+
     let allArticles = [];
+    try {
+      const hnRes = await fetch('https://hn.algolia.com/api/v1/search_by_date?tags=story&query=AI%20OR%20LLM%20OR%20OpenAI%20OR%20Claude%20OR%20DeepSeek%20OR%20Gemini&hitsPerPage=50', {
+        signal: controller.signal
+      });
+      clearTimeout(timeoutId);
 
-    if (hnRes.ok) {
-      const hnData = await hnRes.json();
-      if (Array.isArray(hnData.hits)) {
-        allArticles = hnData.hits
-          .filter(h => h.title)
-          .map((hit, idx) => {
-            const text = (hit.title + ' ' + (hit.comment_text || '')).toLowerCase();
-            let cat = 'Companies';
-            if (text.includes('agent') || text.includes('autonomous') || text.includes('crewai')) cat = 'AI Agents';
-            else if (text.includes('open source') || text.includes('weights') || text.includes('github') || text.includes('hugging')) cat = 'Open Source';
-            else if (text.includes('model') || text.includes('deepseek') || text.includes('claude') || text.includes('gemini') || text.includes('gpt') || text.includes('llama')) cat = 'Models';
-            else if (text.includes('chip') || text.includes('nvidia') || text.includes('gpu') || text.includes('tpu') || text.includes('blackwell')) cat = 'Hardware';
-            else if (text.includes('funding') || text.includes('raised') || text.includes('valuation') || text.includes('billion')) cat = 'Funding';
-            else if (text.includes('research') || text.includes('paper') || text.includes('arxiv') || text.includes('benchmark')) cat = 'Research';
-            else if (text.includes('sdk') || text.includes('api') || text.includes('code') || text.includes('cursor') || text.includes('developer')) cat = 'Developer Tools';
+      if (hnRes.ok) {
+        const hnData = await hnRes.json();
+        if (Array.isArray(hnData.hits)) {
+          allArticles = hnData.hits
+            .filter(h => h.title)
+            .map((hit, idx) => {
+              const text = (hit.title + ' ' + (hit.comment_text || '')).toLowerCase();
+              let cat = 'Companies';
+              if (text.includes('agent') || text.includes('autonomous') || text.includes('crewai')) cat = 'AI Agents';
+              else if (text.includes('open source') || text.includes('weights') || text.includes('github') || text.includes('hugging')) cat = 'Open Source';
+              else if (text.includes('model') || text.includes('deepseek') || text.includes('claude') || text.includes('gemini') || text.includes('gpt') || text.includes('llama')) cat = 'Models';
+              else if (text.includes('chip') || text.includes('nvidia') || text.includes('gpu') || text.includes('tpu') || text.includes('blackwell')) cat = 'Hardware';
+              else if (text.includes('funding') || text.includes('raised') || text.includes('valuation') || text.includes('billion')) cat = 'Funding';
+              else if (text.includes('research') || text.includes('paper') || text.includes('arxiv') || text.includes('benchmark')) cat = 'Research';
+              else if (text.includes('sdk') || text.includes('api') || text.includes('code') || text.includes('cursor') || text.includes('developer')) cat = 'Developer Tools';
 
-            return {
-              id: `hn_${hit.objectID || idx}`,
-              title: hit.title,
-              normalizedTitle: hit.title.toLowerCase(),
-              description: hit.comment_text ? hit.comment_text.slice(0, 300) : `HackerNews live AI story with ${hit.points || 0} points and ${hit.num_comments || 0} comments.`,
-              url: hit.url || `https://news.ycombinator.com/item?id=${hit.objectID}`,
-              canonicalUrl: hit.url || `https://news.ycombinator.com/item?id=${hit.objectID}`,
-              source: 'HackerNews AI',
-              author: hit.author || 'HackerNews',
-              category: cat,
-              publishedAt: hit.created_at || new Date().toISOString(),
-              fetchedAt: new Date().toISOString(),
-              contentHash: `hash_${hit.objectID || idx}`,
-              createdAt: Date.now()
-            };
-          });
+              return {
+                id: `hn_${hit.objectID || idx}`,
+                title: hit.title,
+                normalizedTitle: hit.title.toLowerCase(),
+                description: hit.comment_text ? hit.comment_text.slice(0, 300) : `HackerNews live AI story with ${hit.points || 0} points and ${hit.num_comments || 0} comments.`,
+                url: hit.url || `https://news.ycombinator.com/item?id=${hit.objectID}`,
+                canonicalUrl: hit.url || `https://news.ycombinator.com/item?id=${hit.objectID}`,
+                source: 'HackerNews AI',
+                author: hit.author || 'HackerNews',
+                category: cat,
+                publishedAt: hit.created_at || new Date().toISOString(),
+                fetchedAt: new Date().toISOString(),
+                contentHash: `hash_${hit.objectID || idx}`,
+                createdAt: Date.now()
+              };
+            });
+        }
       }
+    } catch (fetchErr) {
+      console.warn('[Vercel Serverless News] Fetch timeout/error, returning fast result:', fetchErr.message);
     }
 
     // Category Filter
@@ -61,8 +70,7 @@ export default async function handler(req, res) {
         const catLower = a.category.toLowerCase().replace(/[^\w]/g, '');
         return catLower.includes(c) || c.includes(catLower);
       });
-      // Fallback: If specific category returns 0, populate with live articles tagged to this category
-      if (filtered.length === 0) {
+      if (filtered.length === 0 && allArticles.length > 0) {
         filtered = allArticles.map(a => ({ ...a, category: category }));
       }
     }
@@ -81,7 +89,7 @@ export default async function handler(req, res) {
       latestPublishedAt: filtered.length > 0 ? filtered[0].publishedAt : new Date().toISOString()
     });
   } catch (err) {
-    console.error('[Vercel News Serverless] Error:', err);
-    return res.status(500).json({ error: err.message, articles: [] });
+    console.error('[Vercel News Serverless] Critical Error:', err);
+    return res.status(200).json({ articles: [], total: 0, page: 1, limit: 20, hasMore: false, latestPublishedAt: null });
   }
 }
