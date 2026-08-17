@@ -74,52 +74,68 @@ async function searchWebForTask(query) {
   const results = [];
   const cleanQuery = encodeURIComponent(query);
 
-  // 1. Query HackerNews Algolia Technical Search
-  try {
-    const hnRes = await fetch(`https://hn.algolia.com/api/v1/search?query=${cleanQuery}&hitsPerPage=6`);
-    if (hnRes.ok) {
-      const data = await hnRes.json();
-      if (Array.isArray(data.hits)) {
-        data.hits.forEach(hit => {
-          if (hit.title && hit.url) {
-            results.push({
+  const fetchAlgolia = async () => {
+    const controller = new AbortController();
+    const timer = setTimeout(() => controller.abort(), 1000);
+    try {
+      const hnRes = await fetch(`https://hn.algolia.com/api/v1/search?query=${cleanQuery}&hitsPerPage=4`, {
+        signal: controller.signal
+      });
+      clearTimeout(timer);
+      if (hnRes.ok) {
+        const data = await hnRes.json();
+        if (Array.isArray(data.hits)) {
+          return data.hits
+            .filter(hit => hit.title && hit.url)
+            .map(hit => ({
               title: hit.title,
               url: hit.url,
               snippet: hit.comment_text || hit.story_text || hit.title
-            });
-          }
-        });
+            }));
+        }
       }
+    } catch {
+      clearTimeout(timer);
     }
-  } catch (err) {
-    console.warn('[GUIDE DISCOVERY] Algolia search warning:', err.message);
-  }
+    return [];
+  };
 
-  // 2. Query GitHub Code / Docs Search
-  try {
-    const ghRes = await fetch(`https://api.github.com/search/repositories?q=${cleanQuery}&per_page=4`, {
-      headers: {
-        'User-Agent': 'AIEcosystemGuideBot/1.0',
-        'Accept': 'application/vnd.github.v3+json'
-      }
-    });
-
-    if (ghRes.ok) {
-      const ghData = await ghRes.json();
-      if (Array.isArray(ghData.items)) {
-        ghData.items.forEach(repo => {
-          if (repo.full_name && repo.html_url) {
-            results.push({
+  const fetchGithub = async () => {
+    const controller = new AbortController();
+    const timer = setTimeout(() => controller.abort(), 1000);
+    try {
+      const ghRes = await fetch(`https://api.github.com/search/repositories?q=${cleanQuery}&per_page=3`, {
+        headers: {
+          'User-Agent': 'AIEcosystemGuideBot/1.0',
+          'Accept': 'application/vnd.github.v3+json'
+        },
+        signal: controller.signal
+      });
+      clearTimeout(timer);
+      if (ghRes.ok) {
+        const ghData = await ghRes.json();
+        if (Array.isArray(ghData.items)) {
+          return ghData.items
+            .filter(repo => repo.full_name && repo.html_url)
+            .map(repo => ({
               title: `${repo.full_name} Reference Implementation`,
               url: repo.html_url,
               snippet: repo.description || `Official reference codebase for ${repo.name}.`
-            });
-          }
-        });
+            }));
+        }
       }
+    } catch {
+      clearTimeout(timer);
     }
-  } catch (err) {
-    console.warn('[GUIDE DISCOVERY] GitHub search warning:', err.message);
+    return [];
+  };
+
+  const [algoliaResults, githubResults] = await Promise.allSettled([fetchAlgolia(), fetchGithub()]);
+  if (algoliaResults.status === 'fulfilled' && Array.isArray(algoliaResults.value)) {
+    results.push(...algoliaResults.value);
+  }
+  if (githubResults.status === 'fulfilled' && Array.isArray(githubResults.value)) {
+    results.push(...githubResults.value);
   }
 
   return results;

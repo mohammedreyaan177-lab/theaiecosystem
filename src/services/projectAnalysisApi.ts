@@ -63,20 +63,30 @@ export interface FullProjectAnalysisReport {
 }
 
 export async function requestIntelligentAnalysis(prompt: string): Promise<FullProjectAnalysisReport> {
-  const response = await fetch('/api/project-analysis', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify({ prompt })
-  });
+  const controller = new AbortController();
+  const timer = setTimeout(() => controller.abort(), 8000);
 
-  const rawText = await response.text();
-  const trimmed = (rawText || '').trim();
+  try {
+    const response = await fetch('/api/project-analysis', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ prompt }),
+      signal: controller.signal
+    });
+    clearTimeout(timer);
 
-  if (!response.ok || trimmed.startsWith('<') || trimmed.startsWith('<!DOCTYPE')) {
-    throw new Error(`Server endpoint returned non-JSON fallback (HTTP ${response.status})`);
+    const rawText = await response.text();
+    const trimmed = (rawText || '').trim();
+
+    if (!response.ok || trimmed.startsWith('<') || trimmed.startsWith('<!DOCTYPE')) {
+      throw new Error(`Server endpoint returned non-JSON fallback (HTTP ${response.status})`);
+    }
+
+    return JSON.parse(rawText);
+  } catch (err: any) {
+    clearTimeout(timer);
+    throw err;
   }
-
-  return JSON.parse(rawText);
 }

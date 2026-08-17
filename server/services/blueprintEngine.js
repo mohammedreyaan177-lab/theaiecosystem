@@ -7,7 +7,6 @@ import { discoverTaskGuides } from './guideDiscoveryEngine.js';
 
 export async function generateBuildBlueprint(prompt, classification, capabilities, archSummary, techStack) {
   const lowerPrompt = prompt.toLowerCase();
-  const phases = [];
 
   const isFrontendOnly = archSummary.isFrontendOnly;
   const requiresDB = archSummary.requiresDatabase;
@@ -19,11 +18,42 @@ export async function generateBuildBlueprint(prompt, classification, capabilitie
   const isCodingReq = capabilities.some(c => c.capability === 'coding_assistance');
   const isAnalyticsReq = capabilities.some(c => c.capability === 'data_analytics');
 
+  const p1Tech = techStack.find(t => t.layer === 'Frontend')?.recommendation || 'React';
+
+  let coreTaskTitle = 'Core Feature API Endpoint Integration';
+  let coreTech = 'REST API';
+  if (isImageReq) { coreTaskTitle = 'AI Image Generation API Integration'; coreTech = 'DALL-E / Midjourney / Replicate API'; }
+  else if (isVoiceReq) { coreTaskTitle = 'AI Speech Synthesis API Integration'; coreTech = 'ElevenLabs API'; }
+  else if (isAutoReq) { coreTaskTitle = 'Workflow Automation Engine & Webhook Triggers'; coreTech = 'n8n / Webhooks'; }
+  else if (isAnalyticsReq) { coreTaskTitle = 'Data Analytics & Visualization Engine'; coreTech = 'Python Data Stack / Chart.js'; }
+  else if (isCodingReq) { coreTaskTitle = 'AI Code Assistant & Parsing Engine'; coreTech = 'OpenAI Code API / Claude SDK'; }
+
+  const p7Tech = isFrontendOnly ? 'Vercel / Netlify' : 'Vercel + Render / Railway';
+  const dbTech = requiresDB ? (techStack.find(t => t.layer === 'Database')?.recommendation || 'PostgreSQL') : '';
+
+  // Parallel Guide Fetching for ultra-fast performance
+  const [
+    p1Guides,
+    p2Guides,
+    p3Guides,
+    p4Guides,
+    p5Guides,
+    p6Guides,
+    p7Guides
+  ] = await Promise.all([
+    discoverTaskGuides('Project setup framework environment initialization', p1Tech),
+    requiresDB ? discoverTaskGuides('Database schema migrations and connection pool', dbTech) : Promise.resolve([]),
+    discoverTaskGuides(coreTaskTitle, coreTech),
+    requiresAuth ? discoverTaskGuides('User authentication JWT session security', 'JWT / Auth') : Promise.resolve([]),
+    discoverTaskGuides('React form submission UI state management', 'React UI'),
+    discoverTaskGuides('Express rate limiting input sanitization error handling', 'Express Security'),
+    discoverTaskGuides(`${p7Tech} production deployment static build`, p7Tech)
+  ]);
+
+  const phases = [];
   let phaseIndex = 1;
 
-  // PHASE 1 — Project Foundation & Environment Setup
-  const p1Tech = techStack.find(t => t.layer === 'Frontend')?.recommendation || 'React';
-  const p1Guides = await discoverTaskGuides('Project setup framework environment initialization', p1Tech);
+  // PHASE 1 — Project Foundation
   phases.push({
     phaseNumber: phaseIndex++,
     title: 'Project Foundation & Environment Setup',
@@ -41,10 +71,8 @@ export async function generateBuildBlueprint(prompt, classification, capabilitie
     guides: p1Guides
   });
 
-  // PHASE 2 — Database Schema & Data Persistence (If DB Required)
+  // PHASE 2 — Database Schema & Persistence (If DB Required)
   if (requiresDB) {
-    const dbTech = techStack.find(t => t.layer === 'Database')?.recommendation || 'PostgreSQL';
-    const p2Guides = await discoverTaskGuides('Database schema migrations and connection pool', dbTech);
     phases.push({
       phaseNumber: phaseIndex++,
       title: 'Database Schema & Data Persistence',
@@ -63,16 +91,7 @@ export async function generateBuildBlueprint(prompt, classification, capabilitie
     });
   }
 
-  // PHASE 3 — Core Technical Capability & API Integration
-  let coreTaskTitle = 'Core Feature API Endpoint Integration';
-  let coreTech = 'REST API';
-  if (isImageReq) { coreTaskTitle = 'AI Image Generation API Integration'; coreTech = 'DALL-E / Midjourney / Replicate API'; }
-  else if (isVoiceReq) { coreTaskTitle = 'AI Speech Synthesis API Integration'; coreTech = 'ElevenLabs API'; }
-  else if (isAutoReq) { coreTaskTitle = 'Workflow Automation Engine & Webhook Triggers'; coreTech = 'n8n / Webhooks'; }
-  else if (isAnalyticsReq) { coreTaskTitle = 'Data Analytics & Visualization Engine'; coreTech = 'Python Data Stack / Chart.js'; }
-  else if (isCodingReq) { coreTaskTitle = 'AI Code Assistant & Parsing Engine'; coreTech = 'OpenAI Code API / Claude SDK'; }
-
-  const p3Guides = await discoverTaskGuides(coreTaskTitle, coreTech);
+  // PHASE 3 — Core Technical Capability
   phases.push({
     phaseNumber: phaseIndex++,
     title: `Core Capability: ${coreTaskTitle}`,
@@ -92,7 +111,6 @@ export async function generateBuildBlueprint(prompt, classification, capabilitie
 
   // PHASE 4 — Authentication & Security (If Auth Required)
   if (requiresAuth) {
-    const p4Guides = await discoverTaskGuides('User authentication JWT session security', 'JWT / Auth');
     phases.push({
       phaseNumber: phaseIndex++,
       title: 'Authentication & Session Security',
@@ -111,8 +129,7 @@ export async function generateBuildBlueprint(prompt, classification, capabilitie
     });
   }
 
-  // PHASE 5 — Interactive UI Components & Primary User Flow
-  const p5Guides = await discoverTaskGuides('React form submission UI state management', 'React UI');
+  // PHASE 5 — Interactive UI Components
   phases.push({
     phaseNumber: phaseIndex++,
     title: 'Interactive User Interface & Main Workflow',
@@ -130,8 +147,7 @@ export async function generateBuildBlueprint(prompt, classification, capabilitie
     guides: p5Guides
   });
 
-  // PHASE 6 — Rate Limiting, Error Resilience & Edge Cases
-  const p6Guides = await discoverTaskGuides('Express rate limiting input sanitization error handling', 'Express Security');
+  // PHASE 6 — Rate Limiting & Resilience
   phases.push({
     phaseNumber: phaseIndex++,
     title: 'Rate Limiting, Error Resilience & Edge Cases',
@@ -150,8 +166,6 @@ export async function generateBuildBlueprint(prompt, classification, capabilitie
   });
 
   // PHASE 7 — Testing & Production Deployment
-  const p7Tech = isFrontendOnly ? 'Vercel / Netlify' : 'Vercel + Render / Railway';
-  const p7Guides = await discoverTaskGuides(`${p7Tech} production deployment static build`, p7Tech);
   phases.push({
     phaseNumber: phaseIndex++,
     title: 'Testing & Stack-Tailored Production Deployment',
