@@ -2,5 +2,9 @@
   "framework": "vite",
   "buildCommand": "npm run build",
   "outputDirectory": "dist",
-  "rewrites": [{ "source": "/(.*)", "destination": "/index.html" }]
+  "rewrites": [
+    { "source": "/api/news", "destination": "/api/news.js" },
+    { "source": "/api/project-analysis", "destination": "/api/project-analysis.js" },
+    { "source": "/((?!api/).*)", "destination": "/index.html" }
+  ]
 }

@@ -78,21 +78,21 @@ export const ProjectAnalysisPage: React.FC<ProjectAnalysisPageProps> = ({ tools 
           repositoryUrl: p.repositoryUrl,
           similarityLevel: p.similarityLevel,
           similarityPercentage: p.similarityPercentage,
-          whySimilar: p.whySimilar.join(' '),
-          whySimilarList: p.whySimilar,
-          majorDifferences: p.majorDifferences,
-          relevantFeatures: p.relevantFeatures,
+          whySimilar: Array.isArray(p.whySimilar) ? p.whySimilar.join(' ') : String(p.whySimilar || ''),
+          whySimilarList: Array.isArray(p.whySimilar) ? p.whySimilar : [String(p.whySimilar || '')],
+          majorDifferences: p.majorDifferences || [],
+          relevantFeatures: p.relevantFeatures || [],
           isLiveSource: true,
           stars: p.stars,
           language: p.language,
-          source: p.source
+          source: p.source || 'Web Search'
         })),
-        discoveredProjects: fullReport.discoveredProjects,
-        searchDisclaimer: fullReport.classification.requestType === 'PROJECT_SPECIFIC'
-          ? `Discovered ${fullReport.discoveredProjects.length} real open-source repositories and online projects related to ${fullReport.classification.targetEntity || 'your target'}.`
+        discoveredProjects: fullReport.discoveredProjects || [],
+        searchDisclaimer: fullReport.classification?.requestType === 'PROJECT_SPECIFIC'
+          ? `Discovered ${(fullReport.discoveredProjects || []).length} real open-source repositories and online projects related to ${fullReport.classification?.targetEntity || 'your target'}.`
           : 'Generic request category analyzed. Web discovery skipped for general application concepts.',
-        existsOnInternetSummary: fullReport.classification.reason,
-        webDiscoveryStatus: fullReport.webDiscoveryStatus,
+        existsOnInternetSummary: fullReport.classification?.reason || fullReport.projectSummary?.summary || 'Project technical evaluation complete.',
+        webDiscoveryStatus: fullReport.webDiscoveryStatus || 'completed',
         buildBlueprint: fullReport.buildBlueprint,
         differentiationEngine: fullReport.differentiationEngine,
         testingPlan: fullReport.testingPlan,

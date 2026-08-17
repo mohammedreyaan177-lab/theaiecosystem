@@ -71,8 +71,9 @@ export async function requestIntelligentAnalysis(prompt: string): Promise<FullPr
     body: JSON.stringify({ prompt })
   });
 
-  if (!response.ok) {
-    throw new Error(`Project analysis request failed: ${response.statusText}`);
+  const contentType = response.headers.get('content-type') || '';
+  if (!response.ok || !contentType.includes('application/json')) {
+    throw new Error(`Server endpoint returned non-JSON fallback (HTTP ${response.status})`);
   }
 
   return response.json();
