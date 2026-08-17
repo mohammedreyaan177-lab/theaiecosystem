@@ -71,10 +71,12 @@ export async function requestIntelligentAnalysis(prompt: string): Promise<FullPr
     body: JSON.stringify({ prompt })
   });
 
-  const contentType = response.headers.get('content-type') || '';
-  if (!response.ok || !contentType.includes('application/json')) {
+  const rawText = await response.text();
+  const trimmed = (rawText || '').trim();
+
+  if (!response.ok || trimmed.startsWith('<') || trimmed.startsWith('<!DOCTYPE')) {
     throw new Error(`Server endpoint returned non-JSON fallback (HTTP ${response.status})`);
   }
 
-  return response.json();
+  return JSON.parse(rawText);
 }

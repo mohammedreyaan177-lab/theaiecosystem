@@ -27,10 +27,10 @@ export interface NewsResponse {
 const API_BASE = import.meta.env.VITE_AI_NEWS_API_URL || '/api/news';
 
 /**
- * Live Browser Fallback for Mobile Networks, Vercel & Client-Only Environments
+ * Direct Live Browser Fetch (Guaranteed 100% CORS & Vercel Safe)
  */
 async function fetchLiveNewsFallback(category = 'all'): Promise<NewsResponse> {
-  console.log('[News Client Fallback] Querying live HackerNews Algolia Search API directly...');
+  console.log('[News Client Direct] Querying live HackerNews Algolia Search API directly from browser...');
   try {
     const res = await fetch('https://hn.algolia.com/api/v1/search_by_date?tags=story&query=AI%20OR%20LLM%20OR%20OpenAI%20OR%20Claude%20OR%20DeepSeek%20OR%20Gemini&hitsPerPage=35');
     if (!res.ok) {
@@ -88,7 +88,7 @@ async function fetchLiveNewsFallback(category = 'all'): Promise<NewsResponse> {
       latestPublishedAt: articles.length > 0 ? articles[0].publishedAt : new Date().toISOString()
     };
   } catch (fallbackErr) {
-    console.error('[News Fallback Error]:', fallbackErr);
+    console.error('[News Browser Direct Fallback Error]:', fallbackErr);
     return { articles: [], total: 0, page: 1, limit: 20, hasMore: false, latestPublishedAt: null };
   }
 }
@@ -107,25 +107,28 @@ export async function fetchNewsArticles(params: {
 
   const url = `${API_BASE}?${query.toString()}`;
   const controller = new AbortController();
-  const timeoutId = setTimeout(() => controller.abort(), 2500);
+  const timeoutId = setTimeout(() => controller.abort(), 2000);
 
   try {
     const response = await fetch(url, { signal: controller.signal });
     clearTimeout(timeoutId);
-    const contentType = response.headers.get('content-type') || '';
-    
-    if (!response.ok || !contentType.includes('application/json')) {
-      throw new Error(`API endpoint unavailable or returned HTML fallback`);
+
+    const rawText = await response.text();
+    const trimmed = (rawText || '').trim();
+
+    // Catch Vercel static rewrite HTML fallback without throwing JSON syntax error
+    if (!response.ok || trimmed.startsWith('<') || trimmed.startsWith('<!DOCTYPE')) {
+      throw new Error(`API returned non-JSON HTML content`);
     }
 
-    const data = await response.json();
+    const data = JSON.parse(rawText);
     if (!data || !Array.isArray(data.articles) || data.articles.length === 0) {
       return await fetchLiveNewsFallback(params.category);
     }
     return data;
   } catch (err) {
     clearTimeout(timeoutId);
-    console.warn('[News API] Server API unavailable or timed out, executing live browser fallback:', err);
+    console.warn('[News API] Server endpoint unavailable or returned HTML, executing browser direct live fetch:', err);
     return await fetchLiveNewsFallback(params.category);
   }
 }
