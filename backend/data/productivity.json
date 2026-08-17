@@ -1,0 +1,122 @@
+[
+  {
+    "id": "scribe",
+    "name": "Scribe AI",
+    "category": "productivity",
+    "pricing": { "free": true, "paid": true },
+    "website": "https://scribehow.com",
+    "playstore": "",
+    "tags": ["productivity", "step by step docs", "screen capture", "sop generator"],
+    "developerCertified": true
+  },
+  {
+    "id": "limitless",
+    "name": "Limitless AI",
+    "category": "productivity",
+    "pricing": { "free": true, "paid": true },
+    "website": "https://limitless.ai",
+    "playstore": "",
+    "tags": ["productivity", "personalized memory", "meeting recorder", "rewind"],
+    "developerCertified": true
+  },
+  {
+    "id": "tome-presentation",
+    "name": "Tome AI",
+    "category": "productivity",
+    "pricing": { "free": true, "paid": true },
+    "website": "https://tome.app",
+    "playstore": "",
+    "tags": ["productivity", "presentation generator", "pitch deck", "storytelling"],
+    "developerCertified": true
+  },
+  {
+    "id": "granola",
+    "name": "Granola AI",
+    "category": "productivity",
+    "pricing": { "free": true, "paid": true },
+    "website": "https://granola.so",
+    "playstore": "",
+    "tags": ["productivity", "meeting notes", "mac app", "structured notes", "transcription"],
+    "developerCertified": true
+  },
+  {
+    "id": "superhuman",
+    "name": "Superhuman AI",
+    "category": "productivity",
+    "pricing": { "free": false, "paid": true },
+    "website": "https://superhuman.com",
+    "playstore": "https://play.google.com/store/apps/details?id=com.superhuman.mail",
+    "tags": ["productivity", "email", "fast drafting", "inbox zero", "speed"],
+    "developerCertified": true
+  },
+  {
+    "id": "raycast",
+    "name": "Raycast AI",
+    "category": "productivity",
+    "pricing": { "free": true, "paid": true },
+    "website": "https://raycast.com",
+    "playstore": "",
+    "tags": ["productivity", "mac launcher", "quick actions", "inline llm", "developer tool"],
+    "developerCertified": true
+  },
+  {
+    "id": "notion-ai",
+    "name": "Notion AI",
+    "category": "productivity",
+    "pricing": { "free": true, "paid": true },
+    "website": "https://www.notion.so",
+    "playstore": "https://play.google.com/store/apps/details?id=notion.id",
+    "tags": ["productivity", "notes", "documents", "knowledge base", "notion", "workspace", "synthesis", "educate"],
+    "developerCertified": true
+  },
+  {
+    "id": "coda-ai",
+    "name": "Coda AI",
+    "category": "productivity",
+    "pricing": { "free": true, "paid": true },
+    "website": "https://coda.io",
+    "playstore": "",
+    "tags": ["productivity", "docs", "tables", "automation", "building blocks", "team wiki"],
+    "developerCertified": true
+  },
+  {
+    "id": "gamma",
+    "name": "Gamma",
+    "category": "productivity",
+    "pricing": { "free": true, "paid": true },
+    "website": "https://gamma.app",
+    "playstore": "",
+    "tags": ["productivity", "presentation", "slide deck", "webpage generation", "visual document"],
+    "developerCertified": true
+  },
+  {
+    "id": "otterai",
+    "name": "Otter.ai",
+    "category": "productivity",
+    "pricing": { "free": true, "paid": true },
+    "website": "https://otter.ai",
+    "playstore": "https://play.google.com/store/apps/details?id=com.aisense.otter",
+    "tags": ["productivity", "transcription", "meeting notes", "zoom recorder", "action items", "speech to text"],
+    "developerCertified": true
+  },
+  {
+    "id": "composer-ai",
+    "name": "Cursor Composer",
+    "category": "productivity",
+    "pricing": { "free": true, "paid": true },
+    "website": "https://cursor.com",
+    "playstore": "",
+    "tags": ["productivity", "cursor", "multi-file agent", "composer", "ide tool", "developer tool"],
+    "developerCertified": true
+  },
+  {
+    "id": "bolt-agent",
+    "name": "Bolt.new Agent",
+    "category": "productivity",
+    "pricing": { "free": true, "paid": true },
+    "website": "https://bolt.new",
+    "playstore": "",
+    "tags": ["productivity", "webcontainers", "stackblitz", "fullstack agent", "developer tool"],
+    "developerCertified": true
+  }
+]

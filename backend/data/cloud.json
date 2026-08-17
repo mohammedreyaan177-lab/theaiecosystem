@@ -1,0 +1,132 @@
+[
+  {
+    "id": "supabase",
+    "name": "Supabase",
+    "category": "cloud",
+    "pricing": { "free": true, "paid": true },
+    "website": "https://supabase.com",
+    "playstore": "",
+    "tags": ["cloud", "database", "postgres", "vector embeddings", "firebase alternative", "open source", "developer tool"],
+    "developerCertified": true
+  },
+  {
+    "id": "neon",
+    "name": "Neon",
+    "category": "cloud",
+    "pricing": { "free": true, "paid": true },
+    "website": "https://neon.tech",
+    "playstore": "",
+    "tags": ["cloud", "postgres", "serverless db", "database branching", "sql", "vector search", "developer tool"],
+    "developerCertified": true
+  },
+  {
+    "id": "pinecone",
+    "name": "Pinecone",
+    "category": "cloud",
+    "pricing": { "free": true, "paid": true },
+    "website": "https://www.pinecone.io",
+    "playstore": "",
+    "tags": ["cloud", "vector database", "rag", "similarity search", "embeddings", "ai database", "developer tool"],
+    "developerCertified": true
+  },
+  {
+    "id": "qdrant",
+    "name": "Qdrant",
+    "category": "cloud",
+    "pricing": { "free": true, "paid": true },
+    "website": "https://qdrant.tech",
+    "playstore": "",
+    "tags": ["cloud", "vector engine", "rust", "open source RAG", "similarity search", "developer tool"],
+    "developerCertified": true
+  },
+  {
+    "id": "weaviate",
+    "name": "Weaviate",
+    "category": "cloud",
+    "pricing": { "free": true, "paid": true },
+    "website": "https://weaviate.io",
+    "playstore": "",
+    "tags": ["cloud", "vector database", "open source", "hybrid search", "rag", "developer tool"],
+    "developerCertified": true
+  },
+  {
+    "id": "milvus",
+    "name": "Milvus",
+    "category": "cloud",
+    "pricing": { "free": true, "paid": true },
+    "website": "https://milvus.io",
+    "playstore": "",
+    "tags": ["cloud", "vector database", "open source", "trillion vectors", "zilliz", "developer tool"],
+    "developerCertified": true
+  },
+  {
+    "id": "chromadb",
+    "name": "ChromaDB",
+    "category": "cloud",
+    "pricing": { "free": true, "paid": false },
+    "website": "https://www.trychroma.com",
+    "playstore": "",
+    "tags": ["cloud", "vector storage", "python", "open source RAG", "embeddings", "developer tool"],
+    "developerCertified": true
+  },
+  {
+    "id": "openrouter",
+    "name": "OpenRouter",
+    "category": "cloud",
+    "pricing": { "free": true, "paid": true },
+    "website": "https://openrouter.ai",
+    "playstore": "",
+    "tags": ["cloud", "api gateway", "multi llm", "fallback", "claude", "gpt-4o", "deepseek", "developer tool"],
+    "developerCertified": true
+  },
+  {
+    "id": "aws",
+    "name": "AWS",
+    "category": "cloud",
+    "pricing": { "free": true, "paid": true },
+    "website": "https://aws.amazon.com",
+    "playstore": "",
+    "tags": ["cloud", "amazon web services", "hosting", "s3", "ec2", "lambda", "infrastructure", "developer tool"],
+    "developerCertified": true
+  },
+  {
+    "id": "cloudflare",
+    "name": "Cloudflare",
+    "category": "cloud",
+    "pricing": { "free": true, "paid": true },
+    "website": "https://www.cloudflare.com",
+    "playstore": "",
+    "tags": ["cloud", "cdn", "dns", "workers", "r2", "vectorize", "security", "developer tool"],
+    "developerCertified": true
+  },
+  {
+    "id": "huggingface",
+    "name": "Hugging Face",
+    "category": "cloud",
+    "pricing": { "free": true, "paid": true },
+    "website": "https://huggingface.co",
+    "playstore": "",
+    "tags": ["cloud", "model hub", "open weights", "datasets", "spaces", "inference api", "developer tool"],
+    "developerCertified": true
+  },
+  {
+    "id": "replicate",
+    "name": "Replicate",
+    "category": "cloud",
+    "pricing": { "free": true, "paid": true },
+    "website": "https://replicate.com",
+    "playstore": "",
+    "tags": ["cloud", "model api", "flux", "llama", "cog", "serverless gpu", "developer tool"],
+    "developerCertified": true
+  },
+  {
+    "id": "modal",
+    "name": "Modal Labs",
+    "category": "cloud",
+    "pricing": { "free": true, "paid": true },
+    "website": "https://modal.com",
+    "playstore": "",
+    "tags": ["cloud", "serverless python", "gpu infra", "fine-tuning", "inference", "developer tool"],
+    "developerCertified": true
+  }
+]

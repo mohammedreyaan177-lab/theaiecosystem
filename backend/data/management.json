@@ -1,0 +1,72 @@
+[
+  {
+    "id": "linear-ai",
+    "name": "Linear Asks AI",
+    "category": "management",
+    "pricing": { "free": true, "paid": true },
+    "website": "https://linear.app",
+    "playstore": "",
+    "tags": ["management", "linear", "sprint triage", "issue automation", "developer tool"],
+    "developerCertified": true
+  },
+  {
+    "id": "jira-ai",
+    "name": "Atlassian Jira AI",
+    "category": "management",
+    "pricing": { "free": true, "paid": true },
+    "website": "https://www.atlassian.com/software/jira",
+    "playstore": "",
+    "tags": ["management", "atlassian intelligence", "agile", "issue summarization", "developer tool"],
+    "developerCertified": true
+  },
+  {
+    "id": "asana-ai",
+    "name": "Asana Intelligence",
+    "category": "management",
+    "pricing": { "free": true, "paid": true },
+    "website": "https://asana.com",
+    "playstore": "",
+    "tags": ["management", "smart goals", "risk prediction", "project tracking"],
+    "developerCertified": true
+  },
+  {
+    "id": "jira",
+    "name": "Jira",
+    "category": "management",
+    "pricing": { "free": true, "paid": true },
+    "website": "https://www.atlassian.com/software/jira",
+    "playstore": "https://play.google.com/store/apps/details?id=com.atlassian.android.jira.core",
+    "tags": ["management", "agile", "scrum", "kanban", "issue tracker", "atlassian", "developer tool"],
+    "developerCertified": true
+  },
+  {
+    "id": "linear",
+    "name": "Linear",
+    "category": "management",
+    "pricing": { "free": true, "paid": true },
+    "website": "https://linear.app",
+    "playstore": "",
+    "tags": ["management", "issue tracking", "keyboard first", "high speed", "software teams", "developer tool"],
+    "developerCertified": true
+  },
+  {
+    "id": "trello",
+    "name": "Trello",
+    "category": "management",
+    "pricing": { "free": true, "paid": true },
+    "website": "https://trello.com",
+    "playstore": "https://play.google.com/store/apps/details?id=com.trello",
+    "tags": ["management", "kanban board", "task management", "atlassian", "simple workflow"],
+    "developerCertified": false
+  },
+  {
+    "id": "asana",
+    "name": "Asana",
+    "category": "management",
+    "pricing": { "free": true, "paid": true },
+    "website": "https://asana.com",
+    "playstore": "https://play.google.com/store/apps/details?id=com.asana.app",
+    "tags": ["management", "project management", "gantt chart", "task tracking", "team execution"],
+    "developerCertified": false
+  }
+]

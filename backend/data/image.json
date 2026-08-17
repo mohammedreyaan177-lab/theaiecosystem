@@ -1,0 +1,82 @@
+[
+  {
+    "id": "midjourney",
+    "name": "Midjourney",
+    "category": "image",
+    "pricing": { "free": false, "paid": true },
+    "website": "https://www.midjourney.com",
+    "playstore": "",
+    "tags": ["image", "image generation", "text to image", "discord", "photorealistic", "art", "creative"],
+    "developerCertified": true
+  },
+  {
+    "id": "dall-e-3",
+    "name": "DALL-E 3",
+    "category": "image",
+    "pricing": { "free": true, "paid": true },
+    "website": "https://openai.com/dall-e-3",
+    "playstore": "",
+    "tags": ["image", "openai", "chatgpt image", "text to image", "prompt expansion", "art"],
+    "developerCertified": true
+  },
+  {
+    "id": "flux",
+    "name": "Flux",
+    "category": "image",
+    "pricing": { "free": true, "paid": true },
+    "website": "https://blackforestlabs.ai",
+    "playstore": "",
+    "tags": ["image", "black forest labs", "open weights", "text to image", "high quality", "sd3 killer"],
+    "developerCertified": true
+  },
+  {
+    "id": "stable-diffusion",
+    "name": "Stable Diffusion",
+    "category": "image",
+    "pricing": { "free": true, "paid": true },
+    "website": "https://stability.ai",
+    "playstore": "",
+    "tags": ["image", "stability ai", "open source", "sdxl", "controlnet", "lora", "local generation"],
+    "developerCertified": true
+  },
+  {
+    "id": "ideogram",
+    "name": "Ideogram",
+    "category": "image",
+    "pricing": { "free": true, "paid": true },
+    "website": "https://ideogram.ai",
+    "playstore": "",
+    "tags": ["image", "text rendering", "typography", "logo design", "graphic art", "image generation"],
+    "developerCertified": true
+  },
+  {
+    "id": "recraft",
+    "name": "Recraft",
+    "category": "image",
+    "pricing": { "free": true, "paid": true },
+    "website": "https://www.recraft.ai",
+    "playstore": "",
+    "tags": ["image", "vector art", "svg generation", "brand design", "consistent style", "illustrator"],
+    "developerCertified": true
+  },
+  {
+    "id": "magnific",
+    "name": "Magnific",
+    "category": "image",
+    "pricing": { "free": false, "paid": true },
+    "website": "https://magnific.ai",
+    "playstore": "",
+    "tags": ["image", "upscaler", "enhancer", "detail generation", "4k resolution", "photo editor"],
+    "developerCertified": true
+  },
+  {
+    "id": "leonardo-ai",
+    "name": "Leonardo.Ai",
+    "category": "image",
+    "pricing": { "free": true, "paid": true },
+    "website": "https://leonardo.ai",
+    "playstore": "https://play.google.com/store/apps/details?id=ai.leonardo.app",
+    "tags": ["image", "game assets", "canvas", "character design", "texture generation"],
+    "developerCertified": false
+  }
+]

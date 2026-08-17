@@ -1,0 +1,52 @@
+[
+  {
+    "id": "render",
+    "name": "Render",
+    "category": "deployment",
+    "pricing": { "free": true, "paid": true },
+    "website": "https://render.com",
+    "playstore": "",
+    "tags": ["deployment", "cloud hosting", "web service", "postgres", "docker", "heroku alternative", "developer tool"],
+    "developerCertified": true
+  },
+  {
+    "id": "railway",
+    "name": "Railway",
+    "category": "deployment",
+    "pricing": { "free": true, "paid": true },
+    "website": "https://railway.app",
+    "playstore": "",
+    "tags": ["deployment", "cloud platform", "infrastructure", "monorepo", "fast deploy", "developer tool"],
+    "developerCertified": true
+  },
+  {
+    "id": "fly-io",
+    "name": "Fly.io",
+    "category": "deployment",
+    "pricing": { "free": true, "paid": true },
+    "website": "https://fly.io",
+    "playstore": "",
+    "tags": ["deployment", "edge compute", "docker containers", "global microservices", "developer tool"],
+    "developerCertified": true
+  },
+  {
+    "id": "digitalocean",
+    "name": "DigitalOcean",
+    "category": "deployment",
+    "pricing": { "free": true, "paid": true },
+    "website": "https://www.digitalocean.com",
+    "playstore": "",
+    "tags": ["deployment", "droplets", "app platform", "vps", "cloud compute", "developer tool"],
+    "developerCertified": true
+  },
+  {
+    "id": "herokuboy",
+    "name": "Heroku",
+    "category": "deployment",
+    "pricing": { "free": false, "paid": true },
+    "website": "https://www.heroku.com",
+    "playstore": "",
+    "tags": ["deployment", "paas", "git push deploy", "web apps", "dynos", "developer tool"],
+    "developerCertified": false
+  }
+]

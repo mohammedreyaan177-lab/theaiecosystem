@@ -62,12 +62,22 @@ export interface FullProjectAnalysisReport {
   securityRisks?: any[];
 }
 
+const getBackendAnalysisUrl = () => {
+  const envUrl = import.meta.env.VITE_BACKEND_URL || import.meta.env.VITE_API_URL || import.meta.env.VITE_PROJECT_ANALYSIS_API_URL;
+  if (envUrl && typeof envUrl === 'string' && envUrl.trim().length > 0) {
+    const clean = envUrl.trim().replace(/\/+$/, '');
+    return clean.endsWith('/api/project-analysis') ? clean : `${clean}/api/project-analysis`;
+  }
+  return '/api/project-analysis';
+};
+
 export async function requestIntelligentAnalysis(prompt: string): Promise<FullProjectAnalysisReport> {
   const controller = new AbortController();
   const timer = setTimeout(() => controller.abort(), 8000);
+  const endpointUrl = getBackendAnalysisUrl();
 
   try {
-    const response = await fetch('/api/project-analysis', {
+    const response = await fetch(endpointUrl, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'

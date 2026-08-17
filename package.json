@@ -7,8 +7,9 @@
   "version": "0.1.0",
   "type": "module",
   "scripts": {
-    "dev": "concurrently -k \"vite\" \"node server/index.js\"",
-    "server": "node server/index.js",
+    "dev": "concurrently -k \"vite\" \"node backend/index.js\"",
+    "server": "node backend/index.js",
+    "start": "node backend/index.js",
     "test-news": "node server/test/newsTest.js",
     "ws-server": "node server/wsServer.js",
     "build": "tsc -b && vite build",

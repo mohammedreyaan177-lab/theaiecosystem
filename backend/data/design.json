@@ -1,0 +1,92 @@
+[
+  {
+    "id": "recraft-v3",
+    "name": "Recraft V3",
+    "category": "design",
+    "pricing": { "free": true, "paid": true },
+    "website": "https://www.recraft.ai",
+    "playstore": "",
+    "tags": ["design", "vector svg", "graphic design", "red dot award", "style consistency"],
+    "developerCertified": true
+  },
+  {
+    "id": "ideogram-v2",
+    "name": "Ideogram 2.0",
+    "category": "design",
+    "pricing": { "free": true, "paid": true },
+    "website": "https://ideogram.ai",
+    "playstore": "",
+    "tags": ["design", "typography", "logo design", "graphic art", "text rendering"],
+    "developerCertified": true
+  },
+  {
+    "id": "adobe-firefly",
+    "name": "Adobe Firefly",
+    "category": "design",
+    "pricing": { "free": true, "paid": true },
+    "website": "https://firefly.adobe.com",
+    "playstore": "",
+    "tags": ["design", "adobe", "generative fill", "photoshop", "vector generation", "font text effects"],
+    "developerCertified": true
+  },
+  {
+    "id": "uizard",
+    "name": "Uizard",
+    "category": "design",
+    "pricing": { "free": true, "paid": true },
+    "website": "https://uizard.io",
+    "playstore": "",
+    "tags": ["design", "ui mockups", "wireframe to code", "prototyping", "ai designer"],
+    "developerCertified": true
+  },
+  {
+    "id": "figma",
+    "name": "Figma",
+    "category": "design",
+    "pricing": { "free": true, "paid": true },
+    "website": "https://www.figma.com",
+    "playstore": "",
+    "tags": ["design", "ui/ux", "prototyping", "figma ai", "collaboration", "vector graphics", "designer tool"],
+    "developerCertified": true
+  },
+  {
+    "id": "canva",
+    "name": "Canva",
+    "category": "design",
+    "pricing": { "free": true, "paid": true },
+    "website": "https://www.canva.com",
+    "playstore": "https://play.google.com/store/apps/details?id=com.canva.editor",
+    "tags": ["design", "graphic design", "magic studio", "presentations", "social media", "templates"],
+    "developerCertified": true
+  },
+  {
+    "id": "framer",
+    "name": "Framer",
+    "category": "design",
+    "pricing": { "free": true, "paid": true },
+    "website": "https://www.framer.com",
+    "playstore": "",
+    "tags": ["design", "website builder", "framer ai", "interactive design", "no-code", "react components"],
+    "developerCertified": true
+  },
+  {
+    "id": "webflow",
+    "name": "Webflow",
+    "category": "design",
+    "pricing": { "free": true, "paid": true },
+    "website": "https://webflow.com",
+    "playstore": "",
+    "tags": ["design", "web builder", "cms", "no-code", "responsive design", "visual code"],
+    "developerCertified": true
+  },
+  {
+    "id": "rive",
+    "name": "Rive",
+    "category": "design",
+    "pricing": { "free": true, "paid": true },
+    "website": "https://rive.app",
+    "playstore": "",
+    "tags": ["design", "interactive animation", "flutter", "react", "game art", "runtime animation", "developer tool"],
+    "developerCertified": true
+  }
+]

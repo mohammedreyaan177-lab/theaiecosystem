@@ -1,0 +1,52 @@
+[
+  {
+    "id": "sunbird",
+    "name": "Sunbird AI",
+    "category": "voice",
+    "pricing": { "free": true, "paid": false },
+    "website": "https://sunbird.ai",
+    "playstore": "",
+    "tags": ["voice", "african languages", "translation", "open source", "speech to text"],
+    "developerCertified": true
+  },
+  {
+    "id": "elevenlabs",
+    "name": "ElevenLabs",
+    "category": "voice",
+    "pricing": { "free": true, "paid": true },
+    "website": "https://elevenlabs.io",
+    "playstore": "",
+    "tags": ["voice", "text to speech", "voice cloning", "dubbing", "audiobook", "sound effects", "developer api"],
+    "developerCertified": true
+  },
+  {
+    "id": "elevenlabs-reader",
+    "name": "ElevenLabs Reader",
+    "category": "voice",
+    "pricing": { "free": true, "paid": false },
+    "website": "https://elevenlabs.io/reader",
+    "playstore": "https://play.google.com/store/apps/details?id=io.elevenlabs.reader",
+    "tags": ["voice", "mobile app", "read pdf", "audiobook narrator", "elevenlabs", "text to speech"],
+    "developerCertified": true
+  },
+  {
+    "id": "playht",
+    "name": "Play.ht",
+    "category": "voice",
+    "pricing": { "free": true, "paid": true },
+    "website": "https://play.ht",
+    "playstore": "",
+    "tags": ["voice", "conversational voice", "realtime tts", "voice cloning", "podcast generator"],
+    "developerCertified": true
+  },
+  {
+    "id": "speechify",
+    "name": "Speechify",
+    "category": "voice",
+    "pricing": { "free": true, "paid": true },
+    "website": "https://speechify.com",
+    "playstore": "https://play.google.com/store/apps/details?id=com.speechify",
+    "tags": ["voice", "read text aloud", "pdf reader", "speed reading", "chrome extension"],
+    "developerCertified": true
+  }
+]

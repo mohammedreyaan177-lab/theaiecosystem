@@ -1,0 +1,379 @@
+import crypto from 'crypto';
+import Parser from 'rss-parser';
+import db from '../db.js';
+
+const parser = new Parser({
+  headers: {
+    'User-Agent': 'AIEcosystemNewsBot/1.0 (+https://aiecosystem.io)'
+  },
+  timeout: 10000
+});
+
+export function getCanonicalUrl(rawUrl) {
+  if (!rawUrl) return '';
+  try {
+    const parsed = new URL(rawUrl);
+    const trackingParams = [
+      'utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term',
+      'fbclid', 'gclid', 'ref', 's', 'source', 'feature', 'ncid', 'mkt_tok'
+    ];
+    
+    trackingParams.forEach(param => parsed.searchParams.delete(param));
+    parsed.searchParams.sort();
+    
+    let pathname = parsed.pathname;
+    if (pathname.length > 1 && pathname.endsWith('/')) {
+      pathname = pathname.slice(0, -1);
+    }
+    
+    return `${parsed.protocol}//${parsed.hostname.toLowerCase()}${parsed.port ? ':' + parsed.port : ''}${pathname}${parsed.search}`;
+  } catch {
+    return rawUrl.trim().toLowerCase();
+  }
+}
+
+export function getNormalizedTitle(title) {
+  if (!title) return '';
+  return title
+    .toLowerCase()
+    .replace(/\s*([|:\-–—]\s*(techcrunch|venturebeat|hacker news|google ai|openai|anthropic|hugging face|youtube|wired|the verge|mit technology review)).*$/gi, '')
+    .replace(/[^\w\s]/gi, ' ')
+    .replace(/\s+/g, ' ')
+    .trim();
+}
+
+export function getContentHash(normalizedTitle, description = '') {
+  const normDesc = (description || '')
+    .toLowerCase()
+    .replace(/[^\w\s]/gi, '')
+    .replace(/\s+/g, ' ')
+    .trim()
+    .slice(0, 150);
+    
+  return crypto
+    .createHash('sha256')
+    .update(`${normalizedTitle}|${normDesc}`)
+    .digest('hex');
+}
+
+export function isSimilarStory(normalizedTitle, existingTitles, threshold = 0.72) {
+  const getTokens = (t) => new Set(t.split(' ').filter(word => word.length > 3));
+  const tokensA = getTokens(normalizedTitle);
+  
+  if (tokensA.size === 0) return false;
+
+  for (const existing of existingTitles) {
+    const tokensB = getTokens(existing);
+    if (tokensB.size === 0) continue;
+
+    let intersection = 0;
+    for (const token of tokensA) {
+      if (tokensB.has(token)) intersection++;
+    }
+
+    const union = new Set([...tokensA, ...tokensB]).size;
+    const similarity = intersection / union;
+
+    if (similarity >= threshold) {
+      return true;
+    }
+  }
+  return false;
+}
+
+function detectCategory(title, description) {
+  const text = `${title} ${description}`.toLowerCase();
+  
+  if (text.includes('agent') || text.includes('autonomous') || text.includes('crewai') || text.includes('autogen')) return 'AI Agents';
+  if (text.includes('open source') || text.includes('weights') || text.includes('github') || text.includes('hugging face')) return 'Open Source';
+  if (text.includes('model') || text.includes('deepseek') || text.includes('claude') || text.includes('gemini') || text.includes('gpt-4') || text.includes('llama') || text.includes('mistral')) return 'Models';
+  if (text.includes('chip') || text.includes('nvidia') || text.includes('gpu') || text.includes('groq') || text.includes('tpu') || text.includes('semiconductor')) return 'Hardware';
+  if (text.includes('funding') || text.includes('raised') || text.includes('series a') || text.includes('valuation') || text.includes('billion')) return 'Funding';
+  if (text.includes('research') || text.includes('paper') || text.includes('arxiv') || text.includes('benchmark') || text.includes('reasoning')) return 'Research';
+  if (text.includes('sdk') || text.includes('api') || text.includes('code') || text.includes('developer') || text.includes('compiler') || text.includes('cursor')) return 'Developer Tools';
+  if (text.includes('regulation') || text.includes('policy') || text.includes('law') || text.includes('copyright') || text.includes('safety')) return 'Regulation';
+  if (text.includes('startup') || text.includes('launch') || text.includes('stealth')) return 'Startups';
+  
+  return 'Companies';
+}
+
+async function fetchExternalArticles() {
+  const rawArticles = [];
+
+  const rssFeeds = [
+    { url: 'https://news.google.com/rss/search?q=Artificial+Intelligence+OR+OpenAI+OR+Gemini+OR+Claude+OR+DeepSeek&hl=en-US&gl=US&ceid=US:en', name: 'Google News AI' },
+    { url: 'https://techcrunch.com/category/artificial-intelligence/feed/', name: 'TechCrunch AI' },
+    { url: 'https://venturebeat.com/category/ai/feed/', name: 'VentureBeat AI' },
+    { url: 'https://huggingface.co/blog/feed.xml', name: 'Hugging Face Blog' },
+    { url: 'https://blog.google/technology/ai/rss/', name: 'Google AI Blog' },
+    { url: 'https://www.theverge.com/rss/ai-artificial-intelligence/index.xml', name: 'The Verge AI' },
+    { url: 'https://www.technologyreview.com/topic/artificial-intelligence/feed/', name: 'MIT Tech Review AI' }
+  ];
+
+  const nowMs = Date.now();
+  const maxAgeMs = 7 * 24 * 60 * 60 * 1000;
+
+  for (const feed of rssFeeds) {
+    try {
+      const feedData = await parser.parseURL(feed.url);
+      if (Array.isArray(feedData.items)) {
+        feedData.items.forEach(item => {
+          if (item.title && (item.link || item.guid)) {
+            const pubDateStr = item.isoDate || item.pubDate ? new Date(item.isoDate || item.pubDate).toISOString() : new Date().toISOString();
+            const pubMs = new Date(pubDateStr).getTime();
+
+            if (nowMs - pubMs <= maxAgeMs) {
+              const parts = item.title.split(' - ');
+              const source = parts.length > 1 ? parts.pop().trim() : feed.name;
+              const cleanTitle = parts.join(' - ').trim();
+
+              rawArticles.push({
+                title: cleanTitle || item.title,
+                url: item.link || item.guid,
+                description: item.contentSnippet || item.summary || item.title,
+                source: source || feed.name,
+                author: item.creator || item.author || source || feed.name,
+                publishedAt: pubDateStr
+              });
+            }
+          }
+        });
+      }
+    } catch (err) {
+      console.warn(`[NEWS] RSS fetch warning for ${feed.name}:`, err.message);
+    }
+  }
+
+  try {
+    const hnRes = await fetch('https://hn.algolia.com/api/v1/search_by_date?tags=story&query=AI%20OR%20LLM%20OR%20OpenAI%20OR%20Claude%20OR%20DeepSeek%20OR%20Gemini&hitsPerPage=35');
+    if (hnRes.ok) {
+      const hnData = await hnRes.json();
+      if (Array.isArray(hnData.hits)) {
+        hnData.hits.forEach(hit => {
+          if (hit.title && (hit.url || hit.objectID)) {
+            const pubDateStr = hit.created_at ? new Date(hit.created_at).toISOString() : new Date().toISOString();
+            const pubMs = new Date(pubDateStr).getTime();
+
+            if (nowMs - pubMs <= maxAgeMs) {
+              rawArticles.push({
+                title: hit.title,
+                url: hit.url || `https://news.ycombinator.com/item?id=${hit.objectID}`,
+                description: hit.comment_text || `HackerNews discussion with ${hit.points || 0} points and ${hit.num_comments || 0} comments.`,
+                source: 'HackerNews AI',
+                author: hit.author || 'HackerNews',
+                publishedAt: pubDateStr
+              });
+            }
+          }
+        });
+      }
+    }
+  } catch (err) {
+    console.warn('[NEWS] HackerNews Algolia fetch warning:', err.message);
+  }
+
+  rawArticles.sort((a, b) => new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime());
+
+  return rawArticles;
+}
+
+export function normalizeCategoryInput(cat) {
+  if (!cat || typeof cat !== 'string') return 'all';
+  const c = cat.toLowerCase().replace(/[^\w]/g, '');
+  if (!c || c === 'all') return 'all';
+  if (c.includes('agent')) return 'AI Agents';
+  if (c.includes('open') || c.includes('source')) return 'Open Source';
+  if (c.includes('model')) return 'Models';
+  if (c.includes('hard') || c.includes('chip') || c.includes('gpu')) return 'Hardware';
+  if (c.includes('fund') || c.includes('raise')) return 'Funding';
+  if (c.includes('res') || c.includes('paper')) return 'Research';
+  if (c.includes('dev') || c.includes('tool') || c.includes('code') || c.includes('sdk')) return 'Developer Tools';
+  if (c.includes('reg') || c.includes('law') || c.includes('policy') || c.includes('safe')) return 'Regulation';
+  if (c.includes('start')) return 'Startups';
+  if (c.includes('comp')) return 'Companies';
+  return cat;
+}
+
+export async function runNewsIngestion() {
+  console.log('[NEWS] Fetching 100% real live articles from external internet sources...');
+  const fetchedAt = new Date().toISOString();
+
+  const threeDaysAgoIso = new Date(Date.now() - 3 * 24 * 60 * 60 * 1000).toISOString();
+  db.prepare(`DELETE FROM articles WHERE publishedAt < ?`).run(threeDaysAgoIso);
+  
+  let rawArticles = [];
+  try {
+    rawArticles = await fetchExternalArticles();
+    console.log(`[NEWS] Live internet providers returned ${rawArticles.length} raw articles`);
+  } catch (err) {
+    console.error('[NEWS] External live news fetch error:', err.message);
+    return { storedCount: 0, skippedDuplicatesCount: 0, error: err.message };
+  }
+
+  if (!rawArticles || rawArticles.length === 0) {
+    console.log('[NEWS] 0 articles returned from external sources');
+    return { storedCount: 0, skippedDuplicatesCount: 0 };
+  }
+
+  const recentRows = db.prepare(`
+    SELECT normalizedTitle FROM articles 
+    WHERE createdAt >= ?
+  `).all(Date.now() - 48 * 60 * 60 * 1000);
+  
+  const existingRecentTitles = recentRows.map(r => r.normalizedTitle);
+
+  let storedCount = 0;
+  let skippedDuplicatesCount = 0;
+
+  const insertStmt = db.prepare(`
+    INSERT OR IGNORE INTO articles (
+      id, title, normalizedTitle, description, url, canonicalUrl, 
+      source, author, imageUrl, category, publishedAt, fetchedAt, contentHash, createdAt
+    ) VALUES (
+      ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?
+    )
+  `);
+
+  const checkExactCanonical = db.prepare(`SELECT id FROM articles WHERE canonicalUrl = ? OR url = ?`);
+  const checkExactNormalizedTitle = db.prepare(`SELECT id FROM articles WHERE normalizedTitle = ?`);
+  const checkExactContentHash = db.prepare(`SELECT id FROM articles WHERE contentHash = ?`);
+
+  const transaction = db.transaction((articlesToProcess) => {
+    for (const raw of articlesToProcess) {
+      if (!raw.title || !raw.url) {
+        skippedDuplicatesCount++;
+        continue;
+      }
+
+      const canonicalUrl = getCanonicalUrl(raw.url);
+      const normalizedTitle = getNormalizedTitle(raw.title);
+
+      if (!canonicalUrl || !normalizedTitle) {
+        skippedDuplicatesCount++;
+        continue;
+      }
+
+      const contentHash = getContentHash(normalizedTitle, raw.description);
+
+      const existingCanonical = checkExactCanonical.get(canonicalUrl, raw.url);
+      if (existingCanonical) {
+        skippedDuplicatesCount++;
+        continue;
+      }
+
+      const existingTitle = checkExactNormalizedTitle.get(normalizedTitle);
+      if (existingTitle) {
+        skippedDuplicatesCount++;
+        continue;
+      }
+
+      const existingHash = checkExactContentHash.get(contentHash);
+      if (existingHash) {
+        skippedDuplicatesCount++;
+        continue;
+      }
+
+      if (isSimilarStory(normalizedTitle, existingRecentTitles)) {
+        skippedDuplicatesCount++;
+        continue;
+      }
+
+      const articleId = `art_${crypto.randomBytes(8).toString('hex')}`;
+      const category = raw.category || detectCategory(raw.title, raw.description);
+      const createdAt = Date.now();
+
+      const safeTitle = String(raw.title || '').trim();
+      const safeUrl = String(raw.url || '').trim();
+      const safeDesc = String(raw.description || raw.title || '').slice(0, 500).trim();
+      const safeSource = String(typeof raw.source === 'string' ? raw.source : raw.source?.name || 'AI News Source').trim();
+      const safeAuthor = String(typeof raw.author === 'string' ? raw.author : raw.author?.name || 'Staff').trim();
+      const safeImageUrl = typeof raw.imageUrl === 'string' ? raw.imageUrl : null;
+      const safePublishedAt = typeof raw.publishedAt === 'string' ? raw.publishedAt : fetchedAt;
+
+      const result = insertStmt.run(
+        articleId,
+        safeTitle,
+        normalizedTitle,
+        safeDesc,
+        safeUrl,
+        canonicalUrl,
+        safeSource,
+        safeAuthor,
+        safeImageUrl,
+        category,
+        safePublishedAt,
+        fetchedAt,
+        contentHash,
+        createdAt
+      );
+
+      if (result.changes > 0) {
+        storedCount++;
+        existingRecentTitles.push(normalizedTitle);
+      } else {
+        skippedDuplicatesCount++;
+      }
+    }
+  });
+
+  try {
+    transaction(rawArticles);
+    console.log(`[NEWS] ${storedCount} new articles stored | ${skippedDuplicatesCount} duplicates skipped`);
+    return { storedCount, skippedDuplicatesCount };
+  } catch (err) {
+    console.error('[NEWS] Database insertion transaction failed:', err.message);
+    return { storedCount, skippedDuplicatesCount, error: err.message };
+  }
+}
+
+export function getArticles({ page = 1, limit = 20, category = 'all', after = null }) {
+  const safePage = Math.max(1, isNaN(parseInt(page, 10)) ? 1 : parseInt(page, 10));
+  const parsedLimit = Math.min(100, Math.max(1, isNaN(parseInt(limit, 10)) ? 20 : parseInt(limit, 10)));
+  const offset = (safePage - 1) * parsedLimit;
+
+  const normalizedCat = normalizeCategoryInput(category);
+
+  let whereClauses = [];
+  let params = [];
+
+  if (normalizedCat && normalizedCat !== 'all') {
+    whereClauses.push('category = ?');
+    params.push(normalizedCat);
+  }
+
+  if (after && typeof after === 'string' && after.trim().length > 0) {
+    whereClauses.push('publishedAt > ?');
+    params.push(after.trim());
+  }
+
+  const whereSql = whereClauses.length > 0 ? `WHERE ${whereClauses.join(' AND ')}` : '';
+
+  const totalStmt = db.prepare(`SELECT COUNT(*) as count FROM articles ${whereSql}`);
+  const total = totalStmt.get(...params).count;
+
+  const querySql = `
+    SELECT * FROM articles 
+    ${whereSql} 
+    ORDER BY publishedAt DESC, createdAt DESC 
+    LIMIT ? OFFSET ?
+  `;
+
+  const articles = db.prepare(querySql).all(...params, parsedLimit, offset);
+
+  const latestRow = db.prepare(`SELECT publishedAt FROM articles ORDER BY publishedAt DESC LIMIT 1`).get();
+  const latestPublishedAt = latestRow ? latestRow.publishedAt : null;
+
+  return {
+    articles,
+    total,
+    page: safePage,
+    limit: parsedLimit,
+    hasMore: offset + articles.length < total,
+    latestPublishedAt
+  };
+}
+
+export function getArticleById(id) {
+  if (!id || typeof id !== 'string') return null;
+  return db.prepare(`SELECT * FROM articles WHERE id = ?`).get(id) || null;
+}

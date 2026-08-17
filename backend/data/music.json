@@ -1,0 +1,42 @@
+[
+  {
+    "id": "riffusion",
+    "name": "Riffusion",
+    "category": "music",
+    "pricing": { "free": true, "paid": false },
+    "website": "https://www.riffusion.com",
+    "playstore": "",
+    "tags": ["music", "spectrogram diffusion", "realtime music", "open source", "audio generation"],
+    "developerCertified": true
+  },
+  {
+    "id": "suno",
+    "name": "Suno",
+    "category": "music",
+    "pricing": { "free": true, "paid": true },
+    "website": "https://suno.com",
+    "playstore": "",
+    "tags": ["music", "song generation", "full tracks", "vocals", "lyrics to music", "audio ai"],
+    "developerCertified": true
+  },
+  {
+    "id": "udio",
+    "name": "Udio",
+    "category": "music",
+    "pricing": { "free": true, "paid": true },
+    "website": "https://www.udio.com",
+    "playstore": "",
+    "tags": ["music", "high fidelity music", "stem control", "genre customization", "song builder"],
+    "developerCertified": true
+  },
+  {
+    "id": "soundraw",
+    "name": "Soundraw",
+    "category": "music",
+    "pricing": { "free": true, "paid": true },
+    "website": "https://soundraw.io",
+    "playstore": "",
+    "tags": ["music", "royalty free music", "background music", "custom beats", "video background"],
+    "developerCertified": false
+  }
+]

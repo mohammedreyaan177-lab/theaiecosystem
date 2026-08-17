@@ -1,0 +1,402 @@
+[
+  {
+    "id": "antigravity",
+    "name": "Antigravity AI",
+    "category": "coding",
+    "pricing": { "free": true, "paid": true },
+    "website": "https://deepmind.google",
+    "playstore": "",
+    "tags": ["coding", "ide", "agent", "google deepmind", "antigravity", "autonomous dev", "developer tool"],
+    "developerCertified": true
+  },
+  {
+    "id": "hermes",
+    "name": "Nous Hermes Agent",
+    "category": "coding",
+    "pricing": { "free": true, "paid": false },
+    "website": "https://nousresearch.com",
+    "playstore": "",
+    "tags": ["coding", "hermes", "nous research", "agent", "reasoning", "open source", "developer tool"],
+    "developerCertified": true
+  },
+  {
+    "id": "devin",
+    "name": "Devin AI",
+    "category": "coding",
+    "pricing": { "free": false, "paid": true },
+    "website": "https://cognition.ai",
+    "playstore": "",
+    "tags": ["coding", "cognition", "autonomous software engineer", "agent", "fullstack", "developer tool"],
+    "developerCertified": true
+  },
+  {
+    "id": "openhands",
+    "name": "OpenHands",
+    "category": "coding",
+    "pricing": { "free": true, "paid": false },
+    "website": "https://all-hands.dev",
+    "playstore": "",
+    "tags": ["coding", "opendevin", "open source", "autonomous agent", "github", "docker", "developer tool"],
+    "developerCertified": true
+  },
+  {
+    "id": "cursor",
+    "name": "Cursor",
+    "category": "coding",
+    "pricing": { "free": true, "paid": true },
+    "website": "https://cursor.com",
+    "playstore": "",
+    "tags": ["coding", "ide", "editor", "ai assistant", "vibe coding", "autocompletion", "ai agent", "developer tool"],
+    "developerCertified": true
+  },
+  {
+    "id": "windsurf",
+    "name": "Windsurf",
+    "category": "coding",
+    "pricing": { "free": true, "paid": true },
+    "website": "https://codeium.com/windsurf",
+    "playstore": "",
+    "tags": ["coding", "ide", "editor", "codeium", "ai agent", "flow", "developer tool"],
+    "developerCertified": true
+  },
+  {
+    "id": "github-copilot",
+    "name": "GitHub Copilot",
+    "category": "coding",
+    "pricing": { "free": true, "paid": true },
+    "website": "https://github.com/features/copilot",
+    "playstore": "",
+    "tags": ["coding", "copilot", "github", "autocompletion", "ai pair programmer", "vscode", "developer tool"],
+    "developerCertified": true
+  },
+  {
+    "id": "zed",
+    "name": "Zed AI",
+    "category": "coding",
+    "pricing": { "free": true, "paid": true },
+    "website": "https://zed.dev",
+    "playstore": "",
+    "tags": ["coding", "ide", "rust", "editor", "speed", "claude", "collaborative", "developer tool"],
+    "developerCertified": true
+  },
+  {
+    "id": "pearai",
+    "name": "PearAI",
+    "category": "coding",
+    "pricing": { "free": true, "paid": true },
+    "website": "https://trypear.ai",
+    "playstore": "",
+    "tags": ["coding", "ide", "open source", "editor", "vscode fork", "ai agent", "developer tool"],
+    "developerCertified": true
+  },
+  {
+    "id": "trae",
+    "name": "Trae AI",
+    "category": "coding",
+    "pricing": { "free": true, "paid": true },
+    "website": "https://trae.ai",
+    "playstore": "",
+    "tags": ["coding", "ide", "editor", "adaptive agent", "byteplus", "multi-file edit", "developer tool"],
+    "developerCertified": true
+  },
+  {
+    "id": "devika",
+    "name": "Devika AI",
+    "category": "coding",
+    "pricing": { "free": true, "paid": false },
+    "website": "https://github.com/stork-ai/devika",
+    "playstore": "",
+    "tags": ["coding", "open source", "agent", "python", "devin alternative", "developer tool"],
+    "developerCertified": true
+  },
+  {
+    "id": "goose-ai",
+    "name": "Goose AI",
+    "category": "coding",
+    "pricing": { "free": true, "paid": false },
+    "website": "https://block.github.io/goose",
+    "playstore": "",
+    "tags": ["coding", "block", "local agent", "cli", "open source", "developer tool"],
+    "developerCertified": true
+  },
+  {
+    "id": "autocoderover",
+    "name": "AutoCodeRover",
+    "category": "coding",
+    "pricing": { "free": true, "paid": false },
+    "website": "https://autocoderover.github.io",
+    "playstore": "",
+    "tags": ["coding", "program repair", "issue solver", "nus", "agent", "developer tool"],
+    "developerCertified": true
+  },
+  {
+    "id": "github-spark",
+    "name": "GitHub Spark",
+    "category": "coding",
+    "pricing": { "free": true, "paid": true },
+    "website": "https://spark.github.com",
+    "playstore": "",
+    "tags": ["coding", "github", "micro-apps", "natural language", "nextjs", "developer tool"],
+    "developerCertified": true
+  },
+  {
+    "id": "replit-agent",
+    "name": "Replit Agent",
+    "category": "coding",
+    "pricing": { "free": false, "paid": true },
+    "website": "https://replit.com/ai",
+    "playstore": "",
+    "tags": ["coding", "replit", "autonomous builder", "fullstack", "deploy", "developer tool"],
+    "developerCertified": true
+  },
+  {
+    "id": "supermaven",
+    "name": "Supermaven",
+    "category": "coding",
+    "pricing": { "free": true, "paid": true },
+    "website": "https://supermaven.com",
+    "playstore": "",
+    "tags": ["coding", "fast autocomplete", "1m context", "speed", "copilot alternative", "developer tool"],
+    "developerCertified": true
+  },
+  {
+    "id": "aider",
+    "name": "Aider",
+    "category": "coding",
+    "pricing": { "free": true, "paid": false },
+    "website": "https://aider.chat",
+    "playstore": "",
+    "tags": ["coding", "terminal", "cli", "git agent", "open source", "python", "developer tool"],
+    "developerCertified": true
+  },
+  {
+    "id": "warp",
+    "name": "Warp AI",
+    "category": "coding",
+    "pricing": { "free": true, "paid": true },
+    "website": "https://warp.dev",
+    "playstore": "",
+    "tags": ["coding", "terminal", "rust", "cli", "ai command completion", "developer tool"],
+    "developerCertified": true
+  },
+  {
+    "id": "cody",
+    "name": "Sourcegraph Cody",
+    "category": "coding",
+    "pricing": { "free": true, "paid": true },
+    "website": "https://sourcegraph.com/cody",
+    "playstore": "",
+    "tags": ["coding", "sourcegraph", "codebase search", "context aware", "developer tool"],
+    "developerCertified": true
+  },
+  {
+    "id": "codeium",
+    "name": "Codeium",
+    "category": "coding",
+    "pricing": { "free": true, "paid": true },
+    "website": "https://codeium.com",
+    "playstore": "",
+    "tags": ["coding", "autocompletion", "free copilot", "code completion", "developer tool"],
+    "developerCertified": true
+  },
+  {
+    "id": "continue",
+    "name": "Continue",
+    "category": "coding",
+    "pricing": { "free": true, "paid": false },
+    "website": "https://continue.dev",
+    "playstore": "",
+    "tags": ["coding", "open source", "vscode", "jetbrains", "llm extension", "developer tool"],
+    "developerCertified": true
+  },
+  {
+    "id": "codegpt",
+    "name": "CodeGPT",
+    "category": "coding",
+    "pricing": { "free": true, "paid": true },
+    "website": "https://codegpt.co",
+    "playstore": "",
+    "tags": ["coding", "vscode extension", "local llm", "ollama", "copilot", "developer tool"],
+    "developerCertified": true
+  },
+  {
+    "id": "gitlab-duo",
+    "name": "GitLab Duo",
+    "category": "coding",
+    "pricing": { "free": false, "paid": true },
+    "website": "https://about.gitlab.com/gitlab-duo",
+    "playstore": "",
+    "tags": ["coding", "gitlab", "devsecops", "code review", "vulnerability scan", "developer tool"],
+    "developerCertified": true
+  },
+  {
+    "id": "augment",
+    "name": "Augment Code",
+    "category": "coding",
+    "pricing": { "free": true, "paid": true },
+    "website": "https://augmentcode.com",
+    "playstore": "",
+    "tags": ["coding", "enterprise code", "codebase context", "speed", "developer tool"],
+    "developerCertified": true
+  },
+  {
+    "id": "pieces",
+    "name": "Pieces for Developers",
+    "category": "coding",
+    "pricing": { "free": true, "paid": true },
+    "website": "https://pieces.app",
+    "playstore": "",
+    "tags": ["coding", "snippet manager", "local ai", "context", "ide extension", "developer tool"],
+    "developerCertified": true
+  },
+  {
+    "id": "qodo",
+    "name": "Qodo (CodiumAI)",
+    "category": "coding",
+    "pricing": { "free": true, "paid": true },
+    "website": "https://qodo.ai",
+    "playstore": "",
+    "tags": ["coding", "test generation", "pr review", "code quality", "integrity", "developer tool"],
+    "developerCertified": true
+  },
+  {
+    "id": "jetbrains-ai",
+    "name": "JetBrains AI Assistant",
+    "category": "coding",
+    "pricing": { "free": false, "paid": true },
+    "website": "https://www.jetbrains.com/ai",
+    "playstore": "",
+    "tags": ["coding", "jetbrains", "intellij", "pycharm", "webstorm", "ide plugin", "developer tool"],
+    "developerCertified": true
+  },
+  {
+    "id": "sweep",
+    "name": "Sweep AI",
+    "category": "coding",
+    "pricing": { "free": true, "paid": true },
+    "website": "https://sweep.dev",
+    "playstore": "",
+    "tags": ["coding", "github agent", "issue to pr", "autonomous bugfix", "developer tool"],
+    "developerCertified": true
+  },
+  {
+    "id": "replit-ai",
+    "name": "Replit AI",
+    "category": "coding",
+    "pricing": { "free": true, "paid": true },
+    "website": "https://replit.com",
+    "playstore": "https://play.google.com/store/apps/details?id=com.replit.app",
+    "tags": ["coding", "cloud ide", "replit", "in-browser editor", "hosting", "developer tool"],
+    "developerCertified": true
+  },
+  {
+    "id": "v0",
+    "name": "v0",
+    "category": "coding",
+    "pricing": { "free": true, "paid": true },
+    "website": "https://v0.dev",
+    "playstore": "",
+    "tags": ["coding", "ui generation", "react", "shadcn", "tailwind", "vercel", "frontend", "developer tool"],
+    "developerCertified": true
+  },
+  {
+    "id": "bolt",
+    "name": "Bolt",
+    "category": "coding",
+    "pricing": { "free": true, "paid": true },
+    "website": "https://bolt.new",
+    "playstore": "",
+    "tags": ["coding", "fullstack", "web app builder", "react", "node", "in-browser app", "developer tool"],
+    "developerCertified": true
+  },
+  {
+    "id": "lovable",
+    "name": "Lovable",
+    "category": "coding",
+    "pricing": { "free": true, "paid": true },
+    "website": "https://lovable.dev",
+    "playstore": "",
+    "tags": ["coding", "fullstack", "web app builder", "gpt-4o", "react", "no-code", "developer tool"],
+    "developerCertified": true
+  },
+  {
+    "id": "marblism",
+    "name": "Marblism",
+    "category": "coding",
+    "pricing": { "free": true, "paid": true },
+    "website": "https://marblism.com",
+    "playstore": "",
+    "tags": ["coding", "schema to app", "nextjs", "node", "boilerplate", "developer tool"],
+    "developerCertified": true
+  },
+  {
+    "id": "locofy",
+    "name": "Locofy AI",
+    "category": "coding",
+    "pricing": { "free": true, "paid": true },
+    "website": "https://locofy.ai",
+    "playstore": "",
+    "tags": ["coding", "figma to code", "react", "react native", "frontend", "developer tool"],
+    "developerCertified": true
+  },
+  {
+    "id": "tabnine",
+    "name": "Tabnine",
+    "category": "coding",
+    "pricing": { "free": true, "paid": true },
+    "website": "https://www.tabnine.com",
+    "playstore": "",
+    "tags": ["coding", "code completion", "privacy", "on-premise", "ai assistant", "developer tool"],
+    "developerCertified": true
+  },
+  {
+    "id": "amazon-q",
+    "name": "Amazon Q Developer",
+    "category": "coding",
+    "pricing": { "free": true, "paid": true },
+    "website": "https://aws.amazon.com/q/developer",
+    "playstore": "",
+    "tags": ["coding", "aws", "amazon", "cloud developer", "security", "developer tool"],
+    "developerCertified": true
+  },
+  {
+    "id": "copilot-workspace",
+    "name": "GitHub Copilot Workspace",
+    "category": "coding",
+    "pricing": { "free": true, "paid": true },
+    "website": "https://github.next/projects/copilot-workspace",
+    "playstore": "",
+    "tags": ["coding", "github next", "task plan", "issue solver", "developer tool"],
+    "developerCertified": true
+  },
+  {
+    "id": "snyk-ai",
+    "name": "Snyk DeepCode AI",
+    "category": "coding",
+    "pricing": { "free": true, "paid": true },
+    "website": "https://snyk.io",
+    "playstore": "",
+    "tags": ["coding", "security scan", "vulnerability repair", "snyk", "developer tool"],
+    "developerCertified": true
+  },
+  {
+    "id": "tabby-ml",
+    "name": "Tabby ML",
+    "category": "coding",
+    "pricing": { "free": true, "paid": false },
+    "website": "https://tabby.tabbyml.com",
+    "playstore": "",
+    "tags": ["coding", "self-hosted copilot", "open source", "rust", "developer tool"],
+    "developerCertified": true
+  },
+  {
+    "id": "mentat",
+    "name": "Mentat AI",
+    "category": "coding",
+    "pricing": { "free": true, "paid": false },
+    "website": "https://mentat.ai",
+    "playstore": "",
+    "tags": ["coding", "cli agent", "command line", "git changes", "open source", "developer tool"],
+    "developerCertified": true
+  }
+]

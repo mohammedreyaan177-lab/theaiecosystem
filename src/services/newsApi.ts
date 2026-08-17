@@ -24,7 +24,16 @@ export interface NewsResponse {
   latestPublishedAt: string | null;
 }
 
-const API_BASE = import.meta.env.VITE_AI_NEWS_API_URL || '/api/news';
+const getBackendNewsUrl = () => {
+  const envUrl = import.meta.env.VITE_BACKEND_URL || import.meta.env.VITE_API_URL || import.meta.env.VITE_AI_NEWS_API_URL;
+  if (envUrl && typeof envUrl === 'string' && envUrl.trim().length > 0) {
+    const clean = envUrl.trim().replace(/\/+$/, '');
+    return clean.endsWith('/api/news') ? clean : `${clean}/api/news`;
+  }
+  return '/api/news';
+};
+
+const API_BASE = getBackendNewsUrl();
 
 /**
  * Direct Live Browser Fetch (Guaranteed 100% CORS & Vercel Safe)

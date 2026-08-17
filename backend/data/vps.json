@@ -1,0 +1,62 @@
+[
+  {
+    "id": "runpod",
+    "name": "RunPod Cloud GPU",
+    "category": "vps",
+    "pricing": { "free": false, "paid": true },
+    "website": "https://www.runpod.io",
+    "playstore": "",
+    "tags": ["vps", "gpu cloud", "serverless gpu", "fine-tuning", "h100", "a100", "developer tool"],
+    "developerCertified": true
+  },
+  {
+    "id": "vast-ai",
+    "name": "Vast.ai",
+    "category": "vps",
+    "pricing": { "free": false, "paid": true },
+    "website": "https://vast.ai",
+    "playstore": "",
+    "tags": ["vps", "gpu rental", "p2p gpu", "cheap training", "docker", "developer tool"],
+    "developerCertified": true
+  },
+  {
+    "id": "vps-hetzner",
+    "name": "Hetzner Cloud",
+    "category": "vps",
+    "pricing": { "free": false, "paid": true },
+    "website": "https://www.hetzner.com/cloud",
+    "playstore": "",
+    "tags": ["vps", "hetzner", "cloud server", "cheap vps", "bare metal", "linux", "gpu server", "developer tool"],
+    "developerCertified": true
+  },
+  {
+    "id": "vps-linode",
+    "name": "Akamai Linode",
+    "category": "vps",
+    "pricing": { "free": false, "paid": true },
+    "website": "https://www.linode.com",
+    "playstore": "",
+    "tags": ["vps", "akamai linode", "linux vps", "cloud computing", "developer infrastructure"],
+    "developerCertified": true
+  },
+  {
+    "id": "vps-vultr",
+    "name": "Vultr",
+    "category": "vps",
+    "pricing": { "free": false, "paid": true },
+    "website": "https://www.vultr.com",
+    "playstore": "",
+    "tags": ["vps", "vultr", "cloud compute", "gpu instances", "one-click apps", "developer tool"],
+    "developerCertified": true
+  },
+  {
+    "id": "vps-contabo",
+    "name": "Contabo",
+    "category": "vps",
+    "pricing": { "free": false, "paid": true },
+    "website": "https://contabo.com",
+    "playstore": "",
+    "tags": ["vps", "contabo", "high storage", "cheap vps", "german servers", "developer tool"],
+    "developerCertified": false
+  }
+]

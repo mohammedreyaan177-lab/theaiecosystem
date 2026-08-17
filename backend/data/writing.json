@@ -1,0 +1,82 @@
+[
+  {
+    "id": "wordtune",
+    "name": "Wordtune",
+    "category": "writing",
+    "pricing": { "free": true, "paid": true },
+    "website": "https://www.wordtune.com",
+    "playstore": "",
+    "tags": ["writing", "rewriter", "paraphrase", "tone enhancer", "summary"],
+    "developerCertified": true
+  },
+  {
+    "id": "languagetool",
+    "name": "LanguageTool AI",
+    "category": "writing",
+    "pricing": { "free": true, "paid": true },
+    "website": "https://languagetool.org",
+    "playstore": "https://play.google.com/store/apps/details?id=org.languagetool",
+    "tags": ["writing", "open source grammar", "multilingual", "proofreader"],
+    "developerCertified": true
+  },
+  {
+    "id": "deepl-write",
+    "name": "DeepL Write",
+    "category": "writing",
+    "pricing": { "free": true, "paid": true },
+    "website": "https://www.deepl.com/write",
+    "playstore": "",
+    "tags": ["writing", "grammar assistant", "tone editing", "paraphrase", "deepl", "precision"],
+    "developerCertified": true
+  },
+  {
+    "id": "jasper",
+    "name": "Jasper",
+    "category": "writing",
+    "pricing": { "free": false, "paid": true },
+    "website": "https://www.jasper.ai",
+    "playstore": "",
+    "tags": ["writing", "copywriting", "marketing content", "blog posts", "brand voice", "seo"],
+    "developerCertified": true
+  },
+  {
+    "id": "copyai",
+    "name": "Copy.ai",
+    "category": "writing",
+    "pricing": { "free": false, "paid": true },
+    "website": "https://www.copy.ai",
+    "playstore": "",
+    "tags": ["writing", "sales copy", "social media posts", "email generator", "marketing automation"],
+    "developerCertified": true
+  },
+  {
+    "id": "grammarly",
+    "name": "Grammarly",
+    "category": "writing",
+    "pricing": { "free": true, "paid": true },
+    "website": "https://www.grammarly.com",
+    "playstore": "https://play.google.com/store/apps/details?id=com.grammarly.android.keyboard",
+    "tags": ["writing", "grammar checker", "spell check", "tone detector", "plagiarism", "keyboard"],
+    "developerCertified": true
+  },
+  {
+    "id": "quillbot",
+    "name": "QuillBot",
+    "category": "writing",
+    "pricing": { "free": true, "paid": true },
+    "website": "https://quillbot.com",
+    "playstore": "https://play.google.com/store/apps/details?id=com.quillbot.paraphrasingtool",
+    "tags": ["writing", "paraphraser", "grammar check", "summarizer", "citation generator", "educate"],
+    "developerCertified": true
+  },
+  {
+    "id": "deepl",
+    "name": "DeepL",
+    "category": "writing",
+    "pricing": { "free": true, "paid": true },
+    "website": "https://www.deepl.com",
+    "playstore": "https://play.google.com/store/apps/details?id=com.deepl.mobiletranslator",
+    "tags": ["writing", "translation", "translator", "multilingual", "precise translation", "dictionary"],
+    "developerCertified": true
+  }
+]

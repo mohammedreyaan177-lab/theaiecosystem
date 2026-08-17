@@ -1,0 +1,42 @@
+[
+  {
+    "id": "khanmigo",
+    "name": "Khanmigo",
+    "category": "learning",
+    "pricing": { "free": true, "paid": true },
+    "website": "https://www.khanacademy.org/khanmigo",
+    "playstore": "",
+    "tags": ["learning", "khan academy", "socratic tutor", "ai coach", "math", "coding", "educate"],
+    "developerCertified": true
+  },
+  {
+    "id": "coursera",
+    "name": "Coursera",
+    "category": "learning",
+    "pricing": { "free": true, "paid": true },
+    "website": "https://www.coursera.org",
+    "playstore": "https://play.google.com/store/apps/details?id=org.coursera.android",
+    "tags": ["learning", "online courses", "certificates", "ai specialization", "university", "education", "educate"],
+    "developerCertified": true
+  },
+  {
+    "id": "deeplearning-ai",
+    "name": "DeepLearning.AI",
+    "category": "learning",
+    "pricing": { "free": true, "paid": true },
+    "website": "https://www.deeplearning.ai",
+    "playstore": "",
+    "tags": ["learning", "andrew ng", "deep learning", "machine learning", "python", "ai certification", "educate"],
+    "developerCertified": true
+  },
+  {
+    "id": "kaggle",
+    "name": "Kaggle",
+    "category": "learning",
+    "pricing": { "free": true, "paid": false },
+    "website": "https://www.kaggle.com",
+    "playstore": "",
+    "tags": ["learning", "data science", "competitions", "datasets", "python notebooks", "machine learning", "educate"],
+    "developerCertified": true
+  }
+]
