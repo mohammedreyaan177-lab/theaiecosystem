@@ -453,7 +453,7 @@ export async function discoverWebProjects(targetEntity, classification, extracte
 
   const fetchGithub = async () => {
     const controller = new AbortController();
-    const timer = setTimeout(() => controller.abort(), 1200);
+    const timer = setTimeout(() => controller.abort(), 250);
     try {
       const githubQuery = encodeURIComponent(`${querySubject} in:name,description,readme sort:stars`);
       const ghRes = await fetch(`https://api.github.com/search/repositories?q=${githubQuery}&per_page=6`, {
@@ -520,7 +520,7 @@ export async function discoverWebProjects(targetEntity, classification, extracte
 
   const fetchAlgolia = async () => {
     const controller = new AbortController();
-    const timer = setTimeout(() => controller.abort(), 1200);
+    const timer = setTimeout(() => controller.abort(), 250);
     try {
       const webRes = await fetch(`https://hn.algolia.com/api/v1/search?query=${encodeURIComponent(querySubject + ' project open source')}&hitsPerPage=4`, {
         signal: controller.signal

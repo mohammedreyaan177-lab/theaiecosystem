@@ -124,31 +124,7 @@ function detectCategory(title, description) {
 async function fetchExternalArticles() {
   const rawArticles = [];
 
-  // 1. Fetch from HackerNews Algolia Real-time AI Search API
-  try {
-    const hnRes = await fetch('https://hn.algolia.com/api/v1/search_by_date?tags=story&query=AI%20OR%20LLM%20OR%20OpenAI%20OR%20Claude%20OR%20DeepSeek%20OR%20Gemini&hitsPerPage=25');
-    if (hnRes.ok) {
-      const hnData = await hnRes.json();
-      if (Array.isArray(hnData.hits)) {
-        hnData.hits.forEach(hit => {
-          if (hit.title && (hit.url || hit.objectID)) {
-            rawArticles.push({
-              title: hit.title,
-              url: hit.url || `https://news.ycombinator.com/item?id=${hit.objectID}`,
-              description: hit.comment_text || `HackerNews discussion with ${hit.points || 0} points and ${hit.num_comments || 0} comments.`,
-              source: 'HackerNews AI',
-              author: hit.author || 'HackerNews',
-              publishedAt: hit.created_at ? new Date(hit.created_at).toISOString() : new Date().toISOString()
-            });
-          }
-        });
-      }
-    }
-  } catch (err) {
-    console.warn('[NEWS] HackerNews Algolia fetch warning:', err.message);
-  }
-
-  // 2. Fetch from curated RSS Feeds
+  // 1. Fetch from curated Live RSS Feeds (Google News, TechCrunch, VentureBeat, HuggingFace, Verge, MIT Tech Review)
   const rssFeeds = [
     { url: 'https://news.google.com/rss/search?q=Artificial+Intelligence+OR+OpenAI+OR+Gemini+OR+Claude+OR+DeepSeek&hl=en-US&gl=US&ceid=US:en', name: 'Google News AI' },
     { url: 'https://techcrunch.com/category/artificial-intelligence/feed/', name: 'TechCrunch AI' },
@@ -159,20 +135,34 @@ async function fetchExternalArticles() {
     { url: 'https://www.technologyreview.com/topic/artificial-intelligence/feed/', name: 'MIT Tech Review AI' }
   ];
 
+  const nowMs = Date.now();
+  const maxAgeMs = 7 * 24 * 60 * 60 * 1000; // 7 days max age
+
   for (const feed of rssFeeds) {
     try {
       const feedData = await parser.parseURL(feed.url);
       if (Array.isArray(feedData.items)) {
         feedData.items.forEach(item => {
           if (item.title && (item.link || item.guid)) {
-            rawArticles.push({
-              title: item.title,
-              url: item.link || item.guid,
-              description: item.contentSnippet || item.summary || item.title,
-              source: feed.name,
-              author: item.creator || item.author || feed.name,
-              publishedAt: item.isoDate || item.pubDate ? new Date(item.isoDate || item.pubDate).toISOString() : new Date().toISOString()
-            });
+            const pubDateStr = item.isoDate || item.pubDate ? new Date(item.isoDate || item.pubDate).toISOString() : new Date().toISOString();
+            const pubMs = new Date(pubDateStr).getTime();
+
+            // Ignore articles older than 7 days
+            if (nowMs - pubMs <= maxAgeMs) {
+              // Extract publisher source name from title format ("Headline - Publisher")
+              const parts = item.title.split(' - ');
+              const source = parts.length > 1 ? parts.pop().trim() : feed.name;
+              const cleanTitle = parts.join(' - ').trim();
+
+              rawArticles.push({
+                title: cleanTitle || item.title,
+                url: item.link || item.guid,
+                description: item.contentSnippet || item.summary || item.title,
+                source: source || feed.name,
+                author: item.creator || item.author || source || feed.name,
+                publishedAt: pubDateStr
+              });
+            }
           }
         });
       }
@@ -180,6 +170,38 @@ async function fetchExternalArticles() {
       console.warn(`[NEWS] RSS fetch warning for ${feed.name}:`, err.message);
     }
   }
+
+  // 2. Fetch from HackerNews Algolia Search API (Filtered to last 7 days only)
+  try {
+    const hnRes = await fetch('https://hn.algolia.com/api/v1/search_by_date?tags=story&query=AI%20OR%20LLM%20OR%20OpenAI%20OR%20Claude%20OR%20DeepSeek%20OR%20Gemini&hitsPerPage=35');
+    if (hnRes.ok) {
+      const hnData = await hnRes.json();
+      if (Array.isArray(hnData.hits)) {
+        hnData.hits.forEach(hit => {
+          if (hit.title && (hit.url || hit.objectID)) {
+            const pubDateStr = hit.created_at ? new Date(hit.created_at).toISOString() : new Date().toISOString();
+            const pubMs = new Date(pubDateStr).getTime();
+
+            if (nowMs - pubMs <= maxAgeMs) {
+              rawArticles.push({
+                title: hit.title,
+                url: hit.url || `https://news.ycombinator.com/item?id=${hit.objectID}`,
+                description: hit.comment_text || `HackerNews discussion with ${hit.points || 0} points and ${hit.num_comments || 0} comments.`,
+                source: 'HackerNews AI',
+                author: hit.author || 'HackerNews',
+                publishedAt: pubDateStr
+              });
+            }
+          }
+        });
+      }
+    }
+  } catch (err) {
+    console.warn('[NEWS] HackerNews Algolia fetch warning:', err.message);
+  }
+
+  // Sort strictly by publishedAt descending
+  rawArticles.sort((a, b) => new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime());
 
   return rawArticles;
 }
@@ -211,6 +233,10 @@ export function normalizeCategoryInput(cat) {
 export async function runNewsIngestion() {
   console.log('[NEWS] Fetching 100% real live articles from external internet sources...');
   const fetchedAt = new Date().toISOString();
+
+  // Purge old articles (>3 days old) to keep SQLite DB fresh with today's latest news
+  const threeDaysAgoIso = new Date(Date.now() - 3 * 24 * 60 * 60 * 1000).toISOString();
+  db.prepare(`DELETE FROM articles WHERE publishedAt < ?`).run(threeDaysAgoIso);
   
   let rawArticles = [];
   try {

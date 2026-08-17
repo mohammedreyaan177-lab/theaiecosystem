@@ -88,7 +88,7 @@ async function fetchLiveNewsFallback(category = 'all'): Promise<NewsResponse> {
 
     const data = await res.json();
     let articles: NewsArticle[] = (data.hits || [])
-      .filter((h: any) => h.title)
+      .filter((h: any) => h.title && h.created_at)
       .map((hit: any, idx: number) => {
         const text = (hit.title + ' ' + (hit.comment_text || '')).toLowerCase();
         let cat = 'Companies';
@@ -116,6 +116,14 @@ async function fetchLiveNewsFallback(category = 'all'): Promise<NewsResponse> {
           createdAt: Date.now()
         };
       });
+
+    // Sort strictly by publishedAt descending (NEWEST FIRST)
+    articles.sort((a, b) => new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime());
+
+    // Filter out items older than 7 days to keep news feed strictly fresh
+    const nowMs = Date.now();
+    const maxAgeMs = 7 * 24 * 60 * 60 * 1000;
+    articles = articles.filter(a => nowMs - new Date(a.publishedAt).getTime() <= maxAgeMs);
 
     if (articles.length === 0) {
       articles = fallbackArticles;
