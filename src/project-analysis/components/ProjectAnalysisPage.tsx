@@ -97,15 +97,24 @@ export const ProjectAnalysisPage: React.FC<ProjectAnalysisPageProps> = ({ tools 
         differentiationEngine: fullReport.differentiationEngine,
         testingPlan: fullReport.testingPlan,
         deploymentPlan: fullReport.deploymentPlan,
-        architectureNodes: [
-          { id: '1', name: 'Web Client', layer: 'Frontend', description: 'React SPA / Next.js frontend', connectedTo: ['2'] },
-          { id: '2', name: 'API Server', layer: 'Backend', description: 'Express REST API gateway', connectedTo: ['3', '4'] },
-          { id: '3', name: 'Postgres DB', layer: 'Database', description: 'Relational database persistence', connectedTo: [] },
-          { id: '4', name: 'AI Services', layer: 'AI Inference', description: 'Ecosystem AI models & vector APIs', connectedTo: [] }
-        ],
-        securityRisks: [
-          { category: 'Authentication & API Security', riskLevel: 'Medium', description: 'API key exposure or unauthenticated endpoints.', mitigationStrategy: 'Enforce environment variables server-side and CORS restrictions.' }
-        ]
+        architectureNodes: (fullReport.architectureNodes && fullReport.architectureNodes.length > 0)
+          ? fullReport.architectureNodes
+          : fullReport.architectureSummary?.isFrontendOnly
+          ? [
+              { id: '1', name: 'Web Client SPA', layer: 'Frontend Tier', description: 'React SPA / Client-side App', connectedTo: ['2'] },
+              { id: '2', name: 'Static CDN Hosting', layer: 'Deployment Tier', description: 'Vercel / Cloudflare Pages CDN', connectedTo: [] }
+            ]
+          : [
+              { id: '1', name: 'Web Client', layer: 'Frontend', description: 'React SPA / Next.js frontend', connectedTo: ['2'] },
+              { id: '2', name: 'API Server', layer: 'Backend', description: 'Express REST API gateway', connectedTo: ['3', '4'] },
+              { id: '3', name: 'Postgres DB', layer: 'Database', description: 'Relational database persistence', connectedTo: [] },
+              { id: '4', name: 'AI Services', layer: 'AI Inference', description: 'Ecosystem AI models & vector APIs', connectedTo: [] }
+            ],
+        securityRisks: (fullReport.securityRisks && fullReport.securityRisks.length > 0)
+          ? fullReport.securityRisks
+          : [
+              { category: 'Authentication & API Security', riskLevel: 'Medium', description: 'API key exposure or unauthenticated endpoints.', mitigationStrategy: 'Enforce environment variables server-side and CORS restrictions.' }
+            ]
       };
 
       setReport(mappedReport);

@@ -58,6 +58,8 @@ export interface FullProjectAnalysisReport {
   differentiationEngine?: any;
   testingPlan?: any[];
   deploymentPlan?: any[];
+  architectureNodes?: any[];
+  securityRisks?: any[];
 }
 
 export async function requestIntelligentAnalysis(prompt: string): Promise<FullProjectAnalysisReport> {

@@ -185,23 +185,43 @@ async function fetchExternalArticles() {
 }
 
 /**
+ * Normalizes input category slug/string to canonical DB category name
+ */
+export function normalizeCategoryInput(cat) {
+  if (!cat || typeof cat !== 'string') return 'all';
+  const c = cat.toLowerCase().replace(/[^\w]/g, '');
+  if (!c || c === 'all') return 'all';
+  if (c.includes('agent')) return 'AI Agents';
+  if (c.includes('open') || c.includes('source')) return 'Open Source';
+  if (c.includes('model')) return 'Models';
+  if (c.includes('hard') || c.includes('chip') || c.includes('gpu')) return 'Hardware';
+  if (c.includes('fund') || c.includes('raise')) return 'Funding';
+  if (c.includes('res') || c.includes('paper')) return 'Research';
+  if (c.includes('dev') || c.includes('tool') || c.includes('code') || c.includes('sdk')) return 'Developer Tools';
+  if (c.includes('reg') || c.includes('law') || c.includes('policy') || c.includes('safe')) return 'Regulation';
+  if (c.includes('start')) return 'Startups';
+  if (c.includes('comp')) return 'Companies';
+  return cat;
+}
+
+/**
  * Execute the complete Ingestion Pipeline:
  * Fetch -> Validate -> Normalize -> Deduplicate (5 levels) -> Store (Database)
  */
 export async function runNewsIngestion() {
-  console.log('[NEWS] Fetching latest articles from external sources...');
+  console.log('[NEWS] Fetching 100% real live articles from external internet sources...');
   const fetchedAt = new Date().toISOString();
   
   let rawArticles = [];
   try {
     rawArticles = await fetchExternalArticles();
-    console.log(`[NEWS] Provider returned ${rawArticles.length} raw articles`);
+    console.log(`[NEWS] Live internet providers returned ${rawArticles.length} raw articles`);
   } catch (err) {
-    console.error('[NEWS] Provider request failed:', err.message);
+    console.error('[NEWS] External live news fetch error:', err.message);
     return { storedCount: 0, skippedDuplicatesCount: 0, error: err.message };
   }
 
-  if (rawArticles.length === 0) {
+  if (!rawArticles || rawArticles.length === 0) {
     console.log('[NEWS] 0 articles returned from external sources');
     return { storedCount: 0, skippedDuplicatesCount: 0 };
   }
@@ -275,7 +295,7 @@ export async function runNewsIngestion() {
       }
 
       const articleId = `art_${crypto.randomBytes(8).toString('hex')}`;
-      const category = detectCategory(raw.title, raw.description);
+      const category = raw.category || detectCategory(raw.title, raw.description);
       const createdAt = Date.now();
 
       const safeTitle = String(raw.title || '').trim();
@@ -326,20 +346,23 @@ export async function runNewsIngestion() {
  * Retrieve paginated, sorted, filtered articles from Database
  */
 export function getArticles({ page = 1, limit = 20, category = 'all', after = null }) {
-  const offset = (Math.max(1, parseInt(page, 10)) - 1) * parseInt(limit, 10);
-  const parsedLimit = Math.min(100, Math.max(1, parseInt(limit, 10)));
+  const safePage = Math.max(1, isNaN(parseInt(page, 10)) ? 1 : parseInt(page, 10));
+  const parsedLimit = Math.min(100, Math.max(1, isNaN(parseInt(limit, 10)) ? 20 : parseInt(limit, 10)));
+  const offset = (safePage - 1) * parsedLimit;
+
+  const normalizedCat = normalizeCategoryInput(category);
 
   let whereClauses = [];
   let params = [];
 
-  if (category && category !== 'all') {
+  if (normalizedCat && normalizedCat !== 'all') {
     whereClauses.push('category = ?');
-    params.push(category);
+    params.push(normalizedCat);
   }
 
-  if (after) {
+  if (after && typeof after === 'string' && after.trim().length > 0) {
     whereClauses.push('publishedAt > ?');
-    params.push(after);
+    params.push(after.trim());
   }
 
   const whereSql = whereClauses.length > 0 ? `WHERE ${whereClauses.join(' AND ')}` : '';
@@ -362,7 +385,7 @@ export function getArticles({ page = 1, limit = 20, category = 'all', after = nu
   return {
     articles,
     total,
-    page: parseInt(page, 10),
+    page: safePage,
     limit: parsedLimit,
     hasMore: offset + articles.length < total,
     latestPublishedAt
@@ -373,5 +396,6 @@ export function getArticles({ page = 1, limit = 20, category = 'all', after = nu
  * Retrieve single article by ID
  */
 export function getArticleById(id) {
+  if (!id || typeof id !== 'string') return null;
   return db.prepare(`SELECT * FROM articles WHERE id = ?`).get(id) || null;
 }

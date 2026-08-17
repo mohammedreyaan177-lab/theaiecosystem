@@ -8,8 +8,8 @@ import {
   SecurityRisk, 
   RequirementItem,
   ArchitectureTypeSummary
-} from '../types';
-import { performWebResearch } from './webResearch';
+} from '../types.js';
+import { performWebResearch } from './webResearch.js';
 
 export interface ToolData {
   id: string;
@@ -57,6 +57,94 @@ export async function runProjectAnalysis(
   const architectureNodes = generateArchitectureNodes(techStack, architectureSummary);
   const securityRisks = analyzeSecurityRisks(lowerPrompt, architectureSummary);
 
+  // 7. Dynamic Blueprint & Guides
+  const buildBlueprint = [
+    {
+      phaseNumber: 1,
+      title: 'Project Foundation & Setup',
+      goal: 'Initialize repository, dependencies, and environment configurations.',
+      dependencies: ['Node.js runtime'],
+      tasks: [
+        'Initialize client SPA framework and style tokens.',
+        'Set up environment variable placeholders.'
+      ],
+      likelyFiles: ['package.json', 'src/App.tsx'],
+      expectedResult: 'Local development server boots cleanly.',
+      testCases: ['Run `npm run dev` and verify UI loads.'],
+      guides: []
+    },
+    {
+      phaseNumber: 2,
+      title: 'Core Capability Logic',
+      goal: `Build core interactive components for ${understanding.category}.`,
+      dependencies: ['Phase 1 Foundation'],
+      tasks: [
+        'Implement primary workspace components.',
+        'Connect state handlers and user inputs.'
+      ],
+      likelyFiles: ['src/components/MainView.tsx'],
+      expectedResult: 'Interactive user inputs process cleanly.',
+      testCases: ['Submit sample data and verify output state.'],
+      guides: []
+    }
+  ];
+
+  // 8. Product Differentiation Matrix
+  const differentiationEngine = {
+    matrix: [
+      {
+        feature: 'Capability-Driven Customization',
+        featureName: 'Capability-Driven Customization',
+        existingProjectsHas: false,
+        existingProductsStatus: 'Partial' as const,
+        userProjectHas: true,
+        yourProjectStatus: 'Full Support' as const,
+        status: 'differentiator',
+        strategicAdvantage: 'Tailored specifically to prompt requirements rather than rigid template constraints.'
+      },
+      {
+        feature: 'Real-Time Ecosystem Integration',
+        featureName: 'Real-Time Ecosystem Integration',
+        existingProjectsHas: false,
+        existingProductsStatus: 'Not Supported' as const,
+        userProjectHas: true,
+        yourProjectStatus: 'Full Support' as const,
+        status: 'differentiator',
+        strategicAdvantage: 'Direct integration with verified AI tool API registry.'
+      }
+    ],
+    differentiators: [
+      {
+        rank: 1,
+        title: 'Adaptive Architecture Design',
+        category: 'Architecture',
+        impactLevel: 'HIGH IMPACT' as const,
+        whyValue: 'Differentiates by supporting client-side SPA or full-stack database architectures dynamically.',
+        implementationComplexity: 'Medium',
+        relevantCapabilities: ['Dynamic Tech Stack', 'Architecture Classification']
+      }
+    ],
+    referenceGuidance: researchResult.products.map(p => ({
+      projectName: p.name,
+      repositoryUrl: p.repositoryUrl || p.websiteUrl,
+      stars: p.stars || 150,
+      architectureUtility: 'Reference implementation pattern.',
+      ethicalNote: 'Use for architectural inspiration; implement clean custom logic.'
+    })),
+    antiCopyingPolicy: 'Enforce clean architecture standards; do not copy proprietary code directly.'
+  };
+
+  // 9. Testing & Deployment Plans
+  const testingPlan = [
+    { category: 'Unit Tests', testName: 'Input Validation & Parsing', command: 'npm test -- --grep "validation"' },
+    { category: 'Integration Tests', testName: 'Core Feature Workflow Integration', command: 'npm test -- --grep "workflow"' }
+  ];
+
+  const deploymentPlan = [
+    { step: 1, action: 'Frontend SPA Deployment', recommendation: architectureSummary.isFrontendOnly ? 'Vercel / Netlify Static Hosting' : 'Vercel Edge Network' },
+    { step: 2, action: 'Production Environment Secret Audit', recommendation: 'Configure environment variables in cloud hosting console.' }
+  ];
+
   return {
     timestamp: new Date().toISOString(),
     rawInput: prompt,
@@ -71,10 +159,45 @@ export async function runProjectAnalysis(
     architectureSummary,
     techStack,
     aiStack,
+    capabilities: understanding.requirements.map(r => ({
+      capability: r.name.toLowerCase().replace(/\s+/g, '_'),
+      name: r.name,
+      importance: 'Essential' as const,
+      reason: r.description
+    })),
     ecosystemTools,
+    recommendedTools: ecosystemTools.map(e => ({
+      toolId: e.toolId || 'ecosystem_tool',
+      name: e.toolName,
+      company: e.company || 'Ecosystem Provider',
+      category: 'Cloud & AI',
+      pricingLabel: e.pricingLabel || 'Freemium',
+      relevanceScore: e.relevanceScore || 90,
+      whyMatches: e.reason,
+      satisfiedCapabilities: [e.capabilityMatched],
+      website: e.website || 'https://aiecosystem.io'
+    })),
     existingProducts: researchResult.products,
+    discoveredProjects: researchResult.products.map(p => ({
+      name: p.name,
+      websiteUrl: p.websiteUrl,
+      repositoryUrl: p.repositoryUrl || p.websiteUrl,
+      similarityLevel: (p.similarityLevel === 'Very Low' ? 'Low' : (p.similarityLevel || 'Medium')) as 'Low' | 'Medium' | 'High' | 'Very High',
+      similarityPercentage: p.similarityPercentage,
+      whySimilar: p.whySimilarList || [p.whySimilar],
+      majorDifferences: p.majorDifferences || ['Custom project implementation'],
+      relevantFeatures: p.relevantFeatures || ['Core Feature Architecture'],
+      stars: p.stars,
+      language: p.language,
+      source: p.source || 'Web Search'
+    })),
     searchDisclaimer: researchResult.searchDisclaimer,
     existsOnInternetSummary: existsSummary,
+    webDiscoveryStatus: 'completed',
+    buildBlueprint,
+    differentiationEngine,
+    testingPlan,
+    deploymentPlan,
     architectureNodes,
     securityRisks
   };
@@ -161,7 +284,10 @@ function evaluateArchitectureRequirements(lowerPrompt: string): ArchitectureType
     lowerPrompt.includes('markdown previewer') ||
     lowerPrompt.includes('browser extension') ||
     lowerPrompt.includes('pure client') ||
-    lowerPrompt.includes('static tool')
+    lowerPrompt.includes('static tool') ||
+    lowerPrompt.includes('portfolio') ||
+    lowerPrompt.includes('static markdown') ||
+    lowerPrompt.includes('blog')
   );
 
   const requiresDatabase = isFullStackDomain;

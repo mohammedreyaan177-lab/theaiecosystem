@@ -554,7 +554,12 @@ export async function discoverWebProjects(targetEntity, classification, extracte
  * Execute End-to-End Project Analysis Pipeline
  */
 export async function runIntelligentProjectAnalysis(userPrompt) {
-  const prompt = userPrompt.trim();
+  let prompt = (typeof userPrompt === 'string' ? userPrompt : '').trim();
+  if (!prompt) {
+    prompt = 'General AI Web Application';
+  } else if (prompt.length > 5000) {
+    prompt = prompt.slice(0, 5000);
+  }
 
   // Stage 1: Semantic Intent Classification
   const classification = classifyPromptIntent(prompt);
@@ -619,6 +624,22 @@ export async function runIntelligentProjectAnalysis(userPrompt) {
 
   const complexityLevel = classification.requestType === 'PROJECT_SPECIFIC' || capabilities.length > 5 ? 'High' : 'Medium';
 
+  const architectureNodes = architectureSummary.isFrontendOnly
+    ? [
+        { id: '1', name: 'Web Client SPA', layer: 'Frontend Tier', description: 'React SPA / Client-side Application', connectedTo: ['2'] },
+        { id: '2', name: 'Static CDN Hosting', layer: 'Deployment Tier', description: 'Vercel / Netlify Edge CDN', connectedTo: [] }
+      ]
+    : [
+        { id: '1', name: 'Web Client', layer: 'Frontend Tier', description: 'React SPA / Next.js Client', connectedTo: ['2'] },
+        { id: '2', name: 'Express API Server', layer: 'Backend Service Tier', description: 'REST API & WebSockets Gateway', connectedTo: ['3', '4'] },
+        { id: '3', name: 'Relational Database', layer: 'Persistence Tier', description: 'PostgreSQL / SQLite Storage', connectedTo: [] },
+        { id: '4', name: 'AI Services', layer: 'AI Inference Tier', description: 'Google Gemini & Vector APIs', connectedTo: [] }
+      ];
+
+  const securityRisks = [
+    { category: 'Authentication & Session Security', riskLevel: 'Medium', description: 'API Key leaks or unauthenticated requests.', mitigationStrategy: 'Enforce server-side environment variables and token middleware.' }
+  ];
+
   return {
     timestamp: new Date().toISOString(),
     rawInput: prompt,
@@ -637,6 +658,8 @@ export async function runIntelligentProjectAnalysis(userPrompt) {
     buildBlueprint,
     differentiationEngine,
     testingPlan,
-    deploymentPlan
+    deploymentPlan,
+    architectureNodes,
+    securityRisks
   };
 }
