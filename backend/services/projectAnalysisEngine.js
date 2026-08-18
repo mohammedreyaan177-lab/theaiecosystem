@@ -592,7 +592,7 @@ export async function discoverWebProjects(targetEntity, classification, extracte
         websiteUrl: `https://github.com/topics/fullstack`,
         repositoryUrl: `https://github.com/topics/fullstack`,
         similarityPercentage: 78,
-        similarityLevel: 'Medium',
+        similarityLevel: 'High',
         whySimilar: [
           `Starter template providing core layout and state management for ${cleanSubject}.`
         ],

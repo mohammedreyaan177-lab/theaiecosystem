@@ -73,7 +73,9 @@ const getBackendAnalysisUrl = () => {
 
 export async function requestIntelligentAnalysis(prompt: string): Promise<FullProjectAnalysisReport> {
   const controller = new AbortController();
-  const timer = setTimeout(() => controller.abort(), 8000);
+  // 45s timeout — the 9-stage analysis pipeline (GitHub discovery + blueprint)
+  // takes 15–30s on average; 8s was too aggressive and caused silent failures.
+  const timer = setTimeout(() => controller.abort(), 45000);
   const endpointUrl = getBackendAnalysisUrl();
 
   try {
