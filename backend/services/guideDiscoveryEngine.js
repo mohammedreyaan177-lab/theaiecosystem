@@ -201,6 +201,7 @@ export async function discoverTaskGuides(taskTitle, technology, concepts = []) {
   const techClean = (technology || 'Web Development').replace(/[^\w\s]/g, '').trim();
   const techLower = techClean.toLowerCase();
 
+  // Build official docs primary guide (always included as anchor)
   let officialUrl = 'https://developer.mozilla.org/en-US/docs/Web';
   let sourceName = `${techClean} Docs`;
 
@@ -234,25 +235,48 @@ export async function discoverTaskGuides(taskTitle, technology, concepts = []) {
   } else if (techLower.includes('vercel')) {
     officialUrl = 'https://vercel.com/docs';
     sourceName = 'Vercel Deployment Docs';
+  } else if (techLower.includes('jwt') || techLower.includes('auth')) {
+    officialUrl = 'https://jwt.io/introduction';
+    sourceName = 'JWT.io Guide';
+  } else if (techLower.includes('typescript') || techLower.includes('ts')) {
+    officialUrl = 'https://www.typescriptlang.org/docs/';
+    sourceName = 'TypeScript Official Docs';
   }
 
   const primaryGuide = {
-    title: `${techClean} Official Documentation & Reference Guide`,
+    title: `${techClean} — Official Documentation & Reference Guide`,
     url: officialUrl,
     type: 'OFFICIAL_DOCS',
     source: sourceName,
     relevance: 99,
-    whyUseful: `Official reference documentation directly applicable to ${taskTitle}.`
+    whyUseful: `Official reference documentation directly applicable to: ${taskTitle}.`
   };
 
-  const secondaryGuide = {
-    title: `GitHub Open-Source Reference Architecture for ${taskTitle}`,
-    url: `https://github.com/topics/${techLower.replace(/\s+/g, '-') || 'web-app'}`,
-    type: 'GITHUB_EXAMPLE',
-    source: 'GitHub Codebase',
-    relevance: 92,
-    whyUseful: `Verified reference implementation codebase demonstrating ${taskTitle}.`
-  };
+  // Fire real web search for dynamic results
+  const searchQuery = `${taskTitle} ${techClean}`.trim();
+  let dynamicGuides = [];
+  try {
+    const rawResults = await searchWebForTask(searchQuery);
+    dynamicGuides = rawResults
+      .map(r => scoreGuide(r, taskTitle, techClean))
+      .filter(Boolean)
+      .filter(g => g.url !== officialUrl) // don't duplicate the primary
+      .sort((a, b) => b.relevance - a.relevance)
+      .slice(0, 3);
+  } catch {
+    // web search failed — continue with just primary guide
+  }
 
-  return [primaryGuide, secondaryGuide];
+  // Merge: primary guide always first, then best dynamic results
+  const guides = [primaryGuide, ...dynamicGuides];
+
+  // Deduplicate by URL
+  const seen = new Set();
+  const unique = guides.filter(g => {
+    if (seen.has(g.url)) return false;
+    seen.add(g.url);
+    return true;
+  });
+
+  return unique.slice(0, 4);
 }
