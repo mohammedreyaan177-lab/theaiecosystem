@@ -74,23 +74,10 @@ export const BuildBlueprintSection: React.FC<BuildBlueprintSectionProps> = ({ ph
                 }}
               >
                 <div style={{ display: 'flex', alignItems: 'center', gap: '14px' }}>
-                  <span
-                    style={{
-                      width: '32px',
-                      height: '32px',
-                      borderRadius: '50%',
-                      background: 'var(--green)',
-                      color: '#fff',
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                      fontWeight: 800,
-                      fontSize: '14px'
-                    }}
-                  >
+                  <span className="phase-serial-badge">
                     P{phase.phaseNumber}
                   </span>
-                  <div>
+                  <div className="phase-title-group">
                     <h4 style={{ margin: 0, fontSize: '16px', color: 'var(--ink)' }}>{phase.title}</h4>
                     <p style={{ margin: '2px 0 0', fontSize: '13px', color: 'var(--muted)' }}>{phase.goal}</p>
                   </div>

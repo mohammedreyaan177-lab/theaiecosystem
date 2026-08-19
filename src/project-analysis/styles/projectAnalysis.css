@@ -385,6 +385,54 @@
   border-color: var(--ink);
 }
 
+/* Phase serial badge (P1, P2...) */
+.phase-serial-badge {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: var(--green);
+  color: var(--paper);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 900;
+  font-size: 13px;
+  flex-shrink: 0;
+  letter-spacing: -0.02em;
+}
+
+.phase-title-group {
+  flex: 1;
+  min-width: 0;
+}
+
+.phase-title-group h4 {
+  white-space: normal;
+  word-break: break-word;
+}
+
+/* Deployment step circle badge */
+.deploy-step-badge {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: var(--green);
+  color: var(--paper);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 900;
+  font-size: 13px;
+  flex-shrink: 0;
+}
+
+/* Testing & Deployment two-col grid */
+.testing-deploy-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 20px;
+}
+
 /* Report Sections */
 .analysis-section-block {
   background: var(--paper);
@@ -1858,20 +1906,37 @@
     align-items: flex-start !important;
   }
 
-  /* --- Tabs bar --- */
+  /* --- Tabs bar — become a 2×4 grid on mobile so all tabs are visible & tappable --- */
   .analysis-tabs-bar {
-    margin-inline: -14px;
-    padding-inline: 14px;
-    -webkit-overflow-scrolling: touch;
-    /* Gradient fade hints for scrollable content */
-    -webkit-mask-image: linear-gradient(to right, transparent 0, black 14px, black calc(100% - 14px), transparent 100%);
-    mask-image: linear-gradient(to right, transparent 0, black 14px, black calc(100% - 14px), transparent 100%);
+    display: grid !important;
+    grid-template-columns: 1fr 1fr;
+    overflow: visible;
+    padding-bottom: 0;
+    margin-inline: 0;
+    gap: 8px;
+    /* Remove the scroll-fade mask on mobile grid layout */
+    -webkit-mask-image: none;
+    mask-image: none;
   }
   .analysis-tab-btn {
-    min-height: 44px;
-    padding: 8px 12px;
+    white-space: normal;
+    text-align: left;
+    min-height: 52px;
+    padding: 10px 12px;
     font-size: 12px;
+    line-height: 1.3;
+    align-items: flex-start;
+    gap: 6px;
+    flex-shrink: unset;
+    border-radius: 12px;
+  }
+  .analysis-tab-btn.active {
+    border-width: 2px;
+  }
+  /* Icon sits on its own row on mobile for clarity */
+  .analysis-tab-btn svg {
     flex-shrink: 0;
+    margin-top: 1px;
   }
 
   /* --- Section block --- */
@@ -2008,7 +2073,7 @@
     min-width: 480px !important;
   }
 
-  /* --- Blueprint phase accordion header --- */
+  /* --- Blueprint phase accordion header & serial badge --- */
   .blueprint-phase-header {
     flex-wrap: wrap;
     gap: 10px;
@@ -2017,6 +2082,30 @@
   }
   .blueprint-phase-header > div:last-child {
     flex-shrink: 0;
+  }
+  .phase-serial-badge {
+    width: 40px;
+    height: 40px;
+    font-size: 14px;
+  }
+  .phase-title-group h4 {
+    font-size: 15px;
+  }
+  .phase-title-group p {
+    font-size: 12px;
+  }
+
+  /* --- Deployment step number badge --- */
+  .deploy-step-badge {
+    width: 34px;
+    height: 34px;
+    font-size: 14px;
+    min-width: 34px;
+  }
+
+  /* --- Testing & Deployment two-col → single col on mobile --- */
+  .testing-deploy-grid {
+    grid-template-columns: 1fr !important;
   }
 }
 

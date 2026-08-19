@@ -25,7 +25,7 @@ export const TestingDeploymentSection: React.FC<TestingDeploymentSectionProps> =
         </p>
       </div>
 
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '20px' }}>
+      <div className="testing-deploy-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '20px' }}>
         {/* 1. Automated Testing Suites */}
         <div style={{ background: 'var(--paper)', border: '1px solid var(--line)', borderRadius: '14px', padding: '20px' }}>
           <h4 style={{ margin: '0 0 14px', fontSize: '16px', color: 'var(--ink)', display: 'flex', alignItems: 'center', gap: '8px' }}>
@@ -55,7 +55,7 @@ export const TestingDeploymentSection: React.FC<TestingDeploymentSectionProps> =
           <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
             {deploymentPlan.map((step, idx) => (
               <div key={idx} style={{ background: 'var(--soft)', border: '1px solid var(--line)', borderRadius: '10px', padding: '14px', display: 'flex', alignItems: 'flex-start', gap: '12px' }}>
-                <span style={{ width: '26px', height: '26px', borderRadius: '50%', background: 'var(--green)', color: '#fff', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 800, fontSize: '12px', flexShrink: 0 }}>
+                <span className="deploy-step-badge">
                   {step.step}
                 </span>
                 <div>
