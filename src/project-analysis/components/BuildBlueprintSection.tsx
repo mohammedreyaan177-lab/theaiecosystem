@@ -60,6 +60,7 @@ export const BuildBlueprintSection: React.FC<BuildBlueprintSectionProps> = ({ ph
             >
               {/* Phase Header Accordion Toggle */}
               <div
+                className="blueprint-phase-header"
                 onClick={() => togglePhase(phase.phaseNumber)}
                 style={{
                   display: 'flex',
@@ -139,7 +140,7 @@ export const BuildBlueprintSection: React.FC<BuildBlueprintSectionProps> = ({ ph
                   </div>
 
                   {/* Likely Files & Test Cases */}
-                  <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '16px', marginBottom: '20px' }}>
+                  <div className="blueprint-files-tests-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '16px', marginBottom: '20px' }}>
                     <div style={{ background: 'var(--soft)', border: '1px solid var(--line)', borderRadius: '10px', padding: '14px' }}>
                       <b style={{ fontSize: '13px', color: 'var(--ink)', display: 'flex', alignItems: 'center', gap: '6px', marginBottom: '8px' }}>
                         <FileCode size={14} /> Required Code Files & Components
@@ -171,7 +172,7 @@ export const BuildBlueprintSection: React.FC<BuildBlueprintSectionProps> = ({ ph
                       <b style={{ fontSize: '13px', color: 'var(--ink)', display: 'flex', alignItems: 'center', gap: '6px', marginBottom: '10px' }}>
                         <BookOpen size={15} style={{ color: 'var(--green)' }} /> Dynamically Discovered Task Guides & Official Docs:
                       </b>
-                      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))', gap: '12px' }}>
+                      <div className="blueprint-guides-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))', gap: '12px' }}>
                         {phase.guides.map((guide, gIdx) => (
                           <div key={gIdx} style={{ background: 'var(--paper)', border: '1px solid var(--line)', borderRadius: '8px', padding: '12px' }}>
                             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '4px' }}>

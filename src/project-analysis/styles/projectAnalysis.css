@@ -1792,6 +1792,8 @@
   .project-analysis-page {
     padding: 0 4px 40px;
   }
+
+  /* --- Form --- */
   .analysis-form-card {
     padding: 16px;
   }
@@ -1802,6 +1804,8 @@
   }
   .clear-text-btn {
     align-self: flex-start;
+    min-height: 44px;
+    padding: 8px 14px;
   }
   .sample-chips-grid {
     grid-template-columns: 1fr;
@@ -1812,8 +1816,25 @@
   .analyze-submit-btn {
     width: 100%;
     justify-content: center;
-    min-height: 48px;
+    min-height: 52px;
+    font-size: 15px;
   }
+  .textarea-wrapper textarea {
+    font-size: 16px; /* Prevents iOS auto-zoom on focus */
+  }
+
+  /* --- Error banner --- */
+  .analysis-error-banner {
+    flex-wrap: wrap;
+    padding: 14px;
+  }
+  .analysis-error-banner > button {
+    width: 100%;
+    justify-content: center;
+    min-height: 44px;
+  }
+
+  /* --- Results toolbar --- */
   .results-toolbar {
     flex-direction: column;
     align-items: flex-start;
@@ -1823,31 +1844,132 @@
   .results-actions {
     width: 100%;
     flex-direction: column;
+    gap: 8px;
   }
   .results-actions button {
     width: 100%;
     justify-content: center;
-    min-height: 44px;
+    min-height: 46px;
   }
+
+  /* --- Intent classification banner --- */
+  .intent-classification-banner > div:first-child {
+    flex-direction: column;
+    align-items: flex-start !important;
+  }
+
+  /* --- Tabs bar --- */
   .analysis-tabs-bar {
     margin-inline: -14px;
     padding-inline: 14px;
     -webkit-overflow-scrolling: touch;
+    /* Gradient fade hints for scrollable content */
+    -webkit-mask-image: linear-gradient(to right, transparent 0, black 14px, black calc(100% - 14px), transparent 100%);
+    mask-image: linear-gradient(to right, transparent 0, black 14px, black calc(100% - 14px), transparent 100%);
   }
   .analysis-tab-btn {
-    min-height: 42px;
-    padding: 8px 14px;
+    min-height: 44px;
+    padding: 8px 12px;
     font-size: 12px;
+    flex-shrink: 0;
   }
+
+  /* --- Section block --- */
   .analysis-section-block {
     padding: 16px;
     border-radius: 14px;
   }
+
+  /* --- Overview grids --- */
+  .overview-two-col {
+    grid-template-columns: 1fr;
+  }
+  .meta-cards-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .requirements-grid {
+    grid-template-columns: 1fr;
+  }
+
+  /* --- Tech stack / Pros-Cons --- */
+  .pros-cons-grid {
+    grid-template-columns: 1fr;
+  }
+
+  /* --- AI Capabilities --- */
+  .ai-capabilities-grid {
+    grid-template-columns: 1fr;
+  }
+
+  /* --- Tool matching --- */
+  .tool-matches-grid {
+    grid-template-columns: 1fr;
+  }
+
+  /* --- Architecture --- */
+  .arch-nodes-grid {
+    grid-template-columns: 1fr;
+  }
+
+  /* --- Security risks --- */
+  .security-risks-grid {
+    grid-template-columns: 1fr;
+  }
+
+  /* --- Differentiation --- */
+  .differentiation-grid {
+    grid-template-columns: 1fr;
+  }
+  .originality-metrics-row {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  /* --- Differentiators grid (inline-styled override via class) --- */
+  .differentiators-grid {
+    grid-template-columns: 1fr !important;
+  }
+
+  /* --- Build Blueprint inline grids (overrides via class) --- */
+  .blueprint-files-tests-grid {
+    grid-template-columns: 1fr !important;
+  }
+  .blueprint-guides-grid {
+    grid-template-columns: 1fr !important;
+  }
+
+  /* --- Compliance / APIs / Journey step details --- */
   .compliance-grid,
   .apis-grid,
   .step-details-grid {
     grid-template-columns: 1fr;
   }
+
+  /* --- Financials --- */
+  .pricing-tiers-grid {
+    grid-template-columns: 1fr;
+  }
+  .financial-meta-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .complexity-tiers-grid {
+    grid-template-columns: 1fr;
+  }
+
+  /* --- Final verdict --- */
+  .final-verdict-card {
+    padding: 18px;
+    margin-top: 24px;
+  }
+  .verdict-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+  .verdict-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  /* --- Journey card --- */
   .journey-step-card {
     flex-direction: column;
     gap: 12px;
@@ -1858,6 +1980,8 @@
     height: 36px;
     font-size: 14px;
   }
+
+  /* --- Code template block --- */
   .code-template-header {
     flex-direction: column;
     align-items: flex-start;
@@ -1866,13 +1990,33 @@
   .copy-code-btn {
     width: 100%;
     justify-content: center;
-    min-height: 36px;
+    min-height: 44px;
   }
   .prompt-code-content {
     font-size: 12px;
     padding: 12px;
     overflow-x: auto;
     -webkit-overflow-scrolling: touch;
+  }
+
+  /* --- Differentiation table scroll fix --- */
+  .differentiation-table-wrapper {
+    overflow-x: auto !important;
+    -webkit-overflow-scrolling: touch !important;
+  }
+  .differentiation-table-wrapper table {
+    min-width: 480px !important;
+  }
+
+  /* --- Blueprint phase accordion header --- */
+  .blueprint-phase-header {
+    flex-wrap: wrap;
+    gap: 10px;
+    padding: 14px 16px !important;
+    align-items: flex-start !important;
+  }
+  .blueprint-phase-header > div:last-child {
+    flex-shrink: 0;
   }
 }
 
@@ -1887,6 +2031,48 @@
   .form-title-group h3 {
     font-size: 16px;
   }
+  .overview-two-col,
+  .pros-cons-grid,
+  .meta-cards-grid,
+  .financial-meta-grid {
+    grid-template-columns: 1fr;
+  }
+  .originality-metrics-row {
+    grid-template-columns: 1fr;
+  }
+  .verdict-grid {
+    grid-template-columns: 1fr;
+  }
+  .results-title-summary h2 {
+    font-size: 17px;
+  }
+  .section-block-header h2 {
+    font-size: 16px;
+  }
 }
 
-
+/* Ultra-small phones (≤360px) */
+@media (max-width: 360px) {
+  .analysis-tabs-bar {
+    gap: 4px;
+  }
+  .analysis-tab-btn {
+    padding: 8px 10px;
+    font-size: 11px;
+  }
+  .final-verdict-card {
+    padding: 14px;
+  }
+  .analyze-submit-btn {
+    font-size: 14px;
+  }
+  .form-title-group h3 {
+    font-size: 15px;
+  }
+  .arch-class-name {
+    font-size: 16px;
+  }
+  .score-num {
+    font-size: 17px;
+  }
+}

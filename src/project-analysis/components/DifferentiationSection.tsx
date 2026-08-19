@@ -39,7 +39,7 @@ export const DifferentiationSection: React.FC<DifferentiationSectionProps> = ({ 
         <h4 style={{ margin: '0 0 14px', fontSize: '16px', color: 'var(--ink)', display: 'flex', alignItems: 'center', gap: '8px' }}>
           <Layers size={16} /> Feature Comparison Matrix (Existing Competitors vs. Your Project)
         </h4>
-        <div style={{ overflowX: 'auto' }}>
+        <div className="differentiation-table-wrapper" style={{ overflowX: 'auto', WebkitOverflowScrolling: 'touch' } as React.CSSProperties}>
           <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: '13px', textAlign: 'left' }}>
             <thead>
               <tr style={{ background: 'var(--soft)', borderBottom: '1px solid var(--line)' }}>
@@ -88,7 +88,7 @@ export const DifferentiationSection: React.FC<DifferentiationSectionProps> = ({ 
         <h4 style={{ margin: '0 0 14px', fontSize: '16px', color: 'var(--ink)', display: 'flex', alignItems: 'center', gap: '8px' }}>
           <Lightbulb size={16} style={{ color: 'var(--green)' }} /> Ranked Strategic Differentiators
         </h4>
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '16px' }}>
+        <div className="differentiators-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '16px' }}>
           {differentiators.map((item, idx) => (
             <div key={idx} style={{ background: 'var(--paper)', border: '1px solid var(--line)', borderRadius: '12px', padding: '18px' }}>
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '10px' }}>
