@@ -52,7 +52,7 @@ a {
 :root, :root[data-theme=light], :root[data-accent=sunlight] {
   --ink: #16140d;
   --muted: #716b55;
-  --green: #a87900;
+  --green: #8a6400;
   --deep-green: #795700;
   --orange: #f6c90e;
   --paper: #fffdf5;
@@ -751,7 +751,7 @@ a {
 
 .filter-chips .clear {
   margin-left: auto;
-  color: var(--orange);
+  color: #8a6400;
   border-color: var(--line);
 }
 
@@ -878,9 +878,9 @@ a {
   letter-spacing: 0.04em;
 }
 
-.badge.free { color: #3fb950; border-color: #238636; }
+.badge.free { color: #1a7f37; border-color: #238636; }
 .badge.certified {
-  color: #107c41;
+  color: #0d6b35;
   background: rgba(16, 124, 65, 0.12);
   border: 1px solid rgba(16, 124, 65, 0.3);
   font: 700 11px Manrope, sans-serif;
@@ -931,7 +931,7 @@ a {
 
 .rating {
   margin-left: auto;
-  color: var(--orange);
+  color: #8a6400;
   font-size: 12px;
   font-weight: 700;
   display: flex;
@@ -950,7 +950,7 @@ a {
 .playstore-link {
   font-size: 11px;
   font-weight: 700;
-  color: #3fb950;
+  color: #1a7f37;
   display: inline-flex;
   align-items: center;
   gap: 4px;
@@ -1379,7 +1379,7 @@ a {
   gap: 5px;
   background: var(--soft);
   border: 1px solid var(--line);
-  color: var(--orange);
+  color: #8a6400;
   font: 700 12px Manrope, sans-serif;
   padding: 4px 10px;
   border-radius: 999px;
@@ -1427,7 +1427,7 @@ a {
 }
 
 .use-case-list .check-icon {
-  color: #3fb950;
+  color: #1a7f37;
   flex-shrink: 0;
   margin-top: 2px;
 }
@@ -1489,7 +1489,7 @@ a {
 
 .feature-status.yes {
   background: rgba(63, 185, 80, 0.15);
-  color: #3fb950;
+  color: #1a7f37;
 }
 
 .feature-status.no {
@@ -1786,7 +1786,7 @@ a {
 }
 
 .cell-check {
-  color: #3fb950;
+  color: #1a7f37;
   font-weight: 700;
   display: inline-flex;
   align-items: center;

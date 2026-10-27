@@ -1,10 +1,10 @@
-import React, { useEffect, useMemo, useState } from 'react'
+import React, { lazy, Suspense, useEffect, useMemo, useState } from 'react'
 import { createRoot } from 'react-dom/client'
 import { BrowserRouter, Link, NavLink, Route, Routes, useLocation, useNavigate, useParams } from 'react-router-dom'
-import { AnimatePresence, motion } from 'framer-motion'
+import { AnimatePresence, LazyMotion, domAnimation, m as motion } from 'framer-motion'
 import { BarChart3, Bot, Boxes, BrainCircuit, Check, ChevronRight, CircleHelp, Command, ExternalLink, FolderGit2, Globe, Heart, Home, Layers, Menu, Moon, Palette, Radio, RefreshCw, Search, Smartphone, Sparkles, Star, TrendingUp, User, Users, Wifi, X, Zap } from 'lucide-react'
-import brandLogo from './assets/ai-ecosystem-logo.png'
-import ProjectAnalysisPage from './project-analysis/components/ProjectAnalysisPage'
+const brandLogo = '/ai-ecosystem-logo.webp'
+const ProjectAnalysisPage = lazy(() => import('./project-analysis/components/ProjectAnalysisPage'))
 import { useISTGreeting } from './utils/greeting'
 import { fetchNewsArticles, triggerNewsIngestion, NewsArticle } from './services/newsApi'
 import './style.css'
@@ -365,7 +365,6 @@ function LatestAIUpdates() {
               return (
                 <motion.article 
                   key={item.id} 
-                  layout 
                   initial={{ opacity: 0, y: -10 }} 
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0 }}
@@ -597,9 +596,6 @@ function ToolLogo({ tool, large = false }: { tool: Tool; large?: boolean }) {
     }
     if (domain) {
       list.push(`https://www.google.com/s2/favicons?domain=${domain}&sz=128`);
-      list.push(`https://logo.clearbit.com/${domain}`);
-      list.push(`https://${domain}/favicon.ico`);
-      list.push(`https://icon.horse/icon/${domain}`);
     }
     return list;
   }, [tool.id, domain]);
@@ -616,6 +612,9 @@ function ToolLogo({ tool, large = false }: { tool: Tool; large?: boolean }) {
         <img
           src={currentSrc}
           alt={`${tool.name} logo`}
+          width={32}
+          height={32}
+          decoding="async"
           onError={() => setSrcIndex(prev => prev + 1)}
           loading="lazy"
         />
@@ -633,7 +632,7 @@ function ToolCard({ tool, favorites, toggleFavorite, compare, toggleCompare }: {
   const isFav = favorites.includes(tool.id);
   const isComp = compare.includes(tool.id);
   return (
-    <motion.article layout initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="tool-card">
+    <motion.article initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="tool-card">
       <div className="tool-top">
         <ToolLogo tool={tool}/>
         <div className="tool-actions">
@@ -1249,7 +1248,7 @@ function Shell() {
             </NavLink>
           ))}
         </nav>
-        <button className="global-search" onClick={()=>setCommand(true)} aria-label="Search directory"><Search size={16}/><span>Search 100+ AI tools...</span><kbd><Command size={11}/>K</kbd></button>
+        <button className="global-search" onClick={()=>setCommand(true)} aria-label="Search 100+ AI tools..."><Search size={16}/><span>Search 100+ AI tools...</span><kbd><Command size={11}/>K</kbd></button>
         <div className="top-actions">
           <button className="avatar" title="Meet Mohammed Reyaan (Maker)" onClick={()=>navigate('/maker')}>MR</button>
         </div>
@@ -1260,7 +1259,7 @@ function Shell() {
           <Route path="/" element={<Dashboard {...props}/>}/>
           <Route path="/browse" element={<Browse {...props}/>}/>
           <Route path="/categories" element={<Categories/>}/>
-          <Route path="/project-analysis" element={<ProjectAnalysisPage tools={allTools} categories={categories}/>}/>
+          <Route path="/project-analysis" element={<Suspense fallback={<div style={{ padding: '60px 20px', textAlign: 'center', color: 'var(--muted)' }}>Loading analysis engine…</div>}><ProjectAnalysisPage tools={allTools} categories={categories}/></Suspense>}/>
           <Route path="/maker" element={<Maker/>}/>
           <Route path="/tools/:id" element={<Detail {...props}/>}/>
           <Route path="/compare" element={<Compare {...props}/>}/>
@@ -1345,4 +1344,4 @@ function Shell() {
   );
 }
 
-createRoot(document.getElementById('root')!).render(<React.StrictMode><BrowserRouter><Shell/></BrowserRouter></React.StrictMode>)
+createRoot(document.getElementById('root')!).render(<React.StrictMode><LazyMotion features={domAnimation} strict><BrowserRouter><Shell/></BrowserRouter></LazyMotion></React.StrictMode>)

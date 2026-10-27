@@ -13,6 +13,7 @@
     "test-news": "node server/test/newsTest.js",
     "ws-server": "node server/wsServer.js",
     "build": "tsc -b && vite build",
+    "prebuild": "node scripts/generate-sitemap.mjs",
     "preview": "vite preview"
   },
   "dependencies": {
