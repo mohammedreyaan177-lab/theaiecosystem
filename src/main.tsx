@@ -7,6 +7,7 @@ const brandLogo = '/ai-ecosystem-logo.webp'
 const ProjectAnalysisPage = lazy(() => import('./project-analysis/components/ProjectAnalysisPage'))
 import { useISTGreeting } from './utils/greeting'
 import { fetchNewsArticles, triggerNewsIngestion, NewsArticle } from './services/newsApi'
+import { setSeo } from './seo'
 import './style.css'
 
 function GithubIcon({ size = 18 }: { size?: number }) {
@@ -1207,7 +1208,44 @@ function Shell() {
   const [command,setCommand]=useState(false); 
   const [cmdQuery,setCmdQuery]=useState('');
   const navigate=useNavigate(); 
+  const location = useLocation();
   useEffect(()=>{ document.documentElement.dataset.theme='light'; document.documentElement.dataset.accent='sunlight'; localStorage.setItem('ai-theme','sunlight') },[]); 
+  useEffect(() => {
+    const path = location.pathname.replace(/\/+$/, '') || '/'
+    const toolMatch = path.match(/^\/tools\/(.+)$/)
+    if (toolMatch) {
+      const tool = allTools.find(t => t.id === decodeURIComponent(toolMatch[1]))
+      if (tool) {
+        const cat = title(tool.category)
+        setSeo({
+          title: `${tool.name} — Pricing, Features & Alternatives | AIEcosystem`,
+          description: `${tool.description.slice(0, 130)} Compare ${cat} AI tools by pricing, rating and use case.`,
+          path,
+          jsonLd: {
+            '@context': 'https://schema.org',
+            '@type': 'SoftwareApplication',
+            name: tool.name,
+            description: tool.description,
+            url: `https://theaiecosystem.reyaan.me/tools/${tool.id}`,
+            applicationCategory: cat,
+            operatingSystem: 'Web'
+          }
+        })
+        return
+      }
+    }
+    const routeSeo: Record<string, { title: string; description: string }> = {
+      '/': { title: 'AIEcosystem — 200+ Best AI Tools, Models & News Directory', description: 'The intelligent directory of 200+ best AI tools & frontier models. Compare ChatGPT, Claude & Gemini by pricing, rating and use case — plus live AI news.' },
+      '/browse': { title: 'Browse 200+ AI Tools by Category, Pricing & Rating | AIEcosystem', description: 'Search and filter 200+ AI tools by category, pricing model, open source, API access and community rating. Find the right AI tool for your workflow.' },
+      '/categories': { title: 'AI Tool Categories — Chat, Coding, Image, Video, Voice & More | AIEcosystem', description: 'Explore AI tools organized by capability: conversational AI, coding assistants, image & video generation, voice, music, research, automation and more.' },
+      '/project-analysis': { title: 'AI Project Analysis — Get Your AI Stack Blueprint | AIEcosystem', description: 'Describe your project and get an intelligent AI tool stack — matched models, developer tools and platforms with architecture and security analysis.' },
+      '/maker': { title: 'Meet the Maker — Mohammed Reyaan, AI Engineer | AIEcosystem', description: 'The developer behind AIEcosystem — building intelligent tool directories, high-performance web applications and developer ecosystems.' },
+      '/compare': { title: 'Compare AI Tools Side-by-Side — Pricing, Ratings & Features | AIEcosystem', description: 'Evaluate up to four AI tools side-by-side across pricing models, ratings, API access, open source availability and platform support.' },
+      '/favorites': { title: 'Saved AI Tools | AIEcosystem', description: 'Your personal collection of saved AI tools on AIEcosystem.' }
+    }
+    const seo = routeSeo[path] || { title: 'Page Not Found | AIEcosystem', description: 'The page you requested does not exist. Browse 200+ AI tools on AIEcosystem.' }
+    setSeo({ ...seo, path })
+  }, [location.pathname])
   useEffect(()=>{ const fn=(e:KeyboardEvent)=>{if((e.ctrlKey||e.metaKey)&&e.key.toLowerCase()==='k'){e.preventDefault();setCommand(true)}}; addEventListener('keydown',fn);return()=>removeEventListener('keydown',fn)},[]); 
   const toggleFavorite=(id:string)=>toggleFavs(x=>x.includes(id)?x.filter(i=>i!==id):[id,...x]); 
   const toggleCompare=(id:string)=>setCompare(x=>x.includes(id)?x.filter(i=>i!==id):x.length<4?[...x,id]:x); 
